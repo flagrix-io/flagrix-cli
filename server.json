@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.flagrix-io/flagrix",
+  "description": "Scan GitHub repos and profiles for malware before cloning — commit-pinned risk verdicts for agents",
+  "repository": {
+    "url": "https://github.com/flagrix-io/flagrix-cli",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "flagrix",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ],
+      "environmentVariables": [
+        {
+          "name": "GITHUB_TOKEN",
+          "description": "Optional GitHub token — raises API rate limits and enables private-repo scans",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ],
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

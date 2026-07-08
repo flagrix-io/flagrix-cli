@@ -1,0 +1,796 @@
+{
+  "version": "2025.01.26.001",
+  "lastUpdated": "2026-07-04T18:31:51.928Z",
+  "maliciousPackages": [
+    {
+      "name": "beavertail",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "North Korean Lazarus Group malware loader — targets developers via fake job interviews"
+    },
+    {
+      "name": "invisible-ferret",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "Python-based data exfiltration malware from Lazarus Group — steals browser data, files, SSH keys"
+    },
+    {
+      "name": "call-bind-apply-helpers",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "Typosquat with BeaverTail malware payload — mimics legitimate npm utility"
+    },
+    {
+      "name": "cors-parser",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "Fake CORS parsing package with backdoor — distributed via fake LinkedIn job offers"
+    },
+    {
+      "name": "helmet-async",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "Typosquat of the legitimate 'helmet' security middleware — contains BeaverTail loader"
+    },
+    {
+      "name": "crossenv",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'cross-env' — published in 2017 npm typosquat attack, steals env vars"
+    },
+    {
+      "name": "lodahs",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'lodash'"
+    },
+    {
+      "name": "lodashs",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'lodash'"
+    },
+    {
+      "name": "electorn",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'electron' — commonly installed by developers"
+    },
+    {
+      "name": "event-stream",
+      "severity": "high",
+      "source": "npm-audit",
+      "version": "3.3.6",
+      "description": "Compromised version of the popular event-stream package (v3.3.6) — contained cryptocurrency wallet stealing payload targeting Copay Bitcoin wallet\n"
+    },
+    {
+      "name": "flatmap-stream",
+      "severity": "critical",
+      "source": "npm-audit",
+      "description": "Malicious dependency injected via compromised event-stream — contained the actual payload"
+    },
+    {
+      "name": "bcrypts-js",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'bcrypt-js'"
+    },
+    {
+      "name": "mongose",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'mongoose'"
+    },
+    {
+      "name": "expres",
+      "severity": "high",
+      "source": "npm-audit",
+      "description": "Typosquat of 'express'"
+    },
+    {
+      "name": "colourama",
+      "severity": "high",
+      "source": "pypi-audit",
+      "description": "Typosquat of 'colorama' — steals clipboard content and cryptocurrency addresses"
+    },
+    {
+      "name": "python-dateutils",
+      "severity": "high",
+      "source": "pypi-audit",
+      "description": "Typosquat of 'python-dateutil'"
+    },
+    {
+      "name": "requesrs",
+      "severity": "high",
+      "source": "pypi-audit",
+      "description": "Typosquat of 'requests'"
+    },
+    {
+      "name": "setup-tools",
+      "severity": "high",
+      "source": "pypi-audit",
+      "description": "Typosquat of 'setuptools' — commonly targets CI/CD environments"
+    },
+    {
+      "name": "loguru-logger",
+      "severity": "high",
+      "source": "pypi-audit",
+      "description": "Typosquat of 'loguru' — popular Python logging library"
+    }
+  ],
+  "yaraRules": [
+    {
+      "id": "BEAVERTAIL_LOADER_V1",
+      "name": "BeaverTail Loader Pattern",
+      "pattern": "require\\(['\"]child_process['\"]\\)\\.exec.*\\bhttp[s]?://",
+      "description": "Matches BeaverTail malware loader pattern used by Lazarus Group in fake job interview repos",
+      "tags": [
+        "lazarus",
+        "beavertail",
+        "loader",
+        "apt"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "BEAVERTAIL_EXFIL",
+      "name": "BeaverTail Data Exfiltration",
+      "pattern": "process\\.env.*JSON\\.stringify.*fetch|axios\\.post",
+      "description": "Environment variable exfiltration pattern — process.env dumped via fetch/axios POST",
+      "tags": [
+        "lazarus",
+        "beavertail",
+        "exfiltration",
+        "apt"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "INVISIBLEFERRET_KEYLOG",
+      "name": "InvisibleFerret Keylogger",
+      "pattern": "keyboard\\.on_press|pynput\\.keyboard|keylogger",
+      "description": "Keylogger pattern using pynput — used by Lazarus Group's InvisibleFerret Python malware",
+      "tags": [
+        "lazarus",
+        "invisibleferret",
+        "keylogger",
+        "apt"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "REVERSE_SHELL",
+      "name": "Reverse Shell Pattern",
+      "pattern": "\\bnet\\.Socket\\(\\)|socket\\.socket.*SOCK_STREAM.*connect",
+      "description": "Socket-based reverse shell connection — creates a TCP connection back to attacker",
+      "tags": [
+        "shell",
+        "backdoor",
+        "remote-access"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "CRYPTO_MINER",
+      "name": "Cryptocurrency Miner",
+      "pattern": "stratum\\+tcp://|xmrig|cryptonight|monero",
+      "description": "Cryptocurrency mining code — uses CPU resources for attacker profit",
+      "tags": [
+        "miner",
+        "crypto",
+        "resource-abuse"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "CREDENTIAL_THEFT",
+      "name": "Browser Credential Theft",
+      "pattern": "chrome.*Login Data|firefox.*logins\\.json|keychain",
+      "description": "Reads browser password databases (Chrome Login Data, Firefox logins.json, macOS Keychain)",
+      "tags": [
+        "credentials",
+        "theft",
+        "stealer"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "ENV_EXFIL_WEBHOOK",
+      "name": "Environment Variables to Webhook Exfiltration",
+      "pattern": "process\\.env.*discord\\.com/api/webhooks|os\\.environ.*webhook.*post|process\\.env.*ntfy\\.sh",
+      "description": "Sends environment variables (secrets, API keys) to Discord/ntfy webhook",
+      "tags": [
+        "exfiltration",
+        "webhook",
+        "secrets"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "DISCORD_WEBHOOK_EXFIL",
+      "name": "Discord Webhook Data Exfiltration",
+      "pattern": "discord\\.com/api/webhooks.*process\\.env|discord\\.com/api/webhooks.*os\\.environ",
+      "description": "Sends sensitive data (env vars, credentials) to Discord webhook endpoint",
+      "tags": [
+        "exfiltration",
+        "discord",
+        "webhook"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBFUSCATED_EVAL",
+      "name": "Obfuscated Eval Execution",
+      "pattern": "eval\\(atob\\(|eval\\(Buffer\\.from\\(.*base64",
+      "description": "Base64-encoded eval execution — decodes and executes hidden payload",
+      "tags": [
+        "obfuscation",
+        "eval",
+        "payload"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBFUSCATED_CODE_EVAL_DYNAMIC",
+      "name": "Dynamic Code Execution",
+      "pattern": "eval\\s*\\([^)]{0,200}\\)|new\\s+Function\\s*\\([^)]{0,200}\\)|setTimeout\\s*\\(\\s*[\"'`][^\"'`]{0,200}[\"'`]|setInterval\\s*\\(\\s*[\"'`][^\"'`]{0,200}[\"'`]",
+      "description": "eval(), new Function(), or setTimeout/setInterval with string argument — executes arbitrary dynamic code",
+      "tags": [
+        "obfuscation",
+        "eval",
+        "dynamic-code"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "HARDCODED_AWS_KEY",
+      "name": "Hardcoded AWS Access Key",
+      "pattern": "AKIA[0-9A-Z]{16}",
+      "description": "AWS Access Key ID pattern (AKIA...) committed to source code",
+      "tags": [
+        "secrets",
+        "aws",
+        "credentials"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "HARDCODED_GITHUB_TOKEN",
+      "name": "Hardcoded GitHub Token",
+      "pattern": "ghp_[a-zA-Z0-9]{36}|gho_[a-zA-Z0-9]{36}",
+      "description": "GitHub Personal Access Token (ghp_) or OAuth token (gho_) in source code",
+      "tags": [
+        "secrets",
+        "github",
+        "credentials"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "HARDCODED_STRIPE_KEY",
+      "name": "Hardcoded Stripe Live Key",
+      "pattern": "sk_live_[a-zA-Z0-9]{24,}",
+      "description": "Stripe live secret key pattern in source code",
+      "tags": [
+        "secrets",
+        "stripe",
+        "credentials"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "HARDCODED_API_KEY",
+      "name": "Hardcoded API Key",
+      "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)\\s*[:=]\\s*['\"]([^'\"]{20,})['\"]",
+      "description": "Generic API key / secret key pattern assigned to a variable",
+      "tags": [
+        "secrets",
+        "credentials",
+        "api-key"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "HARDCODED_DB_CONNECTION",
+      "name": "Hardcoded Database Connection String",
+      "pattern": "(?:mongodb|mongo)[+:\\/\\/]{0,6}[^@\\s]+:[^@\\s]+@|postgres:\\/\\/[^@\\s]+:[^@\\s]+@",
+      "description": "MongoDB or PostgreSQL connection string with credentials embedded",
+      "tags": [
+        "secrets",
+        "database",
+        "credentials"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "NETWORK_DISCORD_WEBHOOK",
+      "name": "Discord Webhook URL",
+      "pattern": "https?:\\/\\/discord(?:app)?\\.com\\/api\\/webhooks\\/\\d+\\/[a-zA-Z0-9_-]+",
+      "description": "Hardcoded Discord webhook URL — frequently used for data exfiltration",
+      "tags": [
+        "network",
+        "discord",
+        "exfiltration"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "NETWORK_TELEGRAM_TOKEN",
+      "name": "Telegram Bot Token",
+      "pattern": "\\d{8,10}:[a-zA-Z0-9_-]{35}",
+      "description": "Hardcoded Telegram bot token — used for covert command & control",
+      "tags": [
+        "network",
+        "telegram",
+        "c2"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "NETWORK_PASTEBIN",
+      "name": "Pastebin URL",
+      "pattern": "(?:pastebin\\.com|hastebin\\.com|paste\\.ee)\\/[a-zA-Z0-9]+",
+      "description": "Pastebin/hastebin URL — often used to host second-stage payloads",
+      "tags": [
+        "network",
+        "pastebin",
+        "payload-hosting"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "NETWORK_URL_SHORTENER",
+      "name": "URL Shortener in Code",
+      "pattern": "(?:bit\\.ly|tinyurl\\.com|t\\.co)\\/[a-zA-Z0-9]+",
+      "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination",
+      "tags": [
+        "network",
+        "url-shortener",
+        "obfuscation"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "NETWORK_SUSPICIOUS_TLD",
+      "name": "Suspicious Domain TLD",
+      "pattern": "https?:\\/\\/[a-zA-Z0-9-]+\\.(?:tk|ml|ga|cf|gq|onion|xyz)(?:\\/|$)",
+      "description": "URLs using free/anonymous TLDs (.tk, .ml, .ga, .cf, .gq, .onion, .xyz) — associated with malware hosting",
+      "tags": [
+        "network",
+        "suspicious-domain",
+        "malware-hosting"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "NETWORK_NGROK_TUNNEL",
+      "name": "Ngrok Tunnel URL",
+      "pattern": "https?:\\/\\/[a-zA-Z0-9-]+\\.ngrok\\.io",
+      "description": "Ngrok tunnel URL in code — used to expose local servers, often for C2",
+      "tags": [
+        "network",
+        "ngrok",
+        "c2"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "EXFIL_CLIPBOARD",
+      "name": "Clipboard Access",
+      "pattern": "navigator\\.clipboard\\.read(?:Text)?\\s*\\(",
+      "description": "Reads clipboard content — can steal copied passwords, 2FA codes, crypto addresses",
+      "tags": [
+        "exfiltration",
+        "clipboard",
+        "data-theft"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "EXFIL_COOKIE",
+      "name": "Cookie Access",
+      "pattern": "document\\.cookie",
+      "description": "Reads browser cookies via document.cookie — can steal session tokens",
+      "tags": [
+        "exfiltration",
+        "cookies",
+        "session-theft"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "EXFIL_KEYLOGGER",
+      "name": "Keylogger Pattern",
+      "pattern": "(?:addEventListener|on)\\s*\\(\\s*['\"](?:keydown|keypress|keyup)['\"]",
+      "description": "Keyboard event listener (keydown/keypress) — captures user keystrokes",
+      "tags": [
+        "exfiltration",
+        "keylogger",
+        "credential-theft"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "BACKDOOR_RCE_ENDPOINT",
+      "name": "Remote Code Execution Endpoint",
+      "pattern": "eval\\s*\\(\\s*(?:request|req)(?:\\.|\\..body|\\..query)|exec\\s*\\(\\s*(?:request|req)(?:\\.|\\..body|\\..query)",
+      "description": "eval() or exec() fed from HTTP request body/query — allows attacker to run arbitrary code",
+      "tags": [
+        "backdoor",
+        "rce",
+        "critical"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "BACKDOOR_DYNAMIC_REQUIRE",
+      "name": "Dynamic Require from Request",
+      "pattern": "require\\s*\\(\\s*(?:request|req)(?:\\.|\\..body|\\..query)",
+      "description": "require() fed from HTTP request — allows attacker to load arbitrary modules",
+      "tags": [
+        "backdoor",
+        "rce",
+        "dynamic-require"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "BACKDOOR_HARDCODED_AUTH",
+      "name": "Hardcoded Auth Bypass",
+      "pattern": "(?:password|auth)\\s*(?:===?|==)\\s*['\"][^'\"]{0,20}['\"]\\s*\\)",
+      "description": "Hardcoded password check — always-true backdoor condition in auth logic",
+      "tags": [
+        "backdoor",
+        "auth-bypass",
+        "hardcoded"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "FILE_ACCESS_CREDENTIALS",
+      "name": "SSH/AWS Credentials File Access",
+      "pattern": "(?:fs\\.read|readFileSync|readFile)\\s*\\([^)]*(?:\\.ssh|\\.aws|\\.gnupg|\\.docker|id_rsa|credentials)",
+      "description": "Reads ~/.ssh/, ~/.aws/, id_rsa, or credentials files — credential theft",
+      "tags": [
+        "file-access",
+        "credentials",
+        "ssh",
+        "aws"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "FILE_ACCESS_SYSTEM",
+      "name": "System File Access",
+      "pattern": "(?:fs\\.read|readFileSync|readFile)\\s*\\([^)]*(?:etc\\/passwd|etc\\/shadow|\\.bash_history|\\.zsh_history)",
+      "description": "Reads /etc/passwd, /etc/shadow, or shell history files",
+      "tags": [
+        "file-access",
+        "system-files",
+        "privilege-escalation"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "FILE_ACCESS_BROWSER_DATA",
+      "name": "Browser Password Database Access",
+      "pattern": "(?:fs\\.read|readFileSync|readFile)\\s*\\([^)]*(?:Chrome|Firefox|Safari|Edge)[\\w\\s\\/\\\\]*(?:Cookies|Login|History)",
+      "description": "Reads Chrome/Firefox/Safari password databases",
+      "tags": [
+        "file-access",
+        "browser-data",
+        "credential-theft"
+      ],
+      "severity": "critical"
+    },
+    {
+      "id": "SOCIAL_ENGINEERING_SECURITY_BYPASS",
+      "name": "Security Bypass Instructions in README",
+      "pattern": "(?:disable|turn off|bypass)[\\s\\w]*(?:antivirus|firewall|security|protection)",
+      "description": "README instructs users to disable antivirus, firewall, or security tools",
+      "tags": [
+        "social-engineering",
+        "security-bypass"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBF_BASE64_HEAVY",
+      "name": "Heavy Base64 Encoding",
+      "pattern": "[A-Za-z0-9+/]{50,}={0,2}",
+      "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n",
+      "tags": [
+        "base64",
+        "obfuscation"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "OBF_HEX_STRINGS",
+      "name": "Extensive Hex-Encoded Strings",
+      "pattern": "\\\\x[0-9a-fA-F]{2}",
+      "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n",
+      "tags": [
+        "hex-encoding",
+        "obfuscation"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "OBF_EVAL",
+      "name": "eval() Usage",
+      "pattern": "eval\\s*\\([^)]{0,200}\\)",
+      "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n",
+      "tags": [
+        "eval",
+        "dynamic-code",
+        "obfuscation"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBF_NEW_FUNCTION",
+      "name": "new Function() Constructor",
+      "pattern": "new\\s+Function\\s*\\([^)]{0,200}\\)",
+      "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n",
+      "tags": [
+        "function-constructor",
+        "dynamic-code",
+        "obfuscation"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBF_SETTIMEOUT_STRING",
+      "name": "setTimeout/setInterval with String Argument",
+      "pattern": "(?:setTimeout|setInterval)\\s*\\(\\s*[\"'`][^\"'`]{0,200}[\"'`]",
+      "description": "Passing a string to setTimeout/setInterval executes it as code (like eval). A common obfuscation technique: setTimeout(\"maliciousCode()\", 0)\n",
+      "tags": [
+        "eval",
+        "dynamic-code",
+        "obfuscation"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "OBF_FROMCHARCODE",
+      "name": "String.fromCharCode Obfuscation",
+      "pattern": "(?:String\\.fromCharCode|fromCharCode)\\s*\\([\\d\\s,]+\\)",
+      "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n",
+      "tags": [
+        "fromcharcode",
+        "obfuscation",
+        "eval-bypass"
+      ],
+      "severity": "medium"
+    },
+    {
+      "id": "OBF_CHARCODE_ARRAY",
+      "name": "Large Character Code Array",
+      "pattern": "\\[(?:\\s*\\d{2,3}\\s*,\\s*){20,}\\d{2,3}\\s*\\]",
+      "description": "Array of 20+ numbers that look like char codes. Used as an alternative to fromCharCode to build malicious strings character by character.\n",
+      "tags": [
+        "charcode-array",
+        "obfuscation"
+      ],
+      "severity": "medium"
+    }
+  ],
+  "knownBadHashes": [],
+  "userProfileRules": {
+    "riskFactors": [
+      {
+        "id": "VERY_NEW_ACCOUNT",
+        "name": "Very New Account",
+        "description": "Account created {accountAgeDays} days ago (very new)",
+        "weight": 0.3,
+        "condition": {
+          "field": "accountAgeDays",
+          "operator": "lt",
+          "value": 30
+        }
+      },
+      {
+        "id": "NEW_ACCOUNT",
+        "name": "New Account",
+        "description": "Account created {accountAgeDays} days ago (new)",
+        "weight": 0.2,
+        "condition": {
+          "field": "accountAgeDays",
+          "operator": "lt",
+          "value": 90
+        },
+        "exclusiveWith": "VERY_NEW_ACCOUNT"
+      },
+      {
+        "id": "NO_REPOS",
+        "name": "No Public Repositories",
+        "description": "No public repositories",
+        "weight": 0.25,
+        "condition": {
+          "field": "ownedReposCount",
+          "operator": "eq",
+          "value": 0
+        }
+      },
+      {
+        "id": "SINGLE_REPO_CONTRIBUTOR",
+        "name": "Single Repository Only",
+        "description": "Only 1 repository (potential throwaway account)",
+        "weight": 0.15,
+        "condition": {
+          "field": "ownedReposCount",
+          "operator": "eq",
+          "value": 1
+        },
+        "exclusiveWith": "NO_REPOS"
+      },
+      {
+        "id": "NO_FOLLOWERS",
+        "name": "Zero Followers",
+        "description": "Zero followers",
+        "weight": 0.2,
+        "condition": {
+          "field": "followers",
+          "operator": "eq",
+          "value": 0
+        }
+      },
+      {
+        "id": "HIGH_FOLLOWING_RATIO",
+        "name": "High Following-to-Follower Ratio",
+        "description": "Following {following} but only {followers} followers (bot pattern)",
+        "weight": 0.2,
+        "condition": {
+          "all": [
+            {
+              "field": "followerFollowingRatio",
+              "operator": "gt",
+              "value": 10
+            },
+            {
+              "field": "following",
+              "operator": "gt",
+              "value": 10
+            }
+          ]
+        }
+      },
+      {
+        "id": "NO_PROFILE_PHOTO",
+        "name": "Default Avatar",
+        "description": "Using default avatar",
+        "weight": 0.15,
+        "condition": {
+          "field": "hasProfilePhoto",
+          "operator": "eq",
+          "value": false
+        }
+      },
+      {
+        "id": "INCOMPLETE_PROFILE",
+        "name": "Incomplete Profile",
+        "description": "Missing bio, name, or location",
+        "weight": 0.1,
+        "condition": {
+          "field": "isProfileComplete",
+          "operator": "eq",
+          "value": false
+        }
+      },
+      {
+        "id": "NO_RECENT_ACTIVITY",
+        "name": "No Recent Activity",
+        "description": "No activity in last 90 days",
+        "weight": 0.15,
+        "condition": {
+          "field": "recentEventCount",
+          "operator": "eq",
+          "value": 0
+        }
+      }
+    ],
+    "trustSignals": [
+      {
+        "id": "VERY_ESTABLISHED",
+        "name": "Very Established Account",
+        "description": "Account is {accountAgeDays} days old (very established)",
+        "weight": -0.25,
+        "condition": {
+          "field": "accountAgeDays",
+          "operator": "gte",
+          "value": 1095
+        }
+      },
+      {
+        "id": "ESTABLISHED_ACCOUNT",
+        "name": "Established Account",
+        "description": "Account is {accountAgeDays} days old (established)",
+        "weight": -0.15,
+        "condition": {
+          "field": "accountAgeDays",
+          "operator": "gte",
+          "value": 365
+        },
+        "exclusiveWith": "VERY_ESTABLISHED"
+      },
+      {
+        "id": "POPULAR_DEVELOPER",
+        "name": "Popular Developer",
+        "description": "{followers} followers (popular developer)",
+        "weight": -0.25,
+        "condition": {
+          "field": "followers",
+          "operator": "gte",
+          "value": 200
+        }
+      },
+      {
+        "id": "STRONG_FOLLOWER_BASE",
+        "name": "Strong Follower Base",
+        "description": "{followers} followers",
+        "weight": -0.15,
+        "condition": {
+          "field": "followers",
+          "operator": "gte",
+          "value": 50
+        },
+        "exclusiveWith": "POPULAR_DEVELOPER"
+      },
+      {
+        "id": "PROLIFIC_DEVELOPER",
+        "name": "Prolific Developer",
+        "description": "{ownedReposCount} repositories (prolific developer)",
+        "weight": -0.3,
+        "condition": {
+          "field": "ownedReposCount",
+          "operator": "gte",
+          "value": 50
+        }
+      },
+      {
+        "id": "ACTIVE_CONTRIBUTOR",
+        "name": "Active Contributor",
+        "description": "{ownedReposCount} repositories",
+        "weight": -0.2,
+        "condition": {
+          "field": "ownedReposCount",
+          "operator": "gte",
+          "value": 10
+        },
+        "exclusiveWith": "PROLIFIC_DEVELOPER"
+      },
+      {
+        "id": "HAS_POPULAR_REPOS",
+        "name": "Has Popular Repositories",
+        "description": "{totalStars} total stars across repositories",
+        "weight": -0.2,
+        "condition": {
+          "field": "totalStars",
+          "operator": "gte",
+          "value": 50
+        }
+      },
+      {
+        "id": "CONSISTENT_ACTIVITY",
+        "name": "Consistent Recent Activity",
+        "description": "{veryRecentEventCount} events in last 30 days",
+        "weight": -0.15,
+        "condition": {
+          "field": "veryRecentEventCount",
+          "operator": "gt",
+          "value": 0
+        }
+      }
+    ],
+    "riskLevels": {
+      "mediumMinScore": 0.4,
+      "highMinScore": 0.7,
+      "recommendations": {
+        "low": "Profile appears legitimate. Standard caution advised for any collaboration requests.",
+        "medium": "Moderate risk. Review profile carefully. Check repository quality and recent activity before accepting collaboration.",
+        "high": "High risk profile. Exercise extreme caution. Verify identity through other channels before trusting any collaboration requests."
+      }
+    }
+  }
+}

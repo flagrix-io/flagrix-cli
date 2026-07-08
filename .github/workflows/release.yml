@@ -1,0 +1,25 @@
+name: Release
+
+# Publishes to npm on version tags (v0.1.0, …). Uses npm trusted publishing
+# (OIDC) — configure it on npmjs.com after the first manual publish, then no
+# token secret is needed.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write # npm provenance / trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run typecheck && npm test && npm run build
+      - run: npm publish --provenance --access public
