@@ -51,7 +51,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@flagrix/scanner-core": "github:flagrix-io/flagrix-scanner-core",
+    "@flagrix/scanner-core": "^0.1.0",
     "@types/node": "^20.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
