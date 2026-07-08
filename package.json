@@ -1,6 +1,6 @@
 {
   "name": "flagrix",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scan GitHub repos and profiles for malware before you clone — CLI and MCP server for the Flagrix scanner",
   "license": "MIT",
   "type": "module",

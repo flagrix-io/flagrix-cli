@@ -1,6 +1,6 @@
 {
-  "version": "2025.01.26.001",
-  "lastUpdated": "2026-07-04T18:31:51.928Z",
+  "version": "2026.07.08.002",
+  "lastUpdated": "2026-07-08T16:18:50.866Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -130,7 +130,13 @@
         "loader",
         "apt"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".cjs"
+      ]
     },
     {
       "id": "BEAVERTAIL_EXFIL",
@@ -143,7 +149,13 @@
         "exfiltration",
         "apt"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".mjs",
+        ".cjs"
+      ]
     },
     {
       "id": "INVISIBLEFERRET_KEYLOG",
@@ -156,7 +168,10 @@
         "keylogger",
         "apt"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".py"
+      ]
     },
     {
       "id": "REVERSE_SHELL",
@@ -168,7 +183,12 @@
         "backdoor",
         "remote-access"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "CRYPTO_MINER",
@@ -180,7 +200,13 @@
         "crypto",
         "resource-abuse"
       ],
-      "severity": "high"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "CREDENTIAL_THEFT",
@@ -192,7 +218,13 @@
         "theft",
         "stealer"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "ENV_EXFIL_WEBHOOK",
@@ -204,7 +236,12 @@
         "webhook",
         "secrets"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "DISCORD_WEBHOOK_EXFIL",
@@ -216,7 +253,12 @@
         "discord",
         "webhook"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "OBFUSCATED_EVAL",
@@ -228,19 +270,12 @@
         "eval",
         "payload"
       ],
-      "severity": "high"
-    },
-    {
-      "id": "OBFUSCATED_CODE_EVAL_DYNAMIC",
-      "name": "Dynamic Code Execution",
-      "pattern": "eval\\s*\\([^)]{0,200}\\)|new\\s+Function\\s*\\([^)]{0,200}\\)|setTimeout\\s*\\(\\s*[\"'`][^\"'`]{0,200}[\"'`]|setInterval\\s*\\(\\s*[\"'`][^\"'`]{0,200}[\"'`]",
-      "description": "eval(), new Function(), or setTimeout/setInterval with string argument — executes arbitrary dynamic code",
-      "tags": [
-        "obfuscation",
-        "eval",
-        "dynamic-code"
-      ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".mjs"
+      ]
     },
     {
       "id": "HARDCODED_AWS_KEY",
@@ -252,7 +287,17 @@
         "aws",
         "credentials"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh",
+        ".env",
+        ".json",
+        ".yaml",
+        ".yml"
+      ]
     },
     {
       "id": "HARDCODED_GITHUB_TOKEN",
@@ -264,7 +309,15 @@
         "github",
         "credentials"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh",
+        ".yaml",
+        ".yml"
+      ]
     },
     {
       "id": "HARDCODED_STRIPE_KEY",
@@ -276,7 +329,12 @@
         "stripe",
         "credentials"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "HARDCODED_API_KEY",
@@ -288,7 +346,12 @@
         "credentials",
         "api-key"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "HARDCODED_DB_CONNECTION",
@@ -300,7 +363,13 @@
         "database",
         "credentials"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".env"
+      ]
     },
     {
       "id": "NETWORK_DISCORD_WEBHOOK",
@@ -312,7 +381,13 @@
         "discord",
         "exfiltration"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "NETWORK_TELEGRAM_TOKEN",
@@ -324,7 +399,13 @@
         "telegram",
         "c2"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "NETWORK_PASTEBIN",
@@ -336,7 +417,13 @@
         "pastebin",
         "payload-hosting"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "NETWORK_URL_SHORTENER",
@@ -348,7 +435,13 @@
         "url-shortener",
         "obfuscation"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "NETWORK_SUSPICIOUS_TLD",
@@ -360,7 +453,13 @@
         "suspicious-domain",
         "malware-hosting"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "NETWORK_NGROK_TUNNEL",
@@ -372,7 +471,13 @@
         "ngrok",
         "c2"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh"
+      ]
     },
     {
       "id": "EXFIL_CLIPBOARD",
@@ -384,7 +489,11 @@
         "clipboard",
         "data-theft"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "EXFIL_COOKIE",
@@ -396,7 +505,11 @@
         "cookies",
         "session-theft"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "EXFIL_KEYLOGGER",
@@ -408,7 +521,11 @@
         "keylogger",
         "credential-theft"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "BACKDOOR_RCE_ENDPOINT",
@@ -420,7 +537,12 @@
         "rce",
         "critical"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "BACKDOOR_DYNAMIC_REQUIRE",
@@ -432,7 +554,11 @@
         "rce",
         "dynamic-require"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "BACKDOOR_HARDCODED_AUTH",
@@ -444,7 +570,12 @@
         "auth-bypass",
         "hardcoded"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "FILE_ACCESS_CREDENTIALS",
@@ -457,7 +588,12 @@
         "ssh",
         "aws"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "FILE_ACCESS_SYSTEM",
@@ -469,7 +605,12 @@
         "system-files",
         "privilege-escalation"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "FILE_ACCESS_BROWSER_DATA",
@@ -481,7 +622,12 @@
         "browser-data",
         "credential-theft"
       ],
-      "severity": "critical"
+      "severity": "critical",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "SOCIAL_ENGINEERING_SECURITY_BYPASS",
@@ -503,7 +649,15 @@
         "base64",
         "obfuscation"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "minMatches": 6,
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py",
+        ".sh",
+        ".ps1"
+      ]
     },
     {
       "id": "OBF_HEX_STRINGS",
@@ -514,7 +668,13 @@
         "hex-encoding",
         "obfuscation"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "minMatches": 20,
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".py"
+      ]
     },
     {
       "id": "OBF_EVAL",
@@ -526,7 +686,12 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts",
+        ".mjs"
+      ]
     },
     {
       "id": "OBF_NEW_FUNCTION",
@@ -538,7 +703,11 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "OBF_SETTIMEOUT_STRING",
@@ -550,7 +719,11 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high"
+      "severity": "high",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "OBF_FROMCHARCODE",
@@ -562,7 +735,11 @@
         "obfuscation",
         "eval-bypass"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     },
     {
       "id": "OBF_CHARCODE_ARRAY",
@@ -573,7 +750,11 @@
         "charcode-array",
         "obfuscation"
       ],
-      "severity": "medium"
+      "severity": "medium",
+      "fileExtensions": [
+        ".js",
+        ".ts"
+      ]
     }
   ],
   "knownBadHashes": [],
