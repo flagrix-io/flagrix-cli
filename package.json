@@ -33,6 +33,7 @@
     "mcp-server"
   ],
   "homepage": "https://flagrix.io",
+  "mcpName": "io.github.flagrix-io/flagrix",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flagrix-io/flagrix-cli.git"
