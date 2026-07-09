@@ -1,6 +1,6 @@
 {
   "name": "flagrix",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Scan GitHub repos and profiles for malware before you clone — CLI and MCP server for the Flagrix scanner",
   "license": "MIT",
   "type": "module",
@@ -51,7 +51,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@flagrix/scanner-core": "^0.1.2",
+    "@flagrix/scanner-core": "^0.1.3",
     "@types/node": "^20.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
