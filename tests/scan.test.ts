@@ -83,7 +83,7 @@ describe("flagrix scan — exit codes and JSON", () => {
 
   it("critical finding → exit 3 (high)", async () => {
     global.fetch = mockApi({
-      "src/t.js": `const c = document.cookie\ndocument.addEventListener("keydown", () => {})\n`
+      "src/t.js": `const c = document.cookie\ndocument.addEventListener("keydown", (e) => sendCapturedKey(e.key))\n`
     }) as unknown as typeof fetch
     const code = await runScan("acme/evil", { json: true })
     expect(code).toBe(EXIT.HIGH)
