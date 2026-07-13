@@ -4,6 +4,8 @@ import { readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
+import { expandCorpus } from "./samples.mjs"
+
 const benchmarkDir = dirname(fileURLToPath(import.meta.url))
 const sourcePath = join(benchmarkDir, "corpus.json")
 const outputPath = join(benchmarkDir, "corpus.lock.json")
@@ -68,22 +70,7 @@ async function main() {
   const additions = JSON.parse(additionsText)
   const osvText = await readFile(join(benchmarkDir, "osv-malicious-packages.json"), "utf8")
   const osv = JSON.parse(osvText)
-  corpus.samples.push(...additions.projects.map((project) => {
-    const prefix = project.corpus === "noisy-legitimate" ? "noisy" : "reference"
-    const slug = project.repo.toLowerCase().replaceAll("/", "-").replaceAll(".", "-")
-    return {
-      sampleId: `${prefix}-${slug}`,
-      corpus: project.corpus,
-      label: "reference-clean",
-      labelSource: "Expanded commit-pinned reference corpus",
-      sourceUrl: `https://github.com/${project.repo}`,
-      immutableRef: null,
-      maximumExpectedVerdict: "low",
-      expectedDetectionCategories: [],
-      target: { kind: "github", repo: project.repo, ref: null },
-    }
-  }))
-  corpus.samples.push(...osv.packages.map((entry) => osvSample(osv.source, entry)))
+  expandCorpus(corpus, additions, osv)
   for (const sample of corpus.samples) {
     if (sample.target.kind !== "github") continue
     if (/^[0-9a-f]{40}$/i.test(sample.target.ref ?? "")) continue
@@ -109,30 +96,6 @@ async function main() {
     .digest("hex")
   await writeFile(outputPath, JSON.stringify(corpus, null, 2) + "\n")
   console.log(outputPath)
-}
-
-function osvSample(source, entry) {
-  const reportPath = `osv/malicious/${source.ecosystem}/${entry.name}/${entry.reportId}.json`
-  return {
-    sampleId: `malicious-osv-${entry.reportId.toLowerCase()}`,
-    corpus: "real-malicious",
-    label: "known-malicious-metadata",
-    labelSource: `OpenSSF OSV ${entry.reportId}; report blob ${entry.reportBlobSha}`,
-    sourceUrl: `https://github.com/${source.repository}/blob/${source.commit}/${reportPath}`,
-    immutableRef: `osv:${source.commit}:${entry.reportBlobSha}`,
-    expectedDetectionCategories: ["SUSPICIOUS_DEPENDENCY"],
-    minimumExpectedVerdict: "high",
-    target: {
-      kind: "fixture",
-      files: {
-        "package.json": JSON.stringify({
-          name: `flagrix-inert-${entry.reportId.toLowerCase()}`,
-          private: true,
-          dependencies: { [entry.name]: entry.version },
-        }) + "\n",
-      },
-    },
-  }
 }
 
 main().catch((error) => {

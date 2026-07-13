@@ -49,12 +49,24 @@ Outputs are written to `benchmark/results/`:
 - `latest.json`: complete structured run and aggregate metrics
 - `latest.csv`: flat, spreadsheet-friendly sample results
 
+Ad-hoc outputs are gitignored; only the canonical snapshots
+(`pre-fix-baseline.*`, `post-fix-final.*`) are tracked. To update a canonical
+snapshot, copy `latest.json`/`latest.csv` over it and commit.
+
 ## Corpus semantics
 
 `reference-clean` means a project selected as a false-alarm reference at one
 specific commit. It is not a claim that the project is vulnerability-free or
 benign forever. Any High/Critical finding requires manual review and a note in
 the result workbook before it is classified as a false positive.
+
+`known-malicious-metadata` measures **signature coverage, not generalizing
+recall**: every OSV package in the corpus is also present in the bundled
+signature snapshot, so the 100% detection rate proves the dependency-matching
+pipeline works end-to-end against independently labeled samples — it does not
+predict detection of malware absent from the rules list. Detection of unseen
+malicious *behavior* is exercised separately by the critical fixtures, which
+match behavioral rules rather than package names.
 
 Launch-gate defaults:
 

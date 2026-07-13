@@ -2,4 +2,11 @@ node_modules/
 dist/
 *.tgz
 .DS_Store
-benchmark/results/
+# Ad-hoc benchmark outputs stay local; canonical committed snapshots
+# (pre-fix-baseline.*, post-fix-final.*) are exempted so updating them never
+# needs `git add -f`.
+benchmark/results/*
+!benchmark/results/pre-fix-baseline.json
+!benchmark/results/pre-fix-baseline.csv
+!benchmark/results/post-fix-final.json
+!benchmark/results/post-fix-final.csv

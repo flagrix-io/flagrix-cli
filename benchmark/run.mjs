@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url"
 
 import { scanGitHubRepo } from "@flagrix/scanner-core"
 
+import { expandCorpus } from "./samples.mjs"
+
 const benchmarkDir = dirname(fileURLToPath(import.meta.url))
 const projectDir = join(benchmarkDir, "..")
 const resultsDir = join(benchmarkDir, "results")
@@ -15,6 +17,12 @@ const SHA_PATTERN = /^[0-9a-f]{40}$/i
 const VERDICT_RANK = { low: 0, medium: 1, high: 2 }
 const GITHUB_GRAPHQL_BATCH_SIZE = 50
 const NPM_PREFETCH_CONCURRENCY = 12
+// Mirror of the file-selection rules in @flagrix/scanner-core's repo-scanner
+// (PRIORITY_FILES / SCANNABLE_EXTENSIONS / MAX_FILES_TO_SCAN /
+// MAX_FILE_SIZE_BYTES) — used only to decide which blobs the GraphQL prefetch
+// warms. Drift is safe for correctness: files the scanner wants but the
+// prefetch skipped fall through to plain REST fetches; extra prefetched files
+// are ignored. Re-sync when bumping the scanner-core dependency.
 const GITHUB_MAX_FILES = 200
 const GITHUB_MAX_FILE_SIZE = 1024 * 1024
 const GITHUB_PRIORITY_FILES = [
@@ -67,49 +75,7 @@ async function loadCorpus() {
     const corpus = await readJson(SOURCE_CORPUS)
     const additions = await readJson(join(benchmarkDir, "github-projects.json"))
     const osv = await readJson(join(benchmarkDir, "osv-malicious-packages.json"))
-    corpus.samples.push(...additions.projects.map(projectSample))
-    corpus.samples.push(...osv.packages.map((entry) => osvSample(osv.source, entry)))
-    return { corpus, path: SOURCE_CORPUS }
-  }
-}
-
-function osvSample(source, entry) {
-  const reportPath = `osv/malicious/${source.ecosystem}/${entry.name}/${entry.reportId}.json`
-  return {
-    sampleId: `malicious-osv-${entry.reportId.toLowerCase()}`,
-    corpus: "real-malicious",
-    label: "known-malicious-metadata",
-    labelSource: `OpenSSF OSV ${entry.reportId}; report blob ${entry.reportBlobSha}`,
-    sourceUrl: `https://github.com/${source.repository}/blob/${source.commit}/${reportPath}`,
-    immutableRef: `osv:${source.commit}:${entry.reportBlobSha}`,
-    expectedDetectionCategories: ["SUSPICIOUS_DEPENDENCY"],
-    minimumExpectedVerdict: "high",
-    target: {
-      kind: "fixture",
-      files: {
-        "package.json": JSON.stringify({
-          name: `flagrix-inert-${entry.reportId.toLowerCase()}`,
-          private: true,
-          dependencies: { [entry.name]: entry.version },
-        }) + "\n",
-      },
-    },
-  }
-}
-
-function projectSample(project) {
-  const prefix = project.corpus === "noisy-legitimate" ? "noisy" : "reference"
-  const slug = project.repo.toLowerCase().replaceAll("/", "-").replaceAll(".", "-")
-  return {
-    sampleId: `${prefix}-${slug}`,
-    corpus: project.corpus,
-    label: "reference-clean",
-    labelSource: "Expanded commit-pinned reference corpus",
-    sourceUrl: `https://github.com/${project.repo}`,
-    immutableRef: null,
-    maximumExpectedVerdict: "low",
-    expectedDetectionCategories: [],
-    target: { kind: "github", repo: project.repo, ref: null },
+    return { corpus: expandCorpus(corpus, additions, osv), path: SOURCE_CORPUS }
   }
 }
 
