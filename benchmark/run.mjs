@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { scanGitHubRepo } from "../../flagrix-scanner-core/dist/index.js"
+import { scanGitHubRepo } from "@flagrix/scanner-core"
 
 const benchmarkDir = dirname(fileURLToPath(import.meta.url))
 const projectDir = join(benchmarkDir, "..")
@@ -121,20 +121,6 @@ function normalizeSignatures(data) {
     yaraRules: data.yaraRules ?? data.yara_rules ?? [],
     knownBadHashes: data.knownBadHashes ?? data.known_bad_hashes ?? [],
     userProfileRules: data.userProfileRules ?? data.user_profile_rules,
-  }
-}
-
-function gitMetadata(path) {
-  try {
-    const sha = execFileSync("git", ["-C", path, "rev-parse", "HEAD"], {
-      encoding: "utf8",
-    }).trim()
-    const dirty = execFileSync("git", ["-C", path, "status", "--porcelain"], {
-      encoding: "utf8",
-    }).trim().length > 0
-    return { sha, dirty }
-  } catch {
-    return { sha: null, dirty: null }
   }
 }
 
@@ -557,7 +543,7 @@ function toCsv(results, metadata) {
     "actual_score", "safe_to_clone", "rules_triggered", "finding_severities",
     "finding_confidences", "false_positive_notes", "files_scanned", "files_skipped",
     "tree_truncated", "duration_ms", "engine_version", "engine_commit_sha",
-    "detection_rules_version", "detection_rules_commit_sha", "error",
+    "detection_rules_version", "error",
   ]
   const rows = results.map((row) => [
     row.sampleId, row.corpus, row.label, row.labelSource, row.sourceUrl, row.immutableRef,
@@ -568,7 +554,7 @@ function toCsv(results, metadata) {
     row.findings?.map((finding) => finding.confidence) ?? [], row.falsePositiveNotes,
     row.filesScanned, row.filesSkipped, row.treeTruncated, row.durationMs,
     metadata.engineVersion, metadata.engineCommitSha, metadata.rulesVersion,
-    metadata.rulesCommitSha, row.error,
+    row.error,
   ])
   return [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\n") + "\n"
 }
@@ -589,26 +575,27 @@ async function main() {
     return
   }
 
+  // The engine is whatever `npm install` resolved for @flagrix/scanner-core —
+  // the same import the runner executes. Metadata must describe that artifact,
+  // not a sibling checkout that may be dirty or on a different commit.
   const [{ corpus, path: corpusPath }, rawSignatures, corePackage, cliPackage] = await Promise.all([
     loadCorpus(),
     readJson(join(projectDir, "assets", "signatures-snapshot.json")),
-    readJson(join(projectDir, "..", "flagrix-scanner-core", "package.json")),
+    readJson(join(projectDir, "node_modules", "@flagrix/scanner-core", "package.json")),
     readJson(join(projectDir, "package.json")),
   ])
   const signatures = normalizeSignatures(rawSignatures)
-  const engineGit = gitMetadata(join(projectDir, "..", "flagrix-scanner-core"))
-  const rulesGit = gitMetadata(join(projectDir, "..", "flagrix-detection-rules"))
   const metadata = {
     benchmarkVersion: corpus.benchmarkVersion,
     runAt: new Date().toISOString(),
     corpusPath,
     cliVersion: cliPackage.version,
     engineVersion: corePackage.version,
-    engineCommitSha: engineGit.sha,
-    engineDirty: engineGit.dirty,
+    // npm strips gitHead from some publishes; null means "as published on the
+    // registry at engineVersion", which is already immutable.
+    engineCommitSha: corePackage.gitHead ?? null,
+    engineDirty: false,
     rulesVersion: signatures.version,
-    rulesCommitSha: rulesGit.sha,
-    rulesDirty: rulesGit.dirty,
   }
 
   let samples = corpus.samples

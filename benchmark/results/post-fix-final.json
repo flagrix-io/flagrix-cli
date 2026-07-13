@@ -1,15 +1,13 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-07-13T12:16:34.558Z",
-    "corpusPath": "/Users/tomas.tilnak/Documents/Codex/2026-07-12/ca/work/flagrix/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.1.3",
-    "engineVersion": "0.2.2",
-    "engineCommitSha": "8c56989d719efb88051d0ac4d319abcdf63649fe",
-    "engineDirty": true,
-    "rulesVersion": "2026.07.12.002",
-    "rulesCommitSha": "193cd4906826ed458976c1f7b9b56bacc09019dd",
-    "rulesDirty": true
+    "runAt": "2026-07-13T19:35:54.587Z",
+    "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
+    "cliVersion": "0.1.4",
+    "engineVersion": "0.3.0",
+    "engineCommitSha": null,
+    "engineDirty": false,
+    "rulesVersion": "2026.07.12.003"
   },
   "metrics": {
     "samplesDefined": 90,
@@ -71,7 +69,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 41,
+      "durationMs": 17,
       "error": ""
     },
     {
@@ -151,7 +149,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -331,7 +329,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -411,7 +409,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -460,7 +458,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -486,7 +484,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -524,7 +522,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -562,7 +560,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -640,7 +638,7 @@
       "filesScanned": 151,
       "filesSkipped": 62,
       "treeTruncated": false,
-      "durationMs": 2991,
+      "durationMs": 4066,
       "error": ""
     },
     {
@@ -688,7 +686,7 @@
       "filesScanned": 200,
       "filesSkipped": 193,
       "treeTruncated": false,
-      "durationMs": 3042,
+      "durationMs": 3701,
       "error": ""
     },
     {
@@ -714,7 +712,7 @@
       "filesScanned": 84,
       "filesSkipped": 27,
       "treeTruncated": false,
-      "durationMs": 2215,
+      "durationMs": 2878,
       "error": ""
     },
     {
@@ -772,7 +770,7 @@
       "filesScanned": 200,
       "filesSkipped": 254,
       "treeTruncated": false,
-      "durationMs": 4852,
+      "durationMs": 3433,
       "error": ""
     },
     {
@@ -943,7 +941,7 @@
       "filesScanned": 63,
       "filesSkipped": 97,
       "treeTruncated": false,
-      "durationMs": 5500,
+      "durationMs": 6133,
       "error": ""
     },
     {
@@ -981,7 +979,7 @@
       "filesScanned": 21,
       "filesSkipped": 13,
       "treeTruncated": false,
-      "durationMs": 2281,
+      "durationMs": 3006,
       "error": ""
     },
     {
@@ -1019,7 +1017,7 @@
       "filesScanned": 100,
       "filesSkipped": 34,
       "treeTruncated": false,
-      "durationMs": 2424,
+      "durationMs": 4427,
       "error": ""
     },
     {
@@ -1045,7 +1043,7 @@
       "filesScanned": 27,
       "filesSkipped": 26,
       "treeTruncated": false,
-      "durationMs": 1942,
+      "durationMs": 2169,
       "error": ""
     },
     {
@@ -1083,7 +1081,7 @@
       "filesScanned": 200,
       "filesSkipped": 7070,
       "treeTruncated": false,
-      "durationMs": 4591,
+      "durationMs": 6000,
       "error": ""
     },
     {
@@ -1139,7 +1137,7 @@
       "filesScanned": 200,
       "filesSkipped": 503,
       "treeTruncated": false,
-      "durationMs": 2954,
+      "durationMs": 3829,
       "error": ""
     },
     {
@@ -1165,7 +1163,7 @@
       "filesScanned": 200,
       "filesSkipped": 8765,
       "treeTruncated": false,
-      "durationMs": 3229,
+      "durationMs": 3898,
       "error": ""
     },
     {
@@ -1191,7 +1189,7 @@
       "filesScanned": 200,
       "filesSkipped": 2513,
       "treeTruncated": false,
-      "durationMs": 3436,
+      "durationMs": 3743,
       "error": ""
     },
     {
@@ -1423,7 +1421,7 @@
       "filesScanned": 200,
       "filesSkipped": 29628,
       "treeTruncated": false,
-      "durationMs": 10275,
+      "durationMs": 10970,
       "error": ""
     },
     {
@@ -1449,7 +1447,7 @@
       "filesScanned": 200,
       "filesSkipped": 1928,
       "treeTruncated": false,
-      "durationMs": 3363,
+      "durationMs": 3382,
       "error": ""
     },
     {
@@ -1553,7 +1551,7 @@
       "filesScanned": 200,
       "filesSkipped": 16247,
       "treeTruncated": false,
-      "durationMs": 4734,
+      "durationMs": 7152,
       "error": ""
     },
     {
@@ -1667,7 +1665,7 @@
       "filesScanned": 200,
       "filesSkipped": 3047,
       "treeTruncated": false,
-      "durationMs": 3609,
+      "durationMs": 4826,
       "error": ""
     },
     {
@@ -1705,7 +1703,7 @@
       "filesScanned": 200,
       "filesSkipped": 6980,
       "treeTruncated": false,
-      "durationMs": 4145,
+      "durationMs": 4879,
       "error": ""
     },
     {
@@ -1761,7 +1759,7 @@
       "filesScanned": 200,
       "filesSkipped": 2849,
       "treeTruncated": false,
-      "durationMs": 3442,
+      "durationMs": 3713,
       "error": ""
     },
     {
@@ -1809,7 +1807,7 @@
       "filesScanned": 200,
       "filesSkipped": 149,
       "treeTruncated": false,
-      "durationMs": 3536,
+      "durationMs": 6114,
       "error": ""
     },
     {
@@ -1835,7 +1833,7 @@
       "filesScanned": 200,
       "filesSkipped": 49533,
       "treeTruncated": false,
-      "durationMs": 4251,
+      "durationMs": 5951,
       "error": ""
     },
     {
@@ -1861,7 +1859,7 @@
       "filesScanned": 62,
       "filesSkipped": 12,
       "treeTruncated": false,
-      "durationMs": 2921,
+      "durationMs": 3599,
       "error": ""
     },
     {
@@ -1936,7 +1934,7 @@
       "filesScanned": 200,
       "filesSkipped": 276,
       "treeTruncated": false,
-      "durationMs": 3840,
+      "durationMs": 6740,
       "error": ""
     },
     {
@@ -1962,7 +1960,7 @@
       "filesScanned": 200,
       "filesSkipped": 952,
       "treeTruncated": false,
-      "durationMs": 2662,
+      "durationMs": 3228,
       "error": ""
     },
     {
@@ -2000,7 +1998,7 @@
       "filesScanned": 60,
       "filesSkipped": 105,
       "treeTruncated": false,
-      "durationMs": 3009,
+      "durationMs": 3170,
       "error": ""
     },
     {
@@ -2093,7 +2091,7 @@
       "filesScanned": 200,
       "filesSkipped": 1703,
       "treeTruncated": false,
-      "durationMs": 3523,
+      "durationMs": 3383,
       "error": ""
     },
     {
@@ -2131,7 +2129,7 @@
       "filesScanned": 200,
       "filesSkipped": 513,
       "treeTruncated": false,
-      "durationMs": 3255,
+      "durationMs": 3894,
       "error": ""
     },
     {
@@ -2157,7 +2155,7 @@
       "filesScanned": 87,
       "filesSkipped": 40,
       "treeTruncated": false,
-      "durationMs": 3360,
+      "durationMs": 2841,
       "error": ""
     },
     {
@@ -2233,7 +2231,7 @@
       "filesScanned": 200,
       "filesSkipped": 655,
       "treeTruncated": false,
-      "durationMs": 3192,
+      "durationMs": 4590,
       "error": ""
     },
     {
@@ -2259,7 +2257,7 @@
       "filesScanned": 200,
       "filesSkipped": 853,
       "treeTruncated": false,
-      "durationMs": 3651,
+      "durationMs": 4233,
       "error": ""
     },
     {
@@ -2297,7 +2295,7 @@
       "filesScanned": 200,
       "filesSkipped": 2151,
       "treeTruncated": false,
-      "durationMs": 2969,
+      "durationMs": 2775,
       "error": ""
     },
     {
@@ -2323,7 +2321,7 @@
       "filesScanned": 36,
       "filesSkipped": 31,
       "treeTruncated": false,
-      "durationMs": 2270,
+      "durationMs": 3410,
       "error": ""
     },
     {
@@ -2381,7 +2379,7 @@
       "filesScanned": 200,
       "filesSkipped": 4471,
       "treeTruncated": false,
-      "durationMs": 3593,
+      "durationMs": 4192,
       "error": ""
     },
     {
@@ -2407,7 +2405,7 @@
       "filesScanned": 200,
       "filesSkipped": 341,
       "treeTruncated": false,
-      "durationMs": 3046,
+      "durationMs": 3223,
       "error": ""
     },
     {
@@ -2463,7 +2461,7 @@
       "filesScanned": 200,
       "filesSkipped": 9125,
       "treeTruncated": false,
-      "durationMs": 3497,
+      "durationMs": 3380,
       "error": ""
     },
     {
@@ -2501,7 +2499,7 @@
       "filesScanned": 200,
       "filesSkipped": 2156,
       "treeTruncated": false,
-      "durationMs": 3330,
+      "durationMs": 3651,
       "error": ""
     },
     {
@@ -2539,7 +2537,7 @@
       "filesScanned": 200,
       "filesSkipped": 4869,
       "treeTruncated": false,
-      "durationMs": 3814,
+      "durationMs": 4244,
       "error": ""
     },
     {
@@ -2654,7 +2652,7 @@
       "filesScanned": 200,
       "filesSkipped": 14300,
       "treeTruncated": false,
-      "durationMs": 5578,
+      "durationMs": 8022,
       "error": ""
     },
     {
@@ -2722,7 +2720,7 @@
       "filesScanned": 200,
       "filesSkipped": 17929,
       "treeTruncated": false,
-      "durationMs": 4040,
+      "durationMs": 5830,
       "error": ""
     },
     {
@@ -2789,7 +2787,7 @@
       "filesScanned": 133,
       "filesSkipped": 948,
       "treeTruncated": false,
-      "durationMs": 3368,
+      "durationMs": 3181,
       "error": ""
     },
     {
@@ -2865,7 +2863,7 @@
       "filesScanned": 200,
       "filesSkipped": 2016,
       "treeTruncated": false,
-      "durationMs": 4027,
+      "durationMs": 3726,
       "error": ""
     },
     {
@@ -3051,7 +3049,7 @@
       "filesScanned": 200,
       "filesSkipped": 53109,
       "treeTruncated": true,
-      "durationMs": 7952,
+      "durationMs": 9514,
       "error": ""
     },
     {
@@ -3107,7 +3105,7 @@
       "filesScanned": 200,
       "filesSkipped": 6701,
       "treeTruncated": false,
-      "durationMs": 3841,
+      "durationMs": 4126,
       "error": ""
     },
     {
@@ -3145,7 +3143,7 @@
       "filesScanned": 200,
       "filesSkipped": 2970,
       "treeTruncated": false,
-      "durationMs": 3802,
+      "durationMs": 3564,
       "error": ""
     },
     {
@@ -3288,7 +3286,7 @@
       "filesScanned": 200,
       "filesSkipped": 5803,
       "treeTruncated": false,
-      "durationMs": 6846,
+      "durationMs": 10282,
       "error": ""
     },
     {
@@ -3314,7 +3312,7 @@
       "filesScanned": 200,
       "filesSkipped": 6874,
       "treeTruncated": false,
-      "durationMs": 3404,
+      "durationMs": 3997,
       "error": ""
     },
     {
@@ -3362,7 +3360,7 @@
       "filesScanned": 200,
       "filesSkipped": 5591,
       "treeTruncated": false,
-      "durationMs": 3448,
+      "durationMs": 4048,
       "error": ""
     },
     {
@@ -3388,7 +3386,7 @@
       "filesScanned": 200,
       "filesSkipped": 432,
       "treeTruncated": false,
-      "durationMs": 2634,
+      "durationMs": 3222,
       "error": ""
     },
     {
@@ -3414,7 +3412,7 @@
       "filesScanned": 107,
       "filesSkipped": 129,
       "treeTruncated": false,
-      "durationMs": 2134,
+      "durationMs": 2986,
       "error": ""
     },
     {
@@ -3536,7 +3534,7 @@
       "filesScanned": 200,
       "filesSkipped": 60050,
       "treeTruncated": true,
-      "durationMs": 4744,
+      "durationMs": 7390,
       "error": ""
     },
     {
@@ -3562,7 +3560,7 @@
       "filesScanned": 200,
       "filesSkipped": 15414,
       "treeTruncated": false,
-      "durationMs": 3653,
+      "durationMs": 5058,
       "error": ""
     },
     {
@@ -3682,7 +3680,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -3812,7 +3810,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4142,7 +4140,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4462,7 +4460,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
