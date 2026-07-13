@@ -1,6 +1,6 @@
 {
-  "version": "2026.07.08.002",
-  "lastUpdated": "2026-07-09T09:25:31.727Z",
+  "version": "2026.07.12.003",
+  "lastUpdated": "2026-07-13T18:56:08.001Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -73,6 +73,9 @@
       "name": "bcrypts-js",
       "severity": "high",
       "source": "npm-audit",
+      "versions": [
+        "2.4.4"
+      ],
       "description": "Typosquat of 'bcrypt-js'"
     },
     {
@@ -86,6 +89,150 @@
       "severity": "high",
       "source": "npm-audit",
       "description": "Typosquat of 'express'"
+    },
+    {
+      "name": "axios.js",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-4275)"
+    },
+    {
+      "name": "axiosqqq",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "1.16.2",
+        "1.16.3",
+        "1.16.9",
+        "1.16.13"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2026-4493)"
+    },
+    {
+      "name": "axioss",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15242)"
+    },
+    {
+      "name": "babel-laoder",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15281)"
+    },
+    {
+      "name": "babel-loadre",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15282)"
+    },
+    {
+      "name": "babel-loqder",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15283)"
+    },
+    {
+      "name": "babel-node",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15286)"
+    },
+    {
+      "name": "babel-pal",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15289)"
+    },
+    {
+      "name": "axios-http",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15238)"
+    },
+    {
+      "name": "axios-proxy",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2023-116)"
+    },
+    {
+      "name": "axios-browserify",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "1.0.0"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2025-4813)"
+    },
+    {
+      "name": "axios-builder",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "1.2.1"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2025-190832)"
+    },
+    {
+      "name": "axios-mockadptr",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2024-10692)"
+    },
+    {
+      "name": "axios-cancelable",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "1.0.1",
+        "1.0.2"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2025-191389)"
+    },
+    {
+      "name": "babel-plugin-blocks",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2026-2631)"
+    },
+    {
+      "name": "babel-ganache",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "2.2.4",
+        "2.2.6",
+        "2.2.7"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2025-47613)"
+    },
+    {
+      "name": "babel-js",
+      "severity": "high",
+      "source": "openssf-osv",
+      "versions": [
+        "1.0.1"
+      ],
+      "description": "Confirmed malicious npm package (MAL-2026-407)"
+    },
+    {
+      "name": "babel-npm-install",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15287)"
+    },
+    {
+      "name": "babel-npm-publish",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-15288)"
+    },
+    {
+      "name": "babel-loader-fs",
+      "severity": "high",
+      "source": "openssf-osv",
+      "description": "Confirmed malicious npm package (MAL-2025-3985)"
     },
     {
       "name": "colourama",
@@ -133,15 +280,17 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
-        ".ts",
+        ".jsx",
         ".mjs",
-        ".cjs"
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
       "id": "BEAVERTAIL_EXFIL",
       "name": "BeaverTail Data Exfiltration",
-      "pattern": "process\\.env.*JSON\\.stringify.*fetch|axios\\.post",
+      "pattern": "JSON\\.stringify\\s*\\(\\s*process\\.env\\s*\\)[\\s\\S]{0,2000}(?:fetch\\s*\\(|axios\\.post\\s*\\()",
       "description": "Environment variable exfiltration pattern — process.env dumped via fetch/axios POST",
       "tags": [
         "lazarus",
@@ -152,9 +301,11 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
-        ".ts",
+        ".jsx",
         ".mjs",
-        ".cjs"
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -176,7 +327,7 @@
     {
       "id": "REVERSE_SHELL",
       "name": "Reverse Shell Pattern",
-      "pattern": "\\bnet\\.Socket\\(\\)|socket\\.socket.*SOCK_STREAM.*connect",
+      "pattern": "(?:net\\.Socket\\(\\)[\\s\\S]{0,2000}(?:child_process|/bin/(?:sh|bash)|cmd\\.exe)|(?:child_process|/bin/(?:sh|bash)|cmd\\.exe)[\\s\\S]{0,2000}net\\.Socket\\(\\))",
       "description": "Socket-based reverse shell connection — creates a TCP connection back to attacker",
       "tags": [
         "shell",
@@ -186,14 +337,18 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
     {
       "id": "CRYPTO_MINER",
       "name": "Cryptocurrency Miner",
-      "pattern": "stratum\\+tcp://|xmrig|cryptonight|monero",
+      "pattern": "stratum\\+tcp://|xmrig|cryptonight",
       "description": "Cryptocurrency mining code — uses CPU resources for attacker profit",
       "tags": [
         "miner",
@@ -203,26 +358,43 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
-        ".sh"
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
       ]
     },
     {
       "id": "CREDENTIAL_THEFT",
       "name": "Browser Credential Theft",
-      "pattern": "chrome.*Login Data|firefox.*logins\\.json|keychain",
-      "description": "Reads browser password databases (Chrome Login Data, Firefox logins.json, macOS Keychain)",
+      "pattern": "chrome.*Login Data|firefox.*logins\\.json|find-generic-password|find-internet-password|dump-keychain",
+      "description": "Reads browser password databases (Chrome Login Data, Firefox logins.json) or dumps the macOS Keychain via the security(1) command",
       "tags": [
         "credentials",
         "theft",
         "stealer"
       ],
-      "severity": "critical",
+      "severity": "high",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh"
       ]
     },
@@ -239,7 +411,11 @@
       "severity": "high",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
@@ -256,7 +432,11 @@
       "severity": "high",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
@@ -270,11 +450,14 @@
         "eval",
         "payload"
       ],
-      "severity": "high",
+      "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".mjs"
+        ".tsx"
       ]
     },
     {
@@ -290,8 +473,15 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh",
         ".env",
         ".json",
@@ -312,8 +502,15 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh",
         ".yaml",
         ".yml"
@@ -332,25 +529,40 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".py"
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go"
       ]
     },
     {
       "id": "HARDCODED_API_KEY",
       "name": "Hardcoded API Key",
       "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)\\s*[:=]\\s*['\"]([^'\"]{20,})['\"]",
-      "description": "Generic API key / secret key pattern assigned to a variable",
+      "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)",
       "tags": [
         "secrets",
         "credentials",
         "api-key"
       ],
-      "severity": "critical",
+      "severity": "high",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".py"
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go"
       ]
     },
     {
@@ -363,11 +575,19 @@
         "database",
         "credentials"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".env"
       ]
     },
@@ -384,9 +604,18 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
-        ".sh"
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
       ]
     },
     {
@@ -402,8 +631,15 @@
       "severity": "high",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh"
       ]
     },
@@ -420,9 +656,18 @@
       "severity": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
-        ".sh"
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
       ]
     },
     {
@@ -438,8 +683,15 @@
       "severity": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh"
       ]
     },
@@ -456,9 +708,18 @@
       "severity": "high",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
-        ".sh"
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
       ]
     },
     {
@@ -474,8 +735,15 @@
       "severity": "medium",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
+        ".go",
         ".sh"
       ]
     },
@@ -489,10 +757,15 @@
         "clipboard",
         "data-theft"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -505,26 +778,38 @@
         "cookies",
         "session-theft"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
       "id": "EXFIL_KEYLOGGER",
-      "name": "Keylogger Pattern",
-      "pattern": "(?:addEventListener|on)\\s*\\(\\s*['\"](?:keydown|keypress|keyup)['\"]",
-      "description": "Keyboard event listener (keydown/keypress) — captures user keystrokes",
+      "name": "Keyboard Capture and Transmission",
+      "pattern": "(?:addEventListener\\s*\\(\\s*['\"](?:keydown|keypress|keyup)['\"]|\\.on(?:keydown|keypress|keyup)\\s*=)",
+      "description": "Reads pressed keys from a keyboard handler and stores or transmits them",
       "tags": [
         "exfiltration",
         "keylogger",
-        "credential-theft"
+        "credential-theft",
+        "behavioral-chain"
       ],
       "severity": "critical",
+      "confidence": "high",
+      "context": "keyboard-capture",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -540,7 +825,11 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
@@ -557,7 +846,11 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -570,11 +863,19 @@
         "auth-bypass",
         "hardcoded"
       ],
-      "severity": "critical",
+      "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".py"
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go"
       ]
     },
     {
@@ -591,7 +892,11 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
@@ -608,7 +913,11 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
@@ -625,20 +934,30 @@
       "severity": "critical",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py"
       ]
     },
     {
       "id": "SOCIAL_ENGINEERING_SECURITY_BYPASS",
       "name": "Security Bypass Instructions in README",
-      "pattern": "(?:disable|turn off|bypass)[\\s\\w]*(?:antivirus|firewall|security|protection)",
+      "pattern": "(?:disable|turn off|bypass)[\\s\\w]{0,30}(?:antivirus|firewall|windows defender|gatekeeper|smartscreen|real-time protection|security software|security tool)",
       "description": "README instructs users to disable antivirus, firewall, or security tools",
       "tags": [
         "social-engineering",
         "security-bypass"
       ],
-      "severity": "high"
+      "severity": "medium",
+      "confidence": "low",
+      "fileNames": [
+        "README.md",
+        "README.txt",
+        "README"
+      ]
     },
     {
       "id": "OBF_BASE64_HEAVY",
@@ -650,13 +969,21 @@
         "obfuscation"
       ],
       "severity": "medium",
+      "confidence": "low",
       "minMatches": 6,
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
+        ".tsx",
         ".py",
+        ".rb",
+        ".php",
         ".sh",
-        ".ps1"
+        ".ps1",
+        ".psm1"
       ]
     },
     {
@@ -669,11 +996,18 @@
         "obfuscation"
       ],
       "severity": "medium",
+      "confidence": "low",
       "minMatches": 20,
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".py"
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php"
       ]
     },
     {
@@ -686,11 +1020,15 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
         ".ts",
-        ".mjs"
+        ".tsx"
       ]
     },
     {
@@ -703,10 +1041,15 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -719,10 +1062,15 @@
         "dynamic-code",
         "obfuscation"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
@@ -736,24 +1084,34 @@
         "eval-bypass"
       ],
       "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     },
     {
       "id": "OBF_CHARCODE_ARRAY",
       "name": "Large Character Code Array",
-      "pattern": "\\[(?:\\s*\\d{2,3}\\s*,\\s*){20,}\\d{2,3}\\s*\\]",
+      "pattern": "\\[\\s*(?:\\d{2,3}\\s*,\\s*){20,}\\d{2,3}\\s*\\]",
       "description": "Array of 20+ numbers that look like char codes. Used as an alternative to fromCharCode to build malicious strings character by character.\n",
       "tags": [
         "charcode-array",
         "obfuscation"
       ],
       "severity": "medium",
+      "confidence": "low",
       "fileExtensions": [
         ".js",
-        ".ts"
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
       ]
     }
   ],

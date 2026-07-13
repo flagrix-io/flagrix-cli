@@ -1,0 +1,35 @@
+{
+  "source": {
+    "repository": "ossf/malicious-packages",
+    "commit": "1fcca18f1775b47bd272362330684aa2dd1ad870",
+    "ecosystem": "npm",
+    "scope": "osv/malicious/npm (withdrawn and unmergable reports excluded)"
+  },
+  "packages": [
+    { "name": "bcrypts-js", "version": "2.4.4", "reportId": "MAL-2024-8862", "reportBlobSha": "cebceb18d12edabb3bf055a6936a367b0614e792" },
+    { "name": "cors-parser", "version": "*", "reportId": "MAL-2024-1377", "reportBlobSha": "c78863fed3a5a3b662b72b05c16b77d9dc153665" },
+    { "name": "electorn", "version": "*", "reportId": "MAL-2025-19413", "reportBlobSha": "84b9fce13d64dd7ec790910850e9fbbbf58cf348" },
+    { "name": "flatmap-stream", "version": "*", "reportId": "MAL-2025-20690", "reportBlobSha": "2fdd79a99598980c7c4cbaad70833538b602a95c" },
+    { "name": "lodahs", "version": "*", "reportId": "MAL-2025-25502", "reportBlobSha": "67e0222164b6b5f6ec72ce58d7a20b430cac4dd2" },
+    { "name": "axios.js", "version": "*", "reportId": "MAL-2025-4275", "reportBlobSha": "238dc228cd9cf54efea67c07f9bc7089b15207b4" },
+    { "name": "axiosqqq", "version": "1.16.2", "reportId": "MAL-2026-4493", "reportBlobSha": "366383ef9f8518dfc534b911251a2dbe5ccd3928" },
+    { "name": "axioss", "version": "*", "reportId": "MAL-2025-15242", "reportBlobSha": "5850d1f4f2806fd59eb535b3e4d45beb058bc826" },
+    { "name": "babel-laoder", "version": "*", "reportId": "MAL-2025-15281", "reportBlobSha": "e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472" },
+    { "name": "babel-loadre", "version": "*", "reportId": "MAL-2025-15282", "reportBlobSha": "b23f507de17d8c239290fb1c36a5d9a6d886b92c" },
+    { "name": "babel-loqder", "version": "*", "reportId": "MAL-2025-15283", "reportBlobSha": "a98eafc3406e034fe14c4e2fe25edc21ee7e9a47" },
+    { "name": "babel-node", "version": "*", "reportId": "MAL-2025-15286", "reportBlobSha": "7d72739e67fda4b48cc77bfcb6c868feafd17567" },
+    { "name": "babel-pal", "version": "*", "reportId": "MAL-2025-15289", "reportBlobSha": "283dd8d75b91d4a35c89707bd10115e3d2ff9c69" },
+    { "name": "axios-http", "version": "*", "reportId": "MAL-2025-15238", "reportBlobSha": "aceadeea25bc4b32b766096204db12a15315e090" },
+    { "name": "axios-proxy", "version": "*", "reportId": "MAL-2023-116", "reportBlobSha": "0d58b457e7175cc230bff6d7b6da40d3781a5466" },
+    { "name": "axios-browserify", "version": "1.0.0", "reportId": "MAL-2025-4813", "reportBlobSha": "bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392" },
+    { "name": "axios-builder", "version": "1.2.1", "reportId": "MAL-2025-190832", "reportBlobSha": "b9b988a111a6e0915333f4b29ce75fb1fe05f293" },
+    { "name": "axios-mockadptr", "version": "*", "reportId": "MAL-2024-10692", "reportBlobSha": "79cb12c286a16d2f04288db57a43bce0b197d907" },
+    { "name": "axios-cancelable", "version": "1.0.1", "reportId": "MAL-2025-191389", "reportBlobSha": "6bae4d1fc6ab36b3516d10c59910f905e50c4f3a" },
+    { "name": "babel-plugin-blocks", "version": "*", "reportId": "MAL-2026-2631", "reportBlobSha": "d20844f3c5e46ef0707cdad324c86ce0b027a8fa" },
+    { "name": "babel-ganache", "version": "2.2.4", "reportId": "MAL-2025-47613", "reportBlobSha": "3075fa3df8d2b7a89c816127adda2b9188415350" },
+    { "name": "babel-js", "version": "1.0.1", "reportId": "MAL-2026-407", "reportBlobSha": "6bbba35a96333e1960acec15928b07c83544e48a" },
+    { "name": "babel-npm-install", "version": "*", "reportId": "MAL-2025-15287", "reportBlobSha": "910018e9ea790fae8a6c9141550913cf26e5275d" },
+    { "name": "babel-npm-publish", "version": "*", "reportId": "MAL-2025-15288", "reportBlobSha": "4a51f824f7203deffb5fd237dc4105ebfbfeba03" },
+    { "name": "babel-loader-fs", "version": "*", "reportId": "MAL-2025-3985", "reportBlobSha": "eb426f1379301192517dbb30aad8a7b4e6993343" }
+  ]
+}

