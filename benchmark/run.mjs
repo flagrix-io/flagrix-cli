@@ -29,6 +29,19 @@ const GITHUB_PRIORITY_FILES = [
   "package.json", "package-lock.json", "requirements.txt", "setup.py", "Pipfile",
   ".npmrc", ".yarnrc", "Makefile",
 ]
+// Editor/agent/CI configs and root docs that scanner-core >= 0.4 reads first.
+const GITHUB_CONFIG_FILE_PATTERNS = [
+  /(?:^|\/)\.vscode\/(?:tasks|settings|launch|mcp)\.json$/,
+  /(?:^|\/)\.claude\/settings(?:\.local)?\.json$/,
+  /(?:^|\/)\.(?:cursor|amazonq|gemini|windsurf|roo|kiro)\/(?:mcp|settings)\.json$/,
+  /(?:^|\/)\.mcp\.json$/,
+  /^\.github\/workflows\/[^/]+\.ya?ml$/,
+  /^README(?:\.md|\.txt|\.rst)?$/i,
+  /(?:^|\/)(?:AGENTS|CLAUDE|GEMINI)\.md$/,
+  /(?:^|\/)\.(?:cursorrules|windsurfrules|clinerules)$/,
+  /(?:^|\/)\.cursor\/rules\/[^/]+\.mdc?$/,
+  /^\.github\/copilot-instructions\.md$/,
+]
 const GITHUB_SCANNABLE_EXTENSIONS = [
   ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".py", ".rb", ".php",
   ".go", ".sh", ".ps1", ".psm1", ".bat", ".cmd", ".vbs", ".html", ".htm",
@@ -220,6 +233,7 @@ function githubPrefetchFetch(baseFetch) {
     for (const item of tree.tree ?? []) {
       if (item.type !== "blob") continue
       const eligible = GITHUB_PRIORITY_FILES.some((name) => item.path.endsWith(name)) ||
+        GITHUB_CONFIG_FILE_PATTERNS.some((pattern) => pattern.test(item.path)) ||
         GITHUB_SCANNABLE_EXTENSIONS.some((extension) => item.path.endsWith(extension))
       if (!eligible || (item.size !== undefined && item.size > GITHUB_MAX_FILE_SIZE)) continue
       if (files.length >= GITHUB_MAX_FILES) break
@@ -464,6 +478,9 @@ function calculateMetrics(results) {
   ).length
   const highReferenceVerdicts = references.filter((row) => row.actualVerdict === "high").length
 
+  const emerging = completed.filter((row) => row.corpus === "emerging-threat-fixture")
+  const emergingDetected = emerging.filter((row) => row.categoryDetected).length
+  const emergingPassed = emerging.filter((row) => row.testPassed).length
   const criticalDetected = critical.filter((row) => row.categoryDetected).length
   const maliciousDetected = malicious.filter((row) => row.categoryDetected).length
   return {
@@ -473,6 +490,10 @@ function calculateMetrics(results) {
     criticalFixturesDetected: criticalDetected,
     criticalFixturesTotal: critical.length,
     criticalFixtureDetectionRate: critical.length ? criticalDetected / critical.length : null,
+    emergingFixturesDetected: emergingDetected,
+    emergingFixturesPassed: emergingPassed,
+    emergingFixturesTotal: emerging.length,
+    emergingFixtureDetectionRate: emerging.length ? emergingDetected / emerging.length : null,
     maliciousSamplesDetected: maliciousDetected,
     maliciousSamplesTotal: malicious.length,
     maliciousDetectionRate: malicious.length ? maliciousDetected / malicious.length : null,
@@ -483,6 +504,10 @@ function calculateMetrics(results) {
     referenceCriticalFindings: criticalReferenceFindings,
     gates: {
       criticalFixtures100Percent: gate(criticalDetected === critical.length, critical.length > 0),
+      emergingFixturesAtLeast90Percent: gate(
+        emergingDetected / emerging.length >= 0.9,
+        emerging.length > 0
+      ),
       maliciousDetectionAtLeast90Percent: gate(
         maliciousDetected / malicious.length >= 0.9,
         malicious.length > 0

@@ -53,6 +53,21 @@ Ad-hoc outputs are gitignored; only the canonical snapshots
 (`pre-fix-baseline.*`, `post-fix-final.*`) are tracked. To update a canonical
 snapshot, copy `latest.json`/`latest.csv` over it and commit.
 
+### Offline mirror (no GitHub token)
+
+`offline/mirror.py` shallow-fetches every pinned commit (trees plus only the
+blobs any scanner version could select) into `offline/git/`, and
+`offline/gitmock.mjs` serves the scanner's GitHub REST calls from it:
+
+```bash
+python3 benchmark/offline/mirror.py
+node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
+```
+
+Results match the API-backed run sample-for-sample (verified against
+`post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
+fixed 1M/week in this mode, so typosquat warnings never fire on reference repos.
+
 ## Corpus semantics
 
 `reference-clean` means a project selected as a false-alarm reference at one
@@ -68,9 +83,19 @@ predict detection of malware absent from the rules list. Detection of unseen
 malicious *behavior* is exercised separately by the critical fixtures, which
 match behavioral rules rather than package names.
 
+`emerging-threat-fixture` covers 2025–2026 developer-targeted attacks that
+live outside ordinary source files: VS Code `folderOpen` task files, fake font
+loaders, Shai-Hulud/CHAINDROP `preinstall` droppers and `.claude` hooks, MCP
+configs, agent-instruction injection, GlassWorm invisible-Unicode payloads,
+blockchain dead drops, and ClickFix READMEs. Each fixture cites the public
+report it was modeled on. Matching benign look-alikes (watch tasks, project
+hooks, installer one-liners, `npx` MCP servers, real fonts, read-only RPC
+calls, ordinary CI) are in `reference-fixture`.
+
 Launch-gate defaults:
 
 - 100% of critical fixtures detected in the expected category
+- at least 90% of emerging-threat fixtures detected in the expected category
 - at least 90% independently labeled malicious samples detected
 - zero Critical findings in reference-clean samples
 - no more than 5% reference-clean samples with a High verdict

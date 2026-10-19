@@ -10,3 +10,4 @@ benchmark/results/*
 !benchmark/results/pre-fix-baseline.csv
 !benchmark/results/post-fix-final.json
 !benchmark/results/post-fix-final.csv
+benchmark/offline/git/
