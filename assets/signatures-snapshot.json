@@ -1,6 +1,6 @@
 {
-  "version": "2026.07.12.003",
-  "lastUpdated": "2026-07-13T18:56:08.001Z",
+  "version": "2026.10.19.001",
+  "lastUpdated": "2026-10-19T19:29:18.424Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -13,12 +13,6 @@
       "severity": "critical",
       "source": "lazarus",
       "description": "Python-based data exfiltration malware from Lazarus Group — steals browser data, files, SSH keys"
-    },
-    {
-      "name": "call-bind-apply-helpers",
-      "severity": "critical",
-      "source": "lazarus",
-      "description": "Typosquat with BeaverTail malware payload — mimics legitimate npm utility"
     },
     {
       "name": "cors-parser",
@@ -235,6 +229,39 @@
       "description": "Confirmed malicious npm package (MAL-2025-3985)"
     },
     {
+      "name": "tensorlake",
+      "severity": "critical",
+      "source": "shai-hulud",
+      "version": "0.5.144",
+      "description": "Compromised release (Oct 8, 2026). preinstall runs lib/setup.mjs, which fetches Bun and runs Math_Symbol.js — Shai-Hulud stealer/worm with a gh-token-monitor wiper. 0.5.143 is clean.\n"
+    },
+    {
+      "name": "jsonwebauth",
+      "severity": "critical",
+      "source": "lazarus",
+      "description": "Contagious Interview package (published Jan 8, 2026); lib/lserver.js loader used by fake-assessment repos"
+    },
+    {
+      "name": "transform-jsbi-to-bigint",
+      "severity": "critical",
+      "source": "phantomraven",
+      "version": "9.9.0",
+      "description": "PhantomRaven remote-dynamic-dependency wave (Sept 2026); preinstall credential/CI-variable theft"
+    },
+    {
+      "name": "sort-imports-es6-autofix",
+      "severity": "critical",
+      "source": "phantomraven",
+      "description": "PhantomRaven RDD wave (Sept 2026); no safe release — now a 0.0.1-security placeholder"
+    },
+    {
+      "name": "@aifabrix/miso-client",
+      "severity": "critical",
+      "source": "glassworm",
+      "version": "4.7.2",
+      "description": "GlassWorm invisible-Unicode payload (Mar 12, 2026)"
+    },
+    {
       "name": "colourama",
       "severity": "high",
       "source": "pypi-audit",
@@ -375,7 +402,7 @@
     {
       "id": "CREDENTIAL_THEFT",
       "name": "Browser Credential Theft",
-      "pattern": "chrome.*Login Data|firefox.*logins\\.json|find-generic-password|find-internet-password|dump-keychain",
+      "pattern": "chrome[^\\n]{0,200}Login Data|firefox[^\\n]{0,200}logins\\.json|find-generic-password|find-internet-password|dump-keychain",
       "description": "Reads browser password databases (Chrome Login Data, Firefox logins.json) or dumps the macOS Keychain via the security(1) command",
       "tags": [
         "credentials",
@@ -492,8 +519,8 @@
     {
       "id": "HARDCODED_GITHUB_TOKEN",
       "name": "Hardcoded GitHub Token",
-      "pattern": "ghp_[a-zA-Z0-9]{36}|gho_[a-zA-Z0-9]{36}",
-      "description": "GitHub Personal Access Token (ghp_) or OAuth token (gho_) in source code",
+      "pattern": "\\b(?:gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{82})\\b",
+      "description": "GitHub token (classic/fine-grained PAT, OAuth, user-to-server, server-to-server, refresh) in source code",
       "tags": [
         "secrets",
         "github",
@@ -512,8 +539,12 @@
         ".php",
         ".go",
         ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
         ".yaml",
-        ".yml"
+        ".yml",
+        ".env"
       ]
     },
     {
@@ -621,8 +652,8 @@
     {
       "id": "NETWORK_TELEGRAM_TOKEN",
       "name": "Telegram Bot Token",
-      "pattern": "\\d{8,10}:[a-zA-Z0-9_-]{35}",
-      "description": "Hardcoded Telegram bot token — used for covert command & control",
+      "pattern": "\\b\\d{8,10}:AA[A-Za-z0-9_-]{33}\\b|api\\.telegram\\.org\\/bot",
+      "description": "Hardcoded Telegram bot token or Bot API URL — used for covert command & control and exfiltration",
       "tags": [
         "network",
         "telegram",
@@ -640,14 +671,16 @@
         ".rb",
         ".php",
         ".go",
-        ".sh"
+        ".sh",
+        ".ps1",
+        ".psm1"
       ]
     },
     {
       "id": "NETWORK_PASTEBIN",
       "name": "Pastebin URL",
-      "pattern": "(?:pastebin\\.com|hastebin\\.com|paste\\.ee)\\/[a-zA-Z0-9]+",
-      "description": "Pastebin/hastebin URL — often used to host second-stage payloads",
+      "pattern": "(?<![\\w-])(?:www\\.)?(?:pastebin\\.com|hastebin\\.com|paste\\.ee|rentry\\.(?:co|org)|paste\\.rs|jsonkeeper\\.com|jsonsilo\\.com|api\\.npoint\\.io|(?:api\\.)?jsonbin\\.io)\\/[a-zA-Z0-9]+",
+      "description": "Paste / JSON-storage URL (pastebin, rentry, jsonkeeper, jsonsilo, npoint, jsonbin) — often hosts second-stage payloads",
       "tags": [
         "network",
         "pastebin",
@@ -667,13 +700,14 @@
         ".go",
         ".sh",
         ".ps1",
-        ".psm1"
+        ".psm1",
+        ".json"
       ]
     },
     {
       "id": "NETWORK_URL_SHORTENER",
       "name": "URL Shortener in Code",
-      "pattern": "(?:bit\\.ly|tinyurl\\.com|t\\.co)\\/[a-zA-Z0-9]+",
+      "pattern": "(?<![\\w.-])(?:bit\\.ly|tinyurl\\.com|t\\.co|short\\.gy|is\\.gd|cutt\\.ly|rebrand\\.ly|shorturl\\.at|tiny\\.cc|rb\\.gy|t\\.ly)\\/[a-zA-Z0-9]+",
       "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination",
       "tags": [
         "network",
@@ -692,20 +726,24 @@
         ".rb",
         ".php",
         ".go",
-        ".sh"
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json"
       ]
     },
     {
       "id": "NETWORK_SUSPICIOUS_TLD",
       "name": "Suspicious Domain TLD",
-      "pattern": "https?:\\/\\/[a-zA-Z0-9-]+\\.(?:tk|ml|ga|cf|gq|onion|xyz)(?:\\/|$)",
-      "description": "URLs using free/anonymous TLDs (.tk, .ml, .ga, .cf, .gq, .onion, .xyz) — associated with malware hosting",
+      "pattern": "https?:\\/\\/(?:[a-zA-Z0-9-]+\\.)+(?:tk|ml|ga|cf|gq|onion|xyz|top|icu|cfd|sbs|cyou|buzz|rest|zip|mov)(?=[\\/:?#\"'\\x60\\s)]|$)",
+      "description": "URLs on free/abused TLDs (.tk .ml .ga .cf .gq .onion .xyz .top .icu .cfd .sbs .cyou .buzz .rest .zip .mov)",
       "tags": [
         "network",
         "suspicious-domain",
         "malware-hosting"
       ],
-      "severity": "high",
+      "severity": "medium",
+      "confidence": "medium",
       "fileExtensions": [
         ".js",
         ".jsx",
@@ -719,14 +757,15 @@
         ".go",
         ".sh",
         ".ps1",
-        ".psm1"
+        ".psm1",
+        ".json"
       ]
     },
     {
       "id": "NETWORK_NGROK_TUNNEL",
       "name": "Ngrok Tunnel URL",
-      "pattern": "https?:\\/\\/[a-zA-Z0-9-]+\\.ngrok\\.io",
-      "description": "Ngrok tunnel URL in code — used to expose local servers, often for C2",
+      "pattern": "https?:\\/\\/[a-zA-Z0-9-]+\\.(?:ngrok(?:-free)?\\.(?:io|app|dev)|trycloudflare\\.com|loca\\.lt|serveo\\.net|pinggy\\.(?:io|link)|lhr\\.life)",
+      "description": "Tunnel service URL (ngrok, Cloudflare quick tunnels, localtunnel, serveo, pinggy) — exposes C2 behind a throwaway host",
       "tags": [
         "network",
         "ngrok",
@@ -744,7 +783,10 @@
         ".rb",
         ".php",
         ".go",
-        ".sh"
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json"
       ]
     },
     {
@@ -960,6 +1002,743 @@
       ]
     },
     {
+      "id": "SUPPLY_CHAIN_INSTALL_HOOK_DOWNLOADER",
+      "name": "Install Hook Downloads or Executes Remote Code",
+      "pattern": "\"(?:pre|post)?install\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.){0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|Invoke-WebRequest|\\bnode\\s+-e\\b(?:[^\"\\\\]|\\\\.){0,300}?(?:https?:|require\\(\\\\?['\"](?:https?|child_process)|eval\\(|Function\\()|\\|\\s*(?:ba|z)?sh\\b|powershell)",
+      "description": "npm install hook that downloads (curl/wget/iwr), pipes into a shell, or runs `node -e` with network or exec code. Complements scanner-core's built-in postinstall check (which only looks for curl/wget/http/fetch/eval/exec substrings).\n",
+      "tags": [
+        "supply-chain",
+        "install-script",
+        "download"
+      ],
+      "severity": "critical",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "package.json"
+      ]
+    },
+    {
+      "id": "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
+      "name": "Shai-Hulud style preinstall dropper",
+      "pattern": "\"preinstall\"\\s*:\\s*\"(?:node|bun)\\s+(?:[\\w./-]*\\/)?(?:setup|setup_bun)\\.m?js\"",
+      "description": "CHAINDROP (keyv, Aug 2026) and Tensorlake (Oct 2026) add `preinstall: node setup.mjs`, which downloads Bun and runs Math_Symbol.js.\n",
+      "tags": [
+        "supply-chain",
+        "shai-hulud",
+        "worm"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "package.json"
+      ]
+    },
+    {
+      "id": "REVERSE_SHELL_UNIX",
+      "name": "Reverse Shell (Python / shell idioms)",
+      "pattern": "os\\.dup2\\(\\s*\\w+\\.fileno\\(\\)\\s*,\\s*[012]\\s*\\)|pty\\.spawn\\(\\s*['\"]\\/bin\\/(?:ba|z)?sh|\\/dev\\/tcp\\/[\\w.-]+\\/\\d+|\\bnc(?:at)?\\s+(?:-\\w+\\s+)*-e\\s+\\/bin\\/(?:ba|z)?sh|\\bbash\\s+-i\\s+>&",
+      "description": "Upstream REVERSE_SHELL covers Node (net.Socket + child_process). This adds the Python dup2/pty and shell /dev/tcp, nc -e, bash -i forms used by InvisibleFerret-style payloads.\n",
+      "tags": [
+        "shell",
+        "backdoor",
+        "remote-access"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".py",
+        ".sh"
+      ]
+    },
+    {
+      "id": "VSCODE_TASK_AUTORUN",
+      "name": "VS Code Task Runs on Folder Open",
+      "pattern": "\"runOn\"\\s*:\\s*\"folderOpen\"",
+      "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n",
+      "tags": [
+        "vscode",
+        "auto-exec",
+        "contagious-interview"
+      ],
+      "severity": "medium",
+      "confidence": "low",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "tasks.json"
+      ]
+    },
+    {
+      "id": "VSCODE_AUTOMATIC_TASKS_ENABLED",
+      "name": "Workspace Enables Automatic Tasks",
+      "pattern": "\"task\\.allowAutomaticTasks\"\\s*:\\s*(?:true|\"on\")",
+      "description": "Committed to suppress VS Code's 'allow automatic tasks' prompt (RMG-Py incident, Sept 2026).\n",
+      "tags": [
+        "vscode",
+        "auto-exec",
+        "contagious-interview"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "settings.json"
+      ]
+    },
+    {
+      "id": "CONFIG_COMMAND_DOWNLOAD_EXEC",
+      "name": "Config Command Pipes a Download into a Shell",
+      "pattern": "\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.){0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|\\birm\\b|Invoke-WebRequest|Invoke-RestMethod)(?:[^\"\\\\]|\\\\.){0,300}?\\|\\s*(?:sudo\\s+)?(?:(?:ba|z)?sh|cmd|iex|powershell|pwsh)\\b",
+      "description": "tasks.json / hook / MCP 'command' that does curl|wget|iwr ... | sh|bash|cmd|iex (Contagious Interview task files).\n",
+      "tags": [
+        "vscode",
+        "auto-exec",
+        "download",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ]
+    },
+    {
+      "id": "CONFIG_NODE_RUNS_ASSET_FILE",
+      "name": "Node Executes a Font/Image/Text File",
+      "pattern": "\"command\"\\s*:\\s*\"node\\s+[^\"\\s]+\\.(?:woff2?|ttf|otf|eot|svg|png|jpe?g|gif|ico|webp|css|scss|dict|txt|md)\"|\"command\"\\s*:\\s*\"node\"\\s*,\\s*\"args\"\\s*:\\s*\\[\\s*\"[^\"]+\\.(?:woff2?|ttf|otf|eot|svg|png|jpe?g|gif|ico|webp|css|scss|dict|txt|md)\"",
+      "description": "Task runs `node webfonts/fa-brands-regular.woff2`, `node src/assets/card4.jpeg`, `node .vscode/spellright.dict` — JS disguised as assets.\n",
+      "tags": [
+        "vscode",
+        "auto-exec",
+        "masquerade",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ]
+    },
+    {
+      "id": "CONFIG_NODE_INLINE_FETCH_EXEC",
+      "name": "Inline node -e Fetch-and-Execute in Config",
+      "pattern": "node(?:\"\\s*,\\s*\"args\"\\s*:\\s*\\[\\s*\")?\\s*-e[\\s\",]+(?:[^\"\\\\]|\\\\.){0,600}?(?:require\\(\\\\?['\"]https?\\\\?['\"]\\)|fetch\\()(?:[^\"\\\\]|\\\\.){0,600}?(?:new Function|eval\\()",
+      "description": "node -e variant: inline https.get of a JSON-store URL, then new Function(...) on the result.\n",
+      "tags": [
+        "vscode",
+        "auto-exec",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ]
+    },
+    {
+      "id": "AGENT_HOOK_SESSIONSTART_EXEC",
+      "name": "Claude Code SessionStart Hook Runs a Script",
+      "pattern": "\"SessionStart\"\\s*:\\s*\\[[\\s\\S]{0,600}?\"command\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.){0,200}?\\b(?:node|bun|deno|npx|curl|wget|python3?|powershell|pwsh)\\b",
+      "description": "Committed Claude Code SessionStart hook that runs a script. Legit plugins do this too (review signal); the dot-dir dropper rule below is the high-confidence variant.\n",
+      "tags": [
+        "ai-agent",
+        "claude-code",
+        "auto-exec",
+        "shai-hulud"
+      ],
+      "severity": "medium",
+      "confidence": "low",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "settings.json",
+        "settings.local.json",
+        "hooks.json"
+      ]
+    },
+    {
+      "id": "CONFIG_RUNS_DOTDIR_SCRIPT",
+      "name": "Hook/Task Runs a Script Hidden in .claude or .vscode",
+      "pattern": "\"command\"\\s*:\\s*\"(?:node|bun)\\s+\\.(?:claude|vscode|cursor)\\/[\\w.-]+\\.(?:m|c)?js\"",
+      "description": "CHAINDROP and Tensorlake commit `node .claude/setup.mjs` / `node .vscode/setup.mjs` hooks to every branch they can write to.\n",
+      "tags": [
+        "ai-agent",
+        "vscode",
+        "auto-exec",
+        "shai-hulud"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ]
+    },
+    {
+      "id": "MCP_CONFIG_SHELL_EXEC",
+      "name": "Repo MCP Config Launches a Raw Shell",
+      "pattern": "\"mcpServers\"\\s*:\\s*\\{[\\s\\S]{0,3000}?\"command\"\\s*:\\s*\"(?:sh|bash|zsh|cmd(?:\\.exe)?|powershell(?:\\.exe)?|pwsh|curl|wget)\"",
+      "description": "Committed MCP server config (.mcp.json, .cursor/mcp.json, .amazonq/mcp.json) whose command is a shell/downloader. CVE-2026-12957 class.\n",
+      "tags": [
+        "ai-agent",
+        "mcp",
+        "auto-exec"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "mcp.json",
+        ".mcp.json",
+        "settings.json"
+      ]
+    },
+    {
+      "id": "AI_AGENT_PERMISSION_BYPASS",
+      "name": "AI CLI Invoked with Permission Bypass",
+      "pattern": "--dangerously-skip-permissions|--dangerously-bypass-approvals-and-sandbox|--trust-all-tools|\\bgemini\\b[^\\n]{0,80}--yolo\\b",
+      "description": "s1ngularity/Nx (Aug 2025) shelled out to claude/gemini/q with safety flags off to hunt secrets; pattern keeps recurring.\n",
+      "tags": [
+        "ai-agent",
+        "abuse",
+        "supply-chain"
+      ],
+      "severity": "medium",
+      "confidence": "low",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json"
+      ]
+    },
+    {
+      "id": "AI_INSTRUCTION_INJECTION_HTML_COMMENT",
+      "name": "Hidden Agent Instructions in Markdown Comment",
+      "pattern": "<!--(?:(?!-->)[\\s\\S]){0,1500}?(?:[Ii]gnore (?:all |any )?(?:previous|prior|above) instructions|[Dd]o not (?:mention|tell|inform|reveal|disclose) (?:this|the user)|(?:AI|LLM|[Cc]oding) (?:assistant|agent)s?\\b[^\\n]{0,80}\\b(?:must|should|run|execute)\\b|\\b(?:silently|quietly|without (?:asking|telling|confirmation))\\b[^\\n]{0,60}\\b(?:run|execute|curl|install)\\b)",
+      "description": "Poisoned coding tests hide instructions for coding agents in README/CLAUDE.md HTML comments ('Do not mention this step').\n",
+      "tags": [
+        "ai-agent",
+        "prompt-injection",
+        "social-engineering"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".md",
+        ".mdc",
+        ".txt",
+        ".cursorrules",
+        ".windsurfrules",
+        ".clinerules"
+      ]
+    },
+    {
+      "id": "REMOTE_CODE_FROM_HTTP_RESPONSE",
+      "name": "Executes Code Returned by an HTTP Call",
+      "pattern": "(?:\\beval|\\bnew\\s+Function|\\(\\s*Function\\.constructor\\s*\\)|\\bFunction)\\s*\\(\\s*(?:['\"]require['\"]\\s*,\\s*)?(?:err|error|e|res|resp|response|r)\\.(?:response\\.)?data\\b|new\\s+(?:\\(\\s*)?Function(?:\\.constructor)?\\)?\\s*\\(\\s*['\"]require['\"]\\s*,",
+      "description": "Contagious Interview loaders: eval(err.response.data), new Function('require', res.data)(require).\n",
+      "tags": [
+        "contagious-interview",
+        "loader",
+        "rce",
+        "lazarus"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "id": "LOADER_GLOBAL_MARKER",
+      "name": "DPRK Loader Global Marker",
+      "pattern": "global\\s*\\[\\s*['\"](?:!|_V)['\"]\\s*\\]\\s*=",
+      "description": "Void Dokkaebi / PolinRider loaders set global['!'] (variant global['_V']).\n",
+      "tags": [
+        "contagious-interview",
+        "polinrider",
+        "loader",
+        "lazarus"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "id": "HIDDEN_CODE_WHITESPACE_PADDING",
+      "name": "Code Hidden Behind Whitespace Padding",
+      "pattern": "(?<![ \\t])[ \\t]{300,}(?![ \\t])[^\\n]{0,400}?(?:\\beval\\s*\\(|new\\s+Function|global\\s*\\[\\s*['\"]|_0x[0-9a-f]{3,}|atob\\s*\\(|fromCharCode|child_process|require\\s*\\()",
+      "description": "Loader code pushed off-screen by 300+ spaces — PolinRider / Void Dokkaebi append it to next/tailwind/eslint/postcss configs. Scanner-core's built-in long-line check only fires past 5,000 characters and caps at medium.\n",
+      "tags": [
+        "obfuscation",
+        "hidden-code",
+        "polinrider"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py"
+      ]
+    },
+    {
+      "id": "INVISIBLE_UNICODE_PAYLOAD",
+      "name": "Invisible Unicode Payload (GlassWorm)",
+      "pattern": "(?:[\\uFE00-\\uFE0F]|\\uDB40[\\uDD00-\\uDDEF]){16,}",
+      "description": "GlassWorm: runs of variation selectors U+FE00–FE0F / U+E0100–E01EF encode a payload that renders as nothing. Needs scanner-core ≥0.4 (UTF-8 decoding); written in surrogate-pair form so it works without the u flag.\n",
+      "tags": [
+        "glassworm",
+        "invisible-unicode",
+        "obfuscation"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
+      ]
+    },
+    {
+      "id": "INVISIBLE_UNICODE_DECODER",
+      "name": "Variation-Selector Decoder Feeding eval",
+      "pattern": "0x[Ee]0100[\\s\\S]{0,300}?\\beval\\s*\\(",
+      "description": "GlassWorm decoder maps 0xFE00/0xE0100 back to bytes and evals the result.\n",
+      "tags": [
+        "glassworm",
+        "invisible-unicode",
+        "loader"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "id": "TROJAN_SOURCE_BIDI",
+      "name": "Bidirectional Control Characters in Code",
+      "pattern": "[\\u202A-\\u202E\\u2066-\\u2069]",
+      "description": "Trojan Source (CVE-2021-42574): bidi override characters make code render differently than it executes. Needs scanner-core ≥0.4 (UTF-8 decoding).\n",
+      "tags": [
+        "trojan-source",
+        "invisible-unicode",
+        "obfuscation"
+      ],
+      "severity": "medium",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1"
+      ]
+    },
+    {
+      "id": "BLOCKCHAIN_DEAD_DROP_EXEC",
+      "name": "Payload Fetched from Blockchain then Executed",
+      "pattern": "(?:api\\.trongrid\\.io|aptoslabs\\.com|bsc-dataseed|getTransactionByHash|eth_getTransactionByHash|getSignaturesForAddress)[\\s\\S]{0,1500}?(?:\\beval|new\\s+Function)\\s*\\(",
+      "description": "PolinRider/Void Dokkaebi fetch stage 2 from TRON/Aptos/BSC tx data; GlassWorm uses Solana memos. Plain RPC use is fine — this needs eval/Function nearby.\n",
+      "tags": [
+        "blockchain-c2",
+        "contagious-interview",
+        "glassworm",
+        "loader"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "id": "EXFIL_REQUEST_CATCHER",
+      "name": "Request-Catcher / OAST Endpoint",
+      "pattern": "(?<![\\w-])(?:www\\.)?(?:webhook\\.site|[\\w-]+\\.m\\.pipedream\\.net|requestbin\\.(?:net|com)|[\\w-]+\\.oast\\.(?:fun|live|me|online|pro|site)|burpcollaborator\\.net|[\\w-]+\\.interact\\.sh)\\b",
+      "description": "webhook.site (Shai-Hulud v1), pipedream, interactsh/OAST, burp collaborator — no reason to ship these in a project.\n",
+      "tags": [
+        "exfiltration",
+        "network"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml"
+      ]
+    },
+    {
+      "id": "KNOWN_CAMPAIGN_DOMAINS",
+      "name": "Known 2026 Campaign Infrastructure",
+      "pattern": "(?<![\\w-])(?:npm-cache\\.com|awqhnjewqjkl\\.icu|iseekaigogo\\.com|regioncheck\\.xyz|vscodeconfig\\.com|vscode-load\\.onrender\\.com|vscode-toolkit-bootstrap\\.vercel\\.app|vscodesettingstask\\.vercel\\.app|api-server-mocha\\.vercel\\.app|vscode-config\\.vercel\\.app|editorsettings\\.vercel\\.app|packages\\.storeartifact\\.com|storeartifacts\\.com|npm\\.jpartifacts\\.com|artifactsnpm\\.com|elxxvvx\\.xyz)\\b",
+      "description": "CHAINDROP, Tensorlake, Contagious Interview task files, PhantomRaven RDD hosts, third-party.com ClickFix payload host.\n",
+      "tags": [
+        "ioc",
+        "c2",
+        "shai-hulud",
+        "contagious-interview",
+        "phantomraven"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml",
+        ".md"
+      ]
+    },
+    {
+      "id": "SHAI_HULUD_ARTIFACTS",
+      "name": "Shai-Hulud / CHAINDROP Artifacts",
+      "pattern": "\\b(?:Math_Symbol|math_init|setup_bun|bun_environment)\\.js\\b|thebeautifulmarchoftime|IfYouBlockThisAPIKeyItWillCrash|gh-token-monitor|Shai-Hulud: Here We Go Again|shai-hulud-workflow\\.yml",
+      "description": "Payload file names, dead-drop marker and wiper service from the 2025–2026 Shai-Hulud family.\n",
+      "tags": [
+        "ioc",
+        "shai-hulud",
+        "worm"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml"
+      ]
+    },
+    {
+      "id": "ENCODED_SHELL_ONELINER",
+      "name": "Encoded / Download-and-Execute One-liner",
+      "pattern": "base64\\s+(?:-d|-D|--decode)\\b[^\\n|]{0,200}\\|\\s*(?:sudo\\s+)?(?:ba|z)?sh\\b|powershell(?:\\.exe)?\\s[^\\n]{0,80}-(?:e|ec|enc|encodedcommand)\\s+[A-Za-z0-9+\\/=]{40,}|powershell(?:\\.exe)?\\s[^\\n]{0,40}-(?:w|windowstyle)\\s+h(?:idden)?\\b[^\\n]{0,200}(?:iwr|irm|Invoke-WebRequest|Invoke-RestMethod|DownloadString|curl)|\\bmshta(?:\\.exe)?\\s+[\"']?https?:",
+      "description": "base64 -d | sh, powershell -enc <blob>, hidden-window powershell downloads, mshta http — ClickFix / fake-error 'paste this' lures. Plain `irm ... | iex` is left out: it is how Claude Code, bun and scoop install.\n",
+      "tags": [
+        "clickfix",
+        "download-exec",
+        "social-engineering"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".bat",
+        ".cmd",
+        ".json",
+        ".md",
+        ".txt",
+        ".yml",
+        ".yaml",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py"
+      ]
+    },
+    {
+      "id": "DOWNLOAD_PIPED_TO_CMD",
+      "name": "Download Piped into cmd",
+      "pattern": "\\b(?:curl|wget)\\b[^\\n|]{0,300}\\|\\s*cmd\\b",
+      "description": "`curl ... | cmd` is unusual outside malware (Windows variant of the task-file loader).\n",
+      "tags": [
+        "download-exec",
+        "contagious-interview"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".sh",
+        ".ps1",
+        ".bat",
+        ".cmd",
+        ".json",
+        ".md",
+        ".txt",
+        ".yml",
+        ".yaml",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py"
+      ]
+    },
+    {
+      "id": "HARDCODED_NPM_TOKEN",
+      "name": "Hardcoded npm Token",
+      "pattern": "\\bnpm_[A-Za-z0-9]{36}\\b",
+      "description": "npm automation/publish tokens are the worm's propagation fuel.\n",
+      "tags": [
+        "secrets",
+        "npm",
+        "credentials"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml",
+        ".env",
+        ".npmrc"
+      ]
+    },
+    {
+      "id": "HARDCODED_AI_API_KEY",
+      "name": "Hardcoded AI Provider Key",
+      "pattern": "\\bsk-ant-(?:api|admin)\\d{2}-[A-Za-z0-9_-]{80,}|\\bsk-(?:proj|svcacct|admin)-[A-Za-z0-9_-]{40,}",
+      "description": "Anthropic / OpenAI keys are now first-class stealer targets (CHAINDROP collector lists them).\n",
+      "tags": [
+        "secrets",
+        "ai",
+        "credentials"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml",
+        ".env"
+      ]
+    },
+    {
+      "id": "HARDCODED_PRIVATE_KEY_BLOCK",
+      "name": "Private Key Block",
+      "pattern": "-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED |PGP )?PRIVATE KEY(?: BLOCK)?-----\\s*(?:\\\\n|\\\\r\\\\n)?[A-Za-z0-9+\\/=]{40,}",
+      "description": "PEM/OpenSSH private key with key material (bare headers in docs/types are ignored).\n",
+      "tags": [
+        "secrets",
+        "private-key"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".yml",
+        ".yaml",
+        ".env",
+        ".pem",
+        ".key"
+      ]
+    },
+    {
+      "id": "HARDCODED_WALLET_PRIVATE_KEY",
+      "name": "Hardcoded Wallet Private Key",
+      "pattern": "(?:^|\\n)(?![ \\t]*(?:\\*|\\/\\/|#))[^\\n]*?(?:private[_-]?key|PRIVATE_KEY|privKey|secretKey|WALLET_KEY)\\s*[:=]\\s*['\"\\x60]?(?:0x)?[0-9a-fA-F]{64}\\b",
+      "description": "32-byte hex private key assigned to a key-ish variable outside comments (Web3 repos). JSDoc examples in web3/noble are skipped.\n",
+      "tags": [
+        "secrets",
+        "web3",
+        "wallet"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".py",
+        ".rb",
+        ".php",
+        ".go",
+        ".sh",
+        ".ps1",
+        ".psm1",
+        ".json",
+        ".env"
+      ]
+    },
+    {
+      "id": "SOCIAL_ENGINEERING_WALLET_SECRET_REQUEST",
+      "name": "README Asks for Seed Phrase / Private Key",
+      "pattern": "(?:[Pp]aste|[Ee]nter|[Pp]ut|[Ii]nsert|[Aa]dd|[Pp]rovide)\\s+(?:in\\s+)?your\\s[^\\n]{0,40}(?:[Ss]eed [Pp]hrase|[Mm]nemonic|[Rr]ecovery [Pp]hrase|[Ss]ecret [Rr]ecovery|[Pp]rivate [Kk]ey)",
+      "description": "Fake 'MEV / sniper / trading bot' repos ask users to paste a seed phrase or key, then exfiltrate it.\n",
+      "tags": [
+        "social-engineering",
+        "web3",
+        "wallet"
+      ],
+      "severity": "medium",
+      "confidence": "low",
+      "fileExtensions": [
+        ".md",
+        ".txt"
+      ]
+    },
+    {
+      "id": "GHA_SECRETS_DUMP",
+      "name": "Workflow Serialises All Secrets",
+      "pattern": "toJSON\\(\\s*secrets\\s*\\)",
+      "description": "`${{ toJSON(secrets) }}` dumps every secret into a step — used by worm-injected workflows.\n",
+      "tags": [
+        "ci",
+        "github-actions",
+        "exfiltration"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".yml",
+        ".yaml"
+      ]
+    },
+    {
       "id": "OBF_BASE64_HEAVY",
       "name": "Heavy Base64 Encoding",
       "pattern": "[A-Za-z0-9+/]{50,}={0,2}",
@@ -1034,7 +1813,7 @@
     {
       "id": "OBF_NEW_FUNCTION",
       "name": "new Function() Constructor",
-      "pattern": "new\\s+Function\\s*\\([^)]{0,200}\\)",
+      "pattern": "new\\s+Function\\s*\\((?!\\s*\\)|\\s*['\"]return this['\"]\\s*\\))[^)]{0,200}\\)",
       "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n",
       "tags": [
         "function-constructor",
@@ -1115,7 +1894,43 @@
       ]
     }
   ],
-  "knownBadHashes": [],
+  "knownBadHashes": [
+    {
+      "sha256": "9fc2570b7cef51c1b8df116d144d11ff4096357be7d2c4c6367cfc2509cf1bcc",
+      "type": "js",
+      "malwareFamily": "shai-hulud",
+      "source": "elastic-security-labs",
+      "description": "Math_Symbol.js / math_init.js (CHAINDROP payload)"
+    },
+    {
+      "sha256": "fd3ca4007b225fdf8de7af4345a19179d5efa8c4bb9205f88cda806e5684b1eb",
+      "type": "js",
+      "malwareFamily": "shai-hulud",
+      "source": "elastic-security-labs",
+      "description": "setup.mjs (CHAINDROP dropper)"
+    },
+    {
+      "sha256": "54dc7ea54a1317cca0e890a2770630cf7fa6c97813e0cb9d2caa93012b350668",
+      "type": "js",
+      "malwareFamily": "shai-hulud",
+      "source": "elastic-security-labs",
+      "description": "setup.mjs (CHAINDROP dropper variant)"
+    },
+    {
+      "sha256": "25a0735d0db7dc40e5d45ce42d9c106067e6a66e184d967cfecfab17c3bcb5ef",
+      "type": "js",
+      "malwareFamily": "shai-hulud",
+      "source": "stepsecurity",
+      "description": "lib/setup.mjs (tensorlake@0.5.144)"
+    },
+    {
+      "sha256": "b50a00900399ba99fb6ce1fc151519cb99d44320ef2a631f2237e1aea0ad6fec",
+      "type": "js",
+      "malwareFamily": "shai-hulud",
+      "source": "stepsecurity",
+      "description": "lib/Math_Symbol.js (tensorlake@0.5.144)"
+    }
+  ],
   "userProfileRules": {
     "riskFactors": [
       {
