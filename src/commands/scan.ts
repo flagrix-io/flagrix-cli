@@ -2,6 +2,7 @@ import { scanGitHubRepo } from "@flagrix/scanner-core"
 
 import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
+import { loadOsvFeed } from "../lib/osv-feed.js"
 import { renderRepoResult } from "../lib/render.js"
 import { EXIT, exitCodeFor, resolveToken, wantJson } from "./shared.js"
 
@@ -26,10 +27,14 @@ export async function runScan(target: string, options: ScanOptions): Promise<num
     const note = describeSource(loaded)
     if (note) console.error(`flagrix: ${note}`)
 
-    const result = await scanGitHubRepo(repo, {
+    // Passed as a variable: `osvFeed` is a scanner-core >= 0.5 option, and
+    // older engines simply ignore it.
+    const scanOptions = {
       signatures: loaded.signatures,
-      githubToken: resolveToken(options.token)
-    })
+      githubToken: resolveToken(options.token),
+      osvFeed: await loadOsvFeed()
+    }
+    const result = await scanGitHubRepo(repo, scanOptions)
 
     if (wantJson(options.json)) {
       console.log(JSON.stringify(result, null, 2))

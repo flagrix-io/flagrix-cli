@@ -6,6 +6,7 @@ import { scanGitHubRepo, scanGitHubUser } from "@flagrix/scanner-core"
 
 import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
+import { loadOsvFeed } from "../lib/osv-feed.js"
 import { securityScore } from "../lib/render.js"
 import { resolveToken } from "./shared.js"
 
@@ -39,10 +40,12 @@ export async function runMcp(): Promise<number> {
     async ({ target, ref }) => {
       const repo = parseRepoTarget(target, ref)
       const loaded = await loadSignatures()
-      const result = await scanGitHubRepo(repo, {
+      const scanOptions = {
         signatures: loaded.signatures,
-        githubToken: resolveToken()
-      })
+        githubToken: resolveToken(),
+        osvFeed: await loadOsvFeed()
+      }
+      const result = await scanGitHubRepo(repo, scanOptions)
       const note = describeSource(loaded)
       const summary = [
         `${result.riskLevel.toUpperCase()} risk — security score ${securityScore(result.riskScore)}/100 ` +
