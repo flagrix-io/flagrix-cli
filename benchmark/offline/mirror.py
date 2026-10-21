@@ -24,6 +24,71 @@ CONFIG = [re.compile(p) for p in [
     r"^\.github/copilot-instructions\.md$",
 ]]
 FONTS = (".woff", ".woff2", ".ttf", ".otf", ".eot")
+# Files that configs run with node/bun/deno/tsx (scanner-core >= 0.5 reads
+# them whatever their extension). Mirrors scanner-core's extractCommandTargets.
+RUNTIME = re.compile(r"""\b(?:node|nodejs|bun|deno\s+run|tsx|ts-node)((?:\s+-{1,2}[\w-]+(?:=[^\s"'`]*)?)*)\s+\\?["']?([^\s"'`&|;<>()]+)""")
+INLINE = re.compile(r"(?:^|\s)(?:-[ep]|--eval|--print)(?:\s|=|$)")
+ARGS = re.compile(r'"command"\s*:\s*"(?:node|nodejs|bun|deno|tsx|ts-node)"\s*,\s*"args"\s*:\s*\[\s*"([^"]+)"')
+PROJECT_DIR = re.compile(r"""\\?["']?\$\{?(?:CLAUDE_PROJECT_DIR|workspaceFolder|workspaceRoot)\}?\\?["']?(?=/)""")
+DOT_DIR = re.compile(r"^(?:(.*)/)?\.(?:vscode|claude|cursor|amazonq|gemini|windsurf|roo|kiro|github)/")
+
+
+def command_targets(text, config_path):
+    m = DOT_DIR.match(config_path)
+    base = (m.group(1) or "") if m else (config_path.rsplit("/", 1)[0] if "/" in config_path else "")
+    text = PROJECT_DIR.sub(".", text)
+    raws = [t for flags, t in RUNTIME.findall(text) if not INLINE.search(flags)] + ARGS.findall(text)
+    out = set()
+    for raw in raws:
+        raw = raw.rstrip("\\")
+        if not raw or raw[0] in "-/~$" or "://" in raw:
+            continue
+        segs = base.split("/") if base else []
+        ok = True
+        for seg in raw.split("/"):
+            if seg in ("", "."):
+                continue
+            if seg == "..":
+                if not segs:
+                    ok = False
+                    break
+                segs.pop()
+            else:
+                segs.append(seg)
+        if ok and segs:
+            out.add("/".join(segs))
+    return out
+
+
+def fetch_blobs(d, shas):
+    if not shas:
+        return None
+    r = subprocess.run(["git", "-C", d, "-c", "fetch.negotiationAlgorithm=noop", "fetch", "origin", "--no-tags",
+                        "--no-write-fetch-head", "--recurse-submodules=no", "--filter=blob:none", "--stdin"],
+                       input="\n".join(sorted(shas)) + "\n", capture_output=True, text=True)
+    return r.stderr[-200:] if r.returncode else None
+
+
+def have(d, sha):
+    return git(d, "cat-file", "-e", sha).returncode == 0
+
+
+def ensure_command_targets(d, entries):
+    """Second pass: read the mirrored configs and fetch what they run."""
+    blobs = {e["path"]: e for e in entries if e["type"] == "blob"}
+    configs = [e for e in blobs.values() if e["path"].endswith("package.json") or any(c.search(e["path"]) for c in CONFIG)]
+    missing = set()
+    for e in configs:
+        r = subprocess.run(["git", "-C", d, "cat-file", "blob", e["sha"]], capture_output=True,
+                           env={**os.environ, "GIT_NO_LAZY_FETCH": "1"})
+        if r.returncode:
+            continue
+        for path in command_targets(r.stdout.decode("utf-8", "replace"), e["path"]):
+            t = blobs.get(path)
+            if t and t.get("size", 0) <= 1024 * 1024 and not have(d, t["sha"]):
+                missing.add(t["sha"])
+    err = fetch_blobs(d, missing)
+    return len(missing), err
 
 
 def git(d, *args, stdin=None):
@@ -33,8 +98,15 @@ def git(d, *args, stdin=None):
 
 def mirror(repo, sha):
     d = os.path.join(HERE, "git", repo.replace("/", "_"))
-    if os.path.exists(os.path.join(d, "tree.json")):
-        return "cached"
+    tree_path = os.path.join(d, "tree.json")
+    if os.path.exists(tree_path):
+        tree = json.load(open(tree_path))
+        n, err = ensure_command_targets(d, tree["tree"])
+        if err:
+            return "FAIL targets " + err
+        if n:
+            write_tree(d, sha, tree["tree"])
+        return f"cached (+{n} command targets)" if n else "cached"
     os.makedirs(d, exist_ok=True)
     if not os.path.exists(os.path.join(d, ".git")):
         git(d, "init", "-q"); git(d, "remote", "add", "origin", f"https://github.com/{repo}.git")
@@ -54,23 +126,28 @@ def mirror(repo, sha):
     fonts = [e for e in blobs if e["path"].lower().endswith(FONTS)][:10]
     source = [e for e in blobs if any(e["path"].endswith(x) for x in SCANNABLE)][:320]
     want = {e["sha"] for e in first + fonts + source}
-    if want:
-        r = subprocess.run(["git", "-C", d, "-c", "fetch.negotiationAlgorithm=noop", "fetch", "origin", "--no-tags",
-                            "--no-write-fetch-head", "--recurse-submodules=no", "--filter=blob:none", "--stdin"],
-                           input="\n".join(sorted(want)) + "\n", capture_output=True, text=True)
-        if r.returncode:
-            return "FAIL blobs " + r.stderr[-200:]
+    err = fetch_blobs(d, want)
+    if err:
+        return "FAIL blobs " + err
+    n, err = ensure_command_targets(d, entries)
+    if err:
+        return "FAIL targets " + err
+    write_tree(d, sha, entries)
+    return f"ok {len(blobs)} blobs, {len(want) + n} fetched"
+
+
+def write_tree(d, sha, entries):
+    """Record sizes for every blob present locally (the scanner's size limits need them)."""
     sizes = {}
     check = git(d, "cat-file", "--batch-all-objects", "--batch-check=%(objectname) %(objectsize)").stdout
     for line in check.splitlines():
         parts = line.split()
         if len(parts) == 2 and parts[1].isdigit():
             sizes[parts[0]] = int(parts[1])
-    for e in blobs:
-        if e["sha"] in sizes:
+    for e in entries:
+        if e["type"] == "blob" and e["sha"] in sizes:
             e["size"] = sizes[e["sha"]]
     json.dump({"sha": sha, "truncated": False, "tree": entries}, open(os.path.join(d, "tree.json"), "w"))
-    return f"ok {len(blobs)} blobs, {len(want)} fetched"
 
 
 if __name__ == "__main__":

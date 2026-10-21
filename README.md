@@ -65,6 +65,13 @@ calls go to the GitHub/npm APIs and the public
 [detection-rules](https://github.com/flagrix-io/flagrix-detection-rules)
 repository (signature refresh, cached 6 h, with a bundled offline snapshot).
 
+Dependencies are also checked against the OSV malicious-package feed
+(`osv-malicious.json` from the same repository: every npm/PyPI package the
+OpenSSF malicious-packages project has confirmed malicious). The feed is
+downloaded and matched locally, so dependency names never leave your machine.
+It is cached 6 h and revalidated with its ETag. Set `FLAGRIX_OSV_FEED=0` to
+skip it (the curated list in the signatures still applies).
+
 ## How it works
 
 Scanning logic lives in [@flagrix/scanner-core](https://github.com/flagrix-io/flagrix-scanner-core)

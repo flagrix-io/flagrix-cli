@@ -9,6 +9,7 @@ import { join } from "node:path"
 
 const ROOT = join(import.meta.dirname, "git")
 const realFetch = globalThis.fetch
+const warned = new Set()
 const json = (body, status = 200) => new Response(JSON.stringify(body), { status })
 
 globalThis.fetch = async (input, init) => {
@@ -26,9 +27,19 @@ globalThis.fetch = async (input, init) => {
   if ((r = rest.match(/^contents\/(.+?)\?ref=([0-9a-f]{40})$/i))) {
     const path = decodeURIComponent(r[1])
     try {
-      const blob = execFileSync("git", ["-C", dir, "cat-file", "blob", `${r[2]}:${path}`], { maxBuffer: 64 << 20 })
+      // Offline means offline: a blob missing from the blobless mirror must
+      // not trigger a lazy fetch from github.com (that can hang for minutes).
+      const blob = execFileSync("git", ["-C", dir, "cat-file", "blob", `${r[2]}:${path}`], {
+        maxBuffer: 64 << 20,
+        env: { ...process.env, GIT_NO_LAZY_FETCH: "1" },
+        stdio: ["ignore", "pipe", "ignore"],
+      })
       return json({ content: blob.toString("base64") })
     } catch {
+      if (!warned.has(`${dir}:${path}`)) {
+        warned.add(`${dir}:${path}`)
+        console.error(`gitmock: ${m[1]}/${m[2]}:${path} is not in the mirror (re-run mirror.py)`)
+      }
       return json({ message: "Not Found" }, 404)
     }
   }
