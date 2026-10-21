@@ -150,3 +150,43 @@ describe("signature fallback", () => {
     expect(errors.join("\n")).toContain("bundled snapshot")
   })
 })
+
+describe("OSV malicious-package feed", () => {
+  const FEED = {
+    schemaVersion: 1,
+    npm: { all: ["evil-pkg"], versions: { fsevents: [">=1.0.0 <1.2.11"] } },
+    pypi: { all: [], versions: {} }
+  }
+  const withFeed = (files: Record<string, string>, feed: unknown = FEED) => {
+    const api = mockApi(files)
+    return vi.fn(async (input: unknown, init?: RequestInit) => {
+      if (String(input).includes("osv-malicious.json")) {
+        return new Response(JSON.stringify(feed), { status: 200 })
+      }
+      return api(input)
+    })
+  }
+
+  it("a dependency in the feed → critical OSV finding, exit 3", async () => {
+    global.fetch = withFeed({
+      "package.json": JSON.stringify({ name: "app", dependencies: { "evil-pkg": "^1.0.0", fsevents: "~2.3.3" } })
+    }) as unknown as typeof fetch
+    const code = await runScan("acme/app", { json: true })
+    expect(code).toBe(EXIT.HIGH)
+    const result = JSON.parse(logs.join("\n"))
+    const osv = result.findings.filter((f: { pattern?: string }) => f.pattern === "OSV_MALICIOUS_PACKAGE")
+    expect(osv.map((f: { package: string }) => f.package)).toEqual(["evil-pkg"])
+  })
+
+  it("FLAGRIX_OSV_FEED=0 scans with the curated list only", async () => {
+    process.env.FLAGRIX_OSV_FEED = "0"
+    try {
+      global.fetch = withFeed({
+        "package.json": JSON.stringify({ name: "app", dependencies: { "evil-pkg": "^1.0.0" } })
+      }) as unknown as typeof fetch
+      expect(await runScan("acme/app", { json: true })).toBe(EXIT.LOW)
+    } finally {
+      delete process.env.FLAGRIX_OSV_FEED
+    }
+  })
+})
