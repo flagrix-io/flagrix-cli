@@ -1,31 +1,36 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-07-13T19:35:54.587Z",
+    "runAt": "2026-10-21T13:34:25.627Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.1.4",
-    "engineVersion": "0.3.0",
+    "cliVersion": "0.3.0",
+    "engineVersion": "0.5.0",
     "engineCommitSha": null,
     "engineDirty": false,
-    "rulesVersion": "2026.07.12.003"
+    "rulesVersion": "2026.10.19.001"
   },
   "metrics": {
-    "samplesDefined": 90,
-    "samplesCompleted": 90,
-    "samplesPassed": 90,
+    "samplesDefined": 114,
+    "samplesCompleted": 114,
+    "samplesPassed": 114,
     "criticalFixturesDetected": 10,
     "criticalFixturesTotal": 10,
     "criticalFixtureDetectionRate": 1,
+    "emergingFixturesDetected": 15,
+    "emergingFixturesPassed": 15,
+    "emergingFixturesTotal": 15,
+    "emergingFixtureDetectionRate": 1,
     "maliciousSamplesDetected": 25,
     "maliciousSamplesTotal": 25,
     "maliciousDetectionRate": 1,
-    "referenceSamplesTotal": 55,
+    "referenceSamplesTotal": 64,
     "referenceHighVerdicts": 0,
     "referenceHighVerdictRate": 0,
     "referenceSamplesWithHighOrCriticalFindings": 2,
     "referenceCriticalFindings": 0,
     "gates": {
       "criticalFixtures100Percent": true,
+      "emergingFixturesAtLeast90Percent": true,
       "maliciousDetectionAtLeast90Percent": true,
       "zeroCriticalReferenceFindings": true,
       "referenceHighVerdictsAtMost5Percent": true
@@ -69,7 +74,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 17,
+      "durationMs": 33,
       "error": ""
     },
     {
@@ -109,7 +114,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 3,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -369,7 +374,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -429,10 +434,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "high",
-      "actualScore": 0.4,
+      "actualScore": 0.64,
       "safeToClone": false,
       "rulesTriggered": [
-        "POSTINSTALL_SCRIPT"
+        "POSTINSTALL_SCRIPT",
+        "SUPPLY_CHAIN_INSTALL_HOOK_DOWNLOADER"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -453,12 +459,797 @@
           "file": "package.json",
           "line": null,
           "description": "postinstall script executes dynamic code"
+        },
+        {
+          "severity": "critical",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "SUPPLY_CHAIN_INSTALL_HOOK_DOWNLOADER",
+          "file": "package.json",
+          "line": 1,
+          "description": "npm install hook that downloads (curl/wget/iwr), pipes into a shell, or runs `node -e` with network or exec code. Complements scanner-core's built-in postinstall check (which only looks for curl/wget/http/fetch/eval/exec substrings).\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 2,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-node-asset-target-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Contagious Interview: folderOpen task runs a loader disguised as .vscode/spellright.dict",
+      "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
+      "immutableRef": "fixture-v1:1de78a3cf297ce06a922ac9448df61970923744e",
+      "expectedDetectionCategories": [
+        "REMOTE_CODE_FROM_HTTP_RESPONSE",
+        "CONFIG_NODE_RUNS_ASSET_FILE"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.875,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN",
+        "CONFIG_NODE_RUNS_ASSET_FILE",
+        "REMOTE_CODE_FROM_HTTP_RESPONSE",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 12,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CONFIG_NODE_RUNS_ASSET_FILE",
+          "file": ".vscode/tasks.json",
+          "line": 7,
+          "description": "Task runs `node webfonts/fa-brands-regular.woff2`, `node src/assets/card4.jpeg`, `node .vscode/spellright.dict` — JS disguised as assets.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "REMOTE_CODE_FROM_HTTP_RESPONSE",
+          "file": ".vscode/spellright.dict",
+          "line": 2,
+          "description": "Contagious Interview loaders: eval(err.response.data), new Function('require', res.data)(require).\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": ".vscode/spellright.dict",
+          "line": 2,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 3,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 2,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-vscode-task-downloader-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Contagious Interview folderOpen task piping a download into a shell",
+      "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
+      "immutableRef": "fixture-v1:07a5b6e07e4a41496034481ac5110814a9930272",
+      "expectedDetectionCategories": [
+        "CONFIG_COMMAND_DOWNLOAD_EXEC"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN",
+        "CONFIG_COMMAND_DOWNLOAD_EXEC"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 18,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CONFIG_COMMAND_DOWNLOAD_EXEC",
+          "file": ".vscode/tasks.json",
+          "line": 8,
+          "description": "tasks.json / hook / MCP 'command' that does curl|wget|iwr ... | sh|bash|cmd|iex (Contagious Interview task files).\n"
+        }
+      ],
+      "filesScanned": 2,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-fake-font-loader-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "RMG-Py incident: JS dropper disguised as a FontAwesome .woff2, auto-run on folder open",
+      "sourceUrl": "https://github.com/ReactionMechanismGenerator/RMG-Py/issues/3008",
+      "immutableRef": "fixture-v1:300ddf9f6c1c43b3b81579bd020fa4456b28d7a3",
+      "expectedDetectionCategories": [
+        "MASQUERADED_SCRIPT_FONT",
+        "CONFIG_NODE_RUNS_ASSET_FILE",
+        "VSCODE_AUTOMATIC_TASKS_ENABLED"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.9875,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN",
+        "CONFIG_NODE_RUNS_ASSET_FILE",
+        "VSCODE_AUTOMATIC_TASKS_ENABLED",
+        "MASQUERADED_SCRIPT_FONT"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 12,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CONFIG_NODE_RUNS_ASSET_FILE",
+          "file": ".vscode/tasks.json",
+          "line": 7,
+          "description": "Task runs `node webfonts/fa-brands-regular.woff2`, `node src/assets/card4.jpeg`, `node .vscode/spellright.dict` — JS disguised as assets.\n"
+        },
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_AUTOMATIC_TASKS_ENABLED",
+          "file": ".vscode/settings.json",
+          "line": 1,
+          "description": "Committed to suppress VS Code's 'allow automatic tasks' prompt (RMG-Py incident, Sept 2026).\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "OBFUSCATED_CODE",
+          "rule": "MASQUERADED_SCRIPT_FONT",
+          "file": "public/fonts/fa-solid-500.woff2",
+          "line": null,
+          "description": "JavaScript disguised as a font file: public/fonts/fa-solid-500.woff2"
+        }
+      ],
+      "filesScanned": 3,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-vscode-node-inline-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "node -e task fetching a JSON-store payload and running it via new Function",
+      "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
+      "immutableRef": "fixture-v1:fe3a4ba9c23efede31e7ed0dfed66b82be95382d",
+      "expectedDetectionCategories": [
+        "CONFIG_NODE_INLINE_FETCH_EXEC"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN",
+        "CONFIG_NODE_INLINE_FETCH_EXEC"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 13,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CONFIG_NODE_INLINE_FETCH_EXEC",
+          "file": ".vscode/tasks.json",
+          "line": null,
+          "description": "node -e variant: inline https.get of a JSON-store URL, then new Function(...) on the result.\n"
         }
       ],
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
       "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-shai-hulud-preinstall-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "CHAINDROP/Tensorlake: preinstall setup.mjs dropper + .claude SessionStart persistence",
+      "sourceUrl": "https://www.elastic.co/security-labs/threat-command/shai-hulud-chaindrop-npm-supply-chain",
+      "immutableRef": "fixture-v1:47e8654ec41b9d168311dafa9ba756377cbe0905",
+      "expectedDetectionCategories": [
+        "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
+        "CONFIG_RUNS_DOTDIR_SCRIPT"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.6875,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "AGENT_HOOK_SESSIONSTART_EXEC",
+        "CONFIG_RUNS_DOTDIR_SCRIPT",
+        "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "AGENT_HOOK_SESSIONSTART_EXEC",
+          "file": ".claude/settings.json",
+          "line": 1,
+          "description": "Committed Claude Code SessionStart hook that runs a script. Legit plugins do this too (review signal); the dot-dir dropper rule below is the high-confidence variant.\n"
+        },
+        {
+          "severity": "high",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "CONFIG_RUNS_DOTDIR_SCRIPT",
+          "file": ".claude/settings.json",
+          "line": 1,
+          "description": "CHAINDROP and Tensorlake commit `node .claude/setup.mjs` / `node .vscode/setup.mjs` hooks to every branch they can write to.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
+          "file": "package.json",
+          "line": 1,
+          "description": "CHAINDROP (keyv, Aug 2026) and Tensorlake (Oct 2026) add `preinstall: node setup.mjs`, which downloads Bun and runs Math_Symbol.js.\n"
+        }
+      ],
+      "filesScanned": 2,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 2,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-loader-error-eval-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Contagious Interview loader: executes the body of an HTTP error response",
+      "sourceUrl": "https://www.microsoft.com/en-us/security/blog/2026/03/11/contagious-interview-malware-delivered-through-fake-developer-job-interviews/",
+      "immutableRef": "fixture-v1:ef74801649b4e4e6e8488c63643d91f7a68e1924",
+      "expectedDetectionCategories": [
+        "REMOTE_CODE_FROM_HTTP_RESPONSE"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "REMOTE_CODE_FROM_HTTP_RESPONSE",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "REMOTE_CODE_FROM_HTTP_RESPONSE",
+          "file": "server/config/conf.js",
+          "line": 2,
+          "description": "Contagious Interview loaders: eval(err.response.data), new Function('require', res.data)(require).\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "server/config/conf.js",
+          "line": 2,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-config-injection-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "PolinRider/Void Dokkaebi: loader appended to a build config behind whitespace padding",
+      "sourceUrl": "https://www.trendmicro.com/en_us/research/26/d/void-dokkaebi-uses-fake-job-interview-lure-to-spread-malware-via-code-repositories.html",
+      "immutableRef": "fixture-v1:26f0182f176967a46a94af744bdf5c13d1404706",
+      "expectedDetectionCategories": [
+        "LOADER_GLOBAL_MARKER",
+        "HIDDEN_CODE_WHITESPACE_PADDING"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.55,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "LOADER_GLOBAL_MARKER",
+        "HIDDEN_CODE_WHITESPACE_PADDING"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "LOADER_GLOBAL_MARKER",
+          "file": "tailwind.config.js",
+          "line": 1,
+          "description": "Void Dokkaebi / PolinRider loaders set global['!'] (variant global['_V']).\n"
+        },
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "HIDDEN_CODE_WHITESPACE_PADDING",
+          "file": "tailwind.config.js",
+          "line": 1,
+          "description": "Loader code pushed off-screen by 300+ spaces — PolinRider / Void Dokkaebi append it to next/tailwind/eslint/postcss configs. Scanner-core's built-in long-line check only fires past 5,000 characters and caps at medium.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-glassworm-unicode-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "GlassWorm: payload encoded in invisible variation selectors and eval'd",
+      "sourceUrl": "https://www.aikido.dev/blog/glassworm-returns-unicode-attack-github-npm-vscode",
+      "immutableRef": "fixture-v1:5692a43d03871bff8e5db72a9848b8de73b5657d",
+      "expectedDetectionCategories": [
+        "INVISIBLE_UNICODE_PAYLOAD",
+        "INVISIBLE_UNICODE_DECODER"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.8375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "INVISIBLE_UNICODE_PAYLOAD",
+        "INVISIBLE_UNICODE_DECODER",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "INVISIBLE_UNICODE_PAYLOAD",
+          "file": "src/index.js",
+          "line": 2,
+          "description": "GlassWorm: runs of variation selectors U+FE00–FE0F / U+E0100–E01EF encode a payload that renders as nothing. Needs scanner-core ≥0.4 (UTF-8 decoding); written in surrogate-pair form so it works without the u flag.\n"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "INVISIBLE_UNICODE_DECODER",
+          "file": "src/index.js",
+          "line": null,
+          "description": "GlassWorm decoder maps 0xFE00/0xE0100 back to bytes and evals the result.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/index.js",
+          "line": 2,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 4,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-blockchain-dead-drop-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Stage 2 read from TRON transaction data and executed",
+      "sourceUrl": "https://www.trendmicro.com/en_us/research/26/d/void-dokkaebi-uses-fake-job-interview-lure-to-spread-malware-via-code-repositories.html",
+      "immutableRef": "fixture-v1:222f3eeea1a934a70ccfbbfba737db992b4586f5",
+      "expectedDetectionCategories": [
+        "BLOCKCHAIN_DEAD_DROP_EXEC"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "BLOCKCHAIN_DEAD_DROP_EXEC",
+        "OBF_EVAL"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BLOCKCHAIN_DEAD_DROP_EXEC",
+          "file": "lib/sync.js",
+          "line": null,
+          "description": "PolinRider/Void Dokkaebi fetch stage 2 from TRON/Aptos/BSC tx data; GlassWorm uses Solana memos. Plain RPC use is fine — this needs eval/Function nearby.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "lib/sync.js",
+          "line": 2,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-known-campaign-domain-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Contagious Interview task-file payload host (IOC string only)",
+      "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
+      "immutableRef": "fixture-v1:b9a2bc6c9442be6cd8e2030565c31e7e50846317",
+      "expectedDetectionCategories": [
+        "KNOWN_CAMPAIGN_DOMAINS"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.49,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "NETWORK_SUSPICIOUS_TLD",
+        "KNOWN_CAMPAIGN_DOMAINS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_SUSPICIOUS_TLD",
+          "file": "scripts/setup.sh",
+          "line": 3,
+          "description": "URLs on free/abused TLDs (.tk .ml .ga .cf .gq .onion .xyz .top .icu .cfd .sbs .cyou .buzz .rest .zip .mov)"
+        },
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "KNOWN_CAMPAIGN_DOMAINS",
+          "file": "scripts/setup.sh",
+          "line": 3,
+          "description": "CHAINDROP, Tensorlake, Contagious Interview task files, PhantomRaven RDD hosts, third-party.com ClickFix payload host.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-mcp-config-shell-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Repo MCP config whose server is a raw shell that exfiltrates cloud identity (CVE-2026-12957 class)",
+      "sourceUrl": "https://nhimg.org/amazon-q-mcp-config-vulnerability-2026-malicious-repos-steal-aws-credentials",
+      "immutableRef": "fixture-v1:7533b7cc4dd43c38d692ca5b1ac3934d3b494d7d",
+      "expectedDetectionCategories": [
+        "MCP_CONFIG_SHELL_EXEC"
+      ],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "MCP_CONFIG_SHELL_EXEC"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "MCP_CONFIG_SHELL_EXEC",
+          "file": ".amazonq/mcp.json",
+          "line": 1,
+          "description": "Committed MCP server config (.mcp.json, .cursor/mcp.json, .amazonq/mcp.json) whose command is a shell/downloader. CVE-2026-12957 class.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-agent-instruction-injection-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Poisoned coding test: hidden agent instructions in a README HTML comment",
+      "sourceUrl": "https://www.mitiga.io/blog/poisoned-coding-test-ai-agent-attack",
+      "immutableRef": "fixture-v1:c0bccda3a9948803a231557dcd06aa8dd06dd998",
+      "expectedDetectionCategories": [
+        "AI_INSTRUCTION_INJECTION_HTML_COMMENT"
+      ],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "AI_INSTRUCTION_INJECTION_HTML_COMMENT"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "AI_INSTRUCTION_INJECTION_HTML_COMMENT",
+          "file": "README.md",
+          "line": 2,
+          "description": "Poisoned coding tests hide instructions for coding agents in README/CLAUDE.md HTML comments ('Do not mention this step').\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 2,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-clickfix-readme-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "ClickFix-style README: hidden-window PowerShell download",
+      "sourceUrl": "https://www.bleepingcomputer.com/news/security/placeholder-domain-used-in-dev-docs-now-serves-clickfix-attacks/",
+      "immutableRef": "fixture-v1:811b2a8ba00db3458a6d37c666d788868bb97f8a",
+      "expectedDetectionCategories": [
+        "ENCODED_SHELL_ONELINER"
+      ],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "ENCODED_SHELL_ONELINER"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "ENCODED_SHELL_ONELINER",
+          "file": "README.md",
+          "line": 4,
+          "description": "base64 -d | sh, powershell -enc <blob>, hidden-window powershell downloads, mshta http — ClickFix / fake-error 'paste this' lures. Plain `irm ... | iex` is left out: it is how Claude Code, bun and scoop install.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-gha-secrets-dump-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "Worm-injected workflow serialising every secret (Shai-Hulud v1 shai-hulud-workflow.yml)",
+      "sourceUrl": "https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem",
+      "immutableRef": "fixture-v1:40a9a6deffde3c1ca95b003cedf80afaad018000",
+      "expectedDetectionCategories": [
+        "GHA_SECRETS_DUMP"
+      ],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.15,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "GHA_SECRETS_DUMP"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "GHA_SECRETS_DUMP",
+          "file": ".github/workflows/ci.yml",
+          "line": 9,
+          "description": "`${{ toJSON(secrets) }}` dumps every secret into a step — used by worm-injected workflows.\n"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "emerging-python-reverse-shell-v1",
+      "corpus": "emerging-threat-fixture",
+      "label": "known-malicious-structure",
+      "labelSource": "InvisibleFerret-style Python socket + dup2 + pty shell",
+      "sourceUrl": "https://unit42.paloaltonetworks.com/threat-assessment-north-korean-threat-groups/",
+      "immutableRef": "fixture-v1:04995cc0cfb3b9101b0becb11181c4237ed08b3e",
+      "expectedDetectionCategories": [
+        "REVERSE_SHELL_UNIX"
+      ],
+      "minimumExpectedVerdict": "high",
+      "maximumExpectedVerdict": "",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "high",
+      "actualScore": 0.4375,
+      "safeToClone": false,
+      "rulesTriggered": [
+        "REVERSE_SHELL_UNIX",
+        "NETWORK_COMMUNICATION"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "critical",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "REVERSE_SHELL_UNIX",
+          "file": "tools/agent.py",
+          "line": 4,
+          "description": "Upstream REVERSE_SHELL covers Node (net.Socket + child_process). This adds the Python dup2/pty and shell /dev/tcp, nc -e, bash -i forms used by InvisibleFerret-style payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "tools/agent.py",
+          "line": 3,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        }
+      ],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -484,7 +1275,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -522,7 +1313,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -616,6 +1407,252 @@
       "error": ""
     },
     {
+      "sampleId": "reference-fixture-vscode-watch-task-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Ordinary folderOpen watch task (TypeScript compile)",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:3591358eb9e16cba63f4fabefa76df69cf26672a",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.0375,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 10,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        }
+      ],
+      "filesScanned": 2,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-claude-project-hooks-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Claude Code project hooks running scripts from .claude/hooks/",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:162b1ce6452c19a04a0b9f3bd8eb07f079926857",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 2,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-installer-readme-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "README with standard curl|bash and irm|iex installers",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:924441b533985ee0ba69b67f434657b8511ad8d4",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-mcp-npx-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Committed MCP config launching a published server via npx",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:e407c1317954c5fe8b3001cb911146fd7c01f975",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-real-fonts-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Real font binaries and a Git LFS pointer",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:f6161ea1ce7f10b7fabfdfc4374addcde0a1f944",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 3,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-web3-rpc-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "dApp reading TRON / EVM transactions without executing them",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:4d10e3460071c0e9ec995b5834eb291ece6fc86d",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-safe-workflow-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Normal pull_request CI workflow",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:267ef426d9aa62b8fb0e2bb1763a36a6f2366edd",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 0,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-node-build-script-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "package.json scripts that run a local build script with node",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:11dfbce795d48d5543fb9fc7a9e05b9016411915",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 2,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 1,
+      "error": ""
+    },
+    {
+      "sampleId": "reference-fixture-non-english-comments-v1",
+      "corpus": "reference-fixture",
+      "label": "reference-clean",
+      "labelSource": "Utility module commented in Chinese",
+      "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
+      "immutableRef": "fixture-v1:6fb1cedf53348f547153f57de685a6ddc0dc77ea",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0,
+      "safeToClone": true,
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
+      "filesScanned": 1,
+      "filesSkipped": 0,
+      "treeTruncated": false,
+      "durationMs": 2,
+      "error": ""
+    },
+    {
       "sampleId": "reference-express",
       "corpus": "reference-clean",
       "label": "reference-clean",
@@ -635,10 +1672,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 151,
-      "filesSkipped": 62,
+      "filesScanned": 156,
+      "filesSkipped": 57,
       "treeTruncated": false,
-      "durationMs": 4066,
+      "durationMs": 1719,
       "error": ""
     },
     {
@@ -683,10 +1720,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 193,
+      "filesScanned": 221,
+      "filesSkipped": 172,
       "treeTruncated": false,
-      "durationMs": 3701,
+      "durationMs": 2498,
       "error": ""
     },
     {
@@ -709,10 +1746,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 84,
-      "filesSkipped": 27,
+      "filesScanned": 87,
+      "filesSkipped": 24,
       "treeTruncated": false,
-      "durationMs": 2878,
+      "durationMs": 956,
       "error": ""
     },
     {
@@ -767,10 +1804,10 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 254,
+      "filesScanned": 212,
+      "filesSkipped": 242,
       "treeTruncated": false,
-      "durationMs": 3433,
+      "durationMs": 2498,
       "error": ""
     },
     {
@@ -938,10 +1975,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 63,
-      "filesSkipped": 97,
+      "filesScanned": 72,
+      "filesSkipped": 88,
       "treeTruncated": false,
-      "durationMs": 6133,
+      "durationMs": 1520,
       "error": ""
     },
     {
@@ -959,27 +1996,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"mocha\": matcha"
-        }
-      ],
-      "filesScanned": 21,
-      "filesSkipped": 13,
+      "findings": [],
+      "filesScanned": 23,
+      "filesSkipped": 11,
       "treeTruncated": false,
-      "durationMs": 3006,
+      "durationMs": 303,
       "error": ""
     },
     {
@@ -997,13 +2022,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
+        "VSCODE_TASK_AUTORUN",
         "SUSPICIOUS_FILE_ACCESS"
       ],
       "falsePositiveNotes": "",
       "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": ".vscode/tasks.json",
+          "line": 10,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
+        },
         {
           "severity": "medium",
           "confidence": "medium",
@@ -1014,10 +2049,10 @@
           "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
-      "filesScanned": 100,
-      "filesSkipped": 34,
+      "filesScanned": 107,
+      "filesSkipped": 27,
       "treeTruncated": false,
-      "durationMs": 4427,
+      "durationMs": 1418,
       "error": ""
     },
     {
@@ -1040,10 +2075,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 27,
-      "filesSkipped": 26,
+      "filesScanned": 32,
+      "filesSkipped": 21,
       "treeTruncated": false,
-      "durationMs": 2169,
+      "durationMs": 358,
       "error": ""
     },
     {
@@ -1078,10 +2113,10 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 7070,
+      "filesScanned": 228,
+      "filesSkipped": 7042,
       "treeTruncated": false,
-      "durationMs": 6000,
+      "durationMs": 2865,
       "error": ""
     },
     {
@@ -1134,10 +2169,10 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 503,
+      "filesScanned": 218,
+      "filesSkipped": 485,
       "treeTruncated": false,
-      "durationMs": 3829,
+      "durationMs": 2691,
       "error": ""
     },
     {
@@ -1160,10 +2195,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 8765,
+      "filesScanned": 209,
+      "filesSkipped": 8756,
       "treeTruncated": false,
-      "durationMs": 3898,
+      "durationMs": 2694,
       "error": ""
     },
     {
@@ -1186,10 +2221,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 2513,
+      "filesScanned": 220,
+      "filesSkipped": 2493,
       "treeTruncated": false,
-      "durationMs": 3743,
+      "durationMs": 4160,
       "error": ""
     },
     {
@@ -1244,7 +2279,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": ".github/actions/needs-triage/dist/index.js",
           "line": 1,
-          "description": "Extremely long line detected (340,182 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (127,929 chars, contains suspicious code), Line 7 (135,823 chars, contains suspicious code), Line 8 (284,175 chars, contains suspicious code)"
+          "description": "Extremely long line detected (339,874 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (127,929 chars, contains suspicious code), Line 7 (135,823 chars, contains suspicious code), Line 8 (284,170 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -1280,7 +2315,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": ".github/actions/next-repo-actions/dist/feature-requests/index.mjs",
           "line": 1,
-          "description": "Extremely long line detected (283,655 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,655 chars, contains suspicious code)"
+          "description": "Extremely long line detected (283,650 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,650 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -1316,7 +2351,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": ".github/actions/next-repo-actions/dist/issues/index.mjs",
           "line": 1,
-          "description": "Extremely long line detected (283,655 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,655 chars, contains suspicious code)"
+          "description": "Extremely long line detected (283,650 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (266,231 chars, contains suspicious code), Line 15 (120,797 chars, contains suspicious code), Line 16 (283,650 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -1334,7 +2369,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": ".github/actions/next-repo-actions/dist/wrong-issue-template/index.js",
           "line": 1,
-          "description": "Extremely long line detected (284,026 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (283,862 chars, contains suspicious code), Line 2 (283,305 chars, contains suspicious code), Line 3 (116,956 chars, contains suspicious code)"
+          "description": "Extremely long line detected (284,021 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (283,862 chars, contains suspicious code), Line 2 (283,300 chars, contains suspicious code), Line 3 (116,956 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -1352,7 +2387,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": ".github/actions/pr-auto-label/dist/index.js",
           "line": 1,
-          "description": "Extremely long line detected (284,182 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (277,617 chars, contains suspicious code), Line 2 (284,182 chars, contains suspicious code), Line 3 (70,968 chars, contains suspicious code)"
+          "description": "Extremely long line detected (284,177 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (277,617 chars, contains suspicious code), Line 2 (284,177 chars, contains suspicious code), Line 3 (70,660 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -1418,10 +2453,10 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 29628,
+      "filesScanned": 235,
+      "filesSkipped": 29593,
       "treeTruncated": false,
-      "durationMs": 10970,
+      "durationMs": 4157,
       "error": ""
     },
     {
@@ -1444,10 +2479,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 1928,
+      "filesScanned": 202,
+      "filesSkipped": 1926,
       "treeTruncated": false,
-      "durationMs": 3382,
+      "durationMs": 2437,
       "error": ""
     },
     {
@@ -1548,10 +2583,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 16247,
+      "filesScanned": 229,
+      "filesSkipped": 16218,
       "treeTruncated": false,
-      "durationMs": 7152,
+      "durationMs": 2856,
       "error": ""
     },
     {
@@ -1662,10 +2697,10 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 3047,
+      "filesScanned": 241,
+      "filesSkipped": 3006,
       "treeTruncated": false,
-      "durationMs": 4826,
+      "durationMs": 3099,
       "error": ""
     },
     {
@@ -1683,27 +2718,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "cli/package.json",
-          "line": null,
-          "description": "Possible typosquat of \"eslint\": dtslint"
-        }
-      ],
-      "filesScanned": 200,
-      "filesSkipped": 6980,
+      "findings": [],
+      "filesScanned": 229,
+      "filesSkipped": 6951,
       "treeTruncated": false,
-      "durationMs": 4879,
+      "durationMs": 2938,
       "error": ""
     },
     {
@@ -1756,10 +2779,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 2849,
+      "filesScanned": 226,
+      "filesSkipped": 2823,
       "treeTruncated": false,
-      "durationMs": 3713,
+      "durationMs": 2833,
       "error": ""
     },
     {
@@ -1804,10 +2827,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 149,
+      "filesScanned": 205,
+      "filesSkipped": 144,
       "treeTruncated": false,
-      "durationMs": 6114,
+      "durationMs": 2444,
       "error": ""
     },
     {
@@ -1830,10 +2853,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 49533,
+      "filesScanned": 225,
+      "filesSkipped": 49508,
       "treeTruncated": false,
-      "durationMs": 5951,
+      "durationMs": 2684,
       "error": ""
     },
     {
@@ -1856,10 +2879,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 62,
-      "filesSkipped": 12,
+      "filesScanned": 64,
+      "filesSkipped": 10,
       "treeTruncated": false,
-      "durationMs": 3599,
+      "durationMs": 833,
       "error": ""
     },
     {
@@ -1931,10 +2954,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 276,
+      "filesScanned": 205,
+      "filesSkipped": 271,
       "treeTruncated": false,
-      "durationMs": 6740,
+      "durationMs": 2200,
       "error": ""
     },
     {
@@ -1957,10 +2980,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 952,
+      "filesScanned": 205,
+      "filesSkipped": 947,
       "treeTruncated": false,
-      "durationMs": 3228,
+      "durationMs": 2322,
       "error": ""
     },
     {
@@ -1995,10 +3018,10 @@
           "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
         }
       ],
-      "filesScanned": 60,
-      "filesSkipped": 105,
+      "filesScanned": 66,
+      "filesSkipped": 99,
       "treeTruncated": false,
-      "durationMs": 3170,
+      "durationMs": 727,
       "error": ""
     },
     {
@@ -2088,10 +3111,10 @@
           "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 1703,
+      "filesScanned": 211,
+      "filesSkipped": 1692,
       "treeTruncated": false,
-      "durationMs": 3383,
+      "durationMs": 2340,
       "error": ""
     },
     {
@@ -2123,13 +3146,13 @@
           "rule": "OBFUSCATED_CODE",
           "file": "dist/ramda.min.js",
           "line": 1,
-          "description": "Extremely long line detected (53,748 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (53,748 chars, contains suspicious code)"
+          "description": "Extremely long line detected (53,713 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (53,713 chars, contains suspicious code)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 513,
+      "filesScanned": 205,
+      "filesSkipped": 508,
       "treeTruncated": false,
-      "durationMs": 3894,
+      "durationMs": 2351,
       "error": ""
     },
     {
@@ -2152,10 +3175,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 87,
-      "filesSkipped": 40,
+      "filesScanned": 89,
+      "filesSkipped": 38,
       "treeTruncated": false,
-      "durationMs": 2841,
+      "durationMs": 1048,
       "error": ""
     },
     {
@@ -2228,10 +3251,10 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 655,
+      "filesScanned": 216,
+      "filesSkipped": 639,
       "treeTruncated": false,
-      "durationMs": 4590,
+      "durationMs": 2389,
       "error": ""
     },
     {
@@ -2249,15 +3272,27 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.15,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "SOCIAL_ENGINEERING"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 853,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "unspecified",
+          "type": "SOCIAL_ENGINEERING",
+          "rule": "SOCIAL_ENGINEERING",
+          "file": "README.md",
+          "line": null,
+          "description": "Social engineering tactics detected in README: Urgency Language, Fake Popularity Claims"
+        }
+      ],
+      "filesScanned": 224,
+      "filesSkipped": 829,
       "treeTruncated": false,
-      "durationMs": 4233,
+      "durationMs": 2509,
       "error": ""
     },
     {
@@ -2292,10 +3327,10 @@
           "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 2151,
+      "filesScanned": 207,
+      "filesSkipped": 2144,
       "treeTruncated": false,
-      "durationMs": 2775,
+      "durationMs": 2205,
       "error": ""
     },
     {
@@ -2318,10 +3353,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 36,
-      "filesSkipped": 31,
+      "filesScanned": 39,
+      "filesSkipped": 28,
       "treeTruncated": false,
-      "durationMs": 3410,
+      "durationMs": 415,
       "error": ""
     },
     {
@@ -2339,24 +3374,14 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.27749999999999997,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE",
         "OBF_EVAL",
         "HARDCODED_DB_CONNECTION"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"prettier\": prettier2"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -2374,12 +3399,21 @@
           "file": "packages/cli/src/Init.ts",
           "line": 193,
           "description": "MongoDB or PostgreSQL connection string with credentials embedded"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/cli/src/bin.ts",
+          "line": 207,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 4471,
+      "filesScanned": 226,
+      "filesSkipped": 4445,
       "treeTruncated": false,
-      "durationMs": 4192,
+      "durationMs": 2437,
       "error": ""
     },
     {
@@ -2402,10 +3436,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 341,
+      "filesScanned": 207,
+      "filesSkipped": 334,
       "treeTruncated": false,
-      "durationMs": 3223,
+      "durationMs": 2282,
       "error": ""
     },
     {
@@ -2444,24 +3478,15 @@
           "confidence": "low",
           "type": "MALWARE_SIGNATURE",
           "rule": "OBF_NEW_FUNCTION",
-          "file": "knip.config.js",
-          "line": 17,
-          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_NEW_FUNCTION",
           "file": "scripts/build/transform/transforms/transform-string-raw.js",
           "line": 31,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 9125,
+      "filesScanned": 217,
+      "filesSkipped": 9108,
       "treeTruncated": false,
-      "durationMs": 3380,
+      "durationMs": 2438,
       "error": ""
     },
     {
@@ -2496,10 +3521,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 2156,
+      "filesScanned": 222,
+      "filesSkipped": 2134,
       "treeTruncated": false,
-      "durationMs": 3651,
+      "durationMs": 2852,
       "error": ""
     },
     {
@@ -2534,10 +3559,10 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 4869,
+      "filesScanned": 227,
+      "filesSkipped": 4842,
       "treeTruncated": false,
-      "durationMs": 4244,
+      "durationMs": 2499,
       "error": ""
     },
     {
@@ -2649,10 +3674,10 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 14300,
+      "filesScanned": 214,
+      "filesSkipped": 14286,
       "treeTruncated": false,
-      "durationMs": 8022,
+      "durationMs": 2730,
       "error": ""
     },
     {
@@ -2717,10 +3742,10 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 17929,
+      "filesScanned": 226,
+      "filesSkipped": 17903,
       "treeTruncated": false,
-      "durationMs": 5830,
+      "durationMs": 2619,
       "error": ""
     },
     {
@@ -2784,10 +3809,10 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 133,
-      "filesSkipped": 948,
+      "filesScanned": 155,
+      "filesSkipped": 926,
       "treeTruncated": false,
-      "durationMs": 3181,
+      "durationMs": 1658,
       "error": ""
     },
     {
@@ -2810,7 +3835,8 @@
       "rulesTriggered": [
         "OBF_EVAL",
         "EXFIL_CLIPBOARD",
-        "OBF_SETTIMEOUT_STRING"
+        "OBF_SETTIMEOUT_STRING",
+        "OBF_NEW_FUNCTION"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2858,12 +3884,21 @@
           "file": "packages/puppeteer-core/src/api/locators/locators.ts",
           "line": null,
           "description": "Passing a string to setTimeout/setInterval executes it as code (like eval). A common obfuscation technique: setTimeout(\"maliciousCode()\", 0)\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "tools/patch.mjs",
+          "line": 23,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 2016,
+      "filesScanned": 222,
+      "filesSkipped": 1994,
       "treeTruncated": false,
-      "durationMs": 3726,
+      "durationMs": 2637,
       "error": ""
     },
     {
@@ -3046,10 +4081,10 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 53109,
-      "treeTruncated": true,
-      "durationMs": 9514,
+      "filesScanned": 223,
+      "filesSkipped": 81146,
+      "treeTruncated": false,
+      "durationMs": 3640,
       "error": ""
     },
     {
@@ -3102,10 +4137,10 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 6701,
+      "filesScanned": 225,
+      "filesSkipped": 6676,
       "treeTruncated": false,
-      "durationMs": 4126,
+      "durationMs": 2550,
       "error": ""
     },
     {
@@ -3140,10 +4175,10 @@
           "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 2970,
+      "filesScanned": 225,
+      "filesSkipped": 2945,
       "treeTruncated": false,
-      "durationMs": 3564,
+      "durationMs": 2569,
       "error": ""
     },
     {
@@ -3199,7 +4234,7 @@
           "rule": "OBFUSCATED_CODE",
           "file": "Doc/_static/tachyon-example-flamegraph.html",
           "line": 9,
-          "description": "Extremely long line detected (279,572 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 9 (279,572 chars, contains suspicious code), Line 61 (58,594 chars, contains suspicious code), Line 64 (37,721 chars, contains suspicious code)"
+          "description": "Extremely long line detected (279,569 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 9 (279,569 chars, contains suspicious code), Line 61 (58,591 chars, contains suspicious code), Line 64 (37,721 chars, contains suspicious code)"
         },
         {
           "severity": "medium",
@@ -3252,7 +4287,7 @@
           "type": "DATA_EXFILTRATION",
           "rule": "DATA_EXFILTRATION",
           "file": "Doc/_static/tachyon-example-flamegraph.html",
-          "line": 2518,
+          "line": 2519,
           "description": "Data exfiltration patterns detected: Form Data Access"
         },
         {
@@ -3283,10 +4318,10 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 5803,
+      "filesScanned": 224,
+      "filesSkipped": 5779,
       "treeTruncated": false,
-      "durationMs": 10282,
+      "durationMs": 4709,
       "error": ""
     },
     {
@@ -3309,10 +4344,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 6874,
+      "filesScanned": 224,
+      "filesSkipped": 6850,
       "treeTruncated": false,
-      "durationMs": 3997,
+      "durationMs": 2444,
       "error": ""
     },
     {
@@ -3357,10 +4392,10 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 5591,
+      "filesScanned": 203,
+      "filesSkipped": 5588,
       "treeTruncated": false,
-      "durationMs": 4048,
+      "durationMs": 2310,
       "error": ""
     },
     {
@@ -3383,10 +4418,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 432,
+      "filesScanned": 207,
+      "filesSkipped": 425,
       "treeTruncated": false,
-      "durationMs": 3222,
+      "durationMs": 2432,
       "error": ""
     },
     {
@@ -3409,10 +4444,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 107,
-      "filesSkipped": 129,
+      "filesScanned": 113,
+      "filesSkipped": 123,
       "treeTruncated": false,
-      "durationMs": 2986,
+      "durationMs": 1242,
       "error": ""
     },
     {
@@ -3531,10 +4566,10 @@
           "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
-      "filesScanned": 200,
-      "filesSkipped": 60050,
-      "treeTruncated": true,
-      "durationMs": 7390,
+      "filesScanned": 220,
+      "filesSkipped": 60766,
+      "treeTruncated": false,
+      "durationMs": 2617,
       "error": ""
     },
     {
@@ -3557,10 +4592,10 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 200,
-      "filesSkipped": 15414,
+      "filesScanned": 201,
+      "filesSkipped": 15413,
       "treeTruncated": false,
-      "durationMs": 5058,
+      "durationMs": 2281,
       "error": ""
     },
     {
@@ -3940,7 +4975,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4060,7 +5095,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4180,7 +5215,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4420,7 +5455,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {

@@ -65,7 +65,7 @@ node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
 ```
 
 Results match the API-backed run sample-for-sample (verified against
-`post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
+the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
 fixed 1M/week in this mode, so typosquat warnings never fire on reference repos.
 
 ## Corpus semantics
