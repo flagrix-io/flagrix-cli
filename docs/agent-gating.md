@@ -68,4 +68,6 @@ your repo and point the hook at it. The hook only reacts to `git clone` /
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-A non-zero exit fails the job (2/3 = risk verdicts, 1 = scan error).
+A non-zero exit fails the job (2/3 = risk verdicts, 1 = scan error, 4 = the
+scan read too little of the repository to call it safe — commonly GitHub's
+60 req/h limit, which `GITHUB_TOKEN` above raises to 5,000/h).

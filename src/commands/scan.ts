@@ -4,7 +4,7 @@ import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
 import { loadOsvFeed } from "../lib/osv-feed.js"
 import { renderRepoResult } from "../lib/render.js"
-import { EXIT, exitCodeFor, resolveToken, wantJson } from "./shared.js"
+import { EXIT, exitCodeForScan, resolveToken, wantJson } from "./shared.js"
 
 export interface ScanOptions {
   ref?: string
@@ -41,7 +41,7 @@ export async function runScan(target: string, options: ScanOptions): Promise<num
     } else {
       console.log(renderRepoResult(result))
     }
-    return exitCodeFor(result.riskLevel)
+    return exitCodeForScan(result)
   } catch (error) {
     console.error(`flagrix: scan failed — ${(error as Error).message}`)
     return EXIT.ERROR

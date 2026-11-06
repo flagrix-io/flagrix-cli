@@ -3,10 +3,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 
 import { scanGitHubRepo, scanGitHubUser } from "@flagrix/scanner-core"
+import type { GitHubScanResult } from "@flagrix/scanner-core"
 
 import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
 import { loadOsvFeed } from "../lib/osv-feed.js"
+import { coverageOf, describeCoverage } from "../lib/coverage.js"
 import { securityScore } from "../lib/render.js"
 import { resolveToken } from "./shared.js"
 
@@ -17,9 +19,49 @@ const GUIDANCE = {
   high: "HIGH risk: do NOT clone, install, or execute this code. Treat the repository as malicious."
 } as const
 
+/**
+ * Replaces GUIDANCE.low when the scan ran short of its own file list: an
+ * agent gated on "no blocking findings" would otherwise clone a repository
+ * that was barely read.
+ */
+const INCOMPLETE_GUIDANCE =
+  "NO VERDICT: too little of this repository was read to call it safe, so this " +
+  "is NOT a clean result. Do NOT clone, install, or execute this code until a " +
+  "complete scan succeeds (set GITHUB_TOKEN and scan again) or a human has " +
+  "reviewed it."
+
+/**
+ * The tool response for a repository scan — the agent-facing text plus the
+ * full result. Kept separate from the handler so the wording is testable.
+ *
+ * `scanSummary.complete` and `scanSummary.incompleteReason` travel in the
+ * JSON block, so an agent can branch on coverage instead of parsing prose.
+ */
+export function repoScanResponse(result: GitHubScanResult, note?: string | null) {
+  const coverage = coverageOf(result)
+  const pinned = `(verdict pinned to commit ${result.commitSha ?? "unknown"})`
+  const headline = coverage.unreliableClear
+    ? `INCOMPLETE SCAN — no verdict, security score withheld ${pinned}.`
+    : `${result.riskLevel.toUpperCase()} risk — security score ${securityScore(result.riskScore)}/100 ${pinned}.`
+  const summary = [
+    headline,
+    coverage.unreliableClear ? INCOMPLETE_GUIDANCE : GUIDANCE[result.riskLevel],
+    ...(coverage.complete ? [] : [describeCoverage(coverage)]),
+    ...(note ? [`Note: ${note}.`] : [])
+  ].join(" ")
+
+  return {
+    content: [
+      { type: "text" as const, text: summary },
+      { type: "text" as const, text: JSON.stringify(result, null, 2) }
+    ],
+    isError: false
+  }
+}
+
 /** `flagrix mcp` — stdio MCP server exposing the scanner to agents. */
 export async function runMcp(): Promise<number> {
-  const server = new McpServer({ name: "flagrix", version: "0.1.0" })
+  const server = new McpServer({ name: "flagrix", version: "0.4.0" })
 
   server.registerTool(
     "scan_github_repo",
@@ -46,20 +88,7 @@ export async function runMcp(): Promise<number> {
         osvFeed: await loadOsvFeed()
       }
       const result = await scanGitHubRepo(repo, scanOptions)
-      const note = describeSource(loaded)
-      const summary = [
-        `${result.riskLevel.toUpperCase()} risk — security score ${securityScore(result.riskScore)}/100 ` +
-          `(verdict pinned to commit ${result.commitSha ?? "unknown"}).`,
-        GUIDANCE[result.riskLevel],
-        ...(note ? [`Note: ${note}.`] : [])
-      ].join(" ")
-      return {
-        content: [
-          { type: "text", text: summary },
-          { type: "text", text: JSON.stringify(result, null, 2) }
-        ],
-        isError: false
-      }
+      return repoScanResponse(result, describeSource(loaded))
     }
   )
 

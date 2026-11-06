@@ -2,8 +2,9 @@
 # Flagrix clone gate — Claude Code PreToolUse hook for the Bash tool.
 #
 # Scans any GitHub repo about to be cloned; blocks the clone (hook exit 2)
-# when Flagrix rates it MEDIUM or HIGH risk. See docs/agent-gating.md for the
-# settings.json wiring.
+# when Flagrix rates it MEDIUM or HIGH risk, or when the scan could not read
+# enough of the repository to call it safe (exit 4). See docs/agent-gating.md
+# for the settings.json wiring.
 set -euo pipefail
 
 payload="$(cat)"
@@ -35,6 +36,7 @@ else
   case "$code" in
     2) echo "Flagrix: MEDIUM risk — review https://github.com/flagrix-io/flagrix-cli#exit-codes before cloning $url" >&2 ;;
     3) echo "Flagrix: HIGH risk — do NOT clone $url (malicious patterns detected). Run: npx flagrix scan $url" >&2 ;;
+    4) echo "Flagrix: scan of $url was incomplete — too little of the repository was read to call it safe (usually GitHub's 60 req/h limit; set GITHUB_TOKEN). Run: npx flagrix scan $url" >&2 ;;
     *) echo "Flagrix: scan of $url failed (exit $code) — blocking out of caution. Run: npx flagrix scan $url" >&2 ;;
   esac
   exit 2 # exit 2 = block the tool call in Claude Code
