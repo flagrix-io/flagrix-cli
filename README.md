@@ -37,10 +37,30 @@ flagrix mcp                       # MCP server (stdio) for AI agents
 | 1 | scan failed |
 | 2 | medium risk — review before proceeding |
 | 3 | high risk — do not clone |
+| 4 | scan incomplete — too little was read to call the repository safe |
 
 `--json` (automatic when stdout is piped) emits the full result. The verdict is
 **pinned to the scanned commit** (`commitSha` in the JSON): every file is read at
 that SHA, so a push mid-scan or after the verdict can't silently invalidate it.
+
+### Incomplete scans (exit 4)
+
+A repository scan is one tree request plus up to ~200 file reads, and GitHub
+allows 60 requests an hour without a token. When the budget runs out part way
+through, the rest of the repository is never looked at — so a "low risk, no
+findings" result over 30 of 180 files is the absence of looking, not a clean
+bill of health.
+
+The result says so (`scanSummary.complete: false`, with
+`scanSummary.incompleteReason` of `"rate-limit"` or `"fetch-errors"`), the
+human output withholds the verdict and the score, and the exit code is **4**
+instead of 0. In CI the exit code is the decision and nobody reads stdout, so
+a gate on `flagrix scan` stops here as it does on any non-zero code. Findings
+are the other way round: evidence found is evidence however little else was
+read, so a medium or high verdict keeps its own code and the coverage note
+reads "there may be more".
+
+Set a token to make this rare: `GITHUB_TOKEN` raises the budget to 5,000/h.
 
 ## AI agents
 
@@ -55,8 +75,10 @@ Tools: `scan_github_repo`, `scan_github_user`. A Claude Code hook that gates eve
 ## Tokens & rate limits
 
 Unauthenticated scans use GitHub's 60 req/h budget (a scan issues one request per
-scanned file, up to ~50). Set `GITHUB_TOKEN` (or `FLAGRIX_GITHUB_TOKEN`, or
-`--token`) to raise it to 5,000/h and to scan private repositories.
+scanned file, up to ~200). Set `GITHUB_TOKEN` (or `FLAGRIX_GITHUB_TOKEN`, or
+`--token`) to raise it to 5,000/h and to scan private repositories. A scan that
+runs out of budget reports partial coverage and exits 4 — see
+[Incomplete scans](#incomplete-scans-exit-4).
 
 ## Privacy
 
