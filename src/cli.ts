@@ -27,7 +27,7 @@ Exit codes:
 
 The verdict is pinned to the scanned commit SHA (in the JSON output as
 "commitSha"). A scan that runs out of GitHub API budget reports partial
-coverage ("scanSummary.complete": false) and exits 4 rather than 0: unread
+coverage ("verdict": "incomplete", "coverage": {...}) and exits 4 rather than 0: unread
 files cannot clear a repository. Findings still stand on partial coverage,
 so medium and high keep their own codes. Scanning is fully local: the only
 network calls go to the GitHub/npm APIs and the public detection-rules

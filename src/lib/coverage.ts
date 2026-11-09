@@ -1,4 +1,4 @@
-import type { GitHubScanResult } from "@flagrix/scanner-core"
+import type { GitHubScanResult, RiskLevel } from "@flagrix/scanner-core"
 
 /**
  * What a scan actually managed to read.
@@ -34,6 +34,37 @@ export function coverageOf(result: GitHubScanResult): Coverage {
     filesRead: summary.filesScanned,
     filesUnread,
     reason: summary.incompleteReason
+  }
+}
+
+/**
+ * The decision a gate should act on: the risk level, or "incomplete" when a
+ * low verdict rests on files that were never read (the case that exits 4).
+ */
+export type Verdict = RiskLevel | "incomplete"
+
+/**
+ * A repository result as `--json` and the MCP tool emit it: the engine's
+ * result plus the CLI's own coverage verdict, so the JSON says what the exit
+ * code and the human output say.
+ */
+export type ScanReport = GitHubScanResult & { verdict: Verdict; coverage: Coverage }
+
+/**
+ * Every engine field is kept so existing consumers don't break, with one
+ * correction: `safeToClone` is forced to false when the clear is unreliable.
+ * The engine sets it from findings alone, and a scan that ran out of budget
+ * has no findings to block on — that is exactly the result it must not pass.
+ * `riskLevel` stays as the engine's reading of the files it did see; gates
+ * should branch on `verdict` (or the exit code), not on `riskLevel`.
+ */
+export function scanReport(result: GitHubScanResult): ScanReport {
+  const coverage = coverageOf(result)
+  return {
+    verdict: coverage.unreliableClear ? "incomplete" : result.riskLevel,
+    coverage,
+    ...result,
+    safeToClone: result.safeToClone && !coverage.unreliableClear
   }
 }
 

@@ -60,6 +60,39 @@ are the other way round: evidence found is evidence however little else was
 read, so a medium or high verdict keeps its own code and the coverage note
 reads "there may be more".
 
+In `--json` output, read `verdict` and `coverage` rather than `riskLevel`:
+
+```json
+{
+  "verdict": "incomplete",
+  "coverage": {
+    "complete": false,
+    "unreliableClear": true,
+    "filesRead": 30,
+    "filesUnread": 150,
+    "reason": "rate-limit"
+  },
+  "riskLevel": "low",
+  "safeToClone": false,
+  ...
+}
+```
+
+- `verdict` is `"low"`, `"medium"`, `"high"`, or `"incomplete"` when a low
+  result rests on files that were never read. It matches the exit code
+  (0 / 2 / 3 / 4).
+- `coverage.unreliableClear` is true exactly when `verdict` is `"incomplete"`;
+  `coverage.complete` is false on any partial scan, including a medium or high
+  one. `reason` is present only when coverage is incomplete.
+- `riskLevel`, `riskScore` and the rest of the engine's result are unchanged,
+  so existing consumers keep working — but `riskLevel` is the engine's reading
+  of the files it did see, so on an incomplete scan it can still say `"low"`.
+- `safeToClone` is kept for compatibility and is now `false` whenever
+  `verdict` is `"incomplete"` (in 0.4.0 and earlier it could be `true` there). Gate on
+  `verdict` or the exit code instead.
+
+The MCP tool's JSON block carries the same fields.
+
 Set a token to make this rare: `GITHUB_TOKEN` raises the budget to 5,000/h.
 
 ## AI agents
