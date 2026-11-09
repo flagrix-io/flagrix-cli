@@ -12,9 +12,23 @@ Two ways to put Flagrix between an AI agent and untrusted code: the **MCP server
 | 1 | scan failed (network, auth, bad target) |
 | 2 | medium risk — review before proceeding |
 | 3 | high risk — do not clone |
+| 4 | scan incomplete — a low result over files that were never read; no verdict |
 
 `--json` (or any piped stdout) emits the full scan result, including `commitSha` —
 the verdict applies to that commit, not to whatever the branch points at later.
+
+If you gate on the JSON instead of the exit code, branch on `verdict`
+(`"low" | "medium" | "high" | "incomplete"`, matching exit 0 / 2 / 3 / 4) and
+proceed only on `"low"`. Don't gate on `riskLevel`: it is the engine's reading
+of the files it managed to read, so a scan that ran out of GitHub budget can
+still report `"low"` there. `coverage` (`complete`, `unreliableClear`,
+`filesRead`, `filesUnread`, `reason`) says how much was read and why the rest
+wasn't. `safeToClone` is kept for older consumers and is `false` on an
+incomplete scan, but `verdict` is the field to use. The `scan_github_repo` MCP
+tool returns the same JSON as its second content block.
+
+`scan-user` is unaffected: a profile scan either fetches everything it needs or
+fails with exit 1, so it never returns a partial result.
 
 ## MCP server
 
@@ -69,5 +83,5 @@ your repo and point the hook at it. The hook only reacts to `git clone` /
 ```
 
 A non-zero exit fails the job (2/3 = risk verdicts, 1 = scan error, 4 = the
-scan read too little of the repository to call it safe — commonly GitHub's
+scan read too little of the repository to give a verdict — commonly GitHub's
 60 req/h limit, which `GITHUB_TOKEN` above raises to 5,000/h).

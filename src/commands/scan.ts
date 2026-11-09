@@ -4,6 +4,7 @@ import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
 import { loadOsvFeed } from "../lib/osv-feed.js"
 import { renderRepoResult } from "../lib/render.js"
+import { scanReport } from "../lib/coverage.js"
 import { EXIT, exitCodeForScan, resolveToken, wantJson } from "./shared.js"
 
 export interface ScanOptions {
@@ -37,7 +38,7 @@ export async function runScan(target: string, options: ScanOptions): Promise<num
     const result = await scanGitHubRepo(repo, scanOptions)
 
     if (wantJson(options.json)) {
-      console.log(JSON.stringify(result, null, 2))
+      console.log(JSON.stringify(scanReport(result), null, 2))
     } else {
       console.log(renderRepoResult(result))
     }

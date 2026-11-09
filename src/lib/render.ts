@@ -12,7 +12,7 @@ const yellow = paint("33")
 const green = paint("32")
 
 const VERDICTS = {
-  low: { label: "LOW RISK", verdict: "Safe to clone", color: green },
+  low: { label: "LOW RISK", verdict: "No blocking findings", color: green },
   medium: { label: "MEDIUM RISK", verdict: "Review before cloning", color: yellow },
   high: { label: "HIGH RISK", verdict: "Do not clone", color: red }
 } as const
@@ -51,7 +51,7 @@ export function renderRepoResult(result: GitHubScanResult): string {
     // Withhold the clean verdict and the score: both would read as a clean
     // bill of health for files that were never opened.
     lines.push(
-      `  ${yellow(bold("SCAN INCOMPLETE — no verdict"))}  ${dim("too little of this repository was read to call it safe")}`
+      `  ${yellow(bold("SCAN INCOMPLETE — no verdict"))}  ${dim("not enough of this repository was read to give a verdict")}`
     )
   } else {
     lines.push(

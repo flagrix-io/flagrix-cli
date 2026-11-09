@@ -8,7 +8,7 @@ import type { GitHubScanResult } from "@flagrix/scanner-core"
 import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
 import { loadOsvFeed } from "../lib/osv-feed.js"
-import { coverageOf, describeCoverage } from "../lib/coverage.js"
+import { coverageOf, describeCoverage, scanReport } from "../lib/coverage.js"
 import { securityScore } from "../lib/render.js"
 import { resolveToken } from "./shared.js"
 
@@ -25,8 +25,8 @@ const GUIDANCE = {
  * that was barely read.
  */
 const INCOMPLETE_GUIDANCE =
-  "NO VERDICT: too little of this repository was read to call it safe, so this " +
-  "is NOT a clean result. Do NOT clone, install, or execute this code until a " +
+  "NO VERDICT: only part of this repository was read, so this is NOT a clean " +
+  "result. Do NOT clone, install, or execute this code until a " +
   "complete scan succeeds (set GITHUB_TOKEN and scan again) or a human has " +
   "reviewed it."
 
@@ -34,8 +34,9 @@ const INCOMPLETE_GUIDANCE =
  * The tool response for a repository scan — the agent-facing text plus the
  * full result. Kept separate from the handler so the wording is testable.
  *
- * `scanSummary.complete` and `scanSummary.incompleteReason` travel in the
- * JSON block, so an agent can branch on coverage instead of parsing prose.
+ * The JSON block is the same report `flagrix scan --json` prints — `verdict`,
+ * `coverage` and a coverage-aware `safeToClone` — so an agent can branch on
+ * coverage instead of parsing prose, and gets the same answer as the CLI.
  */
 export function repoScanResponse(result: GitHubScanResult, note?: string | null) {
   const coverage = coverageOf(result)
@@ -53,7 +54,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
   return {
     content: [
       { type: "text" as const, text: summary },
-      { type: "text" as const, text: JSON.stringify(result, null, 2) }
+      { type: "text" as const, text: JSON.stringify(scanReport(result), null, 2) }
     ],
     isError: false
   }
@@ -61,7 +62,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
 
 /** `flagrix mcp` — stdio MCP server exposing the scanner to agents. */
 export async function runMcp(): Promise<number> {
-  const server = new McpServer({ name: "flagrix", version: "0.4.0" })
+  const server = new McpServer({ name: "flagrix", version: "0.5.0" })
 
   server.registerTool(
     "scan_github_repo",
