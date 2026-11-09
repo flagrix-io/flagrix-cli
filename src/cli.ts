@@ -4,7 +4,7 @@ import { runScan } from "./commands/scan.js"
 import { runScanUser } from "./commands/scan-user.js"
 import { EXIT } from "./commands/shared.js"
 
-const VERSION = "0.4.0"
+const VERSION = "0.5.0"
 
 const HELP = `flagrix — scan GitHub repos and profiles for malware before you clone
 
