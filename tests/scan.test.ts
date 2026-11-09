@@ -278,11 +278,24 @@ describe("incomplete coverage", () => {
     const out = logs.join("\n")
     expect(out).toContain("SCAN INCOMPLETE — no verdict")
     expect(out).not.toContain("LOW RISK")
-    expect(out).not.toContain("Safe to clone")
+    expect(out).not.toContain("No blocking findings")
+    expect(out).not.toMatch(/\bsafe\b/i)
+    expect(out).toContain("not enough of this repository was read to give a verdict")
     expect(out).not.toContain("security score")
     expect(out).toContain("GitHub rate limit")
     // The note is soft-wrapped, so assert on a fragment that stays on one line.
     expect(out).toContain("Nothing was found in what was read")
+  })
+
+  it("human output for a complete low names what was found, never 'safe'", async () => {
+    global.fetch = mockApi(CLEAN) as unknown as typeof fetch
+    await runScan("acme/clean", { json: false })
+
+    const out = logs.join("\n")
+    expect(out).toContain("LOW RISK — No blocking findings")
+    expect(out).toContain("security score")
+    // A scanner reduces risk; it can't certify a repository. No "safe" wording.
+    expect(out).not.toMatch(/\bsafe\b/i)
   })
 
   it("human output keeps a high verdict but says there may be more", async () => {
@@ -311,6 +324,8 @@ describe("incomplete coverage", () => {
     expect(summary!.text).toContain("INCOMPLETE SCAN — no verdict")
     expect(summary!.text).not.toContain("LOW risk")
     expect(summary!.text).toContain("Do NOT clone")
+    expect(summary!.text).toContain("only part of this repository was read")
+    expect(summary!.text).not.toMatch(/\bsafe\b/i)
     expect(summary!.text).toContain("GitHub rate limit")
     // An agent should be able to branch on coverage without parsing prose.
     expect(JSON.parse(json!.text).scanSummary.complete).toBe(false)

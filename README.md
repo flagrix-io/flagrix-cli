@@ -37,7 +37,7 @@ flagrix mcp                       # MCP server (stdio) for AI agents
 | 1 | scan failed |
 | 2 | medium risk — review before proceeding |
 | 3 | high risk — do not clone |
-| 4 | scan incomplete — too little was read to call the repository safe |
+| 4 | scan incomplete — not enough of the repository was read to give a verdict |
 
 `--json` (automatic when stdout is piped) emits the full result. The verdict is
 **pinned to the scanned commit** (`commitSha` in the JSON): every file is read at

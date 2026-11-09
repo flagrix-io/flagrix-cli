@@ -25,8 +25,8 @@ const GUIDANCE = {
  * that was barely read.
  */
 const INCOMPLETE_GUIDANCE =
-  "NO VERDICT: too little of this repository was read to call it safe, so this " +
-  "is NOT a clean result. Do NOT clone, install, or execute this code until a " +
+  "NO VERDICT: only part of this repository was read, so this is NOT a clean " +
+  "result. Do NOT clone, install, or execute this code until a " +
   "complete scan succeeds (set GITHUB_TOKEN and scan again) or a human has " +
   "reviewed it."
 
