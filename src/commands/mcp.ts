@@ -62,7 +62,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
 
 /** `flagrix mcp` — stdio MCP server exposing the scanner to agents. */
 export async function runMcp(): Promise<number> {
-  const server = new McpServer({ name: "flagrix", version: "0.5.0" })
+  const server = new McpServer({ name: "flagrix", version: "0.5.1" })
 
   server.registerTool(
     "scan_github_repo",
