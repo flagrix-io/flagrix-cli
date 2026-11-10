@@ -1,6 +1,6 @@
 {
-  "version": "2026.10.19.001",
-  "lastUpdated": "2026-10-19T19:29:18.424Z",
+  "version": "2026.11.10.001",
+  "lastUpdated": "2026-11-10T16:39:28.787Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -897,9 +897,9 @@
     },
     {
       "id": "BACKDOOR_HARDCODED_AUTH",
-      "name": "Hardcoded Auth Bypass",
+      "name": "Hardcoded Password Comparison",
       "pattern": "(?:password|auth)\\s*(?:===?|==)\\s*['\"][^'\"]{0,20}['\"]\\s*\\)",
-      "description": "Hardcoded password check — always-true backdoor condition in auth logic",
+      "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks",
       "tags": [
         "backdoor",
         "auth-bypass",

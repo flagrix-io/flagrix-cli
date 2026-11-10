@@ -2,7 +2,8 @@
 
 Two ways to put Flagrix between an AI agent and untrusted code: the **MCP server**
 (the agent decides to scan, or is instructed to) and the **Claude Code hook**
-(every `git clone` is gated, no cooperation needed).
+(recognized `git clone` / `gh repo clone` commands are gated, no cooperation
+needed).
 
 ## Exit codes (the contract)
 
@@ -72,6 +73,22 @@ Copies of the hook script ship inside the npm package (`hooks/flagrix-clone-gate
 Install the package globally first (`npm i -g flagrix`), or vendor the script into
 your repo and point the hook at it. The hook only reacts to `git clone` /
 `gh repo clone` commands targeting github.com; everything else passes through.
+Git options before the subcommand are recognized (`git -C <dir> clone …`,
+`git -c <key>=<value> clone …`, `git --git-dir=<dir> clone …`). It reads the
+command text, not what the shell will run, so a clone hidden behind an alias,
+a variable, a script or another tool (`curl … | sh`, a Makefile target) is not
+seen. Treat it as a guard for an agent's ordinary clone commands, not a
+sandbox.
+
+What it scans: the branch the clone will check out. A `--branch <name>`,
+`--branch=<name>` or `-b <name>` on the clone (including after `--` in
+`gh repo clone owner/repo -- -b <name>`) is passed to the scan as `--ref`;
+without one, the repository's default branch is scanned, which is what a plain
+clone checks out. The verdict applies to the commit that ref pointed at when
+the scan ran, so a push between the scan and the clone is not covered. Other
+branches and tags the clone fetches but doesn't check out are not scanned, and
+neither is anything you check out afterwards — scan those with
+`npx flagrix scan <repo> --ref <ref>`.
 
 ## CI
 
