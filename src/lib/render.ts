@@ -68,7 +68,7 @@ export function renderRepoResult(result: GitHubScanResult): string {
   // means "and there may be more than this".
   if (!coverage.complete) {
     lines.push("")
-    for (const line of wrapNote(describeCoverage(coverage), "  ")) lines.push(yellow(line))
+    for (const line of wrapNote(describeCoverage(coverage, result.findings.length), "  ")) lines.push(yellow(line))
   }
 
   for (const f of result.findings) {

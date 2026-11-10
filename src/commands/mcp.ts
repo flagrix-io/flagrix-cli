@@ -47,7 +47,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
   const summary = [
     headline,
     coverage.unreliableClear ? INCOMPLETE_GUIDANCE : GUIDANCE[result.riskLevel],
-    ...(coverage.complete ? [] : [describeCoverage(coverage)]),
+    ...(coverage.complete ? [] : [describeCoverage(coverage, result.findings.length)]),
     ...(note ? [`Note: ${note}.`] : [])
   ].join(" ")
 

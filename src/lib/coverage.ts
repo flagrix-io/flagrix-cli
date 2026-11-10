@@ -71,18 +71,22 @@ export function scanReport(result: GitHubScanResult): ScanReport {
 /**
  * One or two sentences naming what was missed and why — empty when coverage
  * is whole. Written for both the human output and the MCP tool text, so it
- * stays free of colour codes and markup.
+ * stays free of colour codes and markup. `findingCount` is how many findings
+ * the scan did report: an incomplete low can still carry low-weight findings,
+ * and then "nothing was found" would contradict the list printed with it.
  */
-export function describeCoverage(coverage: Coverage): string {
+export function describeCoverage(coverage: Coverage, findingCount: number): string {
   if (coverage.complete) return ""
 
   const read = `${coverage.filesRead} ${coverage.filesRead === 1 ? "file" : "files"} read`
   const counts = coverage.filesUnread > 0 ? `${read}, ${coverage.filesUnread} left unread` : read
   // On a low verdict the gap is the whole story; on medium/high it means the
   // findings are a floor, not a ceiling.
-  const consequence = coverage.unreliableClear
-    ? "Nothing was found in what was read — that is not the same as nothing being there."
-    : "There may be more than what is reported here."
+  const consequence = !coverage.unreliableClear
+    ? "There may be more than what is reported here."
+    : findingCount > 0
+      ? "What was read turned up only low-weight findings — that says nothing about the files left unread."
+      : "Nothing was found in what was read — that is not the same as nothing being there."
 
   if (coverage.reason === "rate-limit") {
     return (

@@ -15,7 +15,8 @@ import { runScan } from "../src/commands/scan.js"
 import { parseRepoTarget } from "../src/lib/github-url.js"
 import { loadSignatures } from "../src/lib/signatures.js"
 import { repoScanResponse } from "../src/commands/mcp.js"
-import { coverageOf } from "../src/lib/coverage.js"
+import { coverageOf, describeCoverage } from "../src/lib/coverage.js"
+import { renderRepoResult } from "../src/lib/render.js"
 import { EXIT, exitCodeForScan } from "../src/commands/shared.js"
 
 const MOCK_SHA = "0123456789abcdef0123456789abcdef01234567"
@@ -329,6 +330,45 @@ describe("incomplete coverage", () => {
     expect(summary!.text).toContain("GitHub rate limit")
     // An agent should be able to branch on coverage without parsing prose.
     expect(JSON.parse(json!.text).scanSummary.complete).toBe(false)
+  })
+
+  it("an incomplete low with low-weight findings doesn't claim nothing was found", async () => {
+    global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
+    await runScan("acme/partial", { json: true })
+    const result: GitHubScanResult = JSON.parse(logs.join("\n"))
+    result.findings.push({
+      severity: "low",
+      type: "HIDDEN_FILE",
+      description: "Hidden file in repository",
+      file: ".env.example",
+      cloneBlocking: false
+    } as GitHubScanResult["findings"][number])
+    expect(coverageOf(result).unreliableClear).toBe(true)
+
+    const out = renderRepoResult(result)
+    expect(out).toContain("1 issue")
+    expect(out).not.toContain("Nothing was found")
+    expect(out).toContain("only low-weight findings")
+
+    const summary = repoScanResponse(result).content[0]!.text
+    expect(summary).not.toContain("Nothing was found")
+    expect(summary).toContain("only low-weight findings")
+  })
+
+  it("describeCoverage picks the sentence from verdict and findings", () => {
+    const partial = { complete: false, filesRead: 3, filesUnread: 2, reason: "rate-limit" as const }
+    expect(describeCoverage({ ...partial, unreliableClear: true }, 0)).toContain(
+      "Nothing was found in what was read"
+    )
+    expect(describeCoverage({ ...partial, unreliableClear: true }, 4)).toContain(
+      "only low-weight findings"
+    )
+    expect(describeCoverage({ ...partial, unreliableClear: false }, 4)).toContain(
+      "There may be more than what is reported here"
+    )
+    expect(
+      describeCoverage({ complete: true, unreliableClear: false, filesRead: 3, filesUnread: 0 }, 0)
+    ).toBe("")
   })
 
   it("the MCP tool text is unchanged for a complete low scan", async () => {
