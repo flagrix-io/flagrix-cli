@@ -73,6 +73,16 @@ Install the package globally first (`npm i -g flagrix`), or vendor the script in
 your repo and point the hook at it. The hook only reacts to `git clone` /
 `gh repo clone` commands targeting github.com; everything else passes through.
 
+What it scans: the branch the clone will check out. A `--branch <name>`,
+`--branch=<name>` or `-b <name>` on the clone (including after `--` in
+`gh repo clone owner/repo -- -b <name>`) is passed to the scan as `--ref`;
+without one, the repository's default branch is scanned, which is what a plain
+clone checks out. The verdict applies to the commit that ref pointed at when
+the scan ran, so a push between the scan and the clone is not covered. Other
+branches and tags the clone fetches but doesn't check out are not scanned, and
+neither is anything you check out afterwards — scan those with
+`npx flagrix scan <repo> --ref <ref>`.
+
 ## CI
 
 ```yaml
