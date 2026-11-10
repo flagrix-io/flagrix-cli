@@ -19,7 +19,17 @@ parsed="$(node -e '
   process.stdin.on("end", () => {
     try {
       const cmd = JSON.parse(input)?.tool_input?.command ?? ""
-      const clone = cmd.match(/\b(git\s+clone|gh\s+repo\s+clone)\b/)
+      // git takes global options before the subcommand (`git -C /tmp clone …`,
+      // `git -c http.proxy=… clone …`, `git --git-dir=… clone …`), so allow any
+      // run of them between `git` and `clone`.
+      const VALUE = String.raw`(?:"[^"]*"|\x27[^\x27]*\x27|\S+)`
+      const GIT_OPTS =
+        String.raw`(?:\s+(?:-[Cc]\s+|--(?:git-dir|work-tree|namespace|exec-path|config-env)\s+)` +
+        VALUE +
+        String.raw`|\s+--?[\w-]+(?:=` + VALUE + String.raw`)?)*`
+      const clone = cmd.match(
+        new RegExp(String.raw`\bgit` + GIT_OPTS + String.raw`\s+clone\b|\bgh\s+repo\s+clone\b`)
+      )
       if (!clone) return
       const m =
         cmd.match(/https?:\/\/github\.com\/[\w.-]+\/[\w.-]+/) ||

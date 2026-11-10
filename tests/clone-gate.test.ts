@@ -48,6 +48,31 @@ describe("clone gate hook", () => {
     expect(r.npxArgs![r.npxArgs!.indexOf("--ref") + 1]).toBe(branch)
   })
 
+  it.each([
+    "git -C /tmp clone https://github.com/acme/tool",
+    'git -C "/tmp/my dir" clone https://github.com/acme/tool',
+    "git -c http.sslVerify=true clone https://github.com/acme/tool",
+    "git -c core.autocrlf=false -C /tmp clone https://github.com/acme/tool",
+    "git --git-dir=/tmp/x.git --no-pager clone https://github.com/acme/tool",
+    "git --work-tree /tmp clone https://github.com/acme/tool"
+  ])("gates a clone with git options before the subcommand: %s", (command) => {
+    const r = runHook(command, 3)
+    expect(r.code).toBe(2)
+    expect(r.npxArgs).toEqual(["-y", "flagrix", "scan", "https://github.com/acme/tool", "--json"])
+  })
+
+  it("scans the branch when git options come first", () => {
+    const r = runHook("git -C /tmp clone -b release https://github.com/acme/tool")
+    expect(r.npxArgs).toContain("--ref")
+    expect(r.npxArgs![r.npxArgs!.indexOf("--ref") + 1]).toBe("release")
+  })
+
+  it("lets other git subcommands that mention github.com through", () => {
+    const r = runHook("git -C /tmp remote add origin https://github.com/acme/tool")
+    expect(r.code).toBe(0)
+    expect(r.npxArgs).toBeNull()
+  })
+
   it("ignores a -b that belongs to another command in the same line", () => {
     const r = runHook("git checkout -b wip && git clone https://github.com/acme/tool")
     expect(r.npxArgs).not.toContain("--ref")
