@@ -1,5 +1,5 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.flagrix-io/flagrix",
   "description": "Scan GitHub repos and profiles for malware before cloning — commit-pinned risk verdicts for agents",
   "repository": {
