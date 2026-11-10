@@ -1,0 +1,82 @@
+name: MCP Registry
+
+# Publishes server.json from an already-released tag to the MCP Registry
+# (io.github.flagrix-io/flagrix), without touching npm. For when the registry
+# step of the Release workflow failed: re-running Release would fail at
+# `npm publish` because the version already exists.
+#
+# Publishing under the flagrix-io namespace needs proof of organisation
+# ownership, which GitHub Actions OIDC gives and `mcp-publisher login github`
+# on a laptop does not.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, e.g. v0.5.1"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write # MCP Registry login
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      # Same pin as release.yml; bump both together.
+      MCP_PUBLISHER_VERSION: v1.8.4
+      TAG: ${{ inputs.tag }}
+    steps:
+      # The branch this was dispatched from supplies the scripts; the tag
+      # supplies server.json, so an older tag works too.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Take server.json from the tag and check its versions
+        run: |
+          set -euo pipefail
+          case "$TAG" in v[0-9]*) ;; *) echo "::error::Tag must look like v1.2.3, got: $TAG"; exit 1 ;; esac
+          git rev-parse --verify --quiet "refs/tags/$TAG" > /dev/null || { echo "::error::No such tag: $TAG"; exit 1; }
+          git show "refs/tags/$TAG:server.json" > server.json
+          version="${TAG#v}"
+          srv="$(jq -r .version server.json)"
+          srv_pkg="$(jq -r '.packages[0].version' server.json)"
+          echo "tag=$version server.json=$srv server.json packages[0]=$srv_pkg"
+          if [ "$version" != "$srv" ] || [ "$version" != "$srv_pkg" ]; then
+            echo "::error::server.json at $TAG doesn't say $version"
+            exit 1
+          fi
+          echo "PKG=$(jq -r '.packages[0].identifier' server.json)" >> "$GITHUB_ENV"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Wait for npm to serve the version
+        run: scripts/wait-for-npm.sh "$PKG" "$VERSION"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Download and verify mcp-publisher
+        run: |
+          set -euo pipefail
+          os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+          arch="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
+          archive="mcp-publisher_${os}_${arch}.tar.gz"
+          base_url="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+
+          curl --fail --location --silent --show-error --output "$archive" "$base_url/$archive"
+          curl --fail --location --silent --show-error --output "$archive.sigstore.json" "$base_url/$archive.sigstore.json"
+          cosign verify-blob \
+            --bundle "$archive.sigstore.json" \
+            --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            "$archive"
+          tar xzf "$archive" mcp-publisher
+          rm -f "$archive" "$archive.sigstore.json"
+
+      - name: Log in to the MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server.json to the MCP Registry
+        run: ./mcp-publisher publish

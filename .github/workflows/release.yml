@@ -6,7 +6,10 @@ name: Release
 #
 # Then publishes server.json to the MCP Registry (io.github.flagrix-io/flagrix),
 # also over OIDC. The registry only stores metadata pointing at the npm
-# package, so it must run after npm has the version.
+# package, so it must run after npm serves the version (hence the wait). If
+# the registry step still fails, re-run it on its own with the "MCP Registry"
+# workflow (mcp-registry.yml) rather than re-running this one, whose npm
+# publish would fail on the existing version.
 on:
   push:
     tags: ["v*"]
@@ -46,6 +49,10 @@ jobs:
       - run: npm ci
       - run: npm run typecheck && npm test && npm run build
       - run: npm publish --provenance --access public
+
+      # The registry validates the npm version, which npm may not serve yet.
+      - name: Wait for npm to serve the new version
+        run: scripts/wait-for-npm.sh "$(jq -r .name package.json)" "${GITHUB_REF_NAME#v}"
 
       # ── MCP Registry ────────────────────────────────────────────────────
       - name: Install cosign
