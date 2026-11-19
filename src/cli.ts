@@ -7,7 +7,7 @@ import { EXIT } from "./commands/shared.js"
 // Kept in step with package.json by tests/version.test.ts — `npm version`
 // does not reach into source, and the built CLI would otherwise report the
 // previous release.
-const VERSION = "0.6.1"
+const VERSION = "0.6.2"
 
 const HELP = `flagrix — scan GitHub repos and profiles for malware before you clone
 
