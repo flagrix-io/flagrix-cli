@@ -1,0 +1,30 @@
+{
+  "note": "A run that stopped on an exhausted GitHub quota. Every gate it evaluated is green, because it never reached the samples that would have failed one.",
+  "metrics": {
+    "samplesDefined": 58,
+    "samplesCompleted": 57,
+    "samplesPassed": 57,
+    "criticalFixturesDetected": 10,
+    "criticalFixturesTotal": 10,
+    "criticalFixtureDetectionRate": 1,
+    "emergingFixturesDetected": 15,
+    "emergingFixturesPassed": 15,
+    "emergingFixturesTotal": 15,
+    "emergingFixtureDetectionRate": 1,
+    "maliciousSamplesDetected": 0,
+    "maliciousSamplesTotal": 0,
+    "maliciousDetectionRate": null,
+    "referenceSamplesTotal": 32,
+    "referenceHighVerdicts": 0,
+    "referenceHighVerdictRate": 0,
+    "referenceSamplesWithHighOrCriticalFindings": 1,
+    "referenceCriticalFindings": 0,
+    "gates": {
+      "criticalFixtures100Percent": true,
+      "emergingFixturesAtLeast90Percent": true,
+      "maliciousDetectionAtLeast90Percent": null,
+      "zeroCriticalReferenceFindings": true,
+      "referenceHighVerdictsAtMost5Percent": true
+    }
+  }
+}

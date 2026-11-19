@@ -1,0 +1,30 @@
+{
+  "note": "scanner-core 0.7.1 — both false positives fixed; all five gates green over 114 samples.",
+  "metrics": {
+    "samplesDefined": 114,
+    "samplesCompleted": 114,
+    "samplesPassed": 112,
+    "criticalFixturesDetected": 10,
+    "criticalFixturesTotal": 10,
+    "criticalFixtureDetectionRate": 1,
+    "emergingFixturesDetected": 15,
+    "emergingFixturesPassed": 15,
+    "emergingFixturesTotal": 15,
+    "emergingFixtureDetectionRate": 1,
+    "maliciousSamplesDetected": 25,
+    "maliciousSamplesTotal": 25,
+    "maliciousDetectionRate": 1,
+    "referenceSamplesTotal": 64,
+    "referenceHighVerdicts": 0,
+    "referenceHighVerdictRate": 0,
+    "referenceSamplesWithHighOrCriticalFindings": 5,
+    "referenceCriticalFindings": 0,
+    "gates": {
+      "criticalFixtures100Percent": true,
+      "emergingFixturesAtLeast90Percent": true,
+      "maliciousDetectionAtLeast90Percent": true,
+      "zeroCriticalReferenceFindings": true,
+      "referenceHighVerdictsAtMost5Percent": true
+    }
+  }
+}

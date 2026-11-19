@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url"
 import { scanGitHubRepo } from "@flagrix/scanner-core"
 
 import { expandCorpus } from "./samples.mjs"
+import { gateReport } from "./gates.mjs"
 
 const benchmarkDir = dirname(fileURLToPath(import.meta.url))
 const projectDir = join(benchmarkDir, "..")
@@ -48,12 +49,13 @@ const GITHUB_SCANNABLE_EXTENSIONS = [
 ]
 
 function parseArgs(argv) {
-  const options = { corpus: null, sample: null, resume: false, limit: null }
+  const options = { corpus: null, sample: null, resume: false, limit: null, enforceGates: false }
   for (let index = 0; index < argv.length; index++) {
     const arg = argv[index]
     if (arg === "--corpus") options.corpus = argv[++index]
     else if (arg === "--sample") options.sample = argv[++index]
     else if (arg === "--resume") options.resume = true
+    else if (arg === "--enforce-gates") options.enforceGates = true
     else if (arg === "--limit") {
       options.limit = Number.parseInt(argv[++index], 10)
       if (!Number.isInteger(options.limit) || options.limit < 1) {
@@ -71,6 +73,11 @@ function help() {
 
 Usage:
   npm run benchmark -- [--corpus <name>] [--sample <sample-id>] [--resume] [--limit <count>]
+                       [--enforce-gates]
+
+--enforce-gates exits non-zero unless every evaluated gate passed and every
+defined sample completed, so CI can use the benchmark as a gate. Without it
+the runner reports and exits 0.
 
 The runner never clones repositories or executes fixture code. GitHub samples
 must be pinned in benchmark/corpus.lock.json before they can run. Results are
@@ -647,7 +654,28 @@ async function main() {
   const timestamp = metadata.runAt.replaceAll(":", "-").replaceAll(".", "-")
   await writeFile(join(resultsDir, `${timestamp}.json`), JSON.stringify(report, null, 2) + "\n")
   console.log(JSON.stringify({ metadata, metrics: report.metrics }, null, 2))
+
+  if (options.enforceGates) {
+    // A --corpus / --sample run cannot evaluate the gates belonging to the
+    // corpora it left out, so an unevaluated gate only counts against a run
+    // that was asked to cover everything.
+    const scoped = Boolean(options.corpus || options.sample || options.limit)
+    enforceGates(report.metrics, { requireEveryGate: !scoped })
+  }
 }
+
+/** Report the gate verdict and fail the process when it is negative. */
+function enforceGates(metrics, { requireEveryGate }) {
+  const { problems, warnings } = gateReport(metrics, { requireEveryGate })
+  for (const warning of warnings) console.error(`benchmark: warning: ${warning}`)
+  if (problems.length === 0) {
+    console.error("benchmark: all gates passed")
+    return
+  }
+  for (const problem of problems) console.error(`benchmark: ${problem}`)
+  process.exitCode = 1
+}
+
 
 main().catch((error) => {
   console.error(`benchmark: ${error instanceof Error ? error.message : error}`)

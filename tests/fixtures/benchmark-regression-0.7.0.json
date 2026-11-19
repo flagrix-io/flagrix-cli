@@ -1,0 +1,30 @@
+{
+  "note": "scanner-core 0.7.0 — the published regression: esbuild HIGH/unsafe-to-clone, redux MEDIUM. Metrics only; kept as a gate fixture.",
+  "metrics": {
+    "samplesDefined": 114,
+    "samplesCompleted": 114,
+    "samplesPassed": 111,
+    "criticalFixturesDetected": 10,
+    "criticalFixturesTotal": 10,
+    "criticalFixtureDetectionRate": 1,
+    "emergingFixturesDetected": 15,
+    "emergingFixturesPassed": 15,
+    "emergingFixturesTotal": 15,
+    "emergingFixtureDetectionRate": 1,
+    "maliciousSamplesDetected": 25,
+    "maliciousSamplesTotal": 25,
+    "maliciousDetectionRate": 1,
+    "referenceSamplesTotal": 64,
+    "referenceHighVerdicts": 1,
+    "referenceHighVerdictRate": 0.015625,
+    "referenceSamplesWithHighOrCriticalFindings": 6,
+    "referenceCriticalFindings": 1,
+    "gates": {
+      "criticalFixtures100Percent": true,
+      "emergingFixturesAtLeast90Percent": true,
+      "maliciousDetectionAtLeast90Percent": true,
+      "zeroCriticalReferenceFindings": false,
+      "referenceHighVerdictsAtMost5Percent": true
+    }
+  }
+}
