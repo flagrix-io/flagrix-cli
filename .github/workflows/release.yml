@@ -52,17 +52,28 @@ jobs:
       # The last gate before the registry. 0.7.0 of the engine published
       # verdicts of HIGH (unsafe to clone) on evanw/esbuild and MEDIUM on
       # reduxjs/redux; the unit tests above were all green, because a false
-      # positive on a real repository only shows in this corpus. Nightly runs
-      # live in benchmark.yml — this is the copy that can stop a release.
-      - name: Benchmark gate (full corpus)
-        env:
-          FLAGRIX_GITHUB_TOKEN: ${{ secrets.FLAGRIX_GITHUB_TOKEN }}
-        run: |
-          if [ -z "${FLAGRIX_GITHUB_TOKEN}" ]; then
-            echo "::error::Set the FLAGRIX_GITHUB_TOKEN secret (fine-grained, read-only PAT) — the release gate needs it."
-            exit 1
-          fi
-          npm run benchmark -- --enforce-gates
+      # positive on a real repository only shows in this corpus.
+      - name: Selection fingerprint
+        id: fp
+        run: echo "value=$(python3 benchmark/offline/mirror.py --fingerprint)" >> "$GITHUB_OUTPUT"
+
+      # The mirror holds every blob the scanner could select, so the corpus
+      # runs with no GitHub API at all. That is the point: a full API-backed
+      # run costs roughly a whole hourly quota, and the limit is per user
+      # rather than per token, so the nightly, a release and anyone running it
+      # locally used to starve each other. The v0.6.1 release died that way.
+      - name: Restore the offline mirror
+        uses: actions/cache@v4
+        with:
+          path: benchmark/offline/git
+          key: mirror-${{ hashFiles('benchmark/corpus.lock.json') }}-${{ steps.fp.outputs.value }}
+
+      # A no-op when the cache hit; fetches over git, never the API, when not.
+      - name: Build the offline mirror
+        run: python3 benchmark/offline/mirror.py
+
+      - name: Benchmark gate (full corpus, offline)
+        run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --enforce-gates
 
       - name: Upload the benchmark run
         if: always()

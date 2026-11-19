@@ -36,28 +36,31 @@ jobs:
           node-version: 22
       - run: npm ci
 
-      # A fine-grained, read-only PAT. The built-in GITHUB_TOKEN is capped at
-      # 1,000 API requests per hour per repository, which a 114-sample run can
-      # exhaust — and a run that dies partway now fails the gate rather than
-      # reporting green from a partial read, so a missing secret would surface
-      # as a confusing benchmark failure instead of a clear one.
-      - name: Check the token secret is present
-        env:
-          FLAGRIX_GITHUB_TOKEN: ${{ secrets.FLAGRIX_GITHUB_TOKEN }}
-        run: |
-          if [ -z "${FLAGRIX_GITHUB_TOKEN}" ]; then
-            echo "::error::Set the FLAGRIX_GITHUB_TOKEN secret to a fine-grained, read-only PAT."
-            exit 1
-          fi
+      - name: Selection fingerprint
+        id: fp
+        run: echo "value=$(python3 benchmark/offline/mirror.py --fingerprint)" >> "$GITHUB_OUTPUT"
 
-      - name: Full corpus
-        env:
-          FLAGRIX_GITHUB_TOKEN: ${{ secrets.FLAGRIX_GITHUB_TOKEN }}
+      # The mirror holds every blob the scanner could select, so the corpus
+      # runs with no GitHub API at all. That is the point: a full API-backed
+      # run costs roughly a whole hourly quota, and the limit is per user
+      # rather than per token, so the nightly, a release and anyone running it
+      # locally used to starve each other. The v0.6.1 release died that way.
+      - name: Restore the offline mirror
+        uses: actions/cache@v4
+        with:
+          path: benchmark/offline/git
+          key: mirror-${{ hashFiles('benchmark/corpus.lock.json') }}-${{ steps.fp.outputs.value }}
+
+      # A no-op when the cache hit; fetches over git, never the API, when not.
+      - name: Build the offline mirror
+        run: python3 benchmark/offline/mirror.py
+
+      - name: Full corpus (offline)
         run: |
           if [ -n "${{ inputs.corpus }}" ]; then
-            npm run benchmark -- --corpus "${{ inputs.corpus }}" --enforce-gates
+            node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --corpus "${{ inputs.corpus }}" --enforce-gates
           else
-            npm run benchmark -- --enforce-gates
+            node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --enforce-gates
           fi
 
       # The run itself, so a failure can be read without reproducing it. Only

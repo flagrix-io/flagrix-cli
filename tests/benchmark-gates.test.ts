@@ -78,10 +78,34 @@ describe("benchmark gate decision", () => {
     )
   })
 
+  it("reports samples the run never reached, not just the one that errored", () => {
+    // The shape of the v0.6.1 release failure. The run stopped on an
+    // exhausted GitHub quota at sample 59 of 114, so the malicious-package
+    // corpus — last in the list — was never reached and its gate came back
+    // null. Reporting results.length as samplesDefined turned a 55-sample
+    // shortfall into "58 of 59 completed".
+    const { problems } = gateReport(
+      {
+        samplesDefined: 114,
+        samplesAttempted: 59,
+        samplesCompleted: 58,
+        samplesPassed: 58,
+        gates: { zeroCriticalReferenceFindings: true, maliciousDetectionAtLeast90Percent: null },
+      },
+      full
+    )
+    expect(problems[0]).toBe(
+      "only 58 of 114 samples completed (1 errored, 55 never attempted)" +
+        " — the gates below were computed from a partial run"
+    )
+    expect(problems).toContain("gate not evaluated: maliciousDetectionAtLeast90Percent")
+  })
+
   it("names every reason rather than stopping at the first", () => {
     const { problems } = gateReport(
       {
         samplesDefined: 114,
+        samplesAttempted: 100,
         samplesCompleted: 100,
         samplesPassed: 90,
         gates: { a: false, b: null, c: true },
@@ -89,7 +113,8 @@ describe("benchmark gate decision", () => {
       full
     )
     expect(problems).toEqual([
-      "only 100 of 114 samples completed — the gates below were computed from a partial run",
+      "only 100 of 114 samples completed (14 never attempted)" +
+        " — the gates below were computed from a partial run",
       "gate failed: a",
       "gate not evaluated: b",
     ])

@@ -472,7 +472,15 @@ function gate(value, evaluated) {
   return evaluated ? value : null
 }
 
-function calculateMetrics(results) {
+/**
+ * `selectedCount` is how many samples the run set out to cover. It is not
+ * derivable from `results`: the run loop abandons the rest of the corpus when
+ * GitHub starts refusing on quota, so `results` holds only what was reached.
+ * Reporting its length as `samplesDefined` made one such run — 59 of 114,
+ * which never got as far as the malicious-package corpus — read as "58 of 59
+ * completed", understating the shortfall by two orders of magnitude.
+ */
+function calculateMetrics(results, selectedCount = results.length) {
   const completed = results.filter((row) => row.status === "completed")
   const critical = completed.filter((row) => row.corpus === "critical-fixture")
   const malicious = completed.filter((row) => row.corpus === "real-malicious")
@@ -491,7 +499,8 @@ function calculateMetrics(results) {
   const criticalDetected = critical.filter((row) => row.categoryDetected).length
   const maliciousDetected = malicious.filter((row) => row.categoryDetected).length
   return {
-    samplesDefined: results.length,
+    samplesDefined: selectedCount,
+    samplesAttempted: results.length,
     samplesCompleted: completed.length,
     samplesPassed: completed.filter((row) => row.testPassed).length,
     criticalFixturesDetected: criticalDetected,
@@ -557,8 +566,8 @@ function toCsv(results, metadata) {
   return [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\n") + "\n"
 }
 
-async function writeCheckpoint(results, metadata) {
-  const report = { metadata, metrics: calculateMetrics(results), results }
+async function writeCheckpoint(results, metadata, selectedCount) {
+  const report = { metadata, metrics: calculateMetrics(results, selectedCount), results }
   await Promise.all([
     writeFile(join(resultsDir, "latest.json"), JSON.stringify(report, null, 2) + "\n"),
     writeFile(join(resultsDir, "latest.csv"), toCsv(results, metadata)),
@@ -643,14 +652,14 @@ async function main() {
         error: error instanceof Error ? error.message : String(error),
       })
       console.error(`error ${sample.sampleId}: ${error instanceof Error ? error.message : error}`)
-      await writeCheckpoint(results, metadata)
+      await writeCheckpoint(results, metadata, samples.length)
       if (/rate limit/i.test(error instanceof Error ? error.message : String(error))) break
       continue
     }
-    await writeCheckpoint(results, metadata)
+    await writeCheckpoint(results, metadata, samples.length)
   }
 
-  const report = await writeCheckpoint(results, metadata)
+  const report = await writeCheckpoint(results, metadata, samples.length)
   const timestamp = metadata.runAt.replaceAll(":", "-").replaceAll(".", "-")
   await writeFile(join(resultsDir, `${timestamp}.json`), JSON.stringify(report, null, 2) + "\n")
   console.log(JSON.stringify({ metadata, metrics: report.metrics }, null, 2))

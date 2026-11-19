@@ -31,9 +31,22 @@ export function gateReport(metrics, { requireEveryGate } = { requireEveryGate: t
   // four green gates without ever reaching the repository whose regression
   // prompted all of this.
   if (metrics.samplesCompleted < metrics.samplesDefined) {
+    // Say which kind of shortfall it is. A sample that errored was reached
+    // and failed; one that was never attempted means the run abandoned the
+    // rest of the corpus, which is what an exhausted GitHub quota looks like
+    // — and the corpora at the end of the list never get a gate at all.
+    const attempted = metrics.samplesAttempted ?? metrics.samplesCompleted
+    const unattempted = metrics.samplesDefined - attempted
+    const errored = attempted - metrics.samplesCompleted
+    const detail = [
+      errored > 0 ? `${errored} errored` : null,
+      unattempted > 0 ? `${unattempted} never attempted` : null,
+    ]
+      .filter(Boolean)
+      .join(", ")
     problems.push(
       `only ${metrics.samplesCompleted} of ${metrics.samplesDefined} samples completed` +
-        " — the gates below were computed from a partial run"
+        ` (${detail}) — the gates below were computed from a partial run`
     )
   }
 

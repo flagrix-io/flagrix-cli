@@ -90,6 +90,14 @@ flagrix-detection-rules on their own cadence and reach the scanner without a
 commit here, so a rule can introduce a false positive that no pull request
 touches.
 
+**A full run costs roughly a whole hourly GitHub quota** — about 5,000 REST
+requests for 114 samples. That limit is *per user*, not per token, so a local
+full run and a CI run in the same hour starve each other. The v0.6.1 release
+failed exactly this way: a local verification run minutes earlier left the
+release gate to stop at sample 59 of 114. Do not run the full corpus locally
+while a release or the nightly is in flight; the fixture corpora are free and
+cost nothing to run any time.
+
 ### Offline mirror (no GitHub token)
 
 `offline/mirror.py` shallow-fetches every pinned commit (trees plus only the
@@ -101,18 +109,40 @@ python3 benchmark/offline/mirror.py
 node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
 ```
 
-Results match the API-backed run sample-for-sample (verified against
-the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
-fixed 1M/week in this mode, so typosquat warnings never fire on reference repos.
+The offline run matches the API-backed run. Verified 2026-11-19 against engine
+0.7.1, over all 114 samples:
 
-**That equivalence no longer holds, and the offline mirror is not wired into
-CI because of it.** `mirror.py` keeps its own copy of scanner-core's config
-file patterns to decide which blobs to fetch, and that copy predates 0.7.0: it
-has no Dockerfile/Containerfile, compose, `.devcontainer`, `.claude/commands`,
-`.claude/agents`, `.claude/skills` or `.github/instructions` entry. So the
-mirror does not contain files the current scanner reads, and an offline run
-silently scans less than an API-backed one. Re-verify the equivalence after
-bringing that list back in step with `CONFIG_FILE_PATTERNS`.
+| | result |
+| --- | --- |
+| files scanned | 9,656 offline vs 9,656 API — identical on every sample |
+| verdicts differing | 0 |
+| findings only in the offline run | 0 |
+| findings only in the API run | 10, all `TYPOSQUAT_PACKAGE` |
+
+The one divergence is structural and harmless: npm download lookups return a
+fixed 1M/week here, so the typosquat check — which only fires below 100k weekly
+downloads — never fires offline. It changes no verdict.
+
+**This is what CI runs.** A full API-backed run costs roughly a whole hourly
+GitHub quota, and that limit is per user rather than per token, so the nightly,
+a release and anyone running it locally used to starve each other; the v0.6.1
+release died exactly that way. The offline path makes that impossible rather
+than merely documented, and needs no token at all.
+
+The mirror holds **every scannable blob**, uncapped. It deliberately has no
+selection of its own: it once took the first 320 blobs in tree order while the
+scanner sorted by `sourcePriority` and took the top 200, and after 0.7.0 began
+reading build scripts first the two diverged badly — `noisy-node` scanned 225
+files through the API and 34 from the mirror. A superset has nothing to drift.
+
+`tree.json` records a fingerprint of every rule that decides which blobs are
+fetched (`SELECTION_POLICY`, `PRIORITY`, `SCANNABLE`, `CONFIG`, `FONTS`), and a
+mismatch re-fetches. Without it the cache short-circuited on `tree.json` merely
+existing, so widening the patterns to follow the engine changed nothing and
+reported `cached` for every repo. `--fingerprint` prints it, which is what the
+CI cache key uses.
+
+Rebuilding the whole mirror takes a few minutes and about 400MB.
 
 ## Corpus semantics
 
