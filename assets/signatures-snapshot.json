@@ -1,6 +1,6 @@
 {
-  "version": "2026.11.10.001",
-  "lastUpdated": "2026-11-10T16:39:28.787Z",
+  "version": "2026.11.19.001",
+  "lastUpdated": "2026-11-19T19:52:49.445Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -574,7 +574,7 @@
     {
       "id": "HARDCODED_API_KEY",
       "name": "Hardcoded API Key",
-      "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)\\s*[:=]\\s*['\"]([^'\"]{20,})['\"]",
+      "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)(?<!algolia[\\s\\S]{0,300})\\s*[:=]\\s*['\"]([^'\"]{20,})['\"]",
       "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)",
       "tags": [
         "secrets",
@@ -1736,6 +1736,181 @@
       "fileExtensions": [
         ".yml",
         ".yaml"
+      ]
+    },
+    {
+      "id": "DOWNLOAD_FROM_IP_EXEC",
+      "name": "Download From a Bare IP Address Executed",
+      "pattern": "\\b(?:curl|wget|iwr|Invoke-WebRequest|Invoke-RestMethod)\\b[^\\n|]{0,200}https?:\\/\\/(?!127\\.|10\\.|0\\.|192\\.168\\.|172\\.(?:1[6-9]|2[0-9]|3[01])\\.)\\d{1,3}(?:\\.\\d{1,3}){3}[^\\n|]{0,200}\\|\\s*(?:sudo\\s+)?(?:(?:ba|z)?sh|dash|python3?|perl|node|iex)\\b|\\b(?:curl|wget)\\b[^\\n]{0,200}https?:\\/\\/(?!127\\.|10\\.|0\\.|192\\.168\\.|172\\.(?:1[6-9]|2[0-9]|3[01])\\.)\\d{1,3}(?:\\.\\d{1,3}){3}[^\\n]{0,200}(?:&&|;|\\n)[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|python3?|node)[ \\t]",
+      "description": "Fetches a script from a hard-coded public IP and runs it. Release tooling uses names, not addresses; loopback and RFC1918 ranges are excluded so local dev scripts don't match.\n",
+      "tags": [
+        "download-exec",
+        "clickfix",
+        "loader"
+      ],
+      "severity": "high",
+      "confidence": "high"
+    },
+    {
+      "id": "DOCKERFILE_RUNS_ASSET_FILE",
+      "name": "Container Build Runs a Font/Image/Text File",
+      "pattern": "(?:^|\\n)[ \\t]*RUN\\b[^\\n]{0,300}\\b(?:node|bun|deno run|python3?)[ \\t]+[^\\n \\t\\\"']{0,120}\\.(?:woff2?|ttf|otf|eot|svg|png|jpe?g|gif|ico|webp|css|scss|dict|txt|md|dat|log)\\b",
+      "description": "`RUN node app/fonts/fa-solid-900.woff2` — the Contagious Interview masquerade moved into the image build, where review attention is lowest.\n",
+      "tags": [
+        "docker",
+        "masquerade",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".dockerfile.sh"
+      ]
+    },
+    {
+      "id": "COMPOSE_DOCKER_SOCKET_MOUNT",
+      "name": "Compose Service Mounts the Docker Socket",
+      "pattern": "(?:^|\\n)[ \\t]*(?:-[ \\t]+[\\\"']?|source:[ \\t]*[\\\"']?)(?:\\/var)?\\/run\\/docker\\.sock(?<!image:[ \\t]*[\\\"']?[\\w./-]*(?:traefik|portainer|watchtower|docker-socket-proxy)[\\s\\S]{0,300})",
+      "description": "A service with /var/run/docker.sock controls the host daemon — container escape by design. A service whose image is Traefik, Portainer, Watchtower or a socket proxy is skipped: the mount is how those tools work at all.\n",
+      "tags": [
+        "docker",
+        "compose",
+        "privilege-escalation"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".compose.yml"
+      ]
+    },
+    {
+      "id": "COMPOSE_HOST_FILESYSTEM_MOUNT",
+      "name": "Compose Service Mounts the Host Filesystem",
+      "pattern": "(?:^|\\n)[ \\t]*-[ \\t]+[\\\"']?(?:\\/(?:etc|root|home|Users)(?:\\/[^\\n:]{0,60})?|\\/|\\$\\{?HOME\\}?(?:\\/[^\\n:]{0,60})?|~(?:\\/[^\\n:]{0,60})?):",
+      "description": "Binds /, /etc, /root, /home or the host home directory into a container — everything in it, credentials included, becomes readable and writable by the image. Project-relative mounts (./data:/data) do not match.\n",
+      "tags": [
+        "docker",
+        "compose",
+        "credential-access"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".compose.yml"
+      ]
+    },
+    {
+      "id": "COMPOSE_PRIVILEGED_CONTAINER",
+      "name": "Compose Service Drops Container Isolation",
+      "pattern": "(?:^|\\n)[ \\t]*(?:privileged[ \\t]*:[ \\t]*(?:true|yes)\\b|pid[ \\t]*:[ \\t]*[\\\"']?host\\b|cap_add[ \\t]*:[\\s\\S]{0,120}?\\bSYS_(?:ADMIN|PTRACE)\\b)",
+      "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n",
+      "tags": [
+        "docker",
+        "compose",
+        "privilege-escalation"
+      ],
+      "severity": "medium",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".compose.yml"
+      ]
+    },
+    {
+      "id": "COMPOSE_COMMAND_DOWNLOAD_EXEC",
+      "name": "Compose Service Command Pipes a Download into a Shell",
+      "pattern": "(?:^|\\n)[ \\t]*(?:command|entrypoint)[ \\t]*:[\\s\\S]{0,300}?\\b(?:curl|wget)\\b[^\\n]{0,200}\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|python3?|node|perl)\\b",
+      "description": "`command: curl ... | sh` in a compose service: the image's own build is not doing the install, a remote script is, every time the stack comes up.\n",
+      "tags": [
+        "docker",
+        "compose",
+        "download-exec"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".compose.yml"
+      ]
+    },
+    {
+      "id": "DEVCONTAINER_COMMAND_DOWNLOAD_EXEC",
+      "name": "Devcontainer Lifecycle Command Pipes a Download into a Shell",
+      "pattern": "\\\"(?:initialize|onCreate|updateContent|postCreate|postStart|postAttach)Command\\\"[ \\t]*:[\\s\\S]{0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|Invoke-WebRequest|Invoke-RestMethod)[\\s\\S]{0,300}?\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|cmd|iex|powershell|pwsh|python3?|node)\\b",
+      "description": "initializeCommand runs on the host and onCreate/postCreateCommand run as soon as the editor opens the folder — the devcontainer form of the Contagious Interview task file. CONFIG_COMMAND_DOWNLOAD_EXEC only covers the \"command\" key, which these configs do not use.\n",
+      "tags": [
+        "devcontainer",
+        "auto-exec",
+        "download",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "devcontainer.json",
+        ".devcontainer.json"
+      ]
+    },
+    {
+      "id": "DEVCONTAINER_RUNS_ASSET_FILE",
+      "name": "Devcontainer Lifecycle Command Runs a Font/Image/Text File",
+      "pattern": "\\\"(?:initialize|onCreate|updateContent|postCreate|postStart|postAttach)Command\\\"[ \\t]*:[\\s\\S]{0,200}?\\b(?:node|bun|deno|python3?)\\b[^\\\"\\n]{0,120}\\.(?:woff2?|ttf|otf|eot|svg|png|jpe?g|gif|ico|webp|css|scss|dict|txt|md|dat|log)\\b",
+      "description": "`postCreateCommand: node .devcontainer/card4.jpeg` — JS disguised as an asset, started by opening the folder.\n",
+      "tags": [
+        "devcontainer",
+        "auto-exec",
+        "masquerade",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "devcontainer.json",
+        ".devcontainer.json"
+      ]
+    },
+    {
+      "id": "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
+      "name": "Devcontainer Runs Privileged or Mounts the Host Home",
+      "pattern": "\\\"privileged\\\"[ \\t]*:[ \\t]*true|\\\"runArgs\\\"[ \\t]*:[\\s\\S]{0,200}?--privileged|\\\"(?:mounts|workspaceMount)\\\"[ \\t]*:[\\s\\S]{0,200}?source=(?:\\/[,\\\"]|\\$\\{localEnv:HOME\\}[,\\\"]|\\/(?:etc|root|home|Users)[,\\\"\\/])",
+      "description": "privileged: true, --privileged in runArgs, or a mount whose source is / or the whole host home directory. Mounting single dotfiles (~/.ssh, ~/.gitconfig) is ordinary and does not match.\n",
+      "tags": [
+        "devcontainer",
+        "privilege-escalation",
+        "credential-access"
+      ],
+      "severity": "medium",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "devcontainer.json",
+        ".devcontainer.json"
+      ]
+    },
+    {
+      "id": "PASTE_RUN_UNTRUSTED_HOST",
+      "name": "Docs Tell You to Pipe a Paste Site into a Shell",
+      "pattern": "\\b(?:curl|wget|iwr|irm|Invoke-WebRequest|Invoke-RestMethod)\\b[^\\n|]{0,200}(?:pastebin\\.com|paste\\.ee|paste\\.rs|rentry\\.(?:co|org)|hastebin\\.com|bit\\.ly|tinyurl\\.com|is\\.gd|cutt\\.ly|rebrand\\.ly|shorturl\\.at|tiny\\.cc|rb\\.gy|t\\.ly|short\\.gy|transfer\\.sh|0x0\\.st|file\\.io|gist\\.githubusercontent\\.com)\\/[^\\n|]{0,200}\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|iex|powershell|pwsh|python3?|node)\\b",
+      "description": "Install instructions that run a script from a paste site, a URL shortener or a raw gist. Vendor one-liners (brew, rustup, bun) are left out — the host is what makes this a lure.\n",
+      "tags": [
+        "clickfix",
+        "download-exec",
+        "social-engineering",
+        "prompt-injection"
+      ],
+      "severity": "high",
+      "confidence": "medium",
+      "fileExtensions": [
+        ".md",
+        ".mdc",
+        ".txt",
+        ".rst"
       ]
     },
     {
