@@ -37,7 +37,19 @@ FLAGRIX_GITHUB_TOKEN=... npm run benchmark:pin -- --refresh
 
 # Run all pinned samples (resume skips completed rows)
 FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --resume
+
+# Fail the process unless every gate passed and every sample completed
+FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --enforce-gates
 ```
+
+Without `--enforce-gates` the runner reports and exits 0, red gates included,
+which is what makes it usable interactively. CI passes the flag. It also fails
+a run that did not finish: a run that dies partway — usually an exhausted
+GitHub quota, which the runner breaks out of rather than throwing — leaves the
+samples it never reached out of the metrics, so its gates are computed from a
+partial read and can come back green having proved nothing. On a full run an
+unevaluated (`null`) gate is a failure too; on a `--corpus` or `--sample` run
+it is expected, so only `false` fails there.
 
 The token should be a fine-grained, read-only GitHub PAT. Do not pass it via
 `--token`, because command-line arguments can appear in process listings. If
@@ -53,6 +65,31 @@ Ad-hoc outputs are gitignored; only the canonical snapshots
 (`pre-fix-baseline.*`, `post-fix-final.*`) are tracked. To update a canonical
 snapshot, copy `latest.json`/`latest.csv` over it and commit.
 
+**Refresh `post-fix-final.*` with every engine release.** A stale snapshot is
+not a harmless stale file: it is the only record of what the corpus is
+*supposed* to produce, so while it lags there is nothing to compare a run
+against. Scanner-core 0.7.0 shipped verdicts of HIGH (unsafe to clone) on
+evanw/esbuild and MEDIUM on reduxjs/redux, and the drift went unnoticed for a
+month because this snapshot predated the release.
+
+## Where the benchmark runs
+
+| run | corpora | token | gate |
+| --- | --- | --- | --- |
+| `ci.yml` → `benchmark-fixtures`, every PR | the three in-memory fixture corpora | none | blocks the PR |
+| `benchmark.yml`, nightly + manual | all 114 samples | `FLAGRIX_GITHUB_TOKEN` | opens a failed run |
+| `release.yml`, on a `v*` tag | all 114 samples | `FLAGRIX_GITHUB_TOKEN` | blocks the publish |
+
+The fixture corpora are inert in-memory samples behind a mocked GitHub API, so
+they are fast and need no network — but they cannot catch a false positive that
+only appears on a real project, which is what 0.7.0's regression was. That is
+why the public corpus gates the release as well as running nightly.
+
+Nightly is not redundant with the release gate: detection rules ship from
+flagrix-detection-rules on their own cadence and reach the scanner without a
+commit here, so a rule can introduce a false positive that no pull request
+touches.
+
 ### Offline mirror (no GitHub token)
 
 `offline/mirror.py` shallow-fetches every pinned commit (trees plus only the
@@ -67,6 +104,15 @@ node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
 Results match the API-backed run sample-for-sample (verified against
 the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
 fixed 1M/week in this mode, so typosquat warnings never fire on reference repos.
+
+**That equivalence no longer holds, and the offline mirror is not wired into
+CI because of it.** `mirror.py` keeps its own copy of scanner-core's config
+file patterns to decide which blobs to fetch, and that copy predates 0.7.0: it
+has no Dockerfile/Containerfile, compose, `.devcontainer`, `.claude/commands`,
+`.claude/agents`, `.claude/skills` or `.github/instructions` entry. So the
+mirror does not contain files the current scanner reads, and an offline run
+silently scans less than an API-backed one. Re-verify the equivalence after
+bringing that list back in step with `CONFIG_FILE_PATTERNS`.
 
 ## Corpus semantics
 

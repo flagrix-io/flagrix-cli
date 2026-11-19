@@ -48,6 +48,33 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm run typecheck && npm test && npm run build
+
+      # The last gate before the registry. 0.7.0 of the engine published
+      # verdicts of HIGH (unsafe to clone) on evanw/esbuild and MEDIUM on
+      # reduxjs/redux; the unit tests above were all green, because a false
+      # positive on a real repository only shows in this corpus. Nightly runs
+      # live in benchmark.yml — this is the copy that can stop a release.
+      - name: Benchmark gate (full corpus)
+        env:
+          FLAGRIX_GITHUB_TOKEN: ${{ secrets.FLAGRIX_GITHUB_TOKEN }}
+        run: |
+          if [ -z "${FLAGRIX_GITHUB_TOKEN}" ]; then
+            echo "::error::Set the FLAGRIX_GITHUB_TOKEN secret (fine-grained, read-only PAT) — the release gate needs it."
+            exit 1
+          fi
+          npm run benchmark -- --enforce-gates
+
+      - name: Upload the benchmark run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-release-${{ github.ref_name }}
+          path: |
+            benchmark/results/latest.json
+            benchmark/results/latest.csv
+          if-no-files-found: warn
+          retention-days: 90
+
       - run: npm publish --provenance --access public
 
       # The registry validates the npm version, which npm may not serve yet.

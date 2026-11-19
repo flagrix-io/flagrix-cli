@@ -22,3 +22,27 @@ jobs:
       - run: npm run build
       - name: Smoke test the built CLI
         run: node dist/cli.js --version && node dist/cli.js --help > /dev/null
+
+  # The fixture corpora are inert in-memory samples served through a mocked
+  # GitHub API, so they need no token, no network and no pinned-corpus refresh.
+  # They are fast enough to gate every PR, and they fail the build rather than
+  # only reporting: `npm run benchmark` on its own exits 0 even on a red gate.
+  #
+  # These corpora cannot catch a regression that only shows on a real
+  # repository — 0.7.0's false positives on esbuild and redux came from the
+  # public corpus, which needs a token and runs in benchmark.yml and before
+  # every release instead.
+  benchmark-fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Critical behaviors
+        run: npm run benchmark -- --corpus critical-fixture --enforce-gates
+      - name: Emerging threats
+        run: npm run benchmark -- --corpus emerging-threat-fixture --enforce-gates
+      - name: Known-malicious packages
+        run: npm run benchmark -- --corpus real-malicious --enforce-gates
