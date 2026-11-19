@@ -1,18 +1,19 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-19T17:03:35.001Z",
+    "runAt": "2026-11-19T20:01:16.341Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
     "cliVersion": "0.6.1",
     "engineVersion": "0.7.1",
     "engineCommitSha": null,
     "engineDirty": false,
-    "rulesVersion": "2026.11.10.001"
+    "rulesVersion": "2026.11.19.001"
   },
   "metrics": {
     "samplesDefined": 114,
+    "samplesAttempted": 114,
     "samplesCompleted": 114,
-    "samplesPassed": 112,
+    "samplesPassed": 114,
     "criticalFixturesDetected": 10,
     "criticalFixturesTotal": 10,
     "criticalFixtureDetectionRate": 1,
@@ -26,7 +27,7 @@
     "referenceSamplesTotal": 64,
     "referenceHighVerdicts": 0,
     "referenceHighVerdictRate": 0,
-    "referenceSamplesWithHighOrCriticalFindings": 5,
+    "referenceSamplesWithHighOrCriticalFindings": 2,
     "referenceCriticalFindings": 0,
     "gates": {
       "criticalFixtures100Percent": true,
@@ -114,7 +115,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 4,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -194,7 +195,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -234,7 +235,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -334,7 +335,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -374,7 +375,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -414,7 +415,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -544,7 +545,7 @@
       "filesScanned": 3,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 3,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -666,7 +667,7 @@
       "filesScanned": 3,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -716,7 +717,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -878,7 +879,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -939,7 +940,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 4,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -1119,7 +1120,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 2,
+      "durationMs": 3,
       "error": ""
     },
     {
@@ -1159,7 +1160,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1275,7 +1276,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1313,7 +1314,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1351,7 +1352,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1377,7 +1378,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1467,7 +1468,7 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1623,7 +1624,7 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1675,7 +1676,7 @@
       "filesScanned": 157,
       "filesSkipped": 56,
       "treeTruncated": false,
-      "durationMs": 3871,
+      "durationMs": 1924,
       "error": ""
     },
     {
@@ -1723,7 +1724,7 @@
       "filesScanned": 225,
       "filesSkipped": 168,
       "treeTruncated": false,
-      "durationMs": 4541,
+      "durationMs": 2706,
       "error": ""
     },
     {
@@ -1749,7 +1750,7 @@
       "filesScanned": 87,
       "filesSkipped": 24,
       "treeTruncated": false,
-      "durationMs": 2458,
+      "durationMs": 1002,
       "error": ""
     },
     {
@@ -1807,7 +1808,7 @@
       "filesScanned": 219,
       "filesSkipped": 235,
       "treeTruncated": false,
-      "durationMs": 4585,
+      "durationMs": 2571,
       "error": ""
     },
     {
@@ -1978,7 +1979,7 @@
       "filesScanned": 73,
       "filesSkipped": 87,
       "treeTruncated": false,
-      "durationMs": 5492,
+      "durationMs": 1408,
       "error": ""
     },
     {
@@ -1996,27 +1997,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"mocha\": matcha"
-        }
-      ],
+      "findings": [],
       "filesScanned": 23,
       "filesSkipped": 11,
       "treeTruncated": false,
-      "durationMs": 3265,
+      "durationMs": 456,
       "error": ""
     },
     {
@@ -2064,7 +2053,7 @@
       "filesScanned": 115,
       "filesSkipped": 19,
       "treeTruncated": false,
-      "durationMs": 2949,
+      "durationMs": 1413,
       "error": ""
     },
     {
@@ -2090,7 +2079,7 @@
       "filesScanned": 32,
       "filesSkipped": 21,
       "treeTruncated": false,
-      "durationMs": 3083,
+      "durationMs": 777,
       "error": ""
     },
     {
@@ -2138,7 +2127,7 @@
       "filesScanned": 226,
       "filesSkipped": 7044,
       "treeTruncated": false,
-      "durationMs": 12689,
+      "durationMs": 5639,
       "error": ""
     },
     {
@@ -2203,7 +2192,7 @@
       "filesScanned": 225,
       "filesSkipped": 478,
       "treeTruncated": false,
-      "durationMs": 5732,
+      "durationMs": 4266,
       "error": ""
     },
     {
@@ -2229,7 +2218,7 @@
       "filesScanned": 212,
       "filesSkipped": 8753,
       "treeTruncated": false,
-      "durationMs": 9092,
+      "durationMs": 3207,
       "error": ""
     },
     {
@@ -2255,7 +2244,7 @@
       "filesScanned": 227,
       "filesSkipped": 2486,
       "treeTruncated": false,
-      "durationMs": 7830,
+      "durationMs": 3810,
       "error": ""
     },
     {
@@ -2303,7 +2292,7 @@
       "filesScanned": 235,
       "filesSkipped": 29593,
       "treeTruncated": false,
-      "durationMs": 11794,
+      "durationMs": 4824,
       "error": ""
     },
     {
@@ -2329,7 +2318,7 @@
       "filesScanned": 225,
       "filesSkipped": 1903,
       "treeTruncated": false,
-      "durationMs": 4569,
+      "durationMs": 3610,
       "error": ""
     },
     {
@@ -2347,15 +2336,25 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1875,
+      "actualScore": 0.27749999999999997,
       "safeToClone": true,
       "rulesTriggered": [
+        "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
         "OBF_BASE64_HEAVY",
         "OBF_EVAL",
         "HARDCODED_API_KEY"
       ],
       "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
       "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
+          "file": ".devcontainer/devcontainer.json",
+          "line": 15,
+          "description": "privileged: true, --privileged in runArgs, or a mount whose source is / or the whole host home directory. Mounting single dotfiles (~/.ssh, ~/.gitconfig) is ordinary and does not match.\n"
+        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -2405,7 +2404,7 @@
       "filesScanned": 235,
       "filesSkipped": 16212,
       "treeTruncated": false,
-      "durationMs": 8701,
+      "durationMs": 4307,
       "error": ""
     },
     {
@@ -2528,7 +2527,7 @@
       "filesScanned": 241,
       "filesSkipped": 3006,
       "treeTruncated": false,
-      "durationMs": 7139,
+      "durationMs": 7537,
       "error": ""
     },
     {
@@ -2566,7 +2565,7 @@
       "filesScanned": 227,
       "filesSkipped": 6953,
       "treeTruncated": false,
-      "durationMs": 9347,
+      "durationMs": 5397,
       "error": ""
     },
     {
@@ -2584,13 +2583,33 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.0375,
+      "actualScore": 0.27749999999999997,
       "safeToClone": true,
       "rulesTriggered": [
+        "COMPOSE_DOCKER_SOCKET_MOUNT",
+        "COMPOSE_PRIVILEGED_CONTAINER",
         "DATA_EXFILTRATION"
       ],
-      "falsePositiveNotes": "",
+      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
       "findings": [
+        {
+          "severity": "high",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "COMPOSE_DOCKER_SOCKET_MOUNT",
+          "file": ".devcontainer/docker-compose.yml",
+          "line": 10,
+          "description": "A service with /var/run/docker.sock controls the host daemon — container escape by design. A service whose image is Traefik, Portainer, Watchtower or a socket proxy is skipped: the mount is how those tools work at all.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "COMPOSE_PRIVILEGED_CONTAINER",
+          "file": ".devcontainer/docker-compose.yml",
+          "line": null,
+          "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n"
+        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -2613,7 +2632,7 @@
       "filesScanned": 225,
       "filesSkipped": 2824,
       "treeTruncated": false,
-      "durationMs": 6947,
+      "durationMs": 3399,
       "error": ""
     },
     {
@@ -2709,7 +2728,7 @@
       "filesScanned": 225,
       "filesSkipped": 124,
       "treeTruncated": false,
-      "durationMs": 5742,
+      "durationMs": 3782,
       "error": ""
     },
     {
@@ -2757,7 +2776,7 @@
       "filesScanned": 225,
       "filesSkipped": 49508,
       "treeTruncated": false,
-      "durationMs": 11470,
+      "durationMs": 5628,
       "error": ""
     },
     {
@@ -2783,7 +2802,7 @@
       "filesScanned": 64,
       "filesSkipped": 10,
       "treeTruncated": false,
-      "durationMs": 4440,
+      "durationMs": 835,
       "error": ""
     },
     {
@@ -2797,28 +2816,18 @@
       "minimumExpectedVerdict": "",
       "maximumExpectedVerdict": "low",
       "status": "completed",
-      "testPassed": false,
+      "testPassed": true,
       "categoryDetected": true,
-      "verdictPass": false,
-      "actualVerdict": "medium",
-      "actualScore": 0.33749999999999997,
-      "safeToClone": false,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.1875,
+      "safeToClone": true,
       "rulesTriggered": [
-        "HARDCODED_API_KEY",
         "NETWORK_URL_SHORTENER",
         "DATA_EXFILTRATION"
       ],
-      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "high",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "HARDCODED_API_KEY",
-          "file": "website/docusaurus.config.ts",
-          "line": 150,
-          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
-        },
         {
           "severity": "medium",
           "confidence": "high",
@@ -2868,7 +2877,7 @@
       "filesScanned": 220,
       "filesSkipped": 256,
       "treeTruncated": false,
-      "durationMs": 5119,
+      "durationMs": 2663,
       "error": ""
     },
     {
@@ -2886,27 +2895,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "HARDCODED_API_KEY"
-      ],
-      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
-      "findings": [
-        {
-          "severity": "high",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "HARDCODED_API_KEY",
-          "file": "website/docusaurus.config.ts",
-          "line": 184,
-          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
-        }
-      ],
+      "rulesTriggered": [],
+      "falsePositiveNotes": "",
+      "findings": [],
       "filesScanned": 221,
       "filesSkipped": 931,
       "treeTruncated": false,
-      "durationMs": 8001,
+      "durationMs": 4656,
       "error": ""
     },
     {
@@ -2944,7 +2941,7 @@
       "filesScanned": 67,
       "filesSkipped": 98,
       "treeTruncated": false,
-      "durationMs": 3580,
+      "durationMs": 820,
       "error": ""
     },
     {
@@ -2982,7 +2979,7 @@
       "filesScanned": 223,
       "filesSkipped": 1680,
       "treeTruncated": false,
-      "durationMs": 6819,
+      "durationMs": 3909,
       "error": ""
     },
     {
@@ -3008,7 +3005,7 @@
       "filesScanned": 205,
       "filesSkipped": 508,
       "treeTruncated": false,
-      "durationMs": 5066,
+      "durationMs": 2422,
       "error": ""
     },
     {
@@ -3034,7 +3031,7 @@
       "filesScanned": 89,
       "filesSkipped": 38,
       "treeTruncated": false,
-      "durationMs": 3918,
+      "durationMs": 1154,
       "error": ""
     },
     {
@@ -3130,7 +3127,7 @@
       "filesScanned": 230,
       "filesSkipped": 625,
       "treeTruncated": false,
-      "durationMs": 7788,
+      "durationMs": 4041,
       "error": ""
     },
     {
@@ -3156,7 +3153,7 @@
       "filesScanned": 226,
       "filesSkipped": 827,
       "treeTruncated": false,
-      "durationMs": 6317,
+      "durationMs": 3300,
       "error": ""
     },
     {
@@ -3174,81 +3171,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript54"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript55"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript56"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript57"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript58"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript59"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"typescript\": typescript60"
-        }
-      ],
+      "findings": [],
       "filesScanned": 225,
       "filesSkipped": 2126,
       "treeTruncated": false,
-      "durationMs": 8031,
+      "durationMs": 5116,
       "error": ""
     },
     {
@@ -3274,7 +3205,7 @@
       "filesScanned": 40,
       "filesSkipped": 27,
       "treeTruncated": false,
-      "durationMs": 2745,
+      "durationMs": 476,
       "error": ""
     },
     {
@@ -3292,33 +3223,14 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.27749999999999997,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
-        "TYPOSQUAT_PACKAGE",
         "OBF_EVAL",
         "HARDCODED_DB_CONNECTION"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "package.json",
-          "line": null,
-          "description": "Possible typosquat of \"prettier\": prettier2"
-        },
-        {
-          "severity": "medium",
-          "confidence": "unspecified",
-          "type": "TYPOSQUAT_PACKAGE",
-          "rule": "TYPOSQUAT_PACKAGE",
-          "file": "packages/cli/package.json",
-          "line": null,
-          "description": "Possible typosquat of \"lodash\": ohash"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -3350,7 +3262,7 @@
       "filesScanned": 226,
       "filesSkipped": 4445,
       "treeTruncated": false,
-      "durationMs": 10560,
+      "durationMs": 2956,
       "error": ""
     },
     {
@@ -3376,7 +3288,7 @@
       "filesScanned": 225,
       "filesSkipped": 316,
       "treeTruncated": false,
-      "durationMs": 5795,
+      "durationMs": 3732,
       "error": ""
     },
     {
@@ -3394,13 +3306,12 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1875,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "OBF_NEW_FUNCTION",
-        "HARDCODED_API_KEY"
+        "OBF_NEW_FUNCTION"
       ],
-      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "falsePositiveNotes": "",
       "findings": [
         {
           "severity": "medium",
@@ -3410,21 +3321,12 @@
           "file": "bin/prettier.cjs",
           "line": 16,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
-        },
-        {
-          "severity": "high",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "HARDCODED_API_KEY",
-          "file": "website/docusaurus.config.js",
-          "line": 259,
-          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
         }
       ],
       "filesScanned": 226,
       "filesSkipped": 9099,
       "treeTruncated": false,
-      "durationMs": 6393,
+      "durationMs": 3517,
       "error": ""
     },
     {
@@ -3462,7 +3364,7 @@
       "filesScanned": 230,
       "filesSkipped": 2126,
       "treeTruncated": false,
-      "durationMs": 7861,
+      "durationMs": 2931,
       "error": ""
     },
     {
@@ -3500,7 +3402,7 @@
       "filesScanned": 227,
       "filesSkipped": 4842,
       "treeTruncated": false,
-      "durationMs": 6862,
+      "durationMs": 3082,
       "error": ""
     },
     {
@@ -3624,7 +3526,7 @@
       "filesScanned": 225,
       "filesSkipped": 14275,
       "treeTruncated": false,
-      "durationMs": 7408,
+      "durationMs": 3379,
       "error": ""
     },
     {
@@ -3748,7 +3650,7 @@
       "filesScanned": 226,
       "filesSkipped": 17903,
       "treeTruncated": false,
-      "durationMs": 6827,
+      "durationMs": 3331,
       "error": ""
     },
     {
@@ -3815,7 +3717,7 @@
       "filesScanned": 158,
       "filesSkipped": 923,
       "treeTruncated": false,
-      "durationMs": 4417,
+      "durationMs": 1900,
       "error": ""
     },
     {
@@ -3829,21 +3731,20 @@
       "minimumExpectedVerdict": "",
       "maximumExpectedVerdict": "low",
       "status": "completed",
-      "testPassed": false,
+      "testPassed": true,
       "categoryDetected": true,
-      "verdictPass": false,
-      "actualVerdict": "medium",
-      "actualScore": 0.31499999999999995,
-      "safeToClone": false,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.165,
+      "safeToClone": true,
       "rulesTriggered": [
         "OBF_NEW_FUNCTION",
-        "HARDCODED_API_KEY",
         "OBF_EVAL",
         "EXFIL_CLIPBOARD",
         "OBF_SETTIMEOUT_STRING",
         "NETWORK_COMMUNICATION"
       ],
-      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "falsePositiveNotes": "",
       "findings": [
         {
           "severity": "medium",
@@ -3853,15 +3754,6 @@
           "file": "tools/patch.mjs",
           "line": 23,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
-        },
-        {
-          "severity": "high",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "HARDCODED_API_KEY",
-          "file": "website/docusaurus.config.js",
-          "line": 294,
-          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
         },
         {
           "severity": "medium",
@@ -3921,7 +3813,7 @@
       "filesScanned": 228,
       "filesSkipped": 1988,
       "treeTruncated": false,
-      "durationMs": 12232,
+      "durationMs": 3559,
       "error": ""
     },
     {
@@ -4114,9 +4006,9 @@
         }
       ],
       "filesScanned": 225,
-      "filesSkipped": 53084,
-      "treeTruncated": true,
-      "durationMs": 11749,
+      "filesSkipped": 81144,
+      "treeTruncated": false,
+      "durationMs": 4023,
       "error": ""
     },
     {
@@ -4172,7 +4064,7 @@
       "filesScanned": 225,
       "filesSkipped": 6676,
       "treeTruncated": false,
-      "durationMs": 7146,
+      "durationMs": 2918,
       "error": ""
     },
     {
@@ -4210,7 +4102,7 @@
       "filesScanned": 225,
       "filesSkipped": 2945,
       "treeTruncated": false,
-      "durationMs": 4859,
+      "durationMs": 2755,
       "error": ""
     },
     {
@@ -4353,7 +4245,7 @@
       "filesScanned": 225,
       "filesSkipped": 5778,
       "treeTruncated": false,
-      "durationMs": 8791,
+      "durationMs": 4932,
       "error": ""
     },
     {
@@ -4379,7 +4271,7 @@
       "filesScanned": 230,
       "filesSkipped": 6844,
       "treeTruncated": false,
-      "durationMs": 5027,
+      "durationMs": 2708,
       "error": ""
     },
     {
@@ -4427,7 +4319,7 @@
       "filesScanned": 225,
       "filesSkipped": 5566,
       "treeTruncated": false,
-      "durationMs": 4615,
+      "durationMs": 2821,
       "error": ""
     },
     {
@@ -4453,7 +4345,7 @@
       "filesScanned": 208,
       "filesSkipped": 424,
       "treeTruncated": false,
-      "durationMs": 4305,
+      "durationMs": 2537,
       "error": ""
     },
     {
@@ -4479,7 +4371,7 @@
       "filesScanned": 118,
       "filesSkipped": 118,
       "treeTruncated": false,
-      "durationMs": 3033,
+      "durationMs": 1387,
       "error": ""
     },
     {
@@ -4599,9 +4491,9 @@
         }
       ],
       "filesScanned": 235,
-      "filesSkipped": 60015,
-      "treeTruncated": true,
-      "durationMs": 9956,
+      "filesSkipped": 60751,
+      "treeTruncated": false,
+      "durationMs": 3173,
       "error": ""
     },
     {
@@ -4639,7 +4531,7 @@
       "filesScanned": 225,
       "filesSkipped": 15389,
       "treeTruncated": false,
-      "durationMs": 8271,
+      "durationMs": 3686,
       "error": ""
     },
     {
@@ -4679,7 +4571,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4719,7 +4611,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4759,7 +4651,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4889,7 +4781,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4929,7 +4821,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -5179,7 +5071,7 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
