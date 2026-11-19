@@ -4,7 +4,10 @@ import { runScan } from "./commands/scan.js"
 import { runScanUser } from "./commands/scan-user.js"
 import { EXIT } from "./commands/shared.js"
 
-const VERSION = "0.6.0"
+// Kept in step with package.json by tests/version.test.ts — `npm version`
+// does not reach into source, and the built CLI would otherwise report the
+// previous release.
+const VERSION = "0.6.1"
 
 const HELP = `flagrix — scan GitHub repos and profiles for malware before you clone
 
