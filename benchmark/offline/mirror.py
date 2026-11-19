@@ -6,31 +6,65 @@ one batched fetch of just the blobs any scanner variant could select (superset
 of old + new scanner-core file selection). Writes git/<repo>/tree.json in the
 GitHub "git/trees?recursive=1" shape with sizes for the fetched blobs.
 """
-import json, os, re, subprocess, sys
+import hashlib, json, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PRIORITY = ["package.json", "package-lock.json", "requirements.txt", "setup.py", "Pipfile", ".npmrc", ".yarnrc", "Makefile"]
 SCANNABLE = [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".py", ".rb", ".php", ".go", ".sh", ".ps1", ".psm1", ".bat", ".cmd", ".vbs", ".html", ".htm"]
+# Mirrors scanner-core's CONFIG_FILE_PATTERNS (plus CONTAINER_BUILD_FILE and
+# COMPOSE_FILE, which it folds in by name). Keep this in step with the engine:
+# a pattern missing here means the mirror never fetches that blob, so an
+# offline run silently scans less than an API-backed one and the equivalence
+# this file exists to provide is quietly false. The list below matches
+# scanner-core 0.7.1.
 CONFIG = [re.compile(p) for p in [
     r"(?:^|/)\.vscode/(?:tasks|settings|launch|mcp)\.json$",
     r"(?:^|/)\.claude/settings(?:\.local)?\.json$",
     r"(?:^|/)\.(?:cursor|amazonq|gemini|windsurf|roo|kiro)/(?:mcp|settings)\.json$",
     r"(?:^|/)\.mcp\.json$",
+    # devcontainer: initializeCommand runs on the host, and
+    # onCreate/postCreateCommand the moment an editor opens the folder.
+    r"(?:^|/)\.devcontainer\.json$",
+    r"(?:^|/)\.devcontainer/(?:[^/]+/)?devcontainer\.json$",
+    # `docker build` / `docker compose up` is a one-command execution path.
+    r"(?i)(?:^|/)(?:[\w.-]+[-.])?(?:Dockerfile|Containerfile)(?:[-.][\w.-]+)?$",
+    r"(?i)(?:^|/)(?:[\w-]+-)?compose(?:\.[\w-]+)*\.ya?ml$",
     r"^\.github/workflows/[^/]+\.ya?ml$",
-    r"(?i)^README(?:\.md|\.txt|\.rst)?$",
+    # Nested READMEs count, not just the root one.
+    r"(?i)(?:^|/)README(?:\.md|\.txt|\.rst)?$",
     r"(?:^|/)(?:AGENTS|CLAUDE|GEMINI)\.md$",
     r"(?:^|/)\.(?:cursorrules|windsurfrules|clinerules)$",
-    r"(?:^|/)\.cursor/rules/[^/]+\.mdc?$",
+    r"(?:^|/)\.cursor/rules/.*\.mdc?$",
+    # Prompts, slash commands, subagents and skills: markdown a coding agent
+    # executes on request, with the same reach as a hook.
+    r"(?:^|/)\.claude/(?:commands|agents)/.*\.md$",
+    r"(?:^|/)\.claude/skills/[^/]+/SKILL\.md$",
     r"^\.github/copilot-instructions\.md$",
+    r"^\.github/(?:instructions|prompts)/[^/]+\.md$",
 ]]
 FONTS = (".woff", ".woff2", ".ttf", ".otf", ".eot")
+
+
+def selection_fingerprint():
+    """Hash of every rule that decides which blobs are fetched.
+
+    Stored in tree.json and compared on the next run. Without it the cache
+    short-circuits on tree.json merely existing, so widening CONFIG to follow
+    the engine left the mirror holding the old, narrower set and an offline
+    run silently scanned less than an API-backed one — with nothing to say so.
+    """
+    material = json.dumps(
+        [PRIORITY, SCANNABLE, [c.pattern for c in CONFIG], list(FONTS)],
+        sort_keys=True,
+    )
+    return hashlib.sha256(material.encode()).hexdigest()[:16]
 # Files that configs run with node/bun/deno/tsx (scanner-core >= 0.5 reads
 # them whatever their extension). Mirrors scanner-core's extractCommandTargets.
 RUNTIME = re.compile(r"""\b(?:node|nodejs|bun|deno\s+run|tsx|ts-node)((?:\s+-{1,2}[\w-]+(?:=[^\s"'`]*)?)*)\s+\\?["']?([^\s"'`&|;<>()]+)""")
 INLINE = re.compile(r"(?:^|\s)(?:-[ep]|--eval|--print)(?:\s|=|$)")
 ARGS = re.compile(r'"command"\s*:\s*"(?:node|nodejs|bun|deno|tsx|ts-node)"\s*,\s*"args"\s*:\s*\[\s*"([^"]+)"')
-PROJECT_DIR = re.compile(r"""\\?["']?\$\{?(?:CLAUDE_PROJECT_DIR|workspaceFolder|workspaceRoot)\}?\\?["']?(?=/)""")
-DOT_DIR = re.compile(r"^(?:(.*)/)?\.(?:vscode|claude|cursor|amazonq|gemini|windsurf|roo|kiro|github)/")
+PROJECT_DIR = re.compile(r"""\\?["']?\$\{?(?:CLAUDE_PROJECT_DIR|workspaceFolder|workspaceRoot|localWorkspaceFolder|containerWorkspaceFolder)\}?\\?["']?(?=/)""")
+DOT_DIR = re.compile(r"^(?:(.*)/)?\.(?:vscode|claude|cursor|amazonq|gemini|windsurf|roo|kiro|github|devcontainer)/")
 
 
 def command_targets(text, config_path):
@@ -101,6 +135,12 @@ def mirror(repo, sha):
     tree_path = os.path.join(d, "tree.json")
     if os.path.exists(tree_path):
         tree = json.load(open(tree_path))
+        if tree.get("selection") != selection_fingerprint():
+            os.remove(tree_path)  # selection rules changed: re-fetch below
+            tree = None
+    else:
+        tree = None
+    if tree is not None:
         n, err = ensure_command_targets(d, tree["tree"])
         if err:
             return "FAIL targets " + err
@@ -147,7 +187,10 @@ def write_tree(d, sha, entries):
     for e in entries:
         if e["type"] == "blob" and e["sha"] in sizes:
             e["size"] = sizes[e["sha"]]
-    json.dump({"sha": sha, "truncated": False, "tree": entries}, open(os.path.join(d, "tree.json"), "w"))
+    json.dump(
+        {"sha": sha, "truncated": False, "selection": selection_fingerprint(), "tree": entries},
+        open(os.path.join(d, "tree.json"), "w"),
+    )
 
 
 if __name__ == "__main__":

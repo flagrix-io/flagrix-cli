@@ -90,6 +90,14 @@ flagrix-detection-rules on their own cadence and reach the scanner without a
 commit here, so a rule can introduce a false positive that no pull request
 touches.
 
+**A full run costs roughly a whole hourly GitHub quota** — about 5,000 REST
+requests for 114 samples. That limit is *per user*, not per token, so a local
+full run and a CI run in the same hour starve each other. The v0.6.1 release
+failed exactly this way: a local verification run minutes earlier left the
+release gate to stop at sample 59 of 114. Do not run the full corpus locally
+while a release or the nightly is in flight; the fixture corpora are free and
+cost nothing to run any time.
+
 ### Offline mirror (no GitHub token)
 
 `offline/mirror.py` shallow-fetches every pinned commit (trees plus only the
@@ -101,18 +109,37 @@ python3 benchmark/offline/mirror.py
 node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
 ```
 
-Results match the API-backed run sample-for-sample (verified against
-the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download lookups return a
-fixed 1M/week in this mode, so typosquat warnings never fire on reference repos.
+Results used to match the API-backed run sample-for-sample (verified against
+the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download
+lookups return a fixed 1M/week in this mode, so typosquat warnings never fire
+on reference repos.
 
-**That equivalence no longer holds, and the offline mirror is not wired into
-CI because of it.** `mirror.py` keeps its own copy of scanner-core's config
-file patterns to decide which blobs to fetch, and that copy predates 0.7.0: it
-has no Dockerfile/Containerfile, compose, `.devcontainer`, `.claude/commands`,
-`.claude/agents`, `.claude/skills` or `.github/instructions` entry. So the
-mirror does not contain files the current scanner reads, and an offline run
-silently scans less than an API-backed one. Re-verify the equivalence after
-bringing that list back in step with `CONFIG_FILE_PATTERNS`.
+**That equivalence does not hold today, and the offline mirror is therefore
+not wired into CI.** Measured on 2026-11-19 against engine 0.7.1, with the
+config patterns above already brought back in step:
+
+| | API-backed | offline |
+| --- | --- | --- |
+| files scanned, all samples | 9,656 | 8,236 |
+| samples scanning fewer files | — | 24 of 114 |
+| samples differing in verdict or finding count | — | 14 |
+
+The 1,420-file shortfall matches the 1,420 `not in the mirror` warnings the
+mock emits, and the cause is the source selection rather than the config
+patterns. `mirror()` fetches the **first 320 scannable blobs in tree order**,
+while since 0.7.0 the scanner sorts by `sourcePriority` and takes the top 200
+— build scripts and configs first, tests and vendored code last. Tree order
+and priority order diverge sharply on a large repo: `noisy-node` scans 225
+files through the API and 34 offline.
+
+Closing it means either replicating `sourcePriority` here — the same coupling
+that let the config list rot in the first place — or fetching every scannable
+blob under the size limit, so the mirror is a true superset and has no
+selection logic to drift. The second is the better shape; it costs mirror
+size, which for `facebook/react` alone is 4,565 files.
+
+Until then, treat an offline run as a fast approximation for local work, not
+as the gate.
 
 ## Corpus semantics
 
