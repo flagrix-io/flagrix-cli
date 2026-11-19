@@ -45,6 +45,11 @@ CONFIG = [re.compile(p) for p in [
 FONTS = (".woff", ".woff2", ".ttf", ".otf", ".eot")
 
 
+# Bump when the rule for *which* blobs are fetched changes in a way the lists
+# below do not capture, so every mirror re-fetches.
+SELECTION_POLICY = "all-scannable-v2"
+
+
 def selection_fingerprint():
     """Hash of every rule that decides which blobs are fetched.
 
@@ -54,7 +59,7 @@ def selection_fingerprint():
     run silently scanned less than an API-backed one — with nothing to say so.
     """
     material = json.dumps(
-        [PRIORITY, SCANNABLE, [c.pattern for c in CONFIG], list(FONTS)],
+        [SELECTION_POLICY, PRIORITY, SCANNABLE, [c.pattern for c in CONFIG], list(FONTS)],
         sort_keys=True,
     )
     return hashlib.sha256(material.encode()).hexdigest()[:16]
@@ -130,6 +135,11 @@ def git(d, *args, stdin=None):
                           env={**os.environ, "GIT_NO_LAZY_FETCH": "1"})
 
 
+def main_fingerprint():
+    """`--fingerprint`: print the selection hash, for a CI cache key."""
+    print(selection_fingerprint())
+
+
 def mirror(repo, sha):
     d = os.path.join(HERE, "git", repo.replace("/", "_"))
     tree_path = os.path.join(d, "tree.json")
@@ -164,7 +174,15 @@ def mirror(repo, sha):
     blobs = [e for e in entries if e["type"] == "blob"]
     first = [e for e in blobs if any(e["path"].endswith(p) for p in PRIORITY) or any(c.search(e["path"]) for c in CONFIG)]
     fonts = [e for e in blobs if e["path"].lower().endswith(FONTS)][:10]
-    source = [e for e in blobs if any(e["path"].endswith(x) for x in SCANNABLE)][:320]
+    # Every scannable blob, with no cap and no ordering. The mirror holds a
+    # superset of anything the scanner could select, so it has no selection
+    # logic of its own to drift out of step. The previous "first 320 in tree
+    # order" was a different selection from the engine's (sortByPriority, top
+    # 200), and the two diverged sharply once 0.7.0 began reading build
+    # scripts first: noisy-node scanned 225 files through the API and 34 from
+    # the mirror. Blob sizes are not known until a blob is fetched, so the
+    # engine's own 1MB limit is applied when it reads, not here.
+    source = [e for e in blobs if any(e["path"].endswith(x) for x in SCANNABLE)]
     want = {e["sha"] for e in first + fonts + source}
     err = fetch_blobs(d, want)
     if err:
@@ -194,6 +212,9 @@ def write_tree(d, sha, entries):
 
 
 if __name__ == "__main__":
+    if "--fingerprint" in sys.argv:
+        main_fingerprint()
+        sys.exit(0)
     lock = json.load(open(os.path.join(HERE, "..", "corpus.lock.json")))
     for sample in lock["samples"]:
         target = sample["target"]

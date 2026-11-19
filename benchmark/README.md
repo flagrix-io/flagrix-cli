@@ -109,37 +109,40 @@ python3 benchmark/offline/mirror.py
 node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs
 ```
 
-Results used to match the API-backed run sample-for-sample (verified against
-the 2026-07-13 `post-fix-final.json`: 0 of 90 samples differ). npm download
-lookups return a fixed 1M/week in this mode, so typosquat warnings never fire
-on reference repos.
+The offline run matches the API-backed run. Verified 2026-11-19 against engine
+0.7.1, over all 114 samples:
 
-**That equivalence does not hold today, and the offline mirror is therefore
-not wired into CI.** Measured on 2026-11-19 against engine 0.7.1, with the
-config patterns above already brought back in step:
+| | result |
+| --- | --- |
+| files scanned | 9,656 offline vs 9,656 API — identical on every sample |
+| verdicts differing | 0 |
+| findings only in the offline run | 0 |
+| findings only in the API run | 10, all `TYPOSQUAT_PACKAGE` |
 
-| | API-backed | offline |
-| --- | --- | --- |
-| files scanned, all samples | 9,656 | 8,236 |
-| samples scanning fewer files | — | 24 of 114 |
-| samples differing in verdict or finding count | — | 14 |
+The one divergence is structural and harmless: npm download lookups return a
+fixed 1M/week here, so the typosquat check — which only fires below 100k weekly
+downloads — never fires offline. It changes no verdict.
 
-The 1,420-file shortfall matches the 1,420 `not in the mirror` warnings the
-mock emits, and the cause is the source selection rather than the config
-patterns. `mirror()` fetches the **first 320 scannable blobs in tree order**,
-while since 0.7.0 the scanner sorts by `sourcePriority` and takes the top 200
-— build scripts and configs first, tests and vendored code last. Tree order
-and priority order diverge sharply on a large repo: `noisy-node` scans 225
-files through the API and 34 offline.
+**This is what CI runs.** A full API-backed run costs roughly a whole hourly
+GitHub quota, and that limit is per user rather than per token, so the nightly,
+a release and anyone running it locally used to starve each other; the v0.6.1
+release died exactly that way. The offline path makes that impossible rather
+than merely documented, and needs no token at all.
 
-Closing it means either replicating `sourcePriority` here — the same coupling
-that let the config list rot in the first place — or fetching every scannable
-blob under the size limit, so the mirror is a true superset and has no
-selection logic to drift. The second is the better shape; it costs mirror
-size, which for `facebook/react` alone is 4,565 files.
+The mirror holds **every scannable blob**, uncapped. It deliberately has no
+selection of its own: it once took the first 320 blobs in tree order while the
+scanner sorted by `sourcePriority` and took the top 200, and after 0.7.0 began
+reading build scripts first the two diverged badly — `noisy-node` scanned 225
+files through the API and 34 from the mirror. A superset has nothing to drift.
 
-Until then, treat an offline run as a fast approximation for local work, not
-as the gate.
+`tree.json` records a fingerprint of every rule that decides which blobs are
+fetched (`SELECTION_POLICY`, `PRIORITY`, `SCANNABLE`, `CONFIG`, `FONTS`), and a
+mismatch re-fetches. Without it the cache short-circuited on `tree.json` merely
+existing, so widening the patterns to follow the engine changed nothing and
+reported `cached` for every repo. `--fingerprint` prints it, which is what the
+CI cache key uses.
+
+Rebuilding the whole mirror takes a few minutes and about 400MB.
 
 ## Corpus semantics
 
