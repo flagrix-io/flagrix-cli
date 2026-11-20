@@ -5,7 +5,7 @@
  * be tested against recorded reports — including the one where scanner-core
  * 0.7.0 called evanw/esbuild high-risk and unsafe to clone.
  *
- * The contract is the five `gates`, which are the thresholds this benchmark
+ * The contract is the six `gates`, which are the thresholds this benchmark
  * declares, plus the run having actually finished. Individual samples missing
  * their expected verdict is a finer-grained signal than that contract: it is
  * reported, loudly, but it does not fail the build. Treating it as a failure

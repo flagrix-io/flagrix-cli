@@ -33,7 +33,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # The version release.yml runs this same corpus on. The offline mock
+          # builds and gunzips an archive per sample, and Node's gzip handling
+          # has changed within 24 alone, so this should not be the one place
+          # that runs it on something older than the release does.
+          node-version: 24
       - run: npm ci
 
       - name: Selection fingerprint
@@ -70,6 +74,28 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-${{ github.run_id }}
+          path: |
+            benchmark/results/latest.json
+            benchmark/results/latest.csv
+          if-no-files-found: warn
+          retention-days: 30
+
+      # The same corpus read as one archive per commit, which is what
+      # `--tarball` does: 70,253 files against 9,581, and on 2026-11-20 ten
+      # verdicts off "low" and two red gates, which is why that reader is
+      # opt-in. Not blocking, because it is a measurement of something the CLI
+      # does not do by default — it is here to say when it could, and the
+      # answer moves with the detection rules rather than with this repo.
+      - name: Full corpus as snapshots (not blocking)
+        if: ${{ !inputs.corpus }}
+        continue-on-error: true
+        run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --tarball --enforce-gates
+
+      - name: Upload the snapshot run
+        if: ${{ always() && !inputs.corpus }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-tarball-${{ github.run_id }}
           path: |
             benchmark/results/latest.json
             benchmark/results/latest.csv

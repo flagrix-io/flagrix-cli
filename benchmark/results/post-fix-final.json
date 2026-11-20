@@ -1,13 +1,14 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-19T20:01:16.341Z",
+    "runAt": "2026-11-20T12:39:29.733Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.6.1",
-    "engineVersion": "0.7.1",
+    "cliVersion": "0.7.0",
+    "engineVersion": "0.8.0",
     "engineCommitSha": null,
     "engineDirty": false,
-    "rulesVersion": "2026.11.19.001"
+    "rulesVersion": "2026.11.20.001",
+    "requestedReadMode": "per-file"
   },
   "metrics": {
     "samplesDefined": 114,
@@ -29,18 +30,27 @@
     "referenceHighVerdictRate": 0,
     "referenceSamplesWithHighOrCriticalFindings": 2,
     "referenceCriticalFindings": 0,
+    "requestedReadMode": "per-file",
+    "githubSamplesTotal": 50,
+    "githubSamplesReadAsRequested": 50,
+    "readModes": {
+      "per-file": 50
+    },
+    "readFallbacks": {},
     "gates": {
       "criticalFixtures100Percent": true,
       "emergingFixturesAtLeast90Percent": true,
       "maliciousDetectionAtLeast90Percent": true,
       "zeroCriticalReferenceFindings": true,
-      "referenceHighVerdictsAtMost5Percent": true
+      "referenceHighVerdictsAtMost5Percent": true,
+      "everyGitHubSampleReadAsRequested": true
     }
   },
   "results": [
     {
       "sampleId": "critical-keylogger-exfil-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed behavior: keyboard capture plus network sink",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -75,12 +85,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 21,
       "error": ""
     },
     {
       "sampleId": "critical-beavertail-loader-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed Lazarus BeaverTail loader structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -115,12 +128,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 5,
       "error": ""
     },
     {
       "sampleId": "critical-env-exfil-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed environment-variable exfiltration structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -155,12 +171,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "critical-reverse-shell-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed reverse-shell socket structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -195,12 +214,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "critical-crypto-miner-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed cryptocurrency-miner endpoint structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -235,12 +257,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "critical-obfuscated-eval-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed Base64-decoded dynamic execution structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -285,12 +310,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "critical-rce-endpoint-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed request-driven remote-code-execution structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -335,12 +363,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "critical-credential-file-read-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed credential-file access structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-detection-rules",
@@ -375,12 +406,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "critical-aws-key-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed AWS access-key pattern using a reserved dummy value",
       "sourceUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html",
@@ -415,12 +449,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "critical-install-script-v1",
       "corpus": "critical-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Flagrix claimed install-time download and dynamic execution structure",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
@@ -474,12 +511,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 2,
       "error": ""
     },
     {
       "sampleId": "emerging-node-asset-target-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Contagious Interview: folderOpen task runs a loader disguised as .vscode/spellright.dict",
       "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
@@ -545,12 +585,15 @@
       "filesScanned": 3,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 2,
       "error": ""
     },
     {
       "sampleId": "emerging-vscode-task-downloader-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Contagious Interview folderOpen task piping a download into a shell",
       "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
@@ -595,12 +638,15 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "emerging-fake-font-loader-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "RMG-Py incident: JS dropper disguised as a FontAwesome .woff2, auto-run on folder open",
       "sourceUrl": "https://github.com/ReactionMechanismGenerator/RMG-Py/issues/3008",
@@ -667,12 +713,15 @@
       "filesScanned": 3,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 2,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "emerging-vscode-node-inline-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "node -e task fetching a JSON-store payload and running it via new Function",
       "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
@@ -717,12 +766,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "emerging-shai-hulud-preinstall-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "CHAINDROP/Tensorlake: preinstall setup.mjs dropper + .claude SessionStart persistence",
       "sourceUrl": "https://www.elastic.co/security-labs/threat-command/shai-hulud-chaindrop-npm-supply-chain",
@@ -778,12 +830,15 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 2,
       "error": ""
     },
     {
       "sampleId": "emerging-loader-error-eval-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Contagious Interview loader: executes the body of an HTTP error response",
       "sourceUrl": "https://www.microsoft.com/en-us/security/blog/2026/03/11/contagious-interview-malware-delivered-through-fake-developer-job-interviews/",
@@ -828,12 +883,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "emerging-config-injection-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "PolinRider/Void Dokkaebi: loader appended to a build config behind whitespace padding",
       "sourceUrl": "https://www.trendmicro.com/en_us/research/26/d/void-dokkaebi-uses-fake-job-interview-lure-to-spread-malware-via-code-repositories.html",
@@ -879,12 +937,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "emerging-glassworm-unicode-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "GlassWorm: payload encoded in invisible variation selectors and eval'd",
       "sourceUrl": "https://www.aikido.dev/blog/glassworm-returns-unicode-attack-github-npm-vscode",
@@ -940,12 +1001,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 5,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4,
       "error": ""
     },
     {
       "sampleId": "emerging-blockchain-dead-drop-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Stage 2 read from TRON transaction data and executed",
       "sourceUrl": "https://www.trendmicro.com/en_us/research/26/d/void-dokkaebi-uses-fake-job-interview-lure-to-spread-malware-via-code-repositories.html",
@@ -990,12 +1054,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "emerging-known-campaign-domain-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Contagious Interview task-file payload host (IOC string only)",
       "sourceUrl": "https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector",
@@ -1040,12 +1107,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "emerging-mcp-config-shell-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Repo MCP config whose server is a raw shell that exfiltrates cloud identity (CVE-2026-12957 class)",
       "sourceUrl": "https://nhimg.org/amazon-q-mcp-config-vulnerability-2026-malicious-repos-steal-aws-credentials",
@@ -1080,12 +1150,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "emerging-agent-instruction-injection-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Poisoned coding test: hidden agent instructions in a README HTML comment",
       "sourceUrl": "https://www.mitiga.io/blog/poisoned-coding-test-ai-agent-attack",
@@ -1120,12 +1193,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 3,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2,
       "error": ""
     },
     {
       "sampleId": "emerging-clickfix-readme-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "ClickFix-style README: hidden-window PowerShell download",
       "sourceUrl": "https://www.bleepingcomputer.com/news/security/placeholder-domain-used-in-dev-docs-now-serves-clickfix-attacks/",
@@ -1160,12 +1236,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "emerging-gha-secrets-dump-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "Worm-injected workflow serialising every secret (Shai-Hulud v1 shai-hulud-workflow.yml)",
       "sourceUrl": "https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem",
@@ -1200,12 +1279,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "emerging-python-reverse-shell-v1",
       "corpus": "emerging-threat-fixture",
+      "targetKind": "fixture",
       "label": "known-malicious-structure",
       "labelSource": "InvisibleFerret-style Python socket + dup2 + pty shell",
       "sourceUrl": "https://unit42.paloaltonetworks.com/threat-assessment-north-korean-threat-groups/",
@@ -1250,12 +1332,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-keyboard-shortcut-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Regression control for ordinary keyboard UI handling",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
@@ -1276,12 +1361,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-placeholder-secret-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Regression control for documented placeholder configuration",
       "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
@@ -1314,12 +1402,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-flask-debug-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Regression control: deployment warning must not be labeled a backdoor",
       "sourceUrl": "https://github.com/9valleb9/SPY-Options-Dashboard",
@@ -1352,12 +1443,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-detector-regex-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Regression control for security tools containing inert detector regexes",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-scanner-core",
@@ -1378,12 +1472,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-event-stream-safe-version-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Version-bound negative control for the compromised event-stream 3.3.6 incident",
       "sourceUrl": "https://github.com/dominictarr/event-stream",
@@ -1404,12 +1501,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-vscode-watch-task-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Ordinary folderOpen watch task (TypeScript compile)",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1442,12 +1542,15 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-claude-project-hooks-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Claude Code project hooks running scripts from .claude/hooks/",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1468,12 +1571,15 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-installer-readme-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "README with standard curl|bash and irm|iex installers",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1494,12 +1600,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-mcp-npx-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Committed MCP config launching a published server via npx",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1520,12 +1629,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-real-fonts-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Real font binaries and a Git LFS pointer",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1546,12 +1658,15 @@
       "filesScanned": 3,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-web3-rpc-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "dApp reading TRON / EVM transactions without executing them",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1572,12 +1687,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-safe-workflow-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Normal pull_request CI workflow",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1598,12 +1716,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-node-build-script-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "package.json scripts that run a local build script with node",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1624,12 +1745,15 @@
       "filesScanned": 2,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "reference-fixture-non-english-comments-v1",
       "corpus": "reference-fixture",
+      "targetKind": "fixture",
       "label": "reference-clean",
       "labelSource": "Utility module commented in Chinese",
       "sourceUrl": "https://github.com/flagrix-io/flagrix-cli",
@@ -1650,12 +1774,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 2,
       "error": ""
     },
     {
       "sampleId": "reference-express",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/expressjs/express",
@@ -1676,12 +1803,15 @@
       "filesScanned": 157,
       "filesSkipped": 56,
       "treeTruncated": false,
-      "durationMs": 1924,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1746,
       "error": ""
     },
     {
       "sampleId": "reference-fastify",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/fastify/fastify",
@@ -1694,42 +1824,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.075,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "OBF_BASE64_HEAVY",
-        "DATA_EXFILTRATION"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "lib/config-validator.js",
-          "line": 1039,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "lib/schemas.js",
-          "line": 23,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        }
-      ],
+      "findings": [],
       "filesScanned": 225,
       "filesSkipped": 168,
       "treeTruncated": false,
-      "durationMs": 2706,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2601,
       "error": ""
     },
     {
       "sampleId": "reference-koa",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/koajs/koa",
@@ -1750,12 +1861,15 @@
       "filesScanned": 87,
       "filesSkipped": 24,
       "treeTruncated": false,
-      "durationMs": 1002,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 950,
       "error": ""
     },
     {
       "sampleId": "reference-axios",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/axios/axios",
@@ -1768,12 +1882,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.165,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "EXFIL_COOKIE",
-        "DATA_EXFILTRATION",
-        "NETWORK_COMMUNICATION"
+        "DATA_EXFILTRATION"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -1794,26 +1907,20 @@
           "file": "lib/axios.js",
           "line": null,
           "description": "Data exfiltration patterns detected: Form Data Transmission"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "lib/helpers/shouldBypassProxy.js",
-          "line": 21,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
       "filesScanned": 219,
       "filesSkipped": 235,
       "treeTruncated": false,
-      "durationMs": 2571,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2446,
       "error": ""
     },
     {
       "sampleId": "reference-lodash",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/lodash/lodash",
@@ -1826,47 +1933,16 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.2025,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
-        "OBF_HEX_STRINGS",
         "EXFIL_COOKIE",
-        "OBF_BASE64_HEAVY",
         "OBF_EVAL",
         "OBF_NEW_FUNCTION",
-        "OBFUSCATED_CODE",
-        "NETWORK_COMMUNICATION",
-        "DATA_EXFILTRATION"
+        "OBFUSCATED_CODE"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "lodash.js",
-          "line": 226,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "dist/lodash.js",
-          "line": 226,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "dist/lodash.min.js",
-          "line": 16,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
         {
           "severity": "medium",
           "confidence": "medium",
@@ -1875,15 +1951,6 @@
           "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
           "line": 5997,
           "description": "Reads browser cookies via document.cookie — can steal session tokens"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
-          "line": 26455,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         },
         {
           "severity": "medium",
@@ -1947,44 +2014,20 @@
           "file": "vendor/underscore/underscore.js",
           "line": 1531,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "lodash.js",
-          "line": 14567,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "dist/lodash.js",
-          "line": 14567,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
-          "line": 3348,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
       "filesScanned": 73,
       "filesSkipped": 87,
       "treeTruncated": false,
-      "durationMs": 1408,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1369,
       "error": ""
     },
     {
       "sampleId": "reference-chalk",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/chalk/chalk",
@@ -2005,12 +2048,15 @@
       "filesScanned": 23,
       "filesSkipped": 11,
       "treeTruncated": false,
-      "durationMs": 456,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 259,
       "error": ""
     },
     {
       "sampleId": "reference-uuid",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/uuidjs/uuid",
@@ -2023,11 +2069,10 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "VSCODE_TASK_AUTORUN",
-        "SUSPICIOUS_FILE_ACCESS"
+        "VSCODE_TASK_AUTORUN"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2039,26 +2084,20 @@
           "file": ".vscode/tasks.json",
           "line": 10,
           "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "scripts/build.sh",
-          "line": 23,
-          "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
       "filesScanned": 115,
       "filesSkipped": 19,
       "treeTruncated": false,
-      "durationMs": 1413,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1251,
       "error": ""
     },
     {
       "sampleId": "reference-node-fetch",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/node-fetch/node-fetch",
@@ -2079,12 +2118,15 @@
       "filesScanned": 32,
       "filesSkipped": 21,
       "treeTruncated": false,
-      "durationMs": 777,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 370,
       "error": ""
     },
     {
       "sampleId": "reference-react",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/facebook/react",
@@ -2097,42 +2139,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.075,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "OBF_BASE64_HEAVY",
-        "NETWORK_COMMUNICATION"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "scripts/shared/inlinedHostConfigs.js",
-          "line": 35,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "compiler/apps/playground/components/Icons/IconGitHub.tsx",
-          "line": 20,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
-        }
-      ],
+      "findings": [],
       "filesScanned": 226,
       "filesSkipped": 7044,
       "treeTruncated": false,
-      "durationMs": 5639,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4093,
       "error": ""
     },
     {
       "sampleId": "reference-vue",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/vuejs/core",
@@ -2192,12 +2215,15 @@
       "filesScanned": 225,
       "filesSkipped": 478,
       "treeTruncated": false,
-      "durationMs": 4266,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3317,
       "error": ""
     },
     {
       "sampleId": "reference-svelte",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/sveltejs/svelte",
@@ -2218,12 +2244,15 @@
       "filesScanned": 212,
       "filesSkipped": 8753,
       "treeTruncated": false,
-      "durationMs": 3207,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2670,
       "error": ""
     },
     {
       "sampleId": "reference-vite",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/vitejs/vite",
@@ -2244,12 +2273,15 @@
       "filesScanned": 227,
       "filesSkipped": 2486,
       "treeTruncated": false,
-      "durationMs": 3810,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3301,
       "error": ""
     },
     {
       "sampleId": "reference-next",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/vercel/next.js",
@@ -2262,23 +2294,13 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.09,
       "safeToClone": true,
       "rulesTriggered": [
-        "OBF_HEX_STRINGS",
         "SUSPICIOUS_FILE_ACCESS"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "scripts/profile-next-dev-boot.js",
-          "line": 62,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
         {
           "severity": "medium",
           "confidence": "medium",
@@ -2292,12 +2314,15 @@
       "filesScanned": 235,
       "filesSkipped": 29593,
       "treeTruncated": false,
-      "durationMs": 4824,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 5052,
       "error": ""
     },
     {
       "sampleId": "reference-nest",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided normal-project starter set",
       "sourceUrl": "https://github.com/nestjs/nest",
@@ -2318,12 +2343,15 @@
       "filesScanned": 225,
       "filesSkipped": 1903,
       "treeTruncated": false,
-      "durationMs": 3610,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3223,
       "error": ""
     },
     {
       "sampleId": "noisy-vscode",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/microsoft/vscode",
@@ -2340,7 +2368,6 @@
       "safeToClone": true,
       "rulesTriggered": [
         "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
-        "OBF_BASE64_HEAVY",
         "OBF_EVAL",
         "HARDCODED_API_KEY"
       ],
@@ -2354,33 +2381,6 @@
           "file": ".devcontainer/devcontainer.json",
           "line": 15,
           "description": "privileged: true, --privileged in runArgs, or a mount whose source is / or the whole host home directory. Mounting single dotfiles (~/.ssh, ~/.gitconfig) is ordinary and does not match.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "eslint.config.js",
-          "line": 234,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "scripts/chat-simulation/common/perf-scenarios.js",
-          "line": 230,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "extensions/copilot/script/setup/copySources.ts",
-          "line": 169,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         },
         {
           "severity": "medium",
@@ -2404,12 +2404,15 @@
       "filesScanned": 235,
       "filesSkipped": 16212,
       "treeTruncated": false,
-      "durationMs": 4307,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3818,
       "error": ""
     },
     {
       "sampleId": "noisy-playwright",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/microsoft/playwright",
@@ -2422,26 +2425,14 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.11249999999999999,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "OBF_BASE64_HEAVY",
         "OBFUSCATED_CODE",
-        "OBF_EVAL",
-        "DATA_EXFILTRATION",
-        "NETWORK_COMMUNICATION"
+        "OBF_EVAL"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "browser_patches/firefox/juggler/TargetRegistry.js",
-          "line": 267,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -2456,17 +2447,8 @@
           "confidence": "low",
           "type": "MALWARE_SIGNATURE",
           "rule": "OBF_EVAL",
-          "file": "packages/injected/src/clock.ts",
-          "line": 369,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
           "file": "packages/injected/src/injectedScript.ts",
-          "line": 247,
+          "line": 262,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         },
         {
@@ -2477,62 +2459,20 @@
           "file": "packages/injected/src/recorder/clipPaths.ts",
           "line": 30,
           "description": "Extremely long line detected (7,049 characters). Malicious code may be hidden far to the right. Affected: Line 30 (7,049 chars)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
-          "file": "packages/injected/src/utilityScript.ts",
-          "line": 73,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "packages/injected/src/bidiInsertText.ts",
-          "line": 34,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "packages/injected/src/injectedScript.ts",
-          "line": 869,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "packages/injected/src/recorder/clipPaths.ts",
-          "line": 30,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "packages/isomorphic/trace/snapshotRenderer.ts",
-          "line": 340,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
       "filesScanned": 241,
       "filesSkipped": 3006,
       "treeTruncated": false,
-      "durationMs": 7537,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3499,
       "error": ""
     },
     {
       "sampleId": "noisy-cypress",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/cypress-io/cypress",
@@ -2565,12 +2505,15 @@
       "filesScanned": 227,
       "filesSkipped": 6953,
       "treeTruncated": false,
-      "durationMs": 5397,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4550,
       "error": ""
     },
     {
       "sampleId": "noisy-electron",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/electron/electron",
@@ -2583,12 +2526,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.27749999999999997,
+      "actualScore": 0.24,
       "safeToClone": true,
       "rulesTriggered": [
         "COMPOSE_DOCKER_SOCKET_MOUNT",
-        "COMPOSE_PRIVILEGED_CONTAINER",
-        "DATA_EXFILTRATION"
+        "COMPOSE_PRIVILEGED_CONTAINER"
       ],
       "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
       "findings": [
@@ -2609,35 +2551,20 @@
           "file": ".devcontainer/docker-compose.yml",
           "line": null,
           "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "docs/fiddles/features/navigation-history/renderer.js",
-          "line": 20,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "docs/fiddles/ipc/pattern-1/renderer.js",
-          "line": 4,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
       "filesScanned": 225,
       "filesSkipped": 2824,
       "treeTruncated": false,
-      "durationMs": 3399,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3207,
       "error": ""
     },
     {
       "sampleId": "noisy-esbuild",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/evanw/esbuild",
@@ -2650,13 +2577,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.16499999999999998,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_NEW_FUNCTION",
-        "OBF_HEX_STRINGS",
         "OBF_BASE64_HEAVY",
-        "DATA_EXFILTRATION",
         "SUSPICIOUS_FILE_ACCESS"
       ],
       "falsePositiveNotes": "",
@@ -2692,28 +2617,10 @@
           "severity": "medium",
           "confidence": "low",
           "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "scripts/test262.js",
-          "line": 24,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
           "rule": "OBF_BASE64_HEAVY",
           "file": "scripts/verify-source-map.js",
           "line": 243,
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "scripts/try.html",
-          "line": 311,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         },
         {
           "severity": "medium",
@@ -2728,12 +2635,15 @@
       "filesScanned": 225,
       "filesSkipped": 124,
       "treeTruncated": false,
-      "durationMs": 3782,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2886,
       "error": ""
     },
     {
       "sampleId": "noisy-node",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "User-provided scanner-hostile starter set",
       "sourceUrl": "https://github.com/nodejs/node",
@@ -2746,42 +2656,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "SUSPICIOUS_FILE_ACCESS",
-        "NETWORK_COMMUNICATION"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "tools/dep_updaters/update-icu.sh",
-          "line": 62,
-          "description": "Suspicious file access detected: Destructive File Deletion"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "tools/gyp/pylib/packaging/specifiers.py",
-          "line": 348,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        }
-      ],
+      "findings": [],
       "filesScanned": 225,
       "filesSkipped": 49508,
       "treeTruncated": false,
-      "durationMs": 5628,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4822,
       "error": ""
     },
     {
       "sampleId": "reference-hapijs-hapi",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/hapijs/hapi",
@@ -2802,12 +2693,15 @@
       "filesScanned": 64,
       "filesSkipped": 10,
       "treeTruncated": false,
-      "durationMs": 835,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 876,
       "error": ""
     },
     {
       "sampleId": "reference-reduxjs-redux",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/reduxjs/redux",
@@ -2820,11 +2714,10 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1875,
+      "actualScore": 0.15,
       "safeToClone": true,
       "rulesTriggered": [
-        "NETWORK_URL_SHORTENER",
-        "DATA_EXFILTRATION"
+        "NETWORK_URL_SHORTENER"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2845,44 +2738,20 @@
           "file": "examples/counter/src/index.js",
           "line": 22,
           "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "examples/real-world/src/components/Explore.js",
-          "line": 21,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "examples/todos-with-undo/src/containers/AddTodo.js",
-          "line": 13,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "examples/todos/src/containers/AddTodo.js",
-          "line": 13,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
       "filesScanned": 220,
       "filesSkipped": 256,
       "treeTruncated": false,
-      "durationMs": 2663,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2485,
       "error": ""
     },
     {
       "sampleId": "reference-reduxjs-redux-toolkit",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/reduxjs/redux-toolkit",
@@ -2903,12 +2772,15 @@
       "filesScanned": 221,
       "filesSkipped": 931,
       "treeTruncated": false,
-      "durationMs": 4656,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4360,
       "error": ""
     },
     {
       "sampleId": "reference-immerjs-immer",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/immerjs/immer",
@@ -2941,12 +2813,15 @@
       "filesScanned": 67,
       "filesSkipped": 98,
       "treeTruncated": false,
-      "durationMs": 820,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 750,
       "error": ""
     },
     {
       "sampleId": "reference-date-fns-date-fns",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/date-fns/date-fns",
@@ -2959,32 +2834,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.0375,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "NETWORK_COMMUNICATION"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "pkgs/core/src/formatRFC7231/index.ts",
-          "line": 26,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        }
-      ],
+      "findings": [],
       "filesScanned": 223,
       "filesSkipped": 1680,
       "treeTruncated": false,
-      "durationMs": 3909,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3644,
       "error": ""
     },
     {
       "sampleId": "reference-ramda-ramda",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/ramda/ramda",
@@ -3005,12 +2871,15 @@
       "filesScanned": 205,
       "filesSkipped": 508,
       "treeTruncated": false,
-      "durationMs": 2422,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2259,
       "error": ""
     },
     {
       "sampleId": "reference-sindresorhus-got",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/sindresorhus/got",
@@ -3031,12 +2900,15 @@
       "filesScanned": 89,
       "filesSkipped": 38,
       "treeTruncated": false,
-      "durationMs": 1154,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1051,
       "error": ""
     },
     {
       "sampleId": "reference-socketio-socket-io",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/socketio/socket.io",
@@ -3049,13 +2921,12 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.2925,
+      "actualScore": 0.255,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_FROMCHARCODE",
         "EXFIL_COOKIE",
         "BACKDOOR_HARDCODED_AUTH",
-        "NETWORK_COMMUNICATION",
         "HARDCODED_SECRETS"
       ],
       "falsePositiveNotes": "",
@@ -3107,15 +2978,6 @@
         },
         {
           "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "packages/engine.io/lib/contrib/types.cookie.ts",
-          "line": 91,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
-        },
-        {
-          "severity": "medium",
           "confidence": "medium",
           "type": "HARDCODED_SECRETS",
           "rule": "HARDCODED_SECRETS",
@@ -3127,12 +2989,15 @@
       "filesScanned": 230,
       "filesSkipped": 625,
       "treeTruncated": false,
-      "durationMs": 4041,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3723,
       "error": ""
     },
     {
       "sampleId": "reference-apollographql-apollo-client",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/apollographql/apollo-client",
@@ -3153,12 +3018,15 @@
       "filesScanned": 226,
       "filesSkipped": 827,
       "treeTruncated": false,
-      "durationMs": 3300,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2928,
       "error": ""
     },
     {
       "sampleId": "reference-tanstack-query",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/TanStack/query",
@@ -3179,12 +3047,15 @@
       "filesScanned": 225,
       "filesSkipped": 2126,
       "treeTruncated": false,
-      "durationMs": 5116,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4541,
       "error": ""
     },
     {
       "sampleId": "reference-testing-library-react-testing-library",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/testing-library/react-testing-library",
@@ -3205,12 +3076,15 @@
       "filesScanned": 40,
       "filesSkipped": 27,
       "treeTruncated": false,
-      "durationMs": 476,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 441,
       "error": ""
     },
     {
       "sampleId": "reference-prisma-prisma",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/prisma/prisma",
@@ -3262,12 +3136,15 @@
       "filesScanned": 226,
       "filesSkipped": 4445,
       "treeTruncated": false,
-      "durationMs": 2956,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2793,
       "error": ""
     },
     {
       "sampleId": "reference-tailwindlabs-tailwindcss",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/tailwindlabs/tailwindcss",
@@ -3288,12 +3165,15 @@
       "filesScanned": 225,
       "filesSkipped": 316,
       "treeTruncated": false,
-      "durationMs": 3732,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3506,
       "error": ""
     },
     {
       "sampleId": "reference-prettier-prettier",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/prettier/prettier",
@@ -3326,12 +3206,15 @@
       "filesScanned": 226,
       "filesSkipped": 9099,
       "treeTruncated": false,
-      "durationMs": 3517,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3326,
       "error": ""
     },
     {
       "sampleId": "reference-eslint-eslint",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/eslint/eslint",
@@ -3344,32 +3227,23 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.0375,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "DATA_EXFILTRATION"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "docs/src/assets/js/search.js",
-          "line": 186,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        }
-      ],
+      "findings": [],
       "filesScanned": 230,
       "filesSkipped": 2126,
       "treeTruncated": false,
-      "durationMs": 2931,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2762,
       "error": ""
     },
     {
       "sampleId": "reference-pnpm-pnpm",
       "corpus": "reference-clean",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/pnpm/pnpm",
@@ -3402,12 +3276,15 @@
       "filesScanned": 227,
       "filesSkipped": 4842,
       "treeTruncated": false,
-      "durationMs": 3082,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2939,
       "error": ""
     },
     {
       "sampleId": "noisy-denoland-deno",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/denoland/deno",
@@ -3424,7 +3301,6 @@
       "safeToClone": true,
       "rulesTriggered": [
         "OBFUSCATED_CODE",
-        "OBF_BASE64_HEAVY",
         "OBF_EVAL",
         "HARDCODED_SECRETS",
         "NETWORK_COMMUNICATION",
@@ -3445,28 +3321,10 @@
           "severity": "medium",
           "confidence": "low",
           "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "cli/tsc/dts/lib.es2020.intl.d.ts",
-          "line": 80,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
           "rule": "OBF_EVAL",
           "file": "cli/tsc/dts/lib.es5.d.ts",
           "line": 31,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "cli/tsc/dts/lib.webworker.d.ts",
-          "line": 1986,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         },
         {
           "severity": "medium",
@@ -3526,12 +3384,15 @@
       "filesScanned": 225,
       "filesSkipped": 14275,
       "treeTruncated": false,
-      "durationMs": 3379,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3231,
       "error": ""
     },
     {
       "sampleId": "noisy-oven-sh-bun",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/oven-sh/bun",
@@ -3544,13 +3405,12 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.2175,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
         "OBFUSCATED_CODE",
         "OBF_EVAL",
-        "SUSPICIOUS_FILE_ACCESS",
         "NETWORK_COMMUNICATION",
         "CODE_INTEGRITY_ISSUE"
       ],
@@ -3585,57 +3445,12 @@
         },
         {
           "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "scripts/agent.mjs",
-          "line": 210,
-          "description": "Suspicious file access detected: Destructive File Deletion"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "scripts/bootstrap.ps1",
-          "line": 331,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "scripts/bootstrap.sh",
-          "line": 1476,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "scripts/bootstrap.sh",
-          "line": 1907,
-          "description": "Suspicious file access detected: Destructive File Deletion"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "scripts/machine.mjs",
-          "line": 743,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
           "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
           "file": "scripts/runner.node.mjs",
-          "line": 2938,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+          "line": 2944,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
         },
         {
           "severity": "medium",
@@ -3650,12 +3465,15 @@
       "filesScanned": 226,
       "filesSkipped": 17903,
       "treeTruncated": false,
-      "durationMs": 3331,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3093,
       "error": ""
     },
     {
       "sampleId": "noisy-tauri-apps-tauri",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/tauri-apps/tauri",
@@ -3701,7 +3519,7 @@
           "type": "SUSPICIOUS_FILE_ACCESS",
           "rule": "SUSPICIOUS_FILE_ACCESS",
           "file": ".docker/cross/linux-image.sh",
-          "line": 173,
+          "line": 260,
           "description": "Suspicious file access detected: Destructive File Deletion"
         },
         {
@@ -3717,12 +3535,15 @@
       "filesScanned": 158,
       "filesSkipped": 923,
       "treeTruncated": false,
-      "durationMs": 1900,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1755,
       "error": ""
     },
     {
       "sampleId": "noisy-puppeteer-puppeteer",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/puppeteer/puppeteer",
@@ -3735,14 +3556,12 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.165,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_NEW_FUNCTION",
-        "OBF_EVAL",
         "EXFIL_CLIPBOARD",
-        "OBF_SETTIMEOUT_STRING",
-        "NETWORK_COMMUNICATION"
+        "OBF_SETTIMEOUT_STRING"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -3757,24 +3576,6 @@
         },
         {
           "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
-          "file": "packages/puppeteer-core/src/api/ElementHandle.ts",
-          "line": 463,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
-          "file": "packages/puppeteer-core/src/api/Frame.ts",
-          "line": 624,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
           "confidence": "medium",
           "type": "MALWARE_SIGNATURE",
           "rule": "EXFIL_CLIPBOARD",
@@ -3786,39 +3587,24 @@
           "severity": "medium",
           "confidence": "low",
           "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
-          "file": "packages/puppeteer-core/src/api/Page.ts",
-          "line": 1353,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
           "rule": "OBF_SETTIMEOUT_STRING",
           "file": "packages/puppeteer-core/src/api/locators/locators.ts",
           "line": null,
           "description": "Passing a string to setTimeout/setInterval executes it as code (like eval). A common obfuscation technique: setTimeout(\"maliciousCode()\", 0)\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "packages/puppeteer-core/src/common/Device.ts",
-          "line": 21,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
         }
       ],
       "filesScanned": 228,
       "filesSkipped": 1988,
       "treeTruncated": false,
-      "durationMs": 3559,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3669,
       "error": ""
     },
     {
       "sampleId": "noisy-microsoft-typescript",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/microsoft/TypeScript",
@@ -3831,62 +3617,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.075,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "OBF_BASE64_HEAVY",
         "OBFUSCATED_CODE",
-        "OBF_EVAL",
         "OBF_NEW_FUNCTION",
-        "NETWORK_COMMUNICATION"
+        "OBF_EVAL"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/commandLineParser.ts",
-          "line": 1941,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/moduleNameResolver.ts",
-          "line": 79,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/parser.ts",
-          "line": 1042,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/program.ts",
-          "line": 227,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/resolutionCache.ts",
-          "line": 67,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -3895,69 +3634,6 @@
           "file": "src/compiler/scanner.ts",
           "line": 333,
           "description": "Extremely long line detected (10,367 characters). Malicious code may be hidden far to the right. Affected: Line 333 (5,355 chars), Line 342 (8,908 chars), Line 344 (10,367 chars)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/transformers/classFields.ts",
-          "line": 1846,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/transformers/destructuring.ts",
-          "line": 142,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/transformers/es2015.ts",
-          "line": 571,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/types.ts",
-          "line": 4730,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/utilities.ts",
-          "line": 509,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/compiler/watchPublic.ts",
-          "line": 75,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_EVAL",
-          "file": "src/harness/fourslashImpl.ts",
-          "line": 785,
-          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         },
         {
           "severity": "medium",
@@ -3976,44 +3652,20 @@
           "file": "src/harness/fourslashInterfaceImpl.ts",
           "line": 331,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_BASE64_HEAVY",
-          "file": "src/lib/es2020.intl.d.ts",
-          "line": 64,
-          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "src/compiler/transformers/es2015.ts",
-          "line": 3702,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "src/compiler/utilities.ts",
-          "line": 6201,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
       "filesScanned": 225,
       "filesSkipped": 81144,
       "treeTruncated": false,
-      "durationMs": 4023,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3843,
       "error": ""
     },
     {
       "sampleId": "noisy-npm-cli",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/npm/cli",
@@ -4064,12 +3716,15 @@
       "filesScanned": 225,
       "filesSkipped": 6676,
       "treeTruncated": false,
-      "durationMs": 2918,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2901,
       "error": ""
     },
     {
       "sampleId": "noisy-homebrew-brew",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/Homebrew/brew",
@@ -4102,12 +3757,15 @@
       "filesScanned": 225,
       "filesSkipped": 2945,
       "treeTruncated": false,
-      "durationMs": 2755,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2607,
       "error": ""
     },
     {
       "sampleId": "noisy-python-cpython",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/python/cpython",
@@ -4120,14 +3778,12 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.165,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
         "OBF_NEW_FUNCTION",
         "OBFUSCATED_CODE",
-        "OBF_HEX_STRINGS",
-        "DATA_EXFILTRATION",
         "NETWORK_COMMUNICATION",
         "CODE_INTEGRITY_ISSUE"
       ],
@@ -4172,65 +3828,11 @@
         {
           "severity": "medium",
           "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "Lib/_colorize.py",
-          "line": 16,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "Lib/_pyrepl/terminfo.py",
-          "line": 125,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "Lib/_pyrepl/windows_console.py",
-          "line": 116,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_HEX_STRINGS",
-          "file": "Lib/_pyrepl/windows_eventqueue.py",
-          "line": 10,
-          "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "Doc/_static/tachyon-example-flamegraph.html",
-          "line": 2519,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
           "file": "Lib/_aix_support.py",
           "line": 45,
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "Lib/_pyrepl/windows_console.py",
-          "line": 173,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         },
         {
           "severity": "medium",
@@ -4245,12 +3847,15 @@
       "filesScanned": 225,
       "filesSkipped": 5778,
       "treeTruncated": false,
-      "durationMs": 4932,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 4583,
       "error": ""
     },
     {
       "sampleId": "noisy-django-django",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/django/django",
@@ -4271,12 +3876,15 @@
       "filesScanned": 230,
       "filesSkipped": 6844,
       "treeTruncated": false,
-      "durationMs": 2708,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2544,
       "error": ""
     },
     {
       "sampleId": "noisy-ansible-ansible",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/ansible/ansible",
@@ -4319,12 +3927,15 @@
       "filesScanned": 225,
       "filesSkipped": 5566,
       "treeTruncated": false,
-      "durationMs": 2821,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2686,
       "error": ""
     },
     {
       "sampleId": "noisy-scrapy-scrapy",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/scrapy/scrapy",
@@ -4345,12 +3956,15 @@
       "filesScanned": 208,
       "filesSkipped": 424,
       "treeTruncated": false,
-      "durationMs": 2537,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2353,
       "error": ""
     },
     {
       "sampleId": "noisy-pallets-flask",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/pallets/flask",
@@ -4371,12 +3985,15 @@
       "filesScanned": 118,
       "filesSkipped": 118,
       "treeTruncated": false,
-      "durationMs": 1387,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1308,
       "error": ""
     },
     {
       "sampleId": "noisy-rust-lang-rust",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/rust-lang/rust",
@@ -4389,13 +4006,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.2025,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
-        "SUSPICIOUS_FILE_ACCESS",
-        "NETWORK_COMMUNICATION",
-        "DATA_EXFILTRATION"
+        "SUSPICIOUS_FILE_ACCESS"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -4428,15 +4043,6 @@
         },
         {
           "severity": "medium",
-          "confidence": "low",
-          "type": "NETWORK_COMMUNICATION",
-          "rule": "NETWORK_COMMUNICATION",
-          "file": "src/ci/docker/scripts/ohos-sdk.sh",
-          "line": 6,
-          "description": "Suspicious network communication detected: Hardcoded IP Address (3 occurrences)"
-        },
-        {
-          "severity": "medium",
           "confidence": "medium",
           "type": "SUSPICIOUS_FILE_ACCESS",
           "rule": "SUSPICIOUS_FILE_ACCESS",
@@ -4461,44 +4067,20 @@
           "file": "src/ci/scripts/install-clang.sh",
           "line": 53,
           "description": "Suspicious file access detected: Destructive File Deletion"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "src/librustdoc/html/static/js/main.js",
-          "line": 459,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "src/librustdoc/html/static/js/search.js",
-          "line": 5406,
-          "description": "Data exfiltration patterns detected: Form Data Access"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "DATA_EXFILTRATION",
-          "rule": "DATA_EXFILTRATION",
-          "file": "src/tools/clippy/util/gh-pages/script.js",
-          "line": 341,
-          "description": "Data exfiltration patterns detected: Form Data Access"
         }
       ],
       "filesScanned": 235,
       "filesSkipped": 60751,
       "treeTruncated": false,
-      "durationMs": 3173,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 2965,
       "error": ""
     },
     {
       "sampleId": "noisy-golang-go",
       "corpus": "noisy-legitimate",
+      "targetKind": "github",
       "label": "reference-clean",
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/golang/go",
@@ -4531,12 +4113,15 @@
       "filesScanned": 225,
       "filesSkipped": 15389,
       "treeTruncated": false,
-      "durationMs": 3686,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 3563,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2024-8862",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2024-8862; report blob cebceb18d12edabb3bf055a6936a367b0614e792",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/bcrypts-js/MAL-2024-8862.json",
@@ -4571,12 +4156,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2024-1377",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2024-1377; report blob c78863fed3a5a3b662b72b05c16b77d9dc153665",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/cors-parser/MAL-2024-1377.json",
@@ -4611,12 +4199,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-19413",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-19413; report blob 84b9fce13d64dd7ec790910850e9fbbbf58cf348",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/electorn/MAL-2025-19413.json",
@@ -4651,12 +4242,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-20690",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-20690; report blob 2fdd79a99598980c7c4cbaad70833538b602a95c",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/flatmap-stream/MAL-2025-20690.json",
@@ -4691,12 +4285,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-25502",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-25502; report blob 67e0222164b6b5f6ec72ce58d7a20b430cac4dd2",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/lodahs/MAL-2025-25502.json",
@@ -4741,12 +4338,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-4275",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-4275; report blob 238dc228cd9cf54efea67c07f9bc7089b15207b4",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios.js/MAL-2025-4275.json",
@@ -4781,12 +4381,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2026-4493",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2026-4493; report blob 366383ef9f8518dfc534b911251a2dbe5ccd3928",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axiosqqq/MAL-2026-4493.json",
@@ -4821,12 +4424,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15242",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15242; report blob 5850d1f4f2806fd59eb535b3e4d45beb058bc826",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axioss/MAL-2025-15242.json",
@@ -4871,12 +4477,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15281",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15281; report blob e6a3d9c6a3d214bff2f326a8f1d8ba8ac8c1d472",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-laoder/MAL-2025-15281.json",
@@ -4911,12 +4520,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15282",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15282; report blob b23f507de17d8c239290fb1c36a5d9a6d886b92c",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loadre/MAL-2025-15282.json",
@@ -4951,12 +4563,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15283",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15283; report blob a98eafc3406e034fe14c4e2fe25edc21ee7e9a47",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loqder/MAL-2025-15283.json",
@@ -4991,12 +4606,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15286",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15286; report blob 7d72739e67fda4b48cc77bfcb6c868feafd17567",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-node/MAL-2025-15286.json",
@@ -5031,12 +4649,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15289",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15289; report blob 283dd8d75b91d4a35c89707bd10115e3d2ff9c69",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-pal/MAL-2025-15289.json",
@@ -5071,12 +4692,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 1,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15238",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15238; report blob aceadeea25bc4b32b766096204db12a15315e090",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-http/MAL-2025-15238.json",
@@ -5111,12 +4735,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2023-116",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2023-116; report blob 0d58b457e7175cc230bff6d7b6da40d3781a5466",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-proxy/MAL-2023-116.json",
@@ -5151,12 +4778,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-4813",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-4813; report blob bcd00abcd6ee4bb4083f79b6e4d10b6d289aa392",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-browserify/MAL-2025-4813.json",
@@ -5191,12 +4821,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-190832",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-190832; report blob b9b988a111a6e0915333f4b29ce75fb1fe05f293",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-builder/MAL-2025-190832.json",
@@ -5231,12 +4864,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2024-10692",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2024-10692; report blob 79cb12c286a16d2f04288db57a43bce0b197d907",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-mockadptr/MAL-2024-10692.json",
@@ -5271,12 +4907,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-191389",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-191389; report blob 6bae4d1fc6ab36b3516d10c59910f905e50c4f3a",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/axios-cancelable/MAL-2025-191389.json",
@@ -5311,12 +4950,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2026-2631",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2026-2631; report blob d20844f3c5e46ef0707cdad324c86ce0b027a8fa",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-plugin-blocks/MAL-2026-2631.json",
@@ -5351,12 +4993,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-47613",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-47613; report blob 3075fa3df8d2b7a89c816127adda2b9188415350",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-ganache/MAL-2025-47613.json",
@@ -5391,12 +5036,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2026-407",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2026-407; report blob 6bbba35a96333e1960acec15928b07c83544e48a",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-js/MAL-2026-407.json",
@@ -5431,12 +5079,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15287",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15287; report blob 910018e9ea790fae8a6c9141550913cf26e5275d",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-install/MAL-2025-15287.json",
@@ -5471,12 +5122,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-15288",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-15288; report blob 4a51f824f7203deffb5fd237dc4105ebfbfeba03",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-npm-publish/MAL-2025-15288.json",
@@ -5511,12 +5165,15 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
+      "readMode": "per-file",
+      "readFallbackReason": "",
       "durationMs": 0,
       "error": ""
     },
     {
       "sampleId": "malicious-osv-mal-2025-3985",
       "corpus": "real-malicious",
+      "targetKind": "fixture",
       "label": "known-malicious-metadata",
       "labelSource": "OpenSSF OSV MAL-2025-3985; report blob eb426f1379301192517dbb30aad8a7b4e6993343",
       "sourceUrl": "https://github.com/ossf/malicious-packages/blob/1fcca18f1775b47bd272362330684aa2dd1ad870/osv/malicious/npm/babel-loader-fs/MAL-2025-3985.json",
@@ -5551,7 +5208,9 @@
       "filesScanned": 1,
       "filesSkipped": 0,
       "treeTruncated": false,
-      "durationMs": 0,
+      "readMode": "per-file",
+      "readFallbackReason": "",
+      "durationMs": 1,
       "error": ""
     }
   ]

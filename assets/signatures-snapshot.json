@@ -1,6 +1,6 @@
 {
-  "version": "2026.11.19.001",
-  "lastUpdated": "2026-11-19T19:52:49.445Z",
+  "version": "2026.11.20.001",
+  "lastUpdated": "2026-11-20T07:50:32.439Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -1832,17 +1832,39 @@
       ]
     },
     {
+      "id": "DEVCONTAINER_INITIALIZE_DOWNLOAD_EXEC",
+      "name": "Devcontainer initializeCommand Pipes a Download into a Shell",
+      "pattern": "\\\"initializeCommand\\\"[ \\t]*:(?:(?!Command\\\")[\\s\\S]){0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|Invoke-WebRequest|Invoke-RestMethod)(?:(?!Command\\\")[\\s\\S]){0,300}?\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|cmd|iex|powershell|pwsh|python3?|node)\\b",
+      "description": "initializeCommand is the one devcontainer lifecycle hook that runs on the HOST, before any container exists — the devcontainer form of the Contagious Interview task file, with the same reach as a VS Code folderOpen task. CONFIG_COMMAND_DOWNLOAD_EXEC only covers the \"command\" key, which these configs do not use.\n",
+      "tags": [
+        "devcontainer",
+        "auto-exec",
+        "download",
+        "contagious-interview",
+        "host"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "devcontainer.json",
+        ".devcontainer.json"
+      ]
+    },
+    {
       "id": "DEVCONTAINER_COMMAND_DOWNLOAD_EXEC",
-      "name": "Devcontainer Lifecycle Command Pipes a Download into a Shell",
-      "pattern": "\\\"(?:initialize|onCreate|updateContent|postCreate|postStart|postAttach)Command\\\"[ \\t]*:[\\s\\S]{0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|Invoke-WebRequest|Invoke-RestMethod)[\\s\\S]{0,300}?\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|cmd|iex|powershell|pwsh|python3?|node)\\b",
-      "description": "initializeCommand runs on the host and onCreate/postCreateCommand run as soon as the editor opens the folder — the devcontainer form of the Contagious Interview task file. CONFIG_COMMAND_DOWNLOAD_EXEC only covers the \"command\" key, which these configs do not use.\n",
+      "name": "Devcontainer Container Lifecycle Command Pipes a Download into a Shell",
+      "pattern": "\\\"(?:onCreate|updateContent|postCreate|postStart|postAttach)Command\\\"[ \\t]*:(?:(?!Command\\\")[\\s\\S]){0,300}?(?:\\bcurl\\b|\\bwget\\b|\\biwr\\b|Invoke-WebRequest|Invoke-RestMethod)(?:(?!Command\\\")[\\s\\S]){0,300}?\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z)?sh|cmd|iex|powershell|pwsh|python3?|node)\\b",
+      "description": "onCreate/updateContent/postCreate/postStart/postAttachCommand pipe a download into a shell. These run INSIDE the container, so unlike initializeCommand they cannot reach the host's SSH keys, cloud credentials or browser profiles — but they still run unprompted on the mounted workspace, with whatever credentials the editor forwards. Bootstrapping a toolchain this way is common and legitimate, so this is high rather than critical; the host variant is DEVCONTAINER_INITIALIZE_DOWNLOAD_EXEC.\n",
       "tags": [
         "devcontainer",
         "auto-exec",
         "download",
         "contagious-interview"
       ],
-      "severity": "critical",
+      "severity": "high",
       "confidence": "high",
       "fileExtensions": [
         ".json"
@@ -1916,7 +1938,7 @@
     {
       "id": "OBF_BASE64_HEAVY",
       "name": "Heavy Base64 Encoding",
-      "pattern": "[A-Za-z0-9+/]{50,}={0,2}",
+      "pattern": "(?=[A-Za-z+/]{0,49}\\d)[A-Za-z0-9+/]{50,}={0,2}",
       "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n",
       "tags": [
         "base64",
@@ -1943,15 +1965,15 @@
     {
       "id": "OBF_HEX_STRINGS",
       "name": "Extensive Hex-Encoded Strings",
-      "pattern": "\\\\x[0-9a-fA-F]{2}",
-      "description": "20+ hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n",
+      "pattern": "\\\\x([0-9a-fA-F]{2})\\\\x(?!\\1)[0-9a-fA-F]{2}",
+      "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n",
       "tags": [
         "hex-encoding",
         "obfuscation"
       ],
       "severity": "medium",
       "confidence": "low",
-      "minMatches": 20,
+      "minMatches": 10,
       "fileExtensions": [
         ".js",
         ".jsx",
@@ -1967,7 +1989,7 @@
     {
       "id": "OBF_EVAL",
       "name": "eval() Usage",
-      "pattern": "eval\\s*\\(\\s*[^)\\s][^)]{0,200}\\)",
+      "pattern": "(?<![\\w.$])eval[ \\t]*\\(\\s*[^)\\s][^)]{0,200}\\)",
       "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n",
       "tags": [
         "eval",

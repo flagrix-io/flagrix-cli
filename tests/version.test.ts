@@ -7,6 +7,10 @@
  * against package.json and server.json, but nothing checked the literal the
  * CLI actually prints, so a release could — and nearly did — publish 0.6.1
  * while `flagrix --version` said 0.6.0.
+ *
+ * The MCP server advertises its version to the client over the wire, where
+ * nothing checks it at all: it sat at 0.5.1 through four releases. It reads
+ * the same literal now, and the last test here keeps it that way.
  */
 
 import { readFileSync } from "node:fs"
@@ -23,9 +27,18 @@ describe("version consistency", () => {
   })
 
   it("prints the package version from --version", () => {
-    const literal = read("src/cli.ts").match(/^const VERSION = "([^"]+)"$/m)?.[1]
-    expect(literal, "src/cli.ts must declare `const VERSION = \"x.y.z\"`").toBeDefined()
+    const literal = read("src/commands/shared.ts").match(/^export const VERSION = "([^"]+)"$/m)?.[1]
+    expect(
+      literal,
+      'src/commands/shared.ts must declare `export const VERSION = "x.y.z"`'
+    ).toBeDefined()
     expect(literal).toBe(packageVersion)
+  })
+
+  it("advertises that same version over MCP", () => {
+    // A second literal here is a number nobody reads until a client reports
+    // the wrong one, so the source must name the constant.
+    expect(read("src/commands/mcp.ts")).toContain('new McpServer({ name: "flagrix", version: VERSION })')
   })
 
   it("advertises the package version to the MCP registry", () => {
