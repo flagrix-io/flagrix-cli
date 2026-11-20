@@ -53,7 +53,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@flagrix/scanner-core": "^0.7.1",
+    "@flagrix/scanner-core": "^0.8.0",
     "@types/node": "^20.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",

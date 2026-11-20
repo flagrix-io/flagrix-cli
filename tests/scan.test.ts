@@ -15,9 +15,18 @@ import { runScan } from "../src/commands/scan.js"
 import { parseRepoTarget } from "../src/lib/github-url.js"
 import { loadSignatures } from "../src/lib/signatures.js"
 import { repoScanResponse } from "../src/commands/mcp.js"
-import { coverageOf, describeCoverage } from "../src/lib/coverage.js"
+import {
+  coverageOf,
+  describeCoverage,
+  describeReadFallback,
+  readModeLabel
+} from "../src/lib/coverage.js"
 import { renderRepoResult } from "../src/lib/render.js"
-import { EXIT, exitCodeForScan } from "../src/commands/shared.js"
+import {
+  EXIT,
+  READ_WHOLE_SNAPSHOT_BY_DEFAULT,
+  exitCodeForScan
+} from "../src/commands/shared.js"
 
 const MOCK_SHA = "0123456789abcdef0123456789abcdef01234567"
 
@@ -356,7 +365,13 @@ describe("incomplete coverage", () => {
   })
 
   it("describeCoverage picks the sentence from verdict and findings", () => {
-    const partial = { complete: false, filesRead: 3, filesUnread: 2, reason: "rate-limit" as const }
+    const partial = {
+      complete: false,
+      filesRead: 3,
+      filesUnread: 2,
+      reason: "rate-limit" as const,
+      readMode: "per-file" as const
+    }
     expect(describeCoverage({ ...partial, unreliableClear: true }, 0)).toContain(
       "Nothing was found in what was read"
     )
@@ -367,7 +382,10 @@ describe("incomplete coverage", () => {
       "There may be more than what is reported here"
     )
     expect(
-      describeCoverage({ complete: true, unreliableClear: false, filesRead: 3, filesUnread: 0 }, 0)
+      describeCoverage(
+        { complete: true, unreliableClear: false, filesRead: 3, filesUnread: 0, readMode: "per-file" },
+        0
+      )
     ).toBe("")
   })
 
@@ -404,7 +422,7 @@ describe("JSON verdict and coverage", () => {
 
   it("complete low → exit 0, verdict low, safeToClone true", async () => {
     global.fetch = mockApi(CLEAN) as unknown as typeof fetch
-    expect(await runScan("acme/clean", { json: true })).toBe(EXIT.LOW)
+    expect(await runScan("acme/clean", { json: true, tarball: false })).toBe(EXIT.LOW)
 
     const report = JSON.parse(logs.join("\n"))
     expect(report.verdict).toBe("low")
@@ -414,13 +432,14 @@ describe("JSON verdict and coverage", () => {
       complete: true,
       unreliableClear: false,
       filesRead: 3,
-      filesUnread: 0
+      filesUnread: 0,
+      readMode: "per-file"
     })
   })
 
   it("incomplete low → exit 4, verdict incomplete, safeToClone false", async () => {
     global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
-    expect(await runScan("acme/partial", { json: true })).toBe(EXIT.INCOMPLETE)
+    expect(await runScan("acme/partial", { json: true, tarball: false })).toBe(EXIT.INCOMPLETE)
 
     const report = JSON.parse(logs.join("\n"))
     expect(report.verdict).toBe("incomplete")
@@ -430,7 +449,8 @@ describe("JSON verdict and coverage", () => {
       unreliableClear: true,
       filesRead: 1,
       filesUnread: 2,
-      reason: "rate-limit"
+      reason: "rate-limit",
+      readMode: "per-file"
     })
     // Kept for compatibility: the engine's reading of the one file it saw.
     expect(report.riskLevel).toBe("low")
@@ -449,7 +469,7 @@ describe("JSON verdict and coverage", () => {
 
   it("incomplete medium → exit 2, verdict medium — findings stand, coverage still reported", async () => {
     global.fetch = mockApi(MEDIUM_PARTIAL, { contentLimit: 1 }) as unknown as typeof fetch
-    expect(await runScan("acme/meh-partial", { json: true })).toBe(EXIT.MEDIUM)
+    expect(await runScan("acme/meh-partial", { json: true, tarball: false })).toBe(EXIT.MEDIUM)
 
     const report = JSON.parse(logs.join("\n"))
     expect(report.verdict).toBe("medium")
@@ -460,7 +480,8 @@ describe("JSON verdict and coverage", () => {
       unreliableClear: false,
       filesRead: 1,
       filesUnread: 2,
-      reason: "rate-limit"
+      reason: "rate-limit",
+      readMode: "per-file"
     })
   })
 
@@ -499,5 +520,107 @@ describe("older engines without coverage reporting", () => {
     } as unknown as GitHubScanResult
     expect(coverageOf(legacy).complete).toBe(true)
     expect(exitCodeForScan(legacy)).toBe(EXIT.LOW)
+  })
+})
+
+/**
+ * Which reader ran is part of the result, not an implementation detail.
+ *
+ * The two readers see different amounts of a large repository — 4,373 of
+ * facebook/react's files in one request against 226 in 226 of them — so the
+ * same commit can score differently depending on which one ran. A result that
+ * does not say which is a verdict with no coverage attached, and two people
+ * comparing scores have nothing to go on.
+ *
+ * The archive parse itself belongs to scanner-core (tests/tarball.ts there)
+ * and is exercised end to end by the 50 pinned GitHub samples in the offline
+ * benchmark, which serves real archives from the mirror. What is checked here
+ * is the CLI's side: that the flag reaches the engine, and that both the
+ * chosen reader and any fallback reach the user.
+ */
+describe("read mode", () => {
+  const CLEAN = { "src/a.js": "export const a = 1\n" }
+  const askedForArchive = (api: ReturnType<typeof mockApi>) =>
+    api.mock.calls.some((call) => String(call[0]).includes("/tarball/"))
+
+  it("asks the engine for the reader the package declares as its default", async () => {
+    const api = mockApi(CLEAN)
+    global.fetch = api as unknown as typeof fetch
+    await runScan("acme/clean", { json: true })
+    // Guards the wiring, not the choice: an option declared and never passed
+    // through would leave the default a comment rather than a behaviour.
+    expect(askedForArchive(api)).toBe(READ_WHOLE_SNAPSHOT_BY_DEFAULT)
+  })
+
+  it("--tarball asks for the archive and --no-tarball never does", async () => {
+    const wanted = mockApi(CLEAN)
+    global.fetch = wanted as unknown as typeof fetch
+    await runScan("acme/clean", { json: true, tarball: true })
+    expect(askedForArchive(wanted)).toBe(true)
+
+    const refused = mockApi(CLEAN)
+    global.fetch = refused as unknown as typeof fetch
+    await runScan("acme/clean", { json: true, tarball: false })
+    expect(askedForArchive(refused)).toBe(false)
+  })
+
+  it("an archive GitHub will not serve falls back, keeps the verdict, and says why", async () => {
+    // mockApi answers /tarball/ with its 404 catch-all, which is what a repo
+    // with no archive, a blocked redirect or an offline run looks like.
+    global.fetch = mockApi(CLEAN) as unknown as typeof fetch
+    expect(await runScan("acme/clean", { json: true, tarball: true })).toBe(EXIT.LOW)
+
+    const report = JSON.parse(logs.join("\n"))
+    expect(report.verdict).toBe("low")
+    expect(report.coverage.readMode).toBe("per-file")
+    expect(report.coverage.readFallbackReason).toBe("unavailable")
+
+    global.fetch = mockApi(CLEAN) as unknown as typeof fetch
+    await runScan("acme/clean", { json: false, tarball: true })
+    const out = logs.join("\n")
+    expect(out).toContain("read file by file")
+    expect(out).toContain("GitHub would not serve the archive")
+    // A fallback is not a failed scan: the verdict stands on what was read.
+    expect(out).toContain("LOW RISK — No blocking findings")
+  })
+
+  it("names the reader on the counts line and in the MCP text", () => {
+    const snapshot = {
+      riskLevel: "low",
+      riskScore: 0,
+      safeToClone: true,
+      findings: [],
+      disclaimer: "",
+      repo: { owner: "acme", repo: "wide" },
+      commitSha: MOCK_SHA,
+      scanSummary: {
+        filesScanned: 4373,
+        dependenciesChecked: 12,
+        skippedFiles: [],
+        complete: true,
+        readMode: "tarball"
+      }
+    } as unknown as GitHubScanResult
+
+    expect(coverageOf(snapshot).readMode).toBe("tarball")
+    expect(renderRepoResult(snapshot)).toContain("4373 files scanned")
+    expect(renderRepoResult(snapshot)).toContain("read as one snapshot")
+    expect(repoScanResponse(snapshot).content[0]!.text).toContain(
+      "4373 files read as one snapshot"
+    )
+    expect(JSON.parse(repoScanResponse(snapshot).content[1]!.text).coverage.readMode).toBe("tarball")
+  })
+
+  it("an engine that reports no read mode claims nothing about it", () => {
+    // scanner-core < 0.8.0: same rule as `complete`, a missing field is
+    // "unknown" rather than an assumed path.
+    const legacy = {
+      riskLevel: "low",
+      scanSummary: { filesScanned: 3, skippedFiles: [] }
+    } as unknown as GitHubScanResult
+    const coverage = coverageOf(legacy)
+    expect(coverage.readMode).toBe("unknown")
+    expect(readModeLabel(coverage)).toBe("")
+    expect(describeReadFallback(coverage)).toBe("")
   })
 })

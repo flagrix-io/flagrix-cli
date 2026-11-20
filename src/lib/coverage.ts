@@ -17,6 +17,19 @@ export interface Coverage {
   filesRead: number
   filesUnread: number
   reason?: "rate-limit" | "fetch-errors"
+  /**
+   * Which reader produced the evidence. `"tarball"` read the whole commit in
+   * one request under a byte budget; `"per-file"` spent one request per file
+   * under a file cap, so it read far less of a large repository. `"unknown"`
+   * is an engine that predates the field.
+   *
+   * Reported because it decides what the verdict rests on: the same commit
+   * scanned both ways can score differently, and without this the two results
+   * are indistinguishable.
+   */
+  readMode: "tarball" | "per-file" | "unknown"
+  /** Why a requested whole-snapshot read did not happen. */
+  readFallbackReason?: "too-large" | "unavailable" | "unreadable"
 }
 
 export function coverageOf(result: GitHubScanResult): Coverage {
@@ -33,7 +46,11 @@ export function coverageOf(result: GitHubScanResult): Coverage {
     unreliableClear: !complete && result.riskLevel === "low",
     filesRead: summary.filesScanned,
     filesUnread,
-    reason: summary.incompleteReason
+    reason: summary.incompleteReason,
+    // Same reasoning as `complete` above: scanner-core < 0.8.0 reports no read
+    // mode, and a missing field is "unknown" rather than an assumed path.
+    readMode: summary.readMode ?? "unknown",
+    readFallbackReason: summary.readFallbackReason
   }
 }
 
@@ -100,5 +117,37 @@ export function describeCoverage(coverage: Coverage, findingCount: number): stri
     `Scan incomplete — some files could not be read: ${counts}. GitHub did not ` +
     `return the rest, so this rests on partial evidence; re-scanning usually ` +
     `clears it up. ${consequence}`
+  )
+}
+
+/**
+ * A short phrase for the counts line, naming where the files came from. Empty
+ * for an engine that reports no read mode, so nothing is claimed about it.
+ */
+export function readModeLabel(coverage: Coverage): string {
+  if (coverage.readMode === "tarball") return "read as one snapshot"
+  if (coverage.readMode === "per-file") return "read file by file"
+  return ""
+}
+
+const FALLBACK_CAUSE = {
+  "too-large": "the repository is too large to download as one archive",
+  unavailable: "GitHub would not serve the archive — refused, rate-limited, or unreachable",
+  unreadable: "the archive did not parse as a gzipped tar"
+} as const
+
+/**
+ * One sentence when a whole-snapshot read was asked for and did not happen —
+ * empty otherwise, including when none was asked for. The fallback is not a
+ * failure (the per-file path ran and the verdict stands), but it is a
+ * different and smaller body of evidence than the one that was requested, and
+ * silently serving that is how two scans of one commit disagree.
+ */
+export function describeReadFallback(coverage: Coverage): string {
+  if (!coverage.readFallbackReason) return ""
+  return (
+    `Read file by file: ${FALLBACK_CAUSE[coverage.readFallbackReason]}. A per-file ` +
+    `read spends one request per file against a file cap, so on a large ` +
+    `repository it covers less than the one-request snapshot would have.`
   )
 }

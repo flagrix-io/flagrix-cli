@@ -8,9 +8,15 @@ import type { GitHubScanResult } from "@flagrix/scanner-core"
 import { parseRepoTarget } from "../lib/github-url.js"
 import { describeSource, loadSignatures } from "../lib/signatures.js"
 import { loadOsvFeed } from "../lib/osv-feed.js"
-import { coverageOf, describeCoverage, scanReport } from "../lib/coverage.js"
+import {
+  coverageOf,
+  describeCoverage,
+  describeReadFallback,
+  readModeLabel,
+  scanReport
+} from "../lib/coverage.js"
 import { securityScore } from "../lib/render.js"
-import { resolveToken } from "./shared.js"
+import { READ_WHOLE_SNAPSHOT_BY_DEFAULT, VERSION, resolveToken } from "./shared.js"
 
 const GUIDANCE = {
   low: "LOW risk: no blocking findings. Standard caution still applies.",
@@ -44,10 +50,18 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
   const headline = coverage.unreliableClear
     ? `INCOMPLETE SCAN — no verdict, security score withheld ${pinned}.`
     : `${result.riskLevel.toUpperCase()} risk — security score ${securityScore(result.riskScore)}/100 ${pinned}.`
+  // Which reader ran, in the text as well as the JSON: an agent that is handed
+  // a verdict has no other way to tell a scan of 4,000 files from one of 200,
+  // and the two can disagree about the same commit.
+  const readMode = readModeLabel(coverage)
+  const read = readMode ? `${result.scanSummary.filesScanned} files ${readMode}.` : null
+  const fallback = describeReadFallback(coverage)
   const summary = [
     headline,
     coverage.unreliableClear ? INCOMPLETE_GUIDANCE : GUIDANCE[result.riskLevel],
+    ...(read ? [read] : []),
     ...(coverage.complete ? [] : [describeCoverage(coverage, result.findings.length)]),
+    ...(fallback ? [fallback] : []),
     ...(note ? [`Note: ${note}.`] : [])
   ].join(" ")
 
@@ -62,7 +76,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
 
 /** `flagrix mcp` — stdio MCP server exposing the scanner to agents. */
 export async function runMcp(): Promise<number> {
-  const server = new McpServer({ name: "flagrix", version: "0.5.1" })
+  const server = new McpServer({ name: "flagrix", version: VERSION })
 
   server.registerTool(
     "scan_github_repo",
@@ -77,16 +91,29 @@ export async function runMcp(): Promise<number> {
         target: z
           .string()
           .describe("GitHub repository URL or owner/repo slug, e.g. https://github.com/acme/repo"),
-        ref: z.string().optional().describe("Branch, tag, or commit to scan (default: default branch)")
+        ref: z.string().optional().describe("Branch, tag, or commit to scan (default: default branch)"),
+        tarball: z
+          .boolean()
+          .optional()
+          .describe(
+            "Read the whole commit in one request instead of one request per file. " +
+              "Reads far more of a large repository (facebook/react: 4,373 files " +
+              "against 226) and spends 6 requests against GitHub's rate limit " +
+              "instead of 231, so an unauthenticated scan can finish. Off by " +
+              "default: at that coverage the rules also fire on test fixtures and " +
+              "vendored bundles, which moved 10 of 50 well-known repositories off " +
+              "a low verdict. coverage.readMode in the result says which reader ran."
+          )
       }
     },
-    async ({ target, ref }) => {
+    async ({ target, ref, tarball }) => {
       const repo = parseRepoTarget(target, ref)
       const loaded = await loadSignatures()
       const scanOptions = {
         signatures: loaded.signatures,
         githubToken: resolveToken(),
-        osvFeed: await loadOsvFeed()
+        osvFeed: await loadOsvFeed(),
+        tarball: tarball ?? READ_WHOLE_SNAPSHOT_BY_DEFAULT
       }
       const result = await scanGitHubRepo(repo, scanOptions)
       return repoScanResponse(result, describeSource(loaded))
