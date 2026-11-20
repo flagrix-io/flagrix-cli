@@ -64,6 +64,28 @@ describe("benchmark gate decision", () => {
     expect(problems.some((p: string) => /samples completed/.test(p))).toBe(true)
   })
 
+  it("fails a run whose samples were read by a reader the release does not use", () => {
+    // The corpus is only evidence about the code that ships. The offline mock
+    // answered the one-request reader's requests with a 404, so every sample
+    // fell back to the per-file path and the five gates came back green,
+    // measuring a reader that was not the one under test.
+    const { problems } = gateReport(
+      {
+        samplesDefined: 114,
+        samplesCompleted: 114,
+        samplesPassed: 114,
+        requestedReadMode: "tarball",
+        githubSamplesTotal: 50,
+        githubSamplesReadAsRequested: 0,
+        readModes: { "per-file": 50 },
+        readFallbacks: { unavailable: 50 },
+        gates: { zeroCriticalReferenceFindings: true, everyGitHubSampleReadAsRequested: false },
+      },
+      full
+    )
+    expect(problems).toContain("gate failed: everyGitHubSampleReadAsRequested")
+  })
+
   it("treats an unevaluated gate as skipped on a scoped run, failed on a full one", () => {
     const oneCorpus = {
       samplesDefined: 10,

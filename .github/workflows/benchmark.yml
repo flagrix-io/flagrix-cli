@@ -75,3 +75,25 @@ jobs:
             benchmark/results/latest.csv
           if-no-files-found: warn
           retention-days: 30
+
+      # The same corpus read as one archive per commit, which is what
+      # `--tarball` does: 70,253 files against 9,581, and on 2026-11-20 ten
+      # verdicts off "low" and two red gates, which is why that reader is
+      # opt-in. Not blocking, because it is a measurement of something the CLI
+      # does not do by default — it is here to say when it could, and the
+      # answer moves with the detection rules rather than with this repo.
+      - name: Full corpus as snapshots (not blocking)
+        if: ${{ !inputs.corpus }}
+        continue-on-error: true
+        run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --tarball --enforce-gates
+
+      - name: Upload the snapshot run
+        if: ${{ always() && !inputs.corpus }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-tarball-${{ github.run_id }}
+          path: |
+            benchmark/results/latest.json
+            benchmark/results/latest.csv
+          if-no-files-found: warn
+          retention-days: 30

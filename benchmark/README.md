@@ -40,6 +40,9 @@ FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --resume
 
 # Fail the process unless every gate passed and every sample completed
 FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --enforce-gates
+
+# Read each GitHub sample as one snapshot instead of file by file
+node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --tarball
 ```
 
 Without `--enforce-gates` the runner reports and exits 0, red gates included,
@@ -102,7 +105,8 @@ cost nothing to run any time.
 
 `offline/mirror.py` shallow-fetches every pinned commit (trees plus only the
 blobs any scanner version could select) into `offline/git/`, and
-`offline/gitmock.mjs` serves the scanner's GitHub REST calls from it:
+`offline/gitmock.mjs` serves the scanner's GitHub REST calls from it — the
+tree, the file contents, and the commit tarball:
 
 ```bash
 python3 benchmark/offline/mirror.py
@@ -175,3 +179,55 @@ Launch-gate defaults:
 - at least 90% independently labeled malicious samples detected
 - zero Critical findings in reference-clean samples
 - no more than 5% reference-clean samples with a High verdict
+
+### Which reader the samples are read with
+
+scanner-core 0.8.0 can read a commit as one archive instead of one request per
+file, and the two see different amounts of a large repository: 4,373 of
+facebook/react's files against 226. A verdict therefore belongs to a reader,
+and the runner records which one produced each row (`read_mode` in the CSV,
+`readMode` per result, `readModes` in the metrics).
+
+The default follows `READ_WHOLE_SNAPSHOT_BY_DEFAULT` in
+`src/commands/shared.ts`, read out of the source at startup rather than copied
+here, so the corpus always measures the reader the CLI ships.
+`--tarball` / `--no-tarball` override it.
+
+A sixth gate, `everyGitHubSampleReadAsRequested`, fails a run in which any
+GitHub sample was read by a reader other than the one asked for. It exists
+because the first version of this mock answered `/tarball/` with its 404
+catch-all: every sample fell back to the per-file path and the five gates came
+back green, measuring a reader that was no longer the one under test. A silent
+fallback halves the file count on a large repository, so it has to be a
+failure rather than a note. `readFallbacks` in the metrics says why.
+
+Fixtures stay on the per-file path — their file list is served from memory and
+has no archive to offer, and a fixture is a handful of files, so both readers
+see all of them. The archive parse is scanner-core's own test subject; what
+these 50 GitHub samples measure is the coverage it produces.
+
+Two differences from a live archive, both from how the mirror is built: files
+it never fetched (images and other binaries, which no scanner variant selects)
+are absent, and the tree sizes it records cover only the blobs it holds, so
+the engine's 150MB tree-byte gate sees a smaller repository than GitHub would
+serve. A sample where that gate decides the matter has to be measured against
+the API.
+
+Measured 2026-11-20, engine 0.8.0, rules 2026.11.20.001, all 114 samples:
+
+| | file by file | one snapshot |
+| --- | --- | --- |
+| files scanned (50 GitHub samples) | 9,581 | 70,253 |
+| verdicts off "low" | 0 | 10 |
+| critical findings on reference-clean | 0 | 14 |
+| gates | 6 green | `zeroCriticalReferenceFindings` and `referenceHighVerdictsAtMost5Percent` red |
+
+The ten are pnpm (0.090 → 1.000), socket.io (0.255 → 0.708), npm/cli (0.090 →
+0.617) and electron (0.240 → 0.640) on high, and next, playwright, node, bun,
+cpython and ansible on medium. The critical findings are all
+`POSTINSTALL_SCRIPT` on nested `package.json` files, most of them pnpm's and
+npm's own test fixtures for lifecycle scripts; the bulk of the rest is
+`OBFUSCATED_CODE` and the `OBF_*` family on checked-in minified bundles under
+paths like `next/src/compiled/`. That is why the CLI reads file by file by
+default: this run is the measurement that has to come back clean before the
+default moves.

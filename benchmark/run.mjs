@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto"
 import { execFileSync } from "node:child_process"
+import { readFileSync } from "node:fs"
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -48,14 +49,36 @@ const GITHUB_SCANNABLE_EXTENSIONS = [
   ".go", ".sh", ".ps1", ".psm1", ".bat", ".cmd", ".vbs", ".html", ".htm",
 ]
 
+/**
+ * The read mode the CLI ships with, read from the CLI's own declaration.
+ *
+ * The benchmark exists to measure what gets published, so the reader it
+ * exercises has to be the one `flagrix scan` uses. Two copies of this default
+ * would drift the moment one of them moved, and the drift is invisible: the
+ * corpus would still go green, on a path the release no longer takes. A
+ * missing or reshaped declaration throws rather than guessing.
+ */
+function shippedReadsWholeSnapshot() {
+  const source = readFileSync(join(projectDir, "src", "commands", "shared.ts"), "utf8")
+  const match = source.match(/^export const READ_WHOLE_SNAPSHOT_BY_DEFAULT = (true|false)$/m)
+  if (!match) {
+    throw new Error(
+      "src/commands/shared.ts must declare `export const READ_WHOLE_SNAPSHOT_BY_DEFAULT = <true|false>`"
+    )
+  }
+  return match[1] === "true"
+}
+
 function parseArgs(argv) {
-  const options = { corpus: null, sample: null, resume: false, limit: null, enforceGates: false }
+  const options = { corpus: null, sample: null, resume: false, limit: null, enforceGates: false, tarball: null }
   for (let index = 0; index < argv.length; index++) {
     const arg = argv[index]
     if (arg === "--corpus") options.corpus = argv[++index]
     else if (arg === "--sample") options.sample = argv[++index]
     else if (arg === "--resume") options.resume = true
     else if (arg === "--enforce-gates") options.enforceGates = true
+    else if (arg === "--tarball") options.tarball = true
+    else if (arg === "--no-tarball") options.tarball = false
     else if (arg === "--limit") {
       options.limit = Number.parseInt(argv[++index], 10)
       if (!Number.isInteger(options.limit) || options.limit < 1) {
@@ -73,11 +96,18 @@ function help() {
 
 Usage:
   npm run benchmark -- [--corpus <name>] [--sample <sample-id>] [--resume] [--limit <count>]
-                       [--enforce-gates]
+                       [--enforce-gates] [--tarball | --no-tarball]
 
 --enforce-gates exits non-zero unless every evaluated gate passed and every
 defined sample completed, so CI can use the benchmark as a gate. Without it
 the runner reports and exits 0.
+
+--tarball / --no-tarball override how GitHub samples are read: the whole
+commit in one request, or one request per file. The default is whichever one
+the CLI ships (READ_WHOLE_SNAPSHOT_BY_DEFAULT in src/commands/shared.ts), and
+the CSV's read_mode column says per sample which reader actually ran. The two
+read different amounts of a large repository, so they are not interchangeable
+measurements — a verdict only means something next to the mode that produced it.
 
 The runner never clones repositories or executes fixture code. GitHub samples
 must be pinned in benchmark/corpus.lock.json before they can run. Results are
@@ -384,7 +414,7 @@ function flattenFinding(finding) {
   }
 }
 
-async function runSample(sample, signatures, token) {
+async function runSample(sample, signatures, token, tarball) {
   const started = Date.now()
   let result
   let immutableRef = sample.immutableRef
@@ -394,6 +424,10 @@ async function runSample(sample, signatures, token) {
     const originalFetch = global.fetch
     try {
       global.fetch = fixtureFetch(sample.target.files, commitSha)
+      // No `tarball`: `fixtureFetch` serves a file list and has no archive to
+      // offer, and a fixture is a handful of files, so both readers would see
+      // all of them anyway. The GitHub samples below are where the coverage
+      // differs, and where the reader is worth measuring.
       result = await scanGitHubRepo({
         owner: "flagrix-benchmark",
         repo: sample.sampleId,
@@ -410,6 +444,7 @@ async function runSample(sample, signatures, token) {
       return {
         sampleId: sample.sampleId,
         corpus: sample.corpus,
+        targetKind: sample.target.kind,
         label: sample.label,
         labelSource: sample.labelSource,
         sourceUrl: sample.sourceUrl,
@@ -432,7 +467,7 @@ async function runSample(sample, signatures, token) {
         repo,
         branch: ref,
         url: `https://github.com/${sample.target.repo}`,
-      }, { signatures, githubToken: token })
+      }, { signatures, githubToken: token, tarball })
     } finally {
       global.fetch = originalFetch
     }
@@ -443,6 +478,7 @@ async function runSample(sample, signatures, token) {
   return {
     sampleId: sample.sampleId,
     corpus: sample.corpus,
+    targetKind: sample.target.kind,
     label: sample.label,
     labelSource: sample.labelSource,
     sourceUrl: sample.sourceUrl,
@@ -463,6 +499,11 @@ async function runSample(sample, signatures, token) {
     filesScanned: result.scanSummary.filesScanned,
     filesSkipped: result.scanSummary.skippedCount,
     treeTruncated: result.scanSummary.treeTruncated,
+    // Which reader produced this row, and why it is not the one that was
+    // asked for. A fallback halves the file count on a large repository, so a
+    // row without this is a verdict with no coverage attached.
+    readMode: result.scanSummary.readMode ?? "unknown",
+    readFallbackReason: result.scanSummary.readFallbackReason ?? "",
     durationMs: Date.now() - started,
     error: "",
   }
@@ -480,8 +521,22 @@ function gate(value, evaluated) {
  * which never got as far as the malicious-package corpus — read as "58 of 59
  * completed", understating the shortfall by two orders of magnitude.
  */
-function calculateMetrics(results, selectedCount = results.length) {
+function calculateMetrics(results, selectedCount = results.length, requestedReadMode = null) {
   const completed = results.filter((row) => row.status === "completed")
+  // GitHub samples only: fixtures are read from an in-memory file list with no
+  // archive to offer (see runSample). The corpus name does not say which is
+  // which — `real-malicious` is 25 fixtures — so this goes by the target kind.
+  const githubSamples = completed.filter((row) => row.targetKind === "github")
+  const readModes = {}
+  const readFallbacks = {}
+  for (const row of githubSamples) {
+    const mode = row.readMode ?? "unknown"
+    readModes[mode] = (readModes[mode] ?? 0) + 1
+    if (row.readFallbackReason) {
+      readFallbacks[row.readFallbackReason] = (readFallbacks[row.readFallbackReason] ?? 0) + 1
+    }
+  }
+  const readAsRequested = githubSamples.filter((row) => row.readMode === requestedReadMode).length
   const critical = completed.filter((row) => row.corpus === "critical-fixture")
   const malicious = completed.filter((row) => row.corpus === "real-malicious")
   const references = completed.filter((row) => row.label === "reference-clean")
@@ -518,6 +573,11 @@ function calculateMetrics(results, selectedCount = results.length) {
     referenceHighVerdictRate: references.length ? highReferenceVerdicts / references.length : null,
     referenceSamplesWithHighOrCriticalFindings: actionableReferenceFindings,
     referenceCriticalFindings: criticalReferenceFindings,
+    requestedReadMode,
+    githubSamplesTotal: githubSamples.length,
+    githubSamplesReadAsRequested: readAsRequested,
+    readModes,
+    readFallbacks,
     gates: {
       criticalFixtures100Percent: gate(criticalDetected === critical.length, critical.length > 0),
       emergingFixturesAtLeast90Percent: gate(
@@ -533,6 +593,15 @@ function calculateMetrics(results, selectedCount = results.length) {
         highReferenceVerdicts / references.length <= 0.05,
         references.length > 0
       ),
+      // The gate that keeps the other five honest. A reader that quietly fell
+      // back read a fraction of a large repository, so the thresholds above
+      // would be measured against coverage the run never had — which is what
+      // this corpus did for every sample until the mock learned to serve an
+      // archive. `readFallbacks` says why it happened.
+      everyGitHubSampleReadAsRequested: gate(
+        readAsRequested === githubSamples.length,
+        githubSamples.length > 0 && requestedReadMode !== null
+      ),
     },
   }
 }
@@ -544,22 +613,24 @@ function csvCell(value) {
 
 function toCsv(results, metadata) {
   const headers = [
-    "sample_id", "corpus", "label", "label_source", "source_url", "immutable_ref",
+    "sample_id", "corpus", "target_kind", "label", "label_source", "source_url", "immutable_ref",
     "expected_detection_category", "minimum_expected_verdict", "maximum_expected_verdict",
     "status", "test_passed", "category_detected", "verdict_pass", "actual_verdict",
     "actual_score", "safe_to_clone", "rules_triggered", "finding_severities",
     "finding_confidences", "false_positive_notes", "files_scanned", "files_skipped",
-    "tree_truncated", "duration_ms", "engine_version", "engine_commit_sha",
+    "tree_truncated", "read_mode", "read_fallback_reason", "duration_ms",
+    "engine_version", "engine_commit_sha",
     "detection_rules_version", "error",
   ]
   const rows = results.map((row) => [
-    row.sampleId, row.corpus, row.label, row.labelSource, row.sourceUrl, row.immutableRef,
+    row.sampleId, row.corpus, row.targetKind, row.label, row.labelSource, row.sourceUrl, row.immutableRef,
     row.expectedDetectionCategories, row.minimumExpectedVerdict, row.maximumExpectedVerdict,
     row.status, row.testPassed, row.categoryDetected, row.verdictPass, row.actualVerdict,
     row.actualScore, row.safeToClone, row.rulesTriggered ?? [],
     row.findings?.map((finding) => finding.severity) ?? [],
     row.findings?.map((finding) => finding.confidence) ?? [], row.falsePositiveNotes,
-    row.filesScanned, row.filesSkipped, row.treeTruncated, row.durationMs,
+    row.filesScanned, row.filesSkipped, row.treeTruncated,
+    row.readMode ?? "", row.readFallbackReason ?? "", row.durationMs,
     metadata.engineVersion, metadata.engineCommitSha, metadata.rulesVersion,
     row.error,
   ])
@@ -567,7 +638,11 @@ function toCsv(results, metadata) {
 }
 
 async function writeCheckpoint(results, metadata, selectedCount) {
-  const report = { metadata, metrics: calculateMetrics(results, selectedCount), results }
+  const report = {
+    metadata,
+    metrics: calculateMetrics(results, selectedCount, metadata.requestedReadMode),
+    results,
+  }
   await Promise.all([
     writeFile(join(resultsDir, "latest.json"), JSON.stringify(report, null, 2) + "\n"),
     writeFile(join(resultsDir, "latest.csv"), toCsv(results, metadata)),
@@ -581,6 +656,11 @@ async function main() {
     console.log(help())
     return
   }
+
+  const readWholeSnapshot = options.tarball ?? shippedReadsWholeSnapshot()
+  console.error(
+    `benchmark: GitHub samples read ${readWholeSnapshot ? "as one snapshot per commit" : "file by file"}`
+  )
 
   // The engine is whatever `npm install` resolved for @flagrix/scanner-core —
   // the same import the runner executes. Metadata must describe that artifact,
@@ -603,6 +683,10 @@ async function main() {
     engineCommitSha: corePackage.gitHead ?? null,
     engineDirty: false,
     rulesVersion: signatures.version,
+    // What the run asked the engine for. The gate below compares it against
+    // what each sample actually got: a verdict measured on a reader the
+    // release does not use is not a measurement of the release.
+    requestedReadMode: readWholeSnapshot ? "tarball" : "per-file",
   }
 
   let samples = corpus.samples
@@ -633,13 +717,14 @@ async function main() {
     if (options.limit !== null && newlyAttempted >= options.limit) break
     newlyAttempted++
     try {
-      const row = await runSample(sample, signatures, githubToken)
+      const row = await runSample(sample, signatures, githubToken, readWholeSnapshot)
       results.push(row)
       console.error(`${row.status} ${sample.sampleId}${row.actualVerdict ? ` → ${row.actualVerdict}` : ""}`)
     } catch (error) {
       results.push({
         sampleId: sample.sampleId,
         corpus: sample.corpus,
+        targetKind: sample.target.kind,
         label: sample.label,
         labelSource: sample.labelSource,
         sourceUrl: sample.sourceUrl,

@@ -16,7 +16,7 @@ SCANNABLE = [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".py", ".rb", ".php",
 # a pattern missing here means the mirror never fetches that blob, so an
 # offline run silently scans less than an API-backed one and the equivalence
 # this file exists to provide is quietly false. The list below matches
-# scanner-core 0.7.1.
+# scanner-core 0.8.0, which left the selection unchanged from 0.7.1.
 CONFIG = [re.compile(p) for p in [
     r"(?:^|/)\.vscode/(?:tasks|settings|launch|mcp)\.json$",
     r"(?:^|/)\.claude/settings(?:\.local)?\.json$",
