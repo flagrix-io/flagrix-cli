@@ -521,7 +521,29 @@ function gate(value, evaluated) {
  * which never got as far as the malicious-package corpus — read as "58 of 59
  * completed", understating the shortfall by two orders of magnitude.
  */
-function calculateMetrics(results, selectedCount = results.length, requestedReadMode = null) {
+/**
+ * Findings a human reviewed and accepted, from benchmark/reference-review.json.
+ *
+ * An entry names one finding on one sample: its rule, its file, and the ref it
+ * was reviewed at. A finding that differs in any of those is not covered, and
+ * an entry whose ref no longer matches the corpus is ignored — so bumping a
+ * pin re-opens the question rather than carrying the acceptance forward
+ * silently. Nothing here lowers a verdict; it only stops a reviewed finding
+ * from failing the gate twice.
+ */
+function acceptedFinding(accepted, row, finding) {
+  const entries = accepted[row.sampleId]
+  if (!Array.isArray(entries)) return false
+  return entries.some(
+    (entry) =>
+      // Rows here are already flattened, where the rule id lives on `rule`.
+      entry.pattern === (finding.rule ?? findingRule(finding)) &&
+      entry.file === finding.file &&
+      entry.ref === row.immutableRef
+  )
+}
+
+function calculateMetrics(results, selectedCount = results.length, requestedReadMode = null, accepted = {}) {
   const completed = results.filter((row) => row.status === "completed")
   // GitHub samples only: fixtures are read from an in-memory file list with no
   // archive to offer (see runSample). The corpus name does not say which is
@@ -541,8 +563,15 @@ function calculateMetrics(results, selectedCount = results.length, requestedRead
   const malicious = completed.filter((row) => row.corpus === "real-malicious")
   const references = completed.filter((row) => row.label === "reference-clean")
   const criticalReferenceFindings = references.filter((row) =>
-    row.findings.some((finding) => finding.severity === "critical")
+    row.findings.some(
+      (finding) => finding.severity === "critical" && !acceptedFinding(accepted, row, finding)
+    )
   ).length
+  const acceptedReferenceFindings = references.reduce(
+    (total, row) =>
+      total + row.findings.filter((finding) => acceptedFinding(accepted, row, finding)).length,
+    0
+  )
   const actionableReferenceFindings = references.filter((row) =>
     row.findings.some((finding) => finding.severity === "high" || finding.severity === "critical")
   ).length
@@ -573,6 +602,7 @@ function calculateMetrics(results, selectedCount = results.length, requestedRead
     referenceHighVerdictRate: references.length ? highReferenceVerdicts / references.length : null,
     referenceSamplesWithHighOrCriticalFindings: actionableReferenceFindings,
     referenceCriticalFindings: criticalReferenceFindings,
+    acceptedReferenceFindings,
     requestedReadMode,
     githubSamplesTotal: githubSamples.length,
     githubSamplesReadAsRequested: readAsRequested,
@@ -637,10 +667,14 @@ function toCsv(results, metadata) {
   return [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\n") + "\n"
 }
 
+// Loaded once in main(); empty when the file is missing or malformed, which
+// makes every finding count.
+let acceptedReviews = {}
+
 async function writeCheckpoint(results, metadata, selectedCount) {
   const report = {
     metadata,
-    metrics: calculateMetrics(results, selectedCount, metadata.requestedReadMode),
+    metrics: calculateMetrics(results, selectedCount, metadata.requestedReadMode, acceptedReviews),
     results,
   }
   await Promise.all([
@@ -671,6 +705,13 @@ async function main() {
     readJson(join(projectDir, "node_modules", "@flagrix/scanner-core", "package.json")),
     readJson(join(projectDir, "package.json")),
   ])
+  try {
+    const review = await readJson(join(benchmarkDir, "reference-review.json"))
+    acceptedReviews = review.accepted ?? {}
+  } catch {
+    acceptedReviews = {}
+  }
+
   const signatures = normalizeSignatures(rawSignatures)
   const metadata = {
     benchmarkVersion: corpus.benchmarkVersion,
