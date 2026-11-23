@@ -71,8 +71,13 @@ says why (`coverage.readFallbackReason`: `too-large`, `unavailable` or
 | 0 | low risk |
 | 1 | scan failed |
 | 2 | medium risk — review before proceeding |
-| 3 | high risk — do not clone |
+| 3 | high risk — do not clone or install |
 | 4 | scan incomplete — not enough of the repository was read to give a verdict |
+
+When every finding behind a medium or high verdict runs on install (an
+install hook, or a malicious or typosquatted dependency), the verdict reads
+"Review before installing" / "Do not install" instead of naming the clone:
+that code runs on `npm install`, not on `git clone`. The exit code is the same.
 
 `--json` (automatic when stdout is piped) emits the full result. The verdict is
 **pinned to the scanned commit** (`commitSha` in the JSON): every file is read at
