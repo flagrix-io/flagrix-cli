@@ -1,6 +1,7 @@
 import type { GitHubScanResult, GitHubUserScanResult } from "@flagrix/scanner-core"
 
 import { coverageOf, describeCoverage, describeReadFallback, readModeLabel } from "./coverage.js"
+import { INSTALL_TIME_NOTE, verdictIsInstallTime } from "./install-time.js"
 
 const useColor = process.stdout.isTTY && !process.env.NO_COLOR
 
@@ -15,6 +16,12 @@ const VERDICTS = {
   low: { label: "LOW RISK", verdict: "No blocking findings", color: green },
   medium: { label: "MEDIUM RISK", verdict: "Review before cloning", color: yellow },
   high: { label: "HIGH RISK", verdict: "Do not clone", color: red }
+} as const
+
+/** The same verdicts when every finding behind them runs on install. */
+const INSTALL_VERDICTS = {
+  medium: "Review before installing",
+  high: "Do not install"
 } as const
 
 /** Soft-wrap a prose note into the indented column the result lines use. */
@@ -40,6 +47,8 @@ export function securityScore(riskScore: number): number {
 
 export function renderRepoResult(result: GitHubScanResult): string {
   const v = VERDICTS[result.riskLevel]
+  const installTime = verdictIsInstallTime(result)
+  const verdict = installTime && result.riskLevel !== "low" ? INSTALL_VERDICTS[result.riskLevel] : v.verdict
   const coverage = coverageOf(result)
   const slug = `${result.repo.owner}/${result.repo.repo}`
   const sha = result.commitSha?.slice(0, 7)
@@ -55,8 +64,9 @@ export function renderRepoResult(result: GitHubScanResult): string {
     )
   } else {
     lines.push(
-      `  ${v.color(bold(`${v.label} — ${v.verdict}`))}  ${dim(`security score ${securityScore(result.riskScore)}/100`)}`
+      `  ${v.color(bold(`${v.label} — ${verdict}`))}  ${dim(`security score ${securityScore(result.riskScore)}/100`)}`
     )
+    if (installTime) for (const line of wrapNote(INSTALL_TIME_NOTE, "  ")) lines.push(dim(line))
   }
   // The read mode sits on the counts line because it is what makes the file
   // count mean something: 4,373 files read as one snapshot and 200 read one

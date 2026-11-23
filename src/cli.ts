@@ -25,7 +25,7 @@ Options:
 
 Exit codes:
   0  low risk        2  medium risk — review before proceeding
-  1  scan failed     3  high risk — do not clone
+  1  scan failed     3  high risk — do not clone or install
   4  scan incomplete — not enough of the repository was read to give a verdict
 
 Every result names the reader that produced it ("read file by file" or "read

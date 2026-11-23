@@ -15,6 +15,7 @@ import {
   readModeLabel,
   scanReport
 } from "../lib/coverage.js"
+import { INSTALL_TIME_NOTE, verdictIsInstallTime } from "../lib/install-time.js"
 import { securityScore } from "../lib/render.js"
 import { READ_WHOLE_SNAPSHOT_BY_DEFAULT, VERSION, resolveToken } from "./shared.js"
 
@@ -23,6 +24,19 @@ const GUIDANCE = {
   medium:
     "MEDIUM risk: do NOT clone, install, or execute this code until a human has reviewed the findings.",
   high: "HIGH risk: do NOT clone, install, or execute this code. Treat the repository as malicious."
+} as const
+
+/**
+ * GUIDANCE for a verdict that rests only on install-time findings (see
+ * lib/install-time.ts): the step to stop is the install, so it is named first.
+ */
+const INSTALL_GUIDANCE = {
+  medium:
+    "MEDIUM risk: do NOT install this project or its dependencies (npm install, pip install, …), run its " +
+    "scripts, or execute its code until a human has reviewed the findings.",
+  high:
+    "HIGH risk: do NOT install this project or its dependencies (npm install, pip install, …), run its " +
+    "scripts, or execute its code. Treat the repository as malicious."
 } as const
 
 /**
@@ -58,7 +72,7 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
   const fallback = describeReadFallback(coverage)
   const summary = [
     headline,
-    coverage.unreliableClear ? INCOMPLETE_GUIDANCE : GUIDANCE[result.riskLevel],
+    guidanceFor(result, coverage.unreliableClear),
     ...(read ? [read] : []),
     ...(coverage.complete ? [] : [describeCoverage(coverage, result.findings.length)]),
     ...(fallback ? [fallback] : []),
@@ -72,6 +86,14 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
     ],
     isError: false
   }
+}
+
+function guidanceFor(result: GitHubScanResult, unreliableClear: boolean): string {
+  if (unreliableClear) return INCOMPLETE_GUIDANCE
+  if (result.riskLevel !== "low" && verdictIsInstallTime(result)) {
+    return `${INSTALL_GUIDANCE[result.riskLevel]} ${INSTALL_TIME_NOTE}`
+  }
+  return GUIDANCE[result.riskLevel]
 }
 
 /** `flagrix mcp` — stdio MCP server exposing the scanner to agents. */

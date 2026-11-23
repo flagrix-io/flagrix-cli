@@ -12,7 +12,7 @@ needed).
 | 0 | low risk |
 | 1 | scan failed (network, auth, bad target) |
 | 2 | medium risk — review before proceeding |
-| 3 | high risk — do not clone |
+| 3 | high risk — do not clone or install |
 | 4 | scan incomplete — a low result over files that were never read; no verdict |
 
 `--json` (or any piped stdout) emits the full scan result, including `commitSha` —
