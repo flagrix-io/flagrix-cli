@@ -1,6 +1,6 @@
 {
-  "version": "2026.11.20.001",
-  "lastUpdated": "2026-11-20T07:50:32.439Z",
+  "version": "2026.11.23.001",
+  "lastUpdated": "2026-11-23T13:06:09.204Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -574,7 +574,7 @@
     {
       "id": "HARDCODED_API_KEY",
       "name": "Hardcoded API Key",
-      "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)(?<!algolia[\\s\\S]{0,300})\\s*[:=]\\s*['\"]([^'\"]{20,})['\"]",
+      "pattern": "(?:api[_-]?key|apikey|secret[_-]?key|auth[_-]?token|private[_-]?key)(?<!algolia[\\s\\S]{0,300})\\s*[:=]\\s*['\"]([^'\"\\n]{20,})['\"]",
       "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)",
       "tags": [
         "secrets",
@@ -599,7 +599,7 @@
     {
       "id": "HARDCODED_DB_CONNECTION",
       "name": "Hardcoded Database Connection String",
-      "pattern": "(?:mongodb|mongo)[+:\\/\\/]{0,6}[^@\\s]+:[^@\\s]+@|postgres:\\/\\/[^@\\s]+:[^@\\s]+@",
+      "pattern": "(?:(?:mongodb|mongo)[+:\\/\\/]{0,6}[^@\\s]+:[^@\\s]+@|postgres:\\/\\/[^@\\s]+:[^@\\s]+@)(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)",
       "description": "MongoDB or PostgreSQL connection string with credentials embedded",
       "tags": [
         "secrets",
@@ -679,7 +679,7 @@
     {
       "id": "NETWORK_PASTEBIN",
       "name": "Pastebin URL",
-      "pattern": "(?<![\\w-])(?:www\\.)?(?:pastebin\\.com|hastebin\\.com|paste\\.ee|rentry\\.(?:co|org)|paste\\.rs|jsonkeeper\\.com|jsonsilo\\.com|api\\.npoint\\.io|(?:api\\.)?jsonbin\\.io)\\/[a-zA-Z0-9]+",
+      "pattern": "(?<![\\w-])(?:www\\.)?(?:pastebin\\.com|hastebin\\.com|paste\\.ee|rentry\\.(?:co|org)|paste\\.rs|jsonkeeper\\.com|jsonsilo\\.com|api\\.npoint\\.io|(?:api\\.)?jsonbin\\.io)\\/[a-zA-Z0-9]+(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)",
       "description": "Paste / JSON-storage URL (pastebin, rentry, jsonkeeper, jsonsilo, npoint, jsonbin) — often hosts second-stage payloads",
       "tags": [
         "network",
@@ -707,7 +707,7 @@
     {
       "id": "NETWORK_URL_SHORTENER",
       "name": "URL Shortener in Code",
-      "pattern": "(?<![\\w.-])(?:bit\\.ly|tinyurl\\.com|t\\.co|short\\.gy|is\\.gd|cutt\\.ly|rebrand\\.ly|shorturl\\.at|tiny\\.cc|rb\\.gy|t\\.ly)\\/[a-zA-Z0-9]+",
+      "pattern": "(?<![\\w.-])(?:bit\\.ly|tinyurl\\.com|t\\.co|short\\.gy|is\\.gd|cutt\\.ly|rebrand\\.ly|shorturl\\.at|tiny\\.cc|rb\\.gy|t\\.ly)\\/[a-zA-Z0-9]+(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)",
       "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination",
       "tags": [
         "network",
@@ -735,7 +735,7 @@
     {
       "id": "NETWORK_SUSPICIOUS_TLD",
       "name": "Suspicious Domain TLD",
-      "pattern": "https?:\\/\\/(?:[a-zA-Z0-9-]+\\.)+(?:tk|ml|ga|cf|gq|onion|xyz|top|icu|cfd|sbs|cyou|buzz|rest|zip|mov)(?=[\\/:?#\"'\\x60\\s)]|$)",
+      "pattern": "https?:\\/\\/(?:[a-zA-Z0-9-]+\\.)+(?:tk|ml|ga|cf|gq|onion|xyz|top|icu|cfd|sbs|cyou|buzz|rest|zip|mov)(?=[\\/:?#\"'\\x60\\s)]|$)(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)",
       "description": "URLs on free/abused TLDs (.tk .ml .ga .cf .gq .onion .xyz .top .icu .cfd .sbs .cyou .buzz .rest .zip .mov)",
       "tags": [
         "network",
@@ -813,8 +813,8 @@
     {
       "id": "EXFIL_COOKIE",
       "name": "Cookie Access",
-      "pattern": "document\\.cookie",
-      "description": "Reads browser cookies via document.cookie — can steal session tokens",
+      "pattern": "(?:fetch\\s*\\(|sendBeacon\\s*\\(|XMLHttpRequest|new\\s+Image\\b|\\baxios\\b|new\\s+WebSocket\\b|\\$\\.(?:post|ajax|get)\\s*\\()[\\s\\S]{0,1000}?document\\.cookie(?!\\s*=(?!=))(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)|document\\.cookie(?!\\s*=(?!=))(?<!(?:(?:^|\\n)[ \\t]*(?:\\/?\\*|\\/\\/|#)|[ \\t](?:\\/\\/|#))[^\\n]*)[\\s\\S]{0,1000}?(?:fetch\\s*\\(|sendBeacon\\s*\\(|XMLHttpRequest|new\\s+Image\\b|\\baxios\\b|new\\s+WebSocket\\b|\\$\\.(?:post|ajax|get)\\s*\\()",
+      "description": "Reads document.cookie next to a network call — can send session tokens off the page",
       "tags": [
         "exfiltration",
         "cookies",
