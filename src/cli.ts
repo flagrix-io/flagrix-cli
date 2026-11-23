@@ -2,22 +2,22 @@ import { parseArgs } from "node:util"
 
 import { runScan } from "./commands/scan.js"
 import { runScanUser } from "./commands/scan-user.js"
-import { EXIT, VERSION } from "./commands/shared.js"
+import { EXIT, VERSION, tarballFromFlags } from "./commands/shared.js"
 
 const HELP = `flagrix — scan GitHub repos and profiles for malware before you clone
 
 Usage:
-  flagrix scan <url | owner/repo> [--ref <branch|sha>] [--tarball] [--json] [--token <pat>]
+  flagrix scan <url | owner/repo> [--ref <branch|sha>] [--no-tarball] [--json] [--token <pat>]
   flagrix scan-user <username> [--json] [--token <pat>]
   flagrix mcp                       start the MCP server (stdio) for agents
 
 Options:
   --ref <ref>       branch, tag, or commit to scan (default: default branch)
-  --tarball         read the whole commit in one request instead of one request
-                    per file: far wider coverage (facebook/react 226 files to
-                    4,373) and 6 requests against the rate limit instead of
-                    231, at the cost of more false positives on test fixtures
-                    and vendored bundles, which is why it is not the default
+  --no-tarball      read one file per request (up to ~200 files) instead of the
+                    whole commit in one request. The default snapshot read
+                    covers far more (facebook/react: 4,373 files against 226)
+                    and spends 6 requests against the rate limit instead of
+                    231. --tarball is accepted and asks for the default
   --json            machine-readable output (automatic when stdout is piped)
   --token <pat>     GitHub token (or FLAGRIX_GITHUB_TOKEN / GITHUB_TOKEN env)
   -h, --help        show this help
@@ -50,6 +50,9 @@ async function main(): Promise<number> {
       json: { type: "boolean" },
       token: { type: "string" },
       tarball: { type: "boolean" },
+      // Declared on its own: parseArgs only learned `allowNegative` in Node 22,
+      // and the engines field still reaches back to 18.
+      "no-tarball": { type: "boolean" },
       help: { type: "boolean", short: "h" },
       version: { type: "boolean", short: "v" }
     }
@@ -78,7 +81,7 @@ async function main(): Promise<number> {
         ref: values.ref,
         json: values.json,
         token: values.token,
-        tarball: values.tarball
+        tarball: tarballFromFlags(values)
       })
 
     case "scan-user":

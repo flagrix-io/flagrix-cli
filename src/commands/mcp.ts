@@ -96,13 +96,12 @@ export async function runMcp(): Promise<number> {
           .boolean()
           .optional()
           .describe(
-            "Read the whole commit in one request instead of one request per file. " +
-              "Reads far more of a large repository (facebook/react: 4,373 files " +
-              "against 226) and spends 6 requests against GitHub's rate limit " +
-              "instead of 231, so an unauthenticated scan can finish. Off by " +
-              "default: at that coverage the rules also fire on test fixtures and " +
-              "vendored bundles, which moved 10 of 50 well-known repositories off " +
-              "a low verdict. coverage.readMode in the result says which reader ran."
+            "Default true: read the whole commit in one request. Reads far more of a " +
+              "large repository (facebook/react: 4,373 files against 226) and spends 6 " +
+              "requests against GitHub's rate limit instead of 231, so an " +
+              "unauthenticated scan can finish. false reads one file per request, up " +
+              "to ~200 files. If GitHub will not serve the archive the scan falls back " +
+              "to per-file reads. coverage.readMode in the result says which reader ran."
           )
       }
     },

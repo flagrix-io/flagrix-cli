@@ -72,8 +72,17 @@ jobs:
       - name: Build the offline mirror
         run: python3 benchmark/offline/mirror.py
 
+      # The reader the CLI ships: one archive per commit, which gitmock builds
+      # from the mirror's blobs.
       - name: Benchmark gate (full corpus, offline)
         run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --enforce-gates
+
+      # `--no-tarball` still reads file by file, so it is gated too for as long
+      # as the CLI supports it. Runs after a red snapshot gate as well, so the
+      # uploaded run shows both readers; publish still needs both green.
+      - name: Benchmark gate, per-file reader (full corpus, offline)
+        if: ${{ !cancelled() }}
+        run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --no-tarball --enforce-gates
 
       - name: Upload the benchmark run
         if: always()
@@ -81,8 +90,10 @@ jobs:
         with:
           name: benchmark-release-${{ github.ref_name }}
           path: |
-            benchmark/results/latest.json
-            benchmark/results/latest.csv
+            benchmark/results/latest-tarball.json
+            benchmark/results/latest-tarball.csv
+            benchmark/results/latest-per-file.json
+            benchmark/results/latest-per-file.csv
           if-no-files-found: warn
           retention-days: 90
 

@@ -41,8 +41,8 @@ FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --resume
 # Fail the process unless every gate passed and every sample completed
 FLAGRIX_GITHUB_TOKEN=... npm run benchmark -- --enforce-gates
 
-# Read each GitHub sample as one snapshot instead of file by file
-node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --tarball
+# Read each GitHub sample file by file instead of as one snapshot (the default)
+node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --no-tarball
 ```
 
 Without `--enforce-gates` the runner reports and exits 0, red gates included,
@@ -59,14 +59,20 @@ The token should be a fine-grained, read-only GitHub PAT. Do not pass it via
 `FLAGRIX_GITHUB_TOKEN` is absent, the scripts securely reuse `gh auth token`,
 so an interactive `gh auth login -h github.com` is the easiest local setup.
 
-Outputs are written to `benchmark/results/`:
+Outputs are written to `benchmark/results/`, named after the reader the run
+asked for (`tarball` or `per-file`), so the two modes never overwrite or
+`--resume` from each other:
 
-- `latest.json`: complete structured run and aggregate metrics
-- `latest.csv`: flat, spreadsheet-friendly sample results
+- `latest-tarball.json` / `latest-per-file.json`: complete structured run and
+  aggregate metrics
+- `latest-tarball.csv` / `latest-per-file.csv`: flat, spreadsheet-friendly
+  sample results
+- `<timestamp>-<reader>.json`: a copy of each finished run
 
 Ad-hoc outputs are gitignored; only the canonical snapshots
 (`pre-fix-baseline.*`, `post-fix-final.*`) are tracked. To update a canonical
-snapshot, copy `latest.json`/`latest.csv` over it and commit.
+snapshot, copy `latest-tarball.json`/`latest-tarball.csv` (the default
+reader) over it and commit.
 
 **Refresh `post-fix-final.*` with every engine release.** A stale snapshot is
 not a harmless stale file: it is the only record of what the corpus is
@@ -191,7 +197,12 @@ and the runner records which one produced each row (`read_mode` in the CSV,
 The default follows `READ_WHOLE_SNAPSHOT_BY_DEFAULT` in
 `src/commands/shared.ts`, read out of the source at startup rather than copied
 here, so the corpus always measures the reader the CLI ships.
-`--tarball` / `--no-tarball` override it.
+That is the snapshot reader: `READ_WHOLE_SNAPSHOT_BY_DEFAULT` is `true` since
+scanner-core 0.8.2 and rules 2026.11.23.001 brought every pinned repository
+back to "low" when read whole. `--no-tarball` measures the per-file reader,
+`--tarball` asks for the default explicitly. The release and nightly
+workflows run both, each with `--enforce-gates`, for as long as the CLI
+supports both.
 
 A sixth gate, `everyGitHubSampleReadAsRequested`, fails a run in which any
 GitHub sample was read by a reader other than the one asked for. It exists

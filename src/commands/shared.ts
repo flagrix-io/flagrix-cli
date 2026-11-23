@@ -19,40 +19,39 @@ export const VERSION = "0.7.2"
  * Whether a scan reads the whole commit in one request (scanner-core's
  * `tarball` option) unless told otherwise.
  *
- * Off, and the reason is the corpus rather than the mechanism. Reading the
- * snapshot is better on every axis the CLI cares about: facebook/react goes
- * from 226 files in 14.4s to 4,373 in 8.7s, and the scan spends 6 GitHub
- * requests instead of 231, which is the difference between an unauthenticated
- * scan finishing and running out of the hourly 60 part way through. Node has
- * no permission to ask for, unlike the extension.
+ * On. Reading the snapshot is better on every axis the CLI cares about:
+ * facebook/react goes from 226 files in 14.4s to 4,373 in 8.7s, and the scan
+ * spends 6 GitHub requests instead of 231, which is the difference between an
+ * unauthenticated scan finishing and running out of the hourly 60 part way
+ * through. Node has no permission to ask for, unlike the extension.
  *
- * What stops it is what the extra coverage reaches. The 200-file cap spends
- * its budget on the files that run on install and on ordinary source; a byte
- * cap wide enough for 4,000 files also reads the deprioritised tail — test
- * fixtures and vendored bundles — and the rules were never measured there.
- * Over the 50 pinned repositories, read as snapshots:
+ * It was opt-in until the rules had been measured on what the wider coverage
+ * reaches: test fixtures and vendored bundles. On scanner-core 0.8.1 and rules
+ * 2026.11.20.001, reading the 50 pinned repositories as snapshots moved 10
+ * verdicts off "low" (pnpm and socket.io to "high") and failed two release
+ * gates. scanner-core 0.8.2 rates install hooks by what they can do and only
+ * counts a credential read as exfiltration when it leaves for another origin,
+ * and rules 2026.11.23.001 skip matches in comments; with both, every
+ * repository in the corpus reads low as a snapshot and all six gates pass in
+ * both modes.
  *
- *   - 10 verdicts move off "low": pnpm 0.090 → 1.000, socket.io 0.255 →
- *     0.708, npm/cli 0.090 → 0.617 and electron 0.240 → 0.640 all land on
- *     "high — do not clone".
- *   - 14 critical findings on repositories labelled clean, all
- *     POSTINSTALL_SCRIPT on nested package.json files that are pnpm's and
- *     npm's own test fixtures for lifecycle scripts.
- *   - 95 OBFUSCATED_CODE and 104 further OBF_* findings, mostly on minified
- *     bundles checked in under paths like next/src/compiled/.
- *
- * Two release gates fail on that run (zeroCriticalReferenceFindings and
- * referenceHighVerdictsAtMost5Percent) — the same pair that caught 0.7.0.
- * Confirmed against the live API, not just the offline mirror: `flagrix scan
- * pnpm/pnpm --ref 0dd21df` reads 227 files and answers LOW, 91/100, and with
- * `--tarball` reads 2,502 and answers HIGH, 0/100, do not clone.
- *
- * So the reader is opt-in (`--tarball`, or `tarball: true` on the MCP tool)
- * and every result says which one ran. Flipping this is one line plus a green
- * `npm run benchmark -- --tarball --enforce-gates`, which is the measurement
- * that has to come back clean first.
+ * `--no-tarball` (or `tarball: false` on the MCP tool) still reads file by
+ * file, every result says which reader ran, and the release gate runs the
+ * benchmark in both modes for as long as both are supported.
  */
-export const READ_WHOLE_SNAPSHOT_BY_DEFAULT = false
+export const READ_WHOLE_SNAPSHOT_BY_DEFAULT = true
+
+/**
+ * The reader `flagrix scan` asks for, from its flags. `--no-tarball` reads
+ * file by file; `--tarball` asks for what is now the default and stays
+ * accepted so scripts written for 0.7 keep working. Unset leaves the choice to
+ * READ_WHOLE_SNAPSHOT_BY_DEFAULT.
+ */
+export function tarballFromFlags(flags: { tarball?: boolean; "no-tarball"?: boolean }): boolean | undefined {
+  if (flags["no-tarball"]) return false
+  if (flags.tarball) return true
+  return undefined
+}
 
 export function exitCodeFor(level: RiskLevel): number {
   return level === "high" ? EXIT.HIGH : level === "medium" ? EXIT.MEDIUM : EXIT.LOW
