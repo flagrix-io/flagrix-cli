@@ -9,6 +9,7 @@ import { scanGitHubRepo } from "@flagrix/scanner-core"
 
 import { expandCorpus } from "./samples.mjs"
 import { gateReport } from "./gates.mjs"
+import { acceptedFinding, findingRule } from "./accepted.mjs"
 
 const benchmarkDir = dirname(fileURLToPath(import.meta.url))
 const projectDir = join(benchmarkDir, "..")
@@ -367,10 +368,6 @@ function githubPrefetchFetch(baseFetch) {
   }
 }
 
-function findingRule(finding) {
-  return finding.pattern || finding.type
-}
-
 function evaluate(sample, result) {
   const triggered = [...new Set(result.findings.map(findingRule))]
   const expected = sample.expectedDetectionCategories ?? []
@@ -521,28 +518,6 @@ function gate(value, evaluated) {
  * which never got as far as the malicious-package corpus — read as "58 of 59
  * completed", understating the shortfall by two orders of magnitude.
  */
-/**
- * Findings a human reviewed and accepted, from benchmark/reference-review.json.
- *
- * An entry names one finding on one sample: its rule, its file, and the ref it
- * was reviewed at. A finding that differs in any of those is not covered, and
- * an entry whose ref no longer matches the corpus is ignored — so bumping a
- * pin re-opens the question rather than carrying the acceptance forward
- * silently. Nothing here lowers a verdict; it only stops a reviewed finding
- * from failing the gate twice.
- */
-function acceptedFinding(accepted, row, finding) {
-  const entries = accepted[row.sampleId]
-  if (!Array.isArray(entries)) return false
-  return entries.some(
-    (entry) =>
-      // Rows here are already flattened, where the rule id lives on `rule`.
-      entry.pattern === (finding.rule ?? findingRule(finding)) &&
-      entry.file === finding.file &&
-      entry.ref === row.immutableRef
-  )
-}
-
 function calculateMetrics(results, selectedCount = results.length, requestedReadMode = null, accepted = {}) {
   const completed = results.filter((row) => row.status === "completed")
   // GitHub samples only: fixtures are read from an in-memory file list with no
