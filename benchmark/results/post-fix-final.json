@@ -1,14 +1,14 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-23T15:51:30.595Z",
+    "runAt": "2026-11-23T19:48:43.332Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.7.2",
+    "cliVersion": "0.8.0",
     "engineVersion": "0.8.2",
     "engineCommitSha": null,
     "engineDirty": false,
     "rulesVersion": "2026.11.23.001",
-    "requestedReadMode": "per-file"
+    "requestedReadMode": "tarball"
   },
   "metrics": {
     "samplesDefined": 114,
@@ -31,11 +31,11 @@
     "referenceSamplesWithHighOrCriticalFindings": 1,
     "referenceCriticalFindings": 0,
     "acceptedReferenceFindings": 0,
-    "requestedReadMode": "per-file",
+    "requestedReadMode": "tarball",
     "githubSamplesTotal": 50,
     "githubSamplesReadAsRequested": 50,
     "readModes": {
-      "per-file": 50
+      "tarball": 50
     },
     "readFallbacks": {},
     "gates": {
@@ -88,7 +88,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 27,
+      "durationMs": 22,
       "error": ""
     },
     {
@@ -131,7 +131,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 5,
+      "durationMs": 6,
       "error": ""
     },
     {
@@ -588,7 +588,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 3,
       "error": ""
     },
     {
@@ -716,7 +716,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -833,7 +833,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -886,7 +886,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -940,7 +940,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1004,7 +1004,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 5,
+      "durationMs": 6,
       "error": ""
     },
     {
@@ -1057,7 +1057,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1153,7 +1153,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1196,7 +1196,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 3,
       "error": ""
     },
     {
@@ -1282,7 +1282,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1364,7 +1364,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1405,7 +1405,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1504,7 +1504,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1574,7 +1574,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1690,7 +1690,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1748,7 +1748,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -1777,7 +1777,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 4,
       "error": ""
     },
     {
@@ -1804,9 +1804,9 @@
       "filesScanned": 157,
       "filesSkipped": 56,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1735,
+      "durationMs": 1871,
       "error": ""
     },
     {
@@ -1830,12 +1830,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 168,
+      "filesScanned": 326,
+      "filesSkipped": 67,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2634,
+      "durationMs": 2590,
       "error": ""
     },
     {
@@ -1862,9 +1862,9 @@
       "filesScanned": 87,
       "filesSkipped": 24,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 961,
+      "durationMs": 1026,
       "error": ""
     },
     {
@@ -1900,12 +1900,12 @@
           "description": "Data exfiltration patterns detected: Form Data Transmission"
         }
       ],
-      "filesScanned": 219,
-      "filesSkipped": 235,
+      "filesScanned": 270,
+      "filesSkipped": 184,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2537,
+      "durationMs": 2554,
       "error": ""
     },
     {
@@ -2000,9 +2000,9 @@
       "filesScanned": 73,
       "filesSkipped": 87,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1329,
+      "durationMs": 1446,
       "error": ""
     },
     {
@@ -2029,9 +2029,9 @@
       "filesScanned": 23,
       "filesSkipped": 11,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 253,
+      "durationMs": 286,
       "error": ""
     },
     {
@@ -2070,9 +2070,9 @@
       "filesScanned": 115,
       "filesSkipped": 19,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1258,
+      "durationMs": 1397,
       "error": ""
     },
     {
@@ -2099,9 +2099,9 @@
       "filesScanned": 32,
       "filesSkipped": 21,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 361,
+      "durationMs": 577,
       "error": ""
     },
     {
@@ -2120,17 +2120,29 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0375,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_EVAL"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 226,
-      "filesSkipped": 7044,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "compiler/packages/snap/src/sprout/evaluator.ts",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 4397,
+      "filesSkipped": 2873,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4017,
+      "durationMs": 4778,
       "error": ""
     },
     {
@@ -2191,14 +2203,32 @@
           "file": "packages/compiler-dom/src/transforms/stringifyStatic.ts",
           "line": 405,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/vue-compat/src/index.ts",
+          "line": 98,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/vue/src/index.ts",
+          "line": 95,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 478,
+      "filesScanned": 595,
+      "filesSkipped": 108,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3305,
+      "durationMs": 2909,
       "error": ""
     },
     {
@@ -2222,12 +2252,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 212,
-      "filesSkipped": 8753,
+      "filesScanned": 3719,
+      "filesSkipped": 5246,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2677,
+      "durationMs": 2801,
       "error": ""
     },
     {
@@ -2246,17 +2276,38 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0375,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_NEW_FUNCTION"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 227,
-      "filesSkipped": 2486,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/vite/src/node/ssr/ssrStacktrace.ts",
+          "line": 15,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/vite/src/node/utils.ts",
+          "line": null,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        }
+      ],
+      "filesScanned": 1967,
+      "filesSkipped": 746,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3246,
+      "durationMs": 3035,
       "error": ""
     },
     {
@@ -2275,17 +2326,856 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.1275,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBFUSCATED_CODE",
+        "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "OBF_BASE64_HEAVY",
+        "OBF_HEX_STRINGS",
+        "OBF_FROMCHARCODE",
+        "OBF_CHARCODE_ARRAY",
+        "NETWORK_COMMUNICATION",
+        "CODE_INTEGRITY_ISSUE"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 235,
-      "filesSkipped": 29593,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@edge-runtime/primitives/console.js.text.js",
+          "line": 1,
+          "description": "Extremely long line detected (9,522 characters). Malicious code may be hidden far to the right. Affected: Line 1 (9,522 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@edge-runtime/primitives/fetch.js",
+          "line": 2752,
+          "description": "Extremely long line detected (64,909 characters). Malicious code may be hidden far to the right. Affected: Line 2752 (64,869 chars), Line 2762 (64,909 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/@edge-runtime/primitives/load.js",
+          "line": 18700,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@edge-runtime/primitives/load.js",
+          "line": 2752,
+          "description": "Extremely long line detected (64,909 characters). Malicious code may be hidden far to the right. Affected: Line 2752 (64,869 chars), Line 2762 (64,909 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@edge-runtime/primitives/url.js.text.js",
+          "line": 1,
+          "description": "Extremely long line detected (21,984 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (21,984 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@hapi/accept/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (27,673 characters). Malicious code may be hidden far to the right. Affected: Line 1 (27,673 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/next/src/compiled/@modelcontextprotocol/sdk/server/mcp.js",
+          "line": 1,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@modelcontextprotocol/sdk/server/mcp.js",
+          "line": 1,
+          "description": "Extremely long line detected (112,150 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (108,146 chars), Line 3 (112,150 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@modelcontextprotocol/sdk/server/streamableHttp.js",
+          "line": 1,
+          "description": "Extremely long line detected (30,230 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (30,230 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@mswjs/interceptors/ClientRequest/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (36,603 characters). Malicious code may be hidden far to the right. Affected: Line 1 (36,603 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@napi-rs/triples/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (5,023 characters). Malicious code may be hidden far to the right. Affected: Line 1 (5,023 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@opentelemetry/api/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (28,576 characters). Malicious code may be hidden far to the right. Affected: Line 1 (28,576 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@vercel/blob/index.cjs",
+          "line": 8,
+          "description": "Extremely long line detected (304,924 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 8 (304,924 chars, contains suspicious code), Line 9 (113,166 chars, contains suspicious code), Line 10 (41,089 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/@vercel/nft/index.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@vercel/nft/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (282,998 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (282,998 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "packages/next/src/compiled/@vercel/og/index.edge.js",
+          "line": 389,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "packages/next/src/compiled/@vercel/og/index.edge.js",
+          "line": 12638,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/next/src/compiled/@vercel/og/index.edge.js",
+          "line": 12783,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@vercel/og/index.edge.js",
+          "line": 3507,
+          "description": "Extremely long line detected (16,700 characters). Malicious code may be hidden far to the right. Affected: Line 3507 (5,234 chars), Line 14187 (16,700 chars), Line 19033 (5,072 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "packages/next/src/compiled/@vercel/og/index.node.js",
+          "line": 389,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "packages/next/src/compiled/@vercel/og/index.node.js",
+          "line": 12638,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/next/src/compiled/@vercel/og/index.node.js",
+          "line": 12783,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@vercel/og/index.node.js",
+          "line": 3507,
+          "description": "Extremely long line detected (95,714 characters). Malicious code may be hidden far to the right. Affected: Line 3507 (5,234 chars), Line 14175 (95,714 chars), Line 15191 (16,700 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/@vercel/routing-utils/superstatic.js",
+          "line": 1,
+          "description": "Extremely long line detected (14,719 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (14,719 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/acorn/acorn.js",
+          "line": 1,
+          "description": "Extremely long line detected (119,565 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (119,565 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/anser/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (6,994 characters). Malicious code may be hidden far to the right. Affected: Line 1 (6,994 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/assert/assert.js",
+          "line": 1,
+          "description": "Extremely long line detected (50,542 characters). Malicious code may be hidden far to the right. Affected: Line 1 (25,530 chars), Line 7 (50,542 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_CHARCODE_ARRAY",
+          "file": "packages/next/src/compiled/browserify-zlib/index.js",
+          "line": 1,
+          "description": "Array of 20+ numbers that look like char codes. Used as an alternative to fromCharCode to build malicious strings character by character.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/browserify-zlib/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (59,600 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (59,600 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/browserslist/index.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/browserslist/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (74,421 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (74,421 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/buffer/index.js",
+          "line": 7,
+          "description": "Extremely long line detected (24,364 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 7 (24,364 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/busboy/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (25,365 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (25,365 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/cli-select/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (6,564 characters). Malicious code may be hidden far to the right. Affected: Line 1 (6,564 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/commander/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (37,693 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (37,693 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/comment-json/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (155,973 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (155,973 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/compression/index.js",
+          "line": 48,
+          "description": "Extremely long line detected (290,777 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 48 (8,639 chars, contains suspicious code), Line 58 (290,777 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/next/src/compiled/conf/index.js",
+          "line": 1,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/conf/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (117,294 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (117,294 chars), Line 3 (25,974 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/cross-spawn/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (7,862 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (7,862 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "packages/next/src/compiled/crypto-browserify/index.js",
+          "line": 1,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/crypto-browserify/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (330,510 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (330,510 chars, contains suspicious code), Line 3 (32,987 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/cssnano-simple/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (194,890 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (13,184 chars, contains suspicious code), Line 15 (24,605 chars, contains suspicious code), Line 125 (20,552 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_CHARCODE_ARRAY",
+          "file": "packages/next/src/compiled/debug/index.js",
+          "line": 1,
+          "description": "Array of 20+ numbers that look like char codes. Used as an alternative to fromCharCode to build malicious strings character by character.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/debug/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (11,507 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (11,507 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/devalue/devalue.umd.js",
+          "line": 1,
+          "description": "Extremely long line detected (5,018 characters). Malicious code may be hidden far to the right. Affected: Line 1 (5,018 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/edge-runtime/index.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/edge-runtime/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (525,784 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (525,784 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/events/events.js",
+          "line": 1,
+          "description": "Extremely long line detected (7,919 characters). Malicious code may be hidden far to the right. Affected: Line 1 (7,919 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/glob/glob.js",
+          "line": 1,
+          "description": "Extremely long line detected (36,387 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (36,387 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/http-proxy-agent/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (7,412 characters). Malicious code may be hidden far to the right. Affected: Line 1 (7,412 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/http-proxy/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (9,192 characters). Malicious code may be hidden far to the right. Affected: Line 1 (9,192 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/https-proxy-agent/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (8,312 characters). Malicious code may be hidden far to the right. Affected: Line 1 (8,312 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/image-detector/detector.js",
+          "line": 1,
+          "description": "Extremely long line detected (16,918 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (16,918 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/image-size/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (22,351 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (22,351 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/ipaddr.js/ipaddr.js",
+          "line": 1,
+          "description": "Extremely long line detected (13,562 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (13,562 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/jest-worker/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (24,066 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (24,066 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/jest-worker/processChild.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/jest-worker/threadChild.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/json5/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (29,486 characters). Malicious code may be hidden far to the right. Affected: Line 1 (29,486 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/jsonwebtoken/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (94,296 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (24,499 chars), Line 9 (94,296 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/loader-runner/LoaderRunner.js",
+          "line": 1,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/loader-runner/LoaderRunner.js",
+          "line": 1,
+          "description": "Extremely long line detected (8,897 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (8,897 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/loader-utils2/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (41,024 characters). Malicious code may be hidden far to the right. Affected: Line 1 (41,024 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/loader-utils3/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (19,918 characters). Malicious code may be hidden far to the right. Affected: Line 1 (19,918 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/lodash.curry/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (8,286 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (8,286 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/lru-cache/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (18,712 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (18,712 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/mini-css-extract-plugin/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (20,805 characters). Malicious code may be hidden far to the right. Affected: Line 1 (20,805 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/mini-css-extract-plugin/loader.js",
+          "line": 1,
+          "description": "Extremely long line detected (9,446 characters). Malicious code may be hidden far to the right. Affected: Line 1 (9,446 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/neo-async/async.js",
+          "line": 1,
+          "description": "Extremely long line detected (56,209 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (56,209 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/node-html-parser/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (130,432 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (63,252 chars, contains suspicious code), Line 2 (130,432 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/ora/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (79,282 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (79,282 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/p-queue/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (9,920 characters). Malicious code may be hidden far to the right. Affected: Line 1 (9,920 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/path-browserify/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (5,375 characters). Malicious code may be hidden far to the right. Affected: Line 1 (5,375 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/path-to-regexp/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (7,310 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (7,310 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/picomatch/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (23,909 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (23,909 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-modules-local-by-default/index.js",
+          "line": 2,
+          "description": "Extremely long line detected (72,574 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 2 (72,574 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-modules-scope/index.js",
+          "line": 2,
+          "description": "Extremely long line detected (66,059 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 2 (66,059 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-preset-env/index.cjs",
+          "line": 1,
+          "description": "Extremely long line detected (101,316 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (98,568 chars), Line 2 (101,316 chars, contains suspicious code), Line 30 (21,538 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-safe-parser/safe-parse.js",
+          "line": 1,
+          "description": "Extremely long line detected (35,924 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (35,924 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-scss/scss-syntax.js",
+          "line": 1,
+          "description": "Extremely long line detected (12,867 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (12,867 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/postcss-value-parser/index.js",
+          "line": 1,
+          "description": "Extremely long line detected (5,840 characters). Malicious code may be hidden far to the right. Affected: Line 1 (5,840 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/next/src/compiled/raw-body/index.js",
+          "line": 7,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/next/src/compiled/raw-body/index.js",
+          "line": 7,
+          "description": "Extremely long line detected (91,973 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 7 (5,528 chars, contains suspicious code), Line 28 (48,126 chars, contains suspicious code), Line 51 (91,973 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/next/src/compiled/react-dom-experimental/cjs/react-dom-client.production.js",
+          "line": 2021,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/next/src/compiled/react-dom-experimental/cjs/react-dom-profiling.profiling.js",
+          "line": 2117,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "run-evals.js",
+          "line": 8,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "packages/next/src/compiled/browserslist/index.js",
+          "line": 1,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (139 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "packages/next/src/compiled/@vercel/blob/index.cjs",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "packages/next/src/compiled/cssnano-simple/index.js",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "packages/next/src/compiled/http-proxy/index.js",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "CODE_INTEGRITY_ISSUE",
+          "rule": "CODE_INTEGRITY_ISSUE",
+          "file": "packages/next/src/compiled/raw-body/index.js",
+          "line": null,
+          "description": "Minified/obfuscated code detected in source repository"
+        }
+      ],
+      "filesScanned": 2053,
+      "filesSkipped": 27775,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4177,
+      "durationMs": 11620,
       "error": ""
     },
     {
@@ -2304,17 +3194,29 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0375,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_NEW_FUNCTION"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 1903,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "sample/34-using-esm-packages/src/import-esm-package.ts",
+          "line": 8,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        }
+      ],
+      "filesScanned": 1813,
+      "filesSkipped": 315,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3294,
+      "durationMs": 2932,
       "error": ""
     },
     {
@@ -2337,6 +3239,8 @@
       "safeToClone": true,
       "rulesTriggered": [
         "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
+        "OBFUSCATED_CODE",
+        "OBF_BASE64_HEAVY",
         "OBF_EVAL"
       ],
       "falsePositiveNotes": "",
@@ -2353,6 +3257,60 @@
         {
           "severity": "medium",
           "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "extensions/copilot/src/extension/completions-core/vscode-node/extension/src/panelShared/languages/cuda-cpp.tmLanguage.ts",
+          "line": 4535,
+          "description": "Extremely long line detected (11,517 characters). Malicious code may be hidden far to the right. Affected: Line 4535 (6,420 chars), Line 4609 (11,517 chars), Line 7126 (6,712 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "extensions/copilot/src/extension/completions-core/vscode-node/extension/src/panelShared/languages/javaScriptReact.tmLanguage.ts",
+          "line": 449,
+          "description": "Extremely long line detected (8,028 characters). Malicious code may be hidden far to the right. Affected: Line 449 (7,800 chars), Line 507 (7,794 chars), Line 891 (8,028 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "extensions/copilot/src/extension/completions-core/vscode-node/extension/src/panelShared/languages/typeScriptReact.tmLanguage.ts",
+          "line": 448,
+          "description": "Extremely long line detected (8,028 characters). Malicious code may be hidden far to the right. Affected: Line 448 (7,800 chars), Line 506 (7,794 chars), Line 890 (8,028 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/ghostText/statementTree.ts",
+          "line": 320,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "extensions/copilot/src/extension/prompts/node/inline/pythonCookbookData.ts",
+          "line": 70,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
+          "line": 12,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
           "type": "MALWARE_SIGNATURE",
           "rule": "OBF_EVAL",
           "file": "extensions/copilot/.esbuild.mts",
@@ -2360,12 +3318,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 235,
-      "filesSkipped": 16212,
+      "filesScanned": 1655,
+      "filesSkipped": 14792,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3846,
+      "durationMs": 6545,
       "error": ""
     },
     {
@@ -2384,11 +3342,14 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.0375,
+      "actualScore": 0.2175,
       "safeToClone": true,
       "rulesTriggered": [
         "OBFUSCATED_CODE",
-        "OBF_EVAL"
+        "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "SUSPICIOUS_FILE_ACCESS",
+        "NETWORK_COMMUNICATION"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2418,14 +3379,95 @@
           "file": "packages/injected/src/recorder/clipPaths.ts",
           "line": 30,
           "description": "Extremely long line detected (7,049 characters). Malicious code may be hidden far to the right. Affected: Line 30 (7,049 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/playwright-core/src/server/javascript.ts",
+          "line": 311,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/playwright-core/src/tools/backend/evaluate.ts",
+          "line": 50,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/playwright-ct-vue/registerSource.mjs",
+          "line": 82,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/playwright/src/transform/transform.ts",
+          "line": 273,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/utils/httpServer.ts",
+          "line": 122,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/utils/webp/webp_codec.js",
+          "line": 1,
+          "description": "Extremely long line detected (7,679 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (7,679 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "packages/playwright-core/bin/reinstall_chrome_beta_mac.sh",
+          "line": 5,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "packages/playwright-core/bin/reinstall_chrome_stable_mac.sh",
+          "line": 5,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "packages/utils/crypto.ts",
+          "line": 137,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (4 occurrences)"
         }
       ],
-      "filesScanned": 241,
-      "filesSkipped": 3006,
+      "filesScanned": 1705,
+      "filesSkipped": 1542,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3447,
+      "durationMs": 4578,
       "error": ""
     },
     {
@@ -2444,17 +3486,66 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0375,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_EVAL",
+        "OBF_NEW_FUNCTION"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 227,
-      "filesSkipped": 6953,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/app/src/runner/ScriptError.cy.tsx",
+          "line": 3,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/driver/src/cypress.ts",
+          "line": 62,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/server/lib/fixture.ts",
+          "line": 162,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/server/lib/plugins/child/run_require_async_child.ts",
+          "line": 12,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "system-tests/__snapshots__/protocol_spec.js",
+          "line": 50,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 3726,
+      "filesSkipped": 3454,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4464,
+      "durationMs": 5187,
       "error": ""
     },
     {
@@ -2500,12 +3591,12 @@
           "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 2824,
+      "filesScanned": 1147,
+      "filesSkipped": 1902,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3174,
+      "durationMs": 2895,
       "error": ""
     },
     {
@@ -2569,12 +3660,12 @@
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 124,
+      "filesScanned": 276,
+      "filesSkipped": 73,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2882,
+      "durationMs": 2691,
       "error": ""
     },
     {
@@ -2593,17 +3684,205 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.075,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBFUSCATED_CODE",
+        "OBF_EVAL",
+        "OBF_BASE64_HEAVY",
+        "OBF_HEX_STRINGS",
+        "OBF_FROMCHARCODE",
+        "NETWORK_COMMUNICATION"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 49508,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "deps/npm/docs/output/using-npm/config.html",
+          "line": 198,
+          "description": "Extremely long line detected (11,265 characters). Malicious code may be hidden far to the right. Affected: Line 198 (11,265 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "deps/undici/src/lib/llhttp/llhttp-wasm.js",
+          "line": 5,
+          "description": "Extremely long line detected (72,041 characters). Malicious code may be hidden far to the right. Affected: Line 5 (72,041 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "deps/undici/src/lib/llhttp/llhttp_simd-wasm.js",
+          "line": 5,
+          "description": "Extremely long line detected (72,293 characters). Malicious code may be hidden far to the right. Affected: Line 5 (72,293 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "deps/undici/undici.js",
+          "line": 3960,
+          "description": "Extremely long line detected (72,296 characters). Malicious code may be hidden far to the right. Affected: Line 3960 (72,044 chars), Line 3975 (72,296 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/foozzie/v8_mock.js",
+          "line": 302,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/generated/exceptions.js",
+          "line": 404,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/resources/differential_fuzz_jstest.js",
+          "line": 10,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/resources/jstest_stubs.js",
+          "line": 10,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/mutate_string.js",
+          "line": 11,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/mutate_string_mixed_expected.js",
+          "line": 12,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/mutate_string_no_change_expected.js",
+          "line": 12,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/mutate_unicode_string_literal.js",
+          "line": 26,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/mutate_unicode_string_literal_expected.js",
+          "line": 6,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/clusterfuzz/js_fuzzer/test_data/simple_test_expected.js",
+          "line": 24,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "deps/v8/tools/compare-table-gen.js",
+          "line": 11,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "lib/internal/debugger/inspect_repl.js",
+          "line": 459,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "lib/internal/modules/esm/loader.js",
+          "line": 248,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "deps/v8/tools/builtins-pgo/download_profiles.py",
+          "line": 88,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "deps/v8/tools/builtins-pgo/download_profiles_test.py",
+          "line": 79,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (12 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "deps/v8/tools/release/test_scripts.py",
+          "line": 77,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (5 occurrences)"
+        }
+      ],
+      "filesScanned": 1708,
+      "filesSkipped": 48025,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4827,
+      "durationMs": 5883,
       "error": ""
     },
     {
@@ -2630,9 +3909,9 @@
       "filesScanned": 64,
       "filesSkipped": 10,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 789,
+      "durationMs": 824,
       "error": ""
     },
     {
@@ -2656,12 +3935,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 220,
-      "filesSkipped": 256,
+      "filesScanned": 245,
+      "filesSkipped": 231,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2389,
+      "durationMs": 2477,
       "error": ""
     },
     {
@@ -2685,12 +3964,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 221,
-      "filesSkipped": 931,
+      "filesScanned": 792,
+      "filesSkipped": 360,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4368,
+      "durationMs": 2947,
       "error": ""
     },
     {
@@ -2729,9 +4008,9 @@
       "filesScanned": 67,
       "filesSkipped": 98,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 746,
+      "durationMs": 975,
       "error": ""
     },
     {
@@ -2755,12 +4034,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 223,
-      "filesSkipped": 1680,
+      "filesScanned": 1707,
+      "filesSkipped": 196,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3695,
+      "durationMs": 2743,
       "error": ""
     },
     {
@@ -2779,17 +4058,29 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.09,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBFUSCATED_CODE"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 205,
-      "filesSkipped": 508,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "dist/ramda.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (53,713 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (53,713 chars, contains suspicious code)"
+        }
+      ],
+      "filesScanned": 693,
+      "filesSkipped": 20,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2226,
+      "durationMs": 2571,
       "error": ""
     },
     {
@@ -2816,9 +4107,9 @@
       "filesScanned": 89,
       "filesSkipped": 38,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1092,
+      "durationMs": 1133,
       "error": ""
     },
     {
@@ -2837,11 +4128,13 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.075,
+      "actualScore": 0.27749999999999997,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_FROMCHARCODE",
-        "BACKDOOR_HARDCODED_AUTH"
+        "BACKDOOR_HARDCODED_AUTH",
+        "NETWORK_URL_SHORTENER",
+        "OBFUSCATED_CODE"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2880,14 +4173,248 @@
           "file": "packages/socket.io/client-dist/socket.io.js",
           "line": 354,
           "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "NETWORK_URL_SHORTENER",
+          "file": "examples/create-react-app-example/src/serviceWorker.js",
+          "line": 46,
+          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-example/cjs/index.js",
+          "line": 58,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-example/esm/index.js",
+          "line": 61,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-example/ts/index.ts",
+          "line": 72,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-jwt-example/cjs/index.js",
+          "line": 37,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-jwt-example/esm/index.js",
+          "line": 38,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "examples/passport-jwt-example/ts/index.ts",
+          "line": 48,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/engine.io-client/dist/engine.io.esm.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/engine.io-client/dist/engine.io.esm.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (23,496 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (23,496 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/engine.io-client/dist/engine.io.js",
+          "line": 383,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/engine.io-client/dist/engine.io.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/engine.io-client/dist/engine.io.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (27,661 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (27,661 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io-client/dist/socket.io.esm.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io-client/dist/socket.io.esm.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (40,292 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (40,292 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "packages/socket.io-client/dist/socket.io.js",
+          "line": 3947,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io-client/dist/socket.io.js",
+          "line": 354,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io-client/dist/socket.io.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io-client/dist/socket.io.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (46,683 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (46,683 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io-client/dist/socket.io.msgpack.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io-client/dist/socket.io.msgpack.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (50,221 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (50,221 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io/client-dist/socket.io.esm.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io/client-dist/socket.io.esm.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (40,292 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (40,292 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io/client-dist/socket.io.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io/client-dist/socket.io.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (46,683 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (46,683 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_FROMCHARCODE",
+          "file": "packages/socket.io/client-dist/socket.io.msgpack.min.js",
+          "line": 6,
+          "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "packages/socket.io/client-dist/socket.io.msgpack.min.js",
+          "line": 6,
+          "description": "Extremely long line detected (50,221 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (50,221 chars, contains suspicious code)"
         }
       ],
-      "filesScanned": 230,
-      "filesSkipped": 625,
+      "filesScanned": 534,
+      "filesSkipped": 321,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3706,
+      "durationMs": 2623,
       "error": ""
     },
     {
@@ -2911,12 +4438,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 226,
-      "filesSkipped": 827,
+      "filesScanned": 765,
+      "filesSkipped": 288,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2934,
+      "durationMs": 3110,
       "error": ""
     },
     {
@@ -2940,12 +4467,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 2126,
+      "filesScanned": 1323,
+      "filesSkipped": 1028,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4506,
+      "durationMs": 2871,
       "error": ""
     },
     {
@@ -2972,9 +4499,9 @@
       "filesScanned": 40,
       "filesSkipped": 27,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 484,
+      "durationMs": 648,
       "error": ""
     },
     {
@@ -3027,14 +4554,23 @@
           "file": "packages/cli/src/bin.ts",
           "line": 207,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "packages/internals/src/get-generators/utils/getBinaryPathsByVersion.ts",
+          "line": 84,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 226,
-      "filesSkipped": 4445,
+      "filesScanned": 3048,
+      "filesSkipped": 1623,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2836,
+      "durationMs": 3272,
       "error": ""
     },
     {
@@ -3058,12 +4594,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 316,
+      "filesScanned": 380,
+      "filesSkipped": 161,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3502,
+      "durationMs": 2720,
       "error": ""
     },
     {
@@ -3097,14 +4633,32 @@
           "file": "bin/prettier.cjs",
           "line": 16,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "website/static/prettier-plugin-doc-explorer.mjs",
+          "line": null,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "scripts/build/transform/transforms/transform-string-raw.js",
+          "line": 31,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 226,
-      "filesSkipped": 9099,
+      "filesScanned": 6089,
+      "filesSkipped": 3236,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3309,
+      "durationMs": 2917,
       "error": ""
     },
     {
@@ -3123,17 +4677,29 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0375,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_EVAL"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 230,
-      "filesSkipped": 2126,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "lib/rules/no-eval.js",
+          "line": 197,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        }
+      ],
+      "filesScanned": 1630,
+      "filesSkipped": 726,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2804,
+      "durationMs": 4162,
       "error": ""
     },
     {
@@ -3152,17 +4718,49 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.0475,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "OBFUSCATED_CODE",
+        "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 227,
-      "filesSkipped": 4842,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "pnpm11/crypto/shasums-file/src/nodeReleaseKeys.ts",
+          "line": 12,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "pnpm11/crypto/shasums-file/src/nodeReleaseKeys.ts",
+          "line": 12,
+          "description": "Extremely long line detected (14,830 characters). Malicious code may be hidden far to the right. Affected: Line 12 (5,652 chars), Line 32 (9,368 chars), Line 40 (7,156 chars)"
+        },
+        {
+          "severity": "info",
+          "confidence": "high",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
+          "file": "pnpm11/pnpm/artifacts/exe/package.json",
+          "line": 31,
+          "description": "Install hook (preinstall: node setup.js) runs local setup only: no download-and-execute, no writes outside the project, no credential or environment access, no obfuscation in pnpm11/pnpm/artifacts/exe/setup.js, pnpm11/pnpm/artifacts/exe/platform-pkg-name.js."
+        }
+      ],
+      "filesScanned": 2502,
+      "filesSkipped": 2567,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2859,
+      "durationMs": 3543,
       "error": ""
     },
     {
@@ -3186,6 +4784,8 @@
       "rulesTriggered": [
         "OBFUSCATED_CODE",
         "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "OBF_BASE64_HEAVY",
         "NETWORK_COMMUNICATION",
         "CODE_INTEGRITY_ISSUE"
       ],
@@ -3212,6 +4812,69 @@
         {
           "severity": "medium",
           "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "ext/ffi/00_ffi.js",
+          "line": null,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "ext/fs/30_fs.js",
+          "line": 404,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "ext/node/polyfills/01_require.js",
+          "line": null,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "ext/web/00_url.js",
+          "line": 849,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "ext/web/02_timers.js",
+          "line": 6,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "libs/core_testing/integration/error_eval_stack/error_eval_stack.ts",
+          "line": 5,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "libs/core_testing/integration/error_without_stack/error_without_stack.js",
+          "line": 2,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
           "file": "cli/tsc/dts/lib.deno.ns.d.ts",
@@ -3230,6 +4893,33 @@
         {
           "severity": "medium",
           "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "ext/node/polyfills/dgram.ts",
+          "line": 284,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "ext/node/polyfills/dns.ts",
+          "line": 507,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (7 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "ext/node/polyfills/internal/dns/utils.ts",
+          "line": 277,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
           "type": "CODE_INTEGRITY_ISSUE",
           "rule": "CODE_INTEGRITY_ISSUE",
           "file": "cli/tools/doc/prism.js",
@@ -3237,12 +4927,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 14275,
+      "filesScanned": 5937,
+      "filesSkipped": 8563,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3190,
+      "durationMs": 4101,
       "error": ""
     },
     {
@@ -3261,12 +4951,14 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.165,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
         "OBFUSCATED_CODE",
         "OBF_EVAL",
+        "OBF_NEW_FUNCTION",
+        "BACKDOOR_HARDCODED_AUTH",
         "NETWORK_COMMUNICATION",
         "CODE_INTEGRITY_ISSUE"
       ],
@@ -3302,10 +4994,73 @@
         {
           "severity": "medium",
           "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "bench/stream-file-upload-client/generate-file.js",
+          "line": 2,
+          "description": "Extremely long line detected (5,952 characters). Malicious code may be hidden far to the right. Affected: Line 2 (5,952 chars)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "src/js/bun/ffi.ts",
+          "line": 361,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "BACKDOOR_HARDCODED_AUTH",
+          "file": "src/js/internal/sql/shared.ts",
+          "line": 868,
+          "description": "Password or auth value compared against a hardcoded string literal (e.g. password == \"admin123\") — a pattern backdoors use, but also common in tests, examples and placeholder checks"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/js/node/net.ts",
+          "line": 163,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/js/node/tls.ts",
+          "line": 308,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "src/runtime/bake/hmr-module.ts",
+          "line": 145,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
           "file": "scripts/runner.node.mjs",
           "line": 2944,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "packages/bun-types/bun.d.ts",
+          "line": 1940,
           "description": "Suspicious network communication detected: Hardcoded IP Address (2 occurrences)"
         },
         {
@@ -3318,12 +5073,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 226,
-      "filesSkipped": 17903,
+      "filesScanned": 3687,
+      "filesSkipped": 14442,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3122,
+      "durationMs": 4940,
       "error": ""
     },
     {
@@ -3391,9 +5146,9 @@
       "filesScanned": 158,
       "filesSkipped": 923,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1769,
+      "durationMs": 1777,
       "error": ""
     },
     {
@@ -3417,7 +5172,8 @@
       "rulesTriggered": [
         "OBF_NEW_FUNCTION",
         "EXFIL_CLIPBOARD",
-        "OBF_SETTIMEOUT_STRING"
+        "OBF_SETTIMEOUT_STRING",
+        "OBFUSCATED_CODE"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -3447,14 +5203,32 @@
           "file": "packages/puppeteer-core/src/api/locators/locators.ts",
           "line": null,
           "description": "Passing a string to setTimeout/setInterval executes it as code (like eval). A common obfuscation technique: setTimeout(\"maliciousCode()\", 0)\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_NEW_FUNCTION",
+          "file": "packages/puppeteer-core/src/util/Function.ts",
+          "line": 20,
+          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "website/src/theme/SearchPage/index.js",
+          "line": 409,
+          "description": "Extremely long line detected (6,913 characters). Malicious code may be hidden far to the right. Affected: Line 409 (6,913 chars)"
         }
       ],
-      "filesScanned": 228,
-      "filesSkipped": 1988,
+      "filesScanned": 629,
+      "filesSkipped": 1587,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3340,
+      "durationMs": 2559,
       "error": ""
     },
     {
@@ -3473,12 +5247,13 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.0375,
+      "actualScore": 0.09,
       "safeToClone": true,
       "rulesTriggered": [
         "OBFUSCATED_CODE",
         "OBF_NEW_FUNCTION",
-        "OBF_EVAL"
+        "OBF_EVAL",
+        "OBF_BASE64_HEAVY"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -3508,14 +5283,131 @@
           "file": "src/harness/fourslashInterfaceImpl.ts",
           "line": 331,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/lib/es5.d.ts",
+          "line": 15,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/helpers/monorepoSymlinkedSiblingPackages.ts",
+          "line": 36,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/reuseProgramStructure.ts",
+          "line": 930,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/services/languageService.ts",
+          "line": 153,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tsbuild/declarationEmit.ts",
+          "line": 41,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tsbuild/moduleResolution.ts",
+          "line": 14,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tsbuildWatch/moduleResolution.ts",
+          "line": 16,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tscWatch/moduleResolution.ts",
+          "line": 23,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tscWatch/programUpdates.ts",
+          "line": 35,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tscWatch/watchApi.ts",
+          "line": 509,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "src/testRunner/unittests/tsserver/cachingFileSystemInformation.ts",
+          "line": 451,
+          "description": "Extremely long line detected (6,919 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 451 (5,229 chars, contains suspicious code), Line 500 (6,919 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tsserver/projectReferences.ts",
+          "line": 1023,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "src/testRunner/unittests/tsserver/resolutionCache.ts",
+          "line": 431,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 81144,
+      "filesScanned": 1312,
+      "filesSkipped": 80057,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3787,
+      "durationMs": 6341,
       "error": ""
     },
     {
@@ -3534,17 +5426,157 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0,
+      "actualScore": 0.1275,
       "safeToClone": true,
-      "rulesTriggered": [],
+      "rulesTriggered": [
+        "OBF_CHARCODE_ARRAY",
+        "OBFUSCATED_CODE",
+        "NETWORK_COMMUNICATION"
+      ],
       "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 6676,
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_CHARCODE_ARRAY",
+          "file": "node_modules/debug/src/node.js",
+          "line": null,
+          "description": "Array of 20+ numbers that look like char codes. Used as an alternative to fromCharCode to build malicious strings character by character.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/diff/dist/diff.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (30,499 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (30,499 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/glob/dist/commonjs/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (67,694 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (20,467 chars, contains suspicious code), Line 3 (67,694 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/glob/dist/esm/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (63,598 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (18,817 chars, contains suspicious code), Line 3 (63,598 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/commonjs/browser/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (19,243 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (19,243 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/commonjs/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (19,243 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (19,243 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/commonjs/node/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (19,324 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (19,324 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/esm/browser/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (18,668 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (18,668 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/esm/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (18,793 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (18,793 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "OBFUSCATED_CODE",
+          "rule": "OBFUSCATED_CODE",
+          "file": "node_modules/lru-cache/dist/esm/node/index.min.js",
+          "line": 1,
+          "description": "Extremely long line detected (18,751 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 1 (18,751 chars, contains suspicious code)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "node_modules/@sigstore/core/dist/x509/cert.js",
+          "line": 57,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (5 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "node_modules/@tufjs/models/dist/utils/key.js",
+          "line": 13,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "node_modules/ip-address/dist/common.js",
+          "line": 33,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "node_modules/ip-address/dist/ipv4.js",
+          "line": 110,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (9 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "node_modules/ip-address/dist/ipv6.js",
+          "line": 741,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (4 occurrences)"
+        }
+      ],
+      "filesScanned": 1958,
+      "filesSkipped": 4943,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2755,
+      "durationMs": 4103,
       "error": ""
     },
     {
@@ -3563,13 +5595,24 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0.2175,
       "safeToClone": true,
       "rulesTriggered": [
-        "SUSPICIOUS_FILE_ACCESS"
+        "OBF_BASE64_HEAVY",
+        "SUSPICIOUS_FILE_ACCESS",
+        "HARDCODED_SECRETS"
       ],
       "falsePositiveNotes": "",
       "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "Library/Homebrew/formula.rb",
+          "line": 74,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
         {
           "severity": "medium",
           "confidence": "medium",
@@ -3578,14 +5621,32 @@
           "file": "Library/Homebrew/brew.sh",
           "line": 860,
           "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "SUSPICIOUS_FILE_ACCESS",
+          "rule": "SUSPICIOUS_FILE_ACCESS",
+          "file": "Library/Homebrew/os/mac/xcode.rb",
+          "line": 288,
+          "description": "Suspicious file access detected: Destructive File Deletion"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "Library/Homebrew/utils/github/api.rb",
+          "line": 238,
+          "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 2945,
+      "filesScanned": 2176,
+      "filesSkipped": 994,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2524,
+      "durationMs": 3007,
       "error": ""
     },
     {
@@ -3604,13 +5665,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.2175,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
         "OBF_NEW_FUNCTION",
         "OBFUSCATED_CODE",
+        "OBF_HEX_STRINGS",
         "NETWORK_COMMUNICATION",
+        "HARDCODED_SECRETS",
         "CODE_INTEGRITY_ISSUE"
       ],
       "falsePositiveNotes": "",
@@ -3654,10 +5717,100 @@
         {
           "severity": "medium",
           "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/pickletools.py",
+          "line": 236,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/plistlib.py",
+          "line": 121,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/urllib/parse.py",
+          "line": 89,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/uuid.py",
+          "line": 44,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Lib/zipimport.py",
+          "line": 37,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "Mac/BuildScript/build-installer.py",
+          "line": 251,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_HEX_STRINGS",
+          "file": "Mac/Tools/plistlib_generate_testdata.py",
+          "line": 74,
+          "description": "10+ runs of differing hex escape sequences (\\xNN) in a single file. Hex encoding hides the actual string content from developers, often used to conceal URLs, commands, or shellcode.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
           "file": "Lib/_aix_support.py",
           "line": 45,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "Lib/ipaddress.py",
+          "line": 201,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (66 occurrences)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "Lib/urllib/request.py",
+          "line": 56,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "PCbuild/fix_encoding.py",
+          "line": 14,
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         },
         {
@@ -3670,12 +5823,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 5778,
+      "filesScanned": 1130,
+      "filesSkipped": 4873,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4549,
+      "durationMs": 6396,
       "error": ""
     },
     {
@@ -3686,35 +5839,6 @@
       "labelSource": "Expanded commit-pinned reference corpus",
       "sourceUrl": "https://github.com/django/django",
       "immutableRef": "bdbda29c3e126754c3ae04ceb5c5d35d49aae01c",
-      "expectedDetectionCategories": [],
-      "minimumExpectedVerdict": "",
-      "maximumExpectedVerdict": "low",
-      "status": "completed",
-      "testPassed": true,
-      "categoryDetected": true,
-      "verdictPass": true,
-      "actualVerdict": "low",
-      "actualScore": 0,
-      "safeToClone": true,
-      "rulesTriggered": [],
-      "falsePositiveNotes": "",
-      "findings": [],
-      "filesScanned": 230,
-      "filesSkipped": 6844,
-      "treeTruncated": false,
-      "readMode": "per-file",
-      "readFallbackReason": "",
-      "durationMs": 2516,
-      "error": ""
-    },
-    {
-      "sampleId": "noisy-ansible-ansible",
-      "corpus": "noisy-legitimate",
-      "targetKind": "github",
-      "label": "reference-clean",
-      "labelSource": "Expanded commit-pinned reference corpus",
-      "sourceUrl": "https://github.com/ansible/ansible",
-      "immutableRef": "8d63341579aa1c62024f3bce1a8af3f9a1b22a16",
       "expectedDetectionCategories": [],
       "minimumExpectedVerdict": "",
       "maximumExpectedVerdict": "low",
@@ -3735,17 +5859,96 @@
           "confidence": "low",
           "type": "NETWORK_COMMUNICATION",
           "rule": "NETWORK_COMMUNICATION",
-          "file": "lib/ansible/_internal/_powershell/_clixml.py",
-          "line": 182,
+          "file": "django/contrib/gis/geoip2.py",
+          "line": 204,
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 225,
-      "filesSkipped": 5566,
+      "filesScanned": 2695,
+      "filesSkipped": 4379,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2812,
+      "durationMs": 3092,
+      "error": ""
+    },
+    {
+      "sampleId": "noisy-ansible-ansible",
+      "corpus": "noisy-legitimate",
+      "targetKind": "github",
+      "label": "reference-clean",
+      "labelSource": "Expanded commit-pinned reference corpus",
+      "sourceUrl": "https://github.com/ansible/ansible",
+      "immutableRef": "8d63341579aa1c62024f3bce1a8af3f9a1b22a16",
+      "expectedDetectionCategories": [],
+      "minimumExpectedVerdict": "",
+      "maximumExpectedVerdict": "low",
+      "status": "completed",
+      "testPassed": true,
+      "categoryDetected": true,
+      "verdictPass": true,
+      "actualVerdict": "low",
+      "actualScore": 0.16499999999999998,
+      "safeToClone": true,
+      "rulesTriggered": [
+        "OBF_BASE64_HEAVY",
+        "NETWORK_COMMUNICATION",
+        "HARDCODED_SECRETS"
+      ],
+      "falsePositiveNotes": "",
+      "findings": [
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_BASE64_HEAVY",
+          "file": "lib/ansible/modules/deb822_repository.py",
+          "line": 202,
+          "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lib/ansible/_internal/_powershell/_clixml.py",
+          "line": 182,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lib/ansible/module_utils/facts/network/linux.py",
+          "line": 108,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        },
+        {
+          "severity": "medium",
+          "confidence": "medium",
+          "type": "HARDCODED_SECRETS",
+          "rule": "HARDCODED_SECRETS",
+          "file": "lib/ansible/modules/expect.py",
+          "line": 93,
+          "description": "Hardcoded credentials detected: Password"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "NETWORK_COMMUNICATION",
+          "rule": "NETWORK_COMMUNICATION",
+          "file": "lib/ansible/modules/uri.py",
+          "line": 355,
+          "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
+        }
+      ],
+      "filesScanned": 2303,
+      "filesSkipped": 3488,
+      "treeTruncated": false,
+      "readMode": "tarball",
+      "readFallbackReason": "",
+      "durationMs": 3079,
       "error": ""
     },
     {
@@ -3769,12 +5972,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 208,
-      "filesSkipped": 424,
+      "filesScanned": 468,
+      "filesSkipped": 164,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2421,
+      "durationMs": 2316,
       "error": ""
     },
     {
@@ -3801,9 +6004,9 @@
       "filesScanned": 118,
       "filesSkipped": 118,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1308,
+      "durationMs": 1281,
       "error": ""
     },
     {
@@ -3826,6 +6029,7 @@
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_BASE64_HEAVY",
+        "OBF_EVAL",
         "SUSPICIOUS_FILE_ACCESS"
       ],
       "falsePositiveNotes": "",
@@ -3838,6 +6042,15 @@
           "file": "src/ci/docker/host-x86_64/dist-x86_64-netbsd/build-netbsd-toolchain.sh",
           "line": 45,
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "OBF_EVAL",
+          "file": "src/tools/rustdoc-js/tester.js",
+          "line": 470,
+          "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         },
         {
           "severity": "medium",
@@ -3885,12 +6098,12 @@
           "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
-      "filesScanned": 235,
-      "filesSkipped": 60751,
+      "filesScanned": 553,
+      "filesSkipped": 60433,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2999,
+      "durationMs": 3094,
       "error": ""
     },
     {
@@ -3914,12 +6127,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 225,
-      "filesSkipped": 15389,
+      "filesScanned": 1317,
+      "filesSkipped": 14297,
       "treeTruncated": false,
-      "readMode": "per-file",
+      "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3425,
+      "durationMs": 4812,
       "error": ""
     },
     {
@@ -3962,7 +6175,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4005,7 +6218,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4091,7 +6304,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4670,7 +6883,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4799,7 +7012,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4842,7 +7055,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4928,7 +7141,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4971,7 +7184,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
