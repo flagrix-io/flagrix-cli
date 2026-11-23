@@ -21,7 +21,7 @@
     "reference-tanstack-query": "False positive: the Algolia example uses a public search-only API key; generic key shape alone does not establish a secret.",
     "reference-prisma-prisma": "False positives: CLI generation and initialization examples intentionally contain dynamic execution and sample database URLs.",
     "reference-prettier-prettier": "False positives: Function construction is part of CLI/config/build transformation tooling, not hidden runtime code.",
-    "reference-pnpm-pnpm": "False positive at tarball coverage: `pnpm11/pnpm/artifacts/exe/package.json` declares `preinstall: node setup.js`, which is SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER's shape. setup.js resolves the platform-specific pnpm package and writes the launcher; it makes no network request and spawns no process. The shape is genuinely the campaign's, so the rule is not weakened for it.",
+    "reference-pnpm-pnpm": "False positive at tarball coverage, fixed in scanner-core 0.8.2: `pnpm11/pnpm/artifacts/exe/package.json` declares `preinstall: node setup.js`, the shape SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER matches. setup.js resolves the platform pnpm package and links its binary into place; it downloads nothing, spawns nothing, writes only inside its own directory and reads no credentials. The engine now rates that rule by what the hook script can do, so the finding is informational.",
     "noisy-denoland-deno": "False positives: generated documentation assets, TypeScript declarations, workflow examples, and literal network documentation were over-weighted.",
     "noisy-oven-sh-bun": "False positives: benchmark snippets and generated worker bundles intentionally contain dynamic/cryptographic test data.",
     "noisy-tauri-apps-tauri": "False positives: a generated global bundle and normal API credential terminology were treated as concealed code and a hardcoded password.",
@@ -33,17 +33,6 @@
     "noisy-ansible-ansible": "False positives: PowerShell paths, CLI password handling, and protocol constants were classified by substrings without malicious context.",
     "noisy-rust-lang-rust": "False positive: CI SDK download/network constants are ordinary build infrastructure, not covert network communication."
   },
-  "accepted": {
-    "reference-pnpm-pnpm": [
-      {
-        "pattern": "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
-        "file": "pnpm11/pnpm/artifacts/exe/package.json",
-        "severity": "critical",
-        "ref": "0dd21df7457d2026f411f2c1a09104280b9b16e5",
-        "reviewedAt": "2026-11-21",
-        "why": "preinstall runs setup.js, which resolves the platform pnpm package and writes the launcher. No network, no process spawn."
-      }
-    ]
-  },
+  "accepted": {},
   "acceptedSchema": "reviews holds prose for a human. accepted is what the gate reads: each entry names one finding on one sample by pattern and file at one pinned ref. A finding that differs in any of those still fails, and an entry whose ref no longer matches the corpus is ignored, so a pin bump re-opens the question."
 }
