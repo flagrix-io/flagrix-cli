@@ -31,44 +31,36 @@ flagrix mcp                       # MCP server (stdio) for AI agents
 
 ## How much gets read
 
-A scan reads one file per GitHub request, up to ~200 files, and says so:
+A scan reads the whole commit in one request (`/tarball/{sha}`), up to a 16MB
+budget of source, and says so:
 
 ```
-  3 files scanned · 10 dependencies · 2 issues · read file by file
+  4373 files scanned · 12 dependencies · 0 issues · read as one snapshot
 ```
 
-`--tarball` reads the whole commit in one request instead (`/tarball/{sha}`),
-which trades the 200-file cap for a 16MB budget of source:
+`--no-tarball` reads one file per request instead, up to ~200 files:
 
-| facebook/react @ e04279e | file by file | one snapshot |
+| facebook/react @ e04279e | one snapshot (default) | `--no-tarball` |
 | --- | --- | --- |
-| files read | 226 | 4,373 |
-| GitHub requests | 231 | 6 |
-| wall clock | 14.4s | 8.7s |
+| files read | 4,373 | 226 |
+| GitHub requests | 6 | 231 |
+| wall clock | 8.7s | 14.4s |
 
 The request count is the part that matters without a token: GitHub allows 60
 requests an hour unauthenticated, so a per-file scan of any real repository
 runs out part way through and exits 4, while a snapshot read finishes.
 
-**It is off by default**, because of what the extra coverage reaches. The
-file cap spends its budget on files that run on install and on ordinary
-source; 4,000 files also means test fixtures and vendored bundles, where the
-rules have not been measured. Across the 50 pinned repositories in
-[benchmark/](benchmark/), reading snapshots moves 10 verdicts off "low":
-pnpm/pnpm 0.090 → 1.000, socket.io 0.255 → 0.708, npm/cli 0.090 → 0.617 and
-electron 0.240 → 0.640 all land on "high — do not clone", on
-`POSTINSTALL_SCRIPT` findings in pnpm's and npm's own lifecycle-script test
-fixtures and `OBFUSCATED_CODE` in checked-in minified bundles. Live, not just
-offline: `flagrix scan pnpm/pnpm --ref 0dd21df` reads 227 files and answers
-LOW, 91/100; with `--tarball` it reads 2,502 and answers HIGH, 0/100. Turn it
-on when the wider coverage is worth reading those findings by hand.
+The wider read reaches test fixtures and vendored bundles, which the file cap
+used to skip. Across the 50 pinned repositories in [benchmark/](benchmark/),
+every one reads "low" as a snapshot, and the release gate runs the whole
+corpus with both readers. `--tarball` is still accepted; it asks for the
+default.
 
 Either way the result names the reader that produced it, in the human output
 and as `coverage.readMode` (`"tarball"`, `"per-file"`, or `"unknown"` from an
 engine older than 0.8.0) in the JSON. Two scans of one commit can score
 differently depending on which ran, so the mode is part of the verdict rather
-than a detail. When `--tarball` is asked for and GitHub will not serve the
-archive, the scan falls back to reading file by file, keeps its verdict, and
+than a detail. When GitHub will not serve the archive, the scan falls back to reading file by file, keeps its verdict, and
 says why (`coverage.readFallbackReason`: `too-large`, `unavailable` or
 `unreadable`).
 
@@ -88,12 +80,14 @@ that SHA, so a push mid-scan or after the verdict can't silently invalidate it.
 
 ### Incomplete scans (exit 4)
 
-A repository scan is one tree request plus up to ~200 file reads, and GitHub
+A per-file scan (`--no-tarball`, or the fallback when GitHub will not serve
+the archive) is one tree request plus up to ~200 file reads, and GitHub
 allows 60 requests an hour without a token. When the budget runs out part way
 through, the rest of the repository is never looked at — so a "low risk, no
 findings" result over 30 of 180 files is the absence of looking, not a clean
-bill of health. (`--tarball` spends one request instead of ~200 — see
-[How much gets read](#how-much-gets-read).)
+bill of health. The default snapshot read spends one request on the
+contents instead, so it rarely gets here — see
+[How much gets read](#how-much-gets-read).
 
 The result says so (`scanSummary.complete: false`, with
 `scanSummary.incompleteReason` of `"rate-limit"` or `"fetch-errors"`), the
@@ -148,14 +142,16 @@ Set a token to make this rare: `GITHUB_TOKEN` raises the budget to 5,000/h.
 claude mcp add flagrix -- npx -y flagrix mcp
 ```
 
-Tools: `scan_github_repo` (`target`, `ref`, `tarball`), `scan_github_user`. A Claude Code hook that gates every
+Tools: `scan_github_repo` (`target`, `ref`, `tarball` — default `true`, `false`
+reads file by file), `scan_github_user`. A Claude Code hook that gates every
 `git clone` on a scan ships in [hooks/](hooks/) — see
 [docs/agent-gating.md](docs/agent-gating.md).
 
 ## Tokens & rate limits
 
-Unauthenticated scans use GitHub's 60 req/h budget (a scan issues one request per
-scanned file, up to ~200, or a single request with `--tarball`). Set
+Unauthenticated scans use GitHub's 60 req/h budget (a scan reads the commit's contents in a
+single request, or one request per scanned file, up to ~200, with
+`--no-tarball`). Set
 `GITHUB_TOKEN` (or `FLAGRIX_GITHUB_TOKEN`, or `--token`) to raise it to 5,000/h
 and to scan private repositories. A scan that runs out of budget reports partial
 coverage and exits 4 — see [Incomplete scans](#incomplete-scans-exit-4).

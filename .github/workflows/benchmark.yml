@@ -59,6 +59,10 @@ jobs:
       - name: Build the offline mirror
         run: python3 benchmark/offline/mirror.py
 
+      # The reader the CLI ships: one archive per commit (70,253 files against
+      # 9,581 read file by file). Blocking — a red gate here is a false
+      # positive or a miss users get by default, and it can arrive with a
+      # detection-rules release rather than a commit to this repo.
       - name: Full corpus (offline)
         run: |
           if [ -n "${{ inputs.corpus }}" ]; then
@@ -67,37 +71,29 @@ jobs:
             node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --enforce-gates
           fi
 
-      # The run itself, so a failure can be read without reproducing it. Only
-      # the ad-hoc outputs; the canonical snapshots are committed in the repo.
-      - name: Upload the run
+      # `--no-tarball`, for as long as the CLI still offers it. Also blocking,
+      # and runs after a red snapshot run so both readers are reported.
+      - name: Full corpus, per-file reader (offline)
+        if: ${{ !cancelled() }}
+        run: |
+          if [ -n "${{ inputs.corpus }}" ]; then
+            node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --corpus "${{ inputs.corpus }}" --no-tarball --enforce-gates
+          else
+            node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --no-tarball --enforce-gates
+          fi
+
+      # The runs themselves, so a failure can be read without reproducing it.
+      # Only the ad-hoc outputs; the canonical snapshots are committed in the
+      # repo. Each reader writes its own files.
+      - name: Upload the runs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-${{ github.run_id }}
           path: |
-            benchmark/results/latest.json
-            benchmark/results/latest.csv
-          if-no-files-found: warn
-          retention-days: 30
-
-      # The same corpus read as one archive per commit, which is what
-      # `--tarball` does: 70,253 files against 9,581, and on 2026-11-20 ten
-      # verdicts off "low" and two red gates, which is why that reader is
-      # opt-in. Not blocking, because it is a measurement of something the CLI
-      # does not do by default — it is here to say when it could, and the
-      # answer moves with the detection rules rather than with this repo.
-      - name: Full corpus as snapshots (not blocking)
-        if: ${{ !inputs.corpus }}
-        continue-on-error: true
-        run: node --import ./benchmark/offline/gitmock.mjs benchmark/run.mjs --tarball --enforce-gates
-
-      - name: Upload the snapshot run
-        if: ${{ always() && !inputs.corpus }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: benchmark-tarball-${{ github.run_id }}
-          path: |
-            benchmark/results/latest.json
-            benchmark/results/latest.csv
+            benchmark/results/latest-tarball.json
+            benchmark/results/latest-tarball.csv
+            benchmark/results/latest-per-file.json
+            benchmark/results/latest-per-file.csv
           if-no-files-found: warn
           retention-days: 30

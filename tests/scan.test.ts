@@ -25,6 +25,7 @@ import { renderRepoResult } from "../src/lib/render.js"
 import {
   EXIT,
   READ_WHOLE_SNAPSHOT_BY_DEFAULT,
+  tarballFromFlags,
   exitCodeForScan
 } from "../src/commands/shared.js"
 
@@ -499,8 +500,9 @@ describe("JSON verdict and coverage", () => {
     expect(block.safeToClone).toBe(false)
     expect(block.coverage).toMatchObject({ complete: false, unreliableClear: true, reason: "rate-limit" })
 
+    // Per-file on both sides: the raw engine call above asks for no archive.
     global.fetch = mockApi(CLEAN, { contentLimit: 1 }) as unknown as typeof fetch
-    await runScan("acme/partial", { json: true })
+    await runScan("acme/partial", { json: true, tarball: false })
     const cli = JSON.parse(logs.join("\n"))
     expect(block.verdict).toBe(cli.verdict)
     expect(block.safeToClone).toBe(cli.safeToClone)
@@ -550,6 +552,19 @@ describe("read mode", () => {
     // Guards the wiring, not the choice: an option declared and never passed
     // through would leave the default a comment rather than a behaviour.
     expect(askedForArchive(api)).toBe(READ_WHOLE_SNAPSHOT_BY_DEFAULT)
+  })
+
+  it("reads the whole commit by default", () => {
+    expect(READ_WHOLE_SNAPSHOT_BY_DEFAULT).toBe(true)
+  })
+
+  it("maps the CLI flags: --no-tarball reads file by file, --tarball is the default", () => {
+    expect(tarballFromFlags({})).toBeUndefined()
+    expect(tarballFromFlags({ "no-tarball": true })).toBe(false)
+    // Accepted so 0.7 scripts keep working; it asks for what is now the default.
+    expect(tarballFromFlags({ tarball: true })).toBe(true)
+    // The explicit opt-out wins over the alias for the default.
+    expect(tarballFromFlags({ tarball: true, "no-tarball": true })).toBe(false)
   })
 
   it("--tarball asks for the archive and --no-tarball never does", async () => {

@@ -97,16 +97,18 @@ function help() {
 
 Usage:
   npm run benchmark -- [--corpus <name>] [--sample <sample-id>] [--resume] [--limit <count>]
-                       [--enforce-gates] [--tarball | --no-tarball]
+                       [--enforce-gates] [--no-tarball | --tarball]
 
 --enforce-gates exits non-zero unless every evaluated gate passed and every
 defined sample completed, so CI can use the benchmark as a gate. Without it
 the runner reports and exits 0.
 
---tarball / --no-tarball override how GitHub samples are read: the whole
-commit in one request, or one request per file. The default is whichever one
+--no-tarball / --tarball override how GitHub samples are read: one request
+per file, or the whole commit in one request. The default is whichever one
 the CLI ships (READ_WHOLE_SNAPSHOT_BY_DEFAULT in src/commands/shared.ts), and
-the CSV's read_mode column says per sample which reader actually ran. The two
+the CSV's read_mode column says per sample which reader actually ran.
+Results are written per reader (latest-tarball.*, latest-per-file.*), so a
+run in one mode never overwrites or resumes from the other. The two
 read different amounts of a large repository, so they are not interchangeable
 measurements — a verdict only means something next to the mode that produced it.
 
@@ -646,6 +648,11 @@ function toCsv(results, metadata) {
 // makes every finding count.
 let acceptedReviews = {}
 
+/** `latest-tarball` or `latest-per-file`: results are kept apart per reader. */
+function latestName(metadata) {
+  return `latest-${metadata.requestedReadMode}`
+}
+
 async function writeCheckpoint(results, metadata, selectedCount) {
   const report = {
     metadata,
@@ -653,8 +660,8 @@ async function writeCheckpoint(results, metadata, selectedCount) {
     results,
   }
   await Promise.all([
-    writeFile(join(resultsDir, "latest.json"), JSON.stringify(report, null, 2) + "\n"),
-    writeFile(join(resultsDir, "latest.csv"), toCsv(results, metadata)),
+    writeFile(join(resultsDir, `${latestName(metadata)}.json`), JSON.stringify(report, null, 2) + "\n"),
+    writeFile(join(resultsDir, `${latestName(metadata)}.csv`), toCsv(results, metadata)),
   ])
   return report
 }
@@ -714,7 +721,7 @@ async function main() {
   let previous = new Map()
   if (options.resume) {
     try {
-      const prior = await readJson(join(resultsDir, "latest.json"))
+      const prior = await readJson(join(resultsDir, `${latestName(metadata)}.json`))
       previous = new Map(prior.results.map((row) => [row.sampleId, row]))
     } catch {
       // No prior run to resume.
@@ -762,7 +769,10 @@ async function main() {
 
   const report = await writeCheckpoint(results, metadata, samples.length)
   const timestamp = metadata.runAt.replaceAll(":", "-").replaceAll(".", "-")
-  await writeFile(join(resultsDir, `${timestamp}.json`), JSON.stringify(report, null, 2) + "\n")
+  await writeFile(
+    join(resultsDir, `${timestamp}-${metadata.requestedReadMode}.json`),
+    JSON.stringify(report, null, 2) + "\n"
+  )
   console.log(JSON.stringify({ metadata, metrics: report.metrics }, null, 2))
 
   if (options.enforceGates) {
