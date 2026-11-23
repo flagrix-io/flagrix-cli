@@ -1,13 +1,13 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-20T12:39:29.733Z",
+    "runAt": "2026-11-23T15:51:30.595Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.7.0",
-    "engineVersion": "0.8.0",
+    "cliVersion": "0.7.2",
+    "engineVersion": "0.8.2",
     "engineCommitSha": null,
     "engineDirty": false,
-    "rulesVersion": "2026.11.20.001",
+    "rulesVersion": "2026.11.23.001",
     "requestedReadMode": "per-file"
   },
   "metrics": {
@@ -28,8 +28,9 @@
     "referenceSamplesTotal": 64,
     "referenceHighVerdicts": 0,
     "referenceHighVerdictRate": 0,
-    "referenceSamplesWithHighOrCriticalFindings": 2,
+    "referenceSamplesWithHighOrCriticalFindings": 1,
     "referenceCriticalFindings": 0,
+    "acceptedReferenceFindings": 0,
     "requestedReadMode": "per-file",
     "githubSamplesTotal": 50,
     "githubSamplesReadAsRequested": 50,
@@ -87,7 +88,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 21,
+      "durationMs": 27,
       "error": ""
     },
     {
@@ -216,7 +217,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -259,7 +260,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -312,7 +313,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -513,7 +514,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 3,
       "error": ""
     },
     {
@@ -640,7 +641,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -824,7 +825,7 @@
           "rule": "SUPPLY_CHAIN_PREINSTALL_SETUP_DROPPER",
           "file": "package.json",
           "line": 1,
-          "description": "CHAINDROP (keyv, Aug 2026) and Tensorlake (Oct 2026) add `preinstall: node setup.mjs`, which downloads Bun and runs Math_Symbol.js.\n"
+          "description": "CHAINDROP (keyv, Aug 2026) and Tensorlake (Oct 2026) add `preinstall: node setup.mjs`, which downloads Bun and runs Math_Symbol.js.\n The hook runs setup.mjs, which is not in the repository, so what it does on install cannot be reviewed."
         }
       ],
       "filesScanned": 2,
@@ -832,7 +833,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -939,7 +940,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1003,7 +1004,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -1238,7 +1239,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -1281,7 +1282,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1363,7 +1364,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1404,7 +1405,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1602,7 +1603,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1689,7 +1690,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1747,7 +1748,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1805,7 +1806,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1746,
+      "durationMs": 1735,
       "error": ""
     },
     {
@@ -1834,7 +1835,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2601,
+      "durationMs": 2634,
       "error": ""
     },
     {
@@ -1863,7 +1864,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 950,
+      "durationMs": 961,
       "error": ""
     },
     {
@@ -1882,23 +1883,13 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "EXFIL_COOKIE",
         "DATA_EXFILTRATION"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "EXFIL_COOKIE",
-          "file": "lib/helpers/cookies.js",
-          "line": 5,
-          "description": "Reads browser cookies via document.cookie — can steal session tokens"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -1914,7 +1905,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2446,
+      "durationMs": 2537,
       "error": ""
     },
     {
@@ -1933,25 +1924,15 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "EXFIL_COOKIE",
         "OBF_EVAL",
         "OBF_NEW_FUNCTION",
         "OBFUSCATED_CODE"
       ],
       "falsePositiveNotes": "",
       "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "EXFIL_COOKIE",
-          "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
-          "line": 5997,
-          "description": "Reads browser cookies via document.cookie — can steal session tokens"
-        },
         {
           "severity": "medium",
           "confidence": "low",
@@ -2021,7 +2002,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1369,
+      "durationMs": 1329,
       "error": ""
     },
     {
@@ -2050,7 +2031,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 259,
+      "durationMs": 253,
       "error": ""
     },
     {
@@ -2091,7 +2072,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1251,
+      "durationMs": 1258,
       "error": ""
     },
     {
@@ -2120,7 +2101,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 370,
+      "durationMs": 361,
       "error": ""
     },
     {
@@ -2149,7 +2130,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4093,
+      "durationMs": 4017,
       "error": ""
     },
     {
@@ -2217,7 +2198,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3317,
+      "durationMs": 3305,
       "error": ""
     },
     {
@@ -2246,7 +2227,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2670,
+      "durationMs": 2677,
       "error": ""
     },
     {
@@ -2275,7 +2256,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3301,
+      "durationMs": 3246,
       "error": ""
     },
     {
@@ -2294,29 +2275,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "SUSPICIOUS_FILE_ACCESS"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "scripts/create-next-bin-placeholder.mjs",
-          "line": null,
-          "description": "Suspicious file access detected: System Directory Write"
-        }
-      ],
+      "findings": [],
       "filesScanned": 235,
       "filesSkipped": 29593,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 5052,
+      "durationMs": 4177,
       "error": ""
     },
     {
@@ -2345,7 +2314,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3223,
+      "durationMs": 3294,
       "error": ""
     },
     {
@@ -2364,14 +2333,13 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.27749999999999997,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
-        "OBF_EVAL",
-        "HARDCODED_API_KEY"
+        "OBF_EVAL"
       ],
-      "falsePositiveNotes": "Manual review required; this result is not yet classified as a false positive.",
+      "falsePositiveNotes": "",
       "findings": [
         {
           "severity": "medium",
@@ -2390,15 +2358,6 @@
           "file": "extensions/copilot/.esbuild.mts",
           "line": 166,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "high",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "HARDCODED_API_KEY",
-          "file": "extensions/copilot/script/setup/getToken.mts",
-          "line": null,
-          "description": "Generic API key / secret key pattern assigned to a variable (obvious placeholders are downgraded by scanner context)"
         }
       ],
       "filesScanned": 235,
@@ -2406,7 +2365,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3818,
+      "durationMs": 3846,
       "error": ""
     },
     {
@@ -2466,7 +2425,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3499,
+      "durationMs": 3447,
       "error": ""
     },
     {
@@ -2485,29 +2444,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "HARDCODED_SECRETS"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "scripts/windows-sign.js",
-          "line": 46,
-          "description": "Hardcoded credentials detected: Password"
-        }
-      ],
+      "findings": [],
       "filesScanned": 227,
       "filesSkipped": 6953,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4550,
+      "durationMs": 4464,
       "error": ""
     },
     {
@@ -2558,7 +2505,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3207,
+      "durationMs": 3174,
       "error": ""
     },
     {
@@ -2577,12 +2524,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_NEW_FUNCTION",
-        "OBF_BASE64_HEAVY",
-        "SUSPICIOUS_FILE_ACCESS"
+        "OBF_BASE64_HEAVY"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2621,15 +2567,6 @@
           "file": "scripts/verify-source-map.js",
           "line": 243,
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "SUSPICIOUS_FILE_ACCESS",
-          "rule": "SUSPICIOUS_FILE_ACCESS",
-          "file": "lib/npm/node-install.ts",
-          "line": 169,
-          "description": "Suspicious file access detected: System Directory Write"
         }
       ],
       "filesScanned": 225,
@@ -2637,7 +2574,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2886,
+      "durationMs": 2882,
       "error": ""
     },
     {
@@ -2666,7 +2603,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4822,
+      "durationMs": 4827,
       "error": ""
     },
     {
@@ -2695,7 +2632,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 876,
+      "durationMs": 789,
       "error": ""
     },
     {
@@ -2714,38 +2651,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.15,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "NETWORK_URL_SHORTENER"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "high",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "NETWORK_URL_SHORTENER",
-          "file": "examples/counter-ts/src/index.tsx",
-          "line": 22,
-          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
-        },
-        {
-          "severity": "medium",
-          "confidence": "high",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "NETWORK_URL_SHORTENER",
-          "file": "examples/counter/src/index.js",
-          "line": 22,
-          "description": "Shortened URLs (bit.ly, tinyurl) in source code — obfuscates actual destination"
-        }
-      ],
+      "findings": [],
       "filesScanned": 220,
       "filesSkipped": 256,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2485,
+      "durationMs": 2389,
       "error": ""
     },
     {
@@ -2774,7 +2690,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4360,
+      "durationMs": 4368,
       "error": ""
     },
     {
@@ -2815,7 +2731,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 750,
+      "durationMs": 746,
       "error": ""
     },
     {
@@ -2844,7 +2760,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3644,
+      "durationMs": 3695,
       "error": ""
     },
     {
@@ -2873,7 +2789,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2259,
+      "durationMs": 2226,
       "error": ""
     },
     {
@@ -2902,7 +2818,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1051,
+      "durationMs": 1092,
       "error": ""
     },
     {
@@ -2921,13 +2837,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.255,
+      "actualScore": 0.075,
       "safeToClone": true,
       "rulesTriggered": [
         "OBF_FROMCHARCODE",
-        "EXFIL_COOKIE",
-        "BACKDOOR_HARDCODED_AUTH",
-        "HARDCODED_SECRETS"
+        "BACKDOOR_HARDCODED_AUTH"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -2939,15 +2853,6 @@
           "file": "packages/engine.io-parser/lib/index.ts",
           "line": 11,
           "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "EXFIL_COOKIE",
-          "file": "packages/engine.io/lib/contrib/types.cookie.ts",
-          "line": 46,
-          "description": "Reads browser cookies via document.cookie — can steal session tokens"
         },
         {
           "severity": "medium",
@@ -2975,15 +2880,6 @@
           "file": "packages/socket.io/client-dist/socket.io.js",
           "line": 354,
           "description": "Constructs strings from char codes (e.g., String.fromCharCode(101,118,97,108) = \"eval\"). Classic technique to hide malicious keywords from simple string scanning.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "examples/basic-crud-application/server-postgres-cluster/lib/index.js",
-          "line": 17,
-          "description": "Hardcoded credentials detected: Password"
         }
       ],
       "filesScanned": 230,
@@ -2991,7 +2887,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3723,
+      "durationMs": 3706,
       "error": ""
     },
     {
@@ -3020,7 +2916,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2928,
+      "durationMs": 2934,
       "error": ""
     },
     {
@@ -3049,7 +2945,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4541,
+      "durationMs": 4506,
       "error": ""
     },
     {
@@ -3078,7 +2974,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 441,
+      "durationMs": 484,
       "error": ""
     },
     {
@@ -3138,7 +3034,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2793,
+      "durationMs": 2836,
       "error": ""
     },
     {
@@ -3167,7 +3063,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3506,
+      "durationMs": 3502,
       "error": ""
     },
     {
@@ -3208,7 +3104,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3326,
+      "durationMs": 3309,
       "error": ""
     },
     {
@@ -3237,7 +3133,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2762,
+      "durationMs": 2804,
       "error": ""
     },
     {
@@ -3256,29 +3152,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "HARDCODED_SECRETS"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "pnpm11/auth/commands/src/login.ts",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
-        }
-      ],
+      "findings": [],
       "filesScanned": 227,
       "filesSkipped": 4842,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2939,
+      "durationMs": 2859,
       "error": ""
     },
     {
@@ -3297,12 +3181,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.2175,
+      "actualScore": 0.1275,
       "safeToClone": true,
       "rulesTriggered": [
         "OBFUSCATED_CODE",
         "OBF_EVAL",
-        "HARDCODED_SECRETS",
         "NETWORK_COMMUNICATION",
         "CODE_INTEGRITY_ISSUE"
       ],
@@ -3325,33 +3208,6 @@
           "file": "cli/tsc/dts/lib.es5.d.ts",
           "line": 31,
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": ".github/workflows/ci.ts",
-          "line": 758,
-          "description": "Hardcoded credentials detected: Password"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": ".github/workflows/promote_to_release.ts",
-          "line": 157,
-          "description": "Hardcoded credentials detected: Password"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "tools/release/promote_to_release.ts",
-          "line": 147,
-          "description": "Hardcoded credentials detected: Password"
         },
         {
           "severity": "medium",
@@ -3386,7 +3242,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3231,
+      "durationMs": 3190,
       "error": ""
     },
     {
@@ -3467,7 +3323,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3093,
+      "durationMs": 3122,
       "error": ""
     },
     {
@@ -3537,7 +3393,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1755,
+      "durationMs": 1769,
       "error": ""
     },
     {
@@ -3598,7 +3454,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3669,
+      "durationMs": 3340,
       "error": ""
     },
     {
@@ -3659,7 +3515,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3843,
+      "durationMs": 3787,
       "error": ""
     },
     {
@@ -3678,47 +3534,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "HARDCODED_SECRETS"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "lib/commands/profile.js",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "lib/utils/auth.js",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "lib/utils/read-user-info.js",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
-        }
-      ],
+      "findings": [],
       "filesScanned": 225,
       "filesSkipped": 6676,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2901,
+      "durationMs": 2755,
       "error": ""
     },
     {
@@ -3759,7 +3585,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2607,
+      "durationMs": 2524,
       "error": ""
     },
     {
@@ -3849,7 +3675,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4583,
+      "durationMs": 4549,
       "error": ""
     },
     {
@@ -3878,7 +3704,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2544,
+      "durationMs": 2516,
       "error": ""
     },
     {
@@ -3897,11 +3723,10 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.0375,
       "safeToClone": true,
       "rulesTriggered": [
-        "NETWORK_COMMUNICATION",
-        "HARDCODED_SECRETS"
+        "NETWORK_COMMUNICATION"
       ],
       "falsePositiveNotes": "",
       "findings": [
@@ -3913,15 +3738,6 @@
           "file": "lib/ansible/_internal/_powershell/_clixml.py",
           "line": 182,
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
-        },
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "lib/ansible/cli/__init__.py",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
         }
       ],
       "filesScanned": 225,
@@ -3929,7 +3745,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2686,
+      "durationMs": 2812,
       "error": ""
     },
     {
@@ -3958,7 +3774,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2353,
+      "durationMs": 2421,
       "error": ""
     },
     {
@@ -4074,7 +3890,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2965,
+      "durationMs": 2999,
       "error": ""
     },
     {
@@ -4093,29 +3909,17 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.09,
+      "actualScore": 0,
       "safeToClone": true,
-      "rulesTriggered": [
-        "HARDCODED_SECRETS"
-      ],
+      "rulesTriggered": [],
       "falsePositiveNotes": "",
-      "findings": [
-        {
-          "severity": "medium",
-          "confidence": "medium",
-          "type": "HARDCODED_SECRETS",
-          "rule": "HARDCODED_SECRETS",
-          "file": "src/cmd/cgo/internal/testplugin/plugin_test.go",
-          "line": null,
-          "description": "Hardcoded credentials detected: Password"
-        }
-      ],
+      "findings": [],
       "filesScanned": 225,
       "filesSkipped": 15389,
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3563,
+      "durationMs": 3425,
       "error": ""
     },
     {
@@ -4158,7 +3962,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4287,7 +4091,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4340,7 +4144,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -4383,7 +4187,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -4565,7 +4369,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -5038,7 +4842,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -5081,7 +4885,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -5167,7 +4971,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -5210,7 +5014,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     }
   ]
