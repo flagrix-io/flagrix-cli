@@ -164,16 +164,30 @@ coverage and exits 4 — see [Incomplete scans](#incomplete-scans-exit-4).
 ## Privacy
 
 Fully local. No telemetry, no accounts, no Flagrix backend — the only network
-calls go to the GitHub/npm APIs and the public
-[detection-rules](https://github.com/flagrix-io/flagrix-detection-rules)
-repository (signature refresh, cached 6 h, with a bundled offline snapshot).
+calls go to:
+
+- the GitHub API (`api.github.com`), for the file tree, file contents and
+  profile data;
+- `codeload.github.com`, for the archive of the commit being scanned (the
+  default snapshot read; the API's `/tarball/{sha}` redirects there — not
+  contacted with `--no-tarball`);
+- npm's public download-count API (`api.npmjs.org`), for typosquat checks;
+- the public
+  [detection-rules](https://github.com/flagrix-io/flagrix-detection-rules)
+  repository (signature refresh, cached 6 h, with a bundled offline snapshot).
 
 Dependencies are also checked against the OSV malicious-package feed
 (`osv-malicious.json` from the same repository: every npm/PyPI package the
 OpenSSF malicious-packages project has confirmed malicious). The feed is
-downloaded and matched locally, so dependency names never leave your machine.
-It is cached 6 h and revalidated with its ETag. Set `FLAGRIX_OSV_FEED=0` to
-skip it (the curated list in the signatures still applies).
+downloaded and matched locally, so the OSV check sends no dependency names
+anywhere. It is cached 6 h and revalidated with its ETag. Set
+`FLAGRIX_OSV_FEED=0` to skip it (the curated list in the signatures still
+applies).
+
+The one place a dependency name leaves your machine is the typosquat check: a
+name within an edit or two of one of 15 popular npm packages (lodash, express,
+react…) is looked up on npm's download-count API, so a well-used package isn't
+reported as a typosquat.
 
 ## How it works
 
