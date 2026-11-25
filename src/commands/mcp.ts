@@ -55,10 +55,11 @@ const INCOMPLETE_GUIDANCE =
  * full result. Kept separate from the handler so the wording is testable.
  *
  * The JSON block is the same report `flagrix scan --json` prints — `verdict`,
- * `coverage` and a coverage-aware `safeToClone` — so an agent can branch on
- * coverage instead of parsing prose, and gets the same answer as the CLI.
+ * `coverage`, a coverage-aware `safeToClone` and `rulesVersion` — so an agent
+ * can branch on coverage instead of parsing prose, and gets the same answer as
+ * the CLI.
  */
-export function repoScanResponse(result: GitHubScanResult, note?: string | null) {
+export function repoScanResponse(result: GitHubScanResult, note?: string | null, rulesVersion?: string) {
   const coverage = coverageOf(result)
   const pinned = `(verdict pinned to commit ${result.commitSha ?? "unknown"})`
   const headline = coverage.unreliableClear
@@ -76,13 +77,14 @@ export function repoScanResponse(result: GitHubScanResult, note?: string | null)
     ...(read ? [read] : []),
     ...(coverage.complete ? [] : [describeCoverage(coverage, result.findings.length)]),
     ...(fallback ? [fallback] : []),
+    ...(rulesVersion ? [`Detection rules v${rulesVersion}.`] : []),
     ...(note ? [`Note: ${note}.`] : [])
   ].join(" ")
 
   return {
     content: [
       { type: "text" as const, text: summary },
-      { type: "text" as const, text: JSON.stringify(scanReport(result), null, 2) }
+      { type: "text" as const, text: JSON.stringify(scanReport(result, rulesVersion), null, 2) }
     ],
     isError: false
   }
@@ -137,7 +139,7 @@ export async function runMcp(): Promise<number> {
         tarball: tarball ?? READ_WHOLE_SNAPSHOT_BY_DEFAULT
       }
       const result = await scanGitHubRepo(repo, scanOptions)
-      return repoScanResponse(result, describeSource(loaded))
+      return repoScanResponse(result, describeSource(loaded), loaded.signatures.version)
     }
   )
 
@@ -163,13 +165,15 @@ export async function runMcp(): Promise<number> {
         githubToken: resolveToken(),
         userProfileRules: loaded.signatures.userProfileRules
       })
+      const rulesVersion = loaded.signatures.version
       const summary =
         `${result.riskLevel.toUpperCase()} risk profile — security score ` +
-        `${securityScore(result.riskScore)}/100. ${result.recommendation}`
+        `${securityScore(result.riskScore)}/100. ${result.recommendation} ` +
+        `Detection rules v${rulesVersion}.`
       return {
         content: [
           { type: "text", text: summary },
-          { type: "text", text: JSON.stringify(result, null, 2) }
+          { type: "text", text: JSON.stringify({ ...result, rulesVersion }, null, 2) }
         ],
         isError: false
       }
