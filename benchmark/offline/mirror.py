@@ -17,7 +17,16 @@ SCANNABLE = [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".py", ".rb", ".php",
 # a pattern missing here means the mirror never fetches that blob, so an
 # offline run silently scans less than an API-backed one and the equivalence
 # this file exists to provide is quietly false. The list below matches
-# scanner-core 0.8.0, which left the selection unchanged from 0.7.1.
+# scanner-core 0.10.0, which added git hooks (and every file named like one, for core.hooksPath).
+GIT_HOOK_NAMES = [
+    "applypatch-msg", "pre-applypatch", "post-applypatch",
+    "pre-commit", "pre-merge-commit", "prepare-commit-msg", "commit-msg", "post-commit",
+    "pre-rebase", "post-checkout", "post-merge", "pre-push", "post-rewrite",
+    "pre-receive", "update", "proc-receive", "post-receive", "post-update",
+    "reference-transaction", "push-to-checkout", "pre-auto-gc", "sendemail-validate",
+    "fsmonitor-watchman", "post-index-change",
+    "p4-changelist", "p4-prepare-changelist", "p4-post-changelist", "p4-pre-submit",
+]
 CONFIG = [re.compile(p) for p in [
     r"(?:^|/)\.vscode/(?:tasks|settings|launch|mcp)\.json$",
     r"(?:^|/)\.claude/settings(?:\.local)?\.json$",
@@ -30,6 +39,8 @@ CONFIG = [re.compile(p) for p in [
     # `docker build` / `docker compose up` is a one-command execution path.
     r"(?i)(?:^|/)(?:[\w.-]+[-.])?(?:Dockerfile|Containerfile)(?:[-.][\w.-]+)?$",
     r"(?i)(?:^|/)(?:[\w-]+-)?compose(?:\.[\w-]+)*\.ya?ml$",
+    # Git hooks in the conventional folders (scanner-core >= 0.10).
+    r"(?:^|/)\.(?:githooks|husky)/(?:" + "|".join(GIT_HOOK_NAMES) + r")$",
     r"^\.github/workflows/[^/]+\.ya?ml$",
     # Nested READMEs count, not just the root one.
     r"(?i)(?:^|/)README(?:\.md|\.txt|\.rst)?$",
@@ -49,7 +60,7 @@ FONTS = (".woff", ".woff2", ".ttf", ".otf", ".eot")
 # Bump when the rule for *which* blobs are fetched changes in a way the lists
 # below do not capture, so every mirror re-fetches. v3: every font, not the
 # first 10.
-SELECTION_POLICY = "all-scannable-v3"
+SELECTION_POLICY = "all-scannable-v4"  # v4: every file named like a git hook
 
 
 def selection_fingerprint():
@@ -190,7 +201,10 @@ def mirror(repo, sha):
     # the mirror. Blob sizes are not known until a blob is fetched, so the
     # engine's own 1MB limit is applied when it reads, not here.
     source = [e for e in blobs if any(e["path"].endswith(x) for x in SCANNABLE)]
-    want = {e["sha"] for e in first + fonts + source}
+    # Every file named like a git hook: one becomes a hook when a package.json
+    # points core.hooksPath at its folder, which only the scan itself knows.
+    hooks = [e for e in blobs if e["path"].rsplit("/", 1)[-1] in GIT_HOOK_NAMES]
+    want = {e["sha"] for e in first + fonts + source + hooks}
     err = fetch_blobs(d, want)
     if err:
         return "FAIL blobs " + err

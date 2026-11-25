@@ -1,6 +1,6 @@
 {
-  "version": "2026.11.23.001",
-  "lastUpdated": "2026-11-23T13:06:09.204Z",
+  "version": "2026.11.25.001",
+  "lastUpdated": "2026-11-25T19:12:41.904Z",
   "maliciousPackages": [
     {
       "name": "beavertail",
@@ -1913,6 +1913,43 @@
       "fileNames": [
         "devcontainer.json",
         ".devcontainer.json"
+      ]
+    },
+    {
+      "id": "GIT_HOOKS_PATH_SET_ON_INSTALL",
+      "name": "Install Script Switches On the Repo's Own Git Hooks",
+      "pattern": "\"(?:(?:pre|post)?(?:install|prepare)|prepublish)\"\\s*:\\s*\"(?:[^\"\\\\]|\\\\.){0,300}?\\bgit\\s+config\\s+(?:-{1,2}[\\w-]+\\s+)*core\\.hooksPath\\s+(?:\\\\\"|')?(?!\\.git\\/|\\.\\.)[\\w.]",
+      "description": "A prepare/install script runs `git config core.hooksPath <folder in the repo>`, so `npm install` makes every later `git commit`, `git push` or `git checkout` run the files committed there, on the host and without a prompt. Plenty of projects do this on purpose to share lint hooks, so on its own it is a low-confidence review signal: read the hooks it turns on. GIT_HOOK_DOWNLOAD_EXEC flags the malicious form. Husky's own `prepare: husky` does not match.\n",
+      "tags": [
+        "git-hooks",
+        "auto-exec",
+        "install-script",
+        "contagious-interview"
+      ],
+      "severity": "medium",
+      "confidence": "low",
+      "fileExtensions": [
+        ".json"
+      ],
+      "fileNames": [
+        "package.json"
+      ]
+    },
+    {
+      "id": "GIT_HOOK_DOWNLOAD_EXEC",
+      "name": "Git Hook Pipes a Download into a Shell",
+      "pattern": "(?:^|\\n)(?![ \\t]*#)[^\\n]{0,200}?(?:\\b(?:curl|wget|iwr|irm|Invoke-WebRequest|Invoke-RestMethod)\\b[^\\n|]{0,300}\\|[ \\t]*(?:sudo[ \\t]+)?(?:(?:ba|z|da)?sh|python3?|node|perl|iex|powershell|pwsh)\\b|\\b(?:ba|z)?sh[ \\t]+(?:-c[ \\t]+)?[\"']?(?:\\$\\(|<\\()[ \\t]*(?:curl|wget)\\b)",
+      "description": "A committed git hook (pre-commit, pre-push, post-checkout...) that downloads a script and runs it: `curl ... | sh`, `bash <(curl ...)`, `sh -c \"$(curl ...)\"`. Once core.hooksPath points at it, it runs on the host on every commit, with the same reach as a VS Code folderOpen task; the remote script can change at any time. Hooks that lint, test or format run local tools and do not match.\n",
+      "tags": [
+        "git-hooks",
+        "auto-exec",
+        "download-exec",
+        "contagious-interview"
+      ],
+      "severity": "critical",
+      "confidence": "high",
+      "fileExtensions": [
+        ".githook.sh"
       ]
     },
     {
