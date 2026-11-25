@@ -1,10 +1,10 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-23T19:48:43.332Z",
+    "runAt": "2026-11-25T11:13:26.142Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.8.0",
-    "engineVersion": "0.8.2",
+    "cliVersion": "0.8.2",
+    "engineVersion": "0.9.0",
     "engineCommitSha": null,
     "engineDirty": false,
     "rulesVersion": "2026.11.23.001",
@@ -88,7 +88,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 22,
+      "durationMs": 34,
       "error": ""
     },
     {
@@ -409,7 +409,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -452,7 +452,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -514,7 +514,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -588,7 +588,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -716,7 +716,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -769,7 +769,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -833,7 +833,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -886,7 +886,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1004,7 +1004,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 6,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -1057,7 +1057,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1196,7 +1196,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 3,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -1239,7 +1239,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1282,7 +1282,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1364,7 +1364,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1446,7 +1446,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1504,7 +1504,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1574,7 +1574,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1603,7 +1603,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1748,7 +1748,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1777,7 +1777,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 4,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1806,7 +1806,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1871,
+      "durationMs": 1733,
       "error": ""
     },
     {
@@ -1835,7 +1835,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2590,
+      "durationMs": 2387,
       "error": ""
     },
     {
@@ -1864,7 +1864,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1026,
+      "durationMs": 952,
       "error": ""
     },
     {
@@ -1905,7 +1905,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2554,
+      "durationMs": 2327,
       "error": ""
     },
     {
@@ -2002,7 +2002,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1446,
+      "durationMs": 1406,
       "error": ""
     },
     {
@@ -2031,7 +2031,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 286,
+      "durationMs": 267,
       "error": ""
     },
     {
@@ -2072,7 +2072,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1397,
+      "durationMs": 1180,
       "error": ""
     },
     {
@@ -2101,7 +2101,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 577,
+      "durationMs": 375,
       "error": ""
     },
     {
@@ -2137,12 +2137,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 4397,
-      "filesSkipped": 2873,
+      "filesScanned": 4496,
+      "filesSkipped": 2774,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4778,
+      "durationMs": 4547,
       "error": ""
     },
     {
@@ -2223,12 +2223,12 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 595,
-      "filesSkipped": 108,
+      "filesScanned": 600,
+      "filesSkipped": 103,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2909,
+      "durationMs": 2707,
       "error": ""
     },
     {
@@ -2257,7 +2257,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2801,
+      "durationMs": 2720,
       "error": ""
     },
     {
@@ -2302,12 +2302,12 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 1967,
-      "filesSkipped": 746,
+      "filesScanned": 1974,
+      "filesSkipped": 739,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3035,
+      "durationMs": 2665,
       "error": ""
     },
     {
@@ -3170,12 +3170,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 2053,
-      "filesSkipped": 27775,
+      "filesScanned": 2462,
+      "filesSkipped": 27366,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 11620,
+      "durationMs": 11114,
       "error": ""
     },
     {
@@ -3211,12 +3211,12 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 1813,
-      "filesSkipped": 315,
+      "filesScanned": 1831,
+      "filesSkipped": 297,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2932,
+      "durationMs": 2652,
       "error": ""
     },
     {
@@ -3235,10 +3235,11 @@
       "categoryDetected": true,
       "verdictPass": true,
       "actualVerdict": "low",
-      "actualScore": 0.1275,
+      "actualScore": 0.165,
       "safeToClone": true,
       "rulesTriggered": [
         "DEVCONTAINER_PRIVILEGED_HOST_MOUNT",
+        "VSCODE_TASK_AUTORUN",
         "OBFUSCATED_CODE",
         "OBF_BASE64_HEAVY",
         "OBF_EVAL"
@@ -3253,6 +3254,15 @@
           "file": ".devcontainer/devcontainer.json",
           "line": 15,
           "description": "privileged: true, --privileged in runArgs, or a mount whose source is / or the whole host home directory. Mounting single dotfiles (~/.ssh, ~/.gitconfig) is ordinary and does not match.\n"
+        },
+        {
+          "severity": "medium",
+          "confidence": "low",
+          "type": "MALWARE_SIGNATURE",
+          "rule": "VSCODE_TASK_AUTORUN",
+          "file": "extensions/copilot/.vscode/tasks.json",
+          "line": 94,
+          "description": "VS Code task that runs when the folder is opened. Legit repos auto-start watch tasks, so on its own this is a low-confidence review signal; the CONFIG_* rules flag the malicious forms.\n"
         },
         {
           "severity": "medium",
@@ -3318,12 +3328,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 1655,
-      "filesSkipped": 14792,
+      "filesScanned": 1826,
+      "filesSkipped": 14621,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6545,
+      "durationMs": 6407,
       "error": ""
     },
     {
@@ -3462,12 +3472,12 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (4 occurrences)"
         }
       ],
-      "filesScanned": 1705,
-      "filesSkipped": 1542,
+      "filesScanned": 1755,
+      "filesSkipped": 1492,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4578,
+      "durationMs": 4467,
       "error": ""
     },
     {
@@ -3540,12 +3550,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 3726,
-      "filesSkipped": 3454,
+      "filesScanned": 3950,
+      "filesSkipped": 3230,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 5187,
+      "durationMs": 4249,
       "error": ""
     },
     {
@@ -3591,12 +3601,12 @@
           "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n"
         }
       ],
-      "filesScanned": 1147,
-      "filesSkipped": 1902,
+      "filesScanned": 1190,
+      "filesSkipped": 1859,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2895,
+      "durationMs": 2651,
       "error": ""
     },
     {
@@ -3660,12 +3670,12 @@
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         }
       ],
-      "filesScanned": 276,
-      "filesSkipped": 73,
+      "filesScanned": 289,
+      "filesSkipped": 60,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2691,
+      "durationMs": 2617,
       "error": ""
     },
     {
@@ -3877,12 +3887,12 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (5 occurrences)"
         }
       ],
-      "filesScanned": 1708,
-      "filesSkipped": 48025,
+      "filesScanned": 1939,
+      "filesSkipped": 47794,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 5883,
+      "durationMs": 5880,
       "error": ""
     },
     {
@@ -3911,7 +3921,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 824,
+      "durationMs": 821,
       "error": ""
     },
     {
@@ -3940,7 +3950,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2477,
+      "durationMs": 2377,
       "error": ""
     },
     {
@@ -3969,7 +3979,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2947,
+      "durationMs": 2588,
       "error": ""
     },
     {
@@ -4010,7 +4020,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 975,
+      "durationMs": 762,
       "error": ""
     },
     {
@@ -4039,7 +4049,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2743,
+      "durationMs": 2558,
       "error": ""
     },
     {
@@ -4080,7 +4090,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2571,
+      "durationMs": 2352,
       "error": ""
     },
     {
@@ -4109,7 +4119,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1133,
+      "durationMs": 1075,
       "error": ""
     },
     {
@@ -4409,12 +4419,12 @@
           "description": "Extremely long line detected (50,221 characters). Contains suspicious code patterns like eval/exec/fetch. Malicious code may be hidden far to the right. Affected: Line 6 (50,221 chars, contains suspicious code)"
         }
       ],
-      "filesScanned": 534,
-      "filesSkipped": 321,
+      "filesScanned": 590,
+      "filesSkipped": 265,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2623,
+      "durationMs": 2564,
       "error": ""
     },
     {
@@ -4438,12 +4448,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 765,
-      "filesSkipped": 288,
+      "filesScanned": 771,
+      "filesSkipped": 282,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3110,
+      "durationMs": 2978,
       "error": ""
     },
     {
@@ -4467,12 +4477,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 1323,
-      "filesSkipped": 1028,
+      "filesScanned": 1389,
+      "filesSkipped": 962,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2871,
+      "durationMs": 2709,
       "error": ""
     },
     {
@@ -4501,7 +4511,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 648,
+      "durationMs": 436,
       "error": ""
     },
     {
@@ -4565,12 +4575,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 3048,
-      "filesSkipped": 1623,
+      "filesScanned": 3211,
+      "filesSkipped": 1460,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3272,
+      "durationMs": 3047,
       "error": ""
     },
     {
@@ -4594,12 +4604,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 380,
-      "filesSkipped": 161,
+      "filesScanned": 383,
+      "filesSkipped": 158,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2720,
+      "durationMs": 2540,
       "error": ""
     },
     {
@@ -4658,7 +4668,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2917,
+      "durationMs": 2789,
       "error": ""
     },
     {
@@ -4694,12 +4704,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 1630,
-      "filesSkipped": 726,
+      "filesScanned": 1652,
+      "filesSkipped": 704,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4162,
+      "durationMs": 3893,
       "error": ""
     },
     {
@@ -4755,12 +4765,12 @@
           "description": "Install hook (preinstall: node setup.js) runs local setup only: no download-and-execute, no writes outside the project, no credential or environment access, no obfuscation in pnpm11/pnpm/artifacts/exe/setup.js, pnpm11/pnpm/artifacts/exe/platform-pkg-name.js."
         }
       ],
-      "filesScanned": 2502,
-      "filesSkipped": 2567,
+      "filesScanned": 2710,
+      "filesSkipped": 2359,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3543,
+      "durationMs": 3362,
       "error": ""
     },
     {
@@ -4927,12 +4937,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 5937,
-      "filesSkipped": 8563,
+      "filesScanned": 6019,
+      "filesSkipped": 8481,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4101,
+      "durationMs": 4133,
       "error": ""
     },
     {
@@ -5073,12 +5083,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 3687,
-      "filesSkipped": 14442,
+      "filesScanned": 3824,
+      "filesSkipped": 14305,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4940,
+      "durationMs": 4614,
       "error": ""
     },
     {
@@ -5143,12 +5153,12 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 158,
-      "filesSkipped": 923,
+      "filesScanned": 206,
+      "filesSkipped": 875,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1777,
+      "durationMs": 1728,
       "error": ""
     },
     {
@@ -5223,12 +5233,12 @@
           "description": "Extremely long line detected (6,913 characters). Malicious code may be hidden far to the right. Affected: Line 409 (6,913 chars)"
         }
       ],
-      "filesScanned": 629,
-      "filesSkipped": 1587,
+      "filesScanned": 631,
+      "filesSkipped": 1585,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2559,
+      "durationMs": 2746,
       "error": ""
     },
     {
@@ -5402,12 +5412,12 @@
           "description": "6+ base64 strings of 50+ chars in a single file. Base64 is a legitimate encoding, but excessive use in source code is a red flag — it's the most common way to hide malicious payloads, C2 URLs, and commands from static analysis.\n"
         }
       ],
-      "filesScanned": 1312,
-      "filesSkipped": 80057,
+      "filesScanned": 1313,
+      "filesSkipped": 80056,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6341,
+      "durationMs": 6264,
       "error": ""
     },
     {
@@ -5571,12 +5581,12 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (4 occurrences)"
         }
       ],
-      "filesScanned": 1958,
-      "filesSkipped": 4943,
+      "filesScanned": 2022,
+      "filesSkipped": 4879,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4103,
+      "durationMs": 3749,
       "error": ""
     },
     {
@@ -5641,12 +5651,12 @@
           "description": "Hardcoded credentials detected: Password"
         }
       ],
-      "filesScanned": 2176,
-      "filesSkipped": 994,
+      "filesScanned": 2188,
+      "filesSkipped": 982,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3007,
+      "durationMs": 2764,
       "error": ""
     },
     {
@@ -5823,12 +5833,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 1130,
-      "filesSkipped": 4873,
+      "filesScanned": 1199,
+      "filesSkipped": 4804,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6396,
+      "durationMs": 6281,
       "error": ""
     },
     {
@@ -5864,12 +5874,12 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 2695,
-      "filesSkipped": 4379,
+      "filesScanned": 2696,
+      "filesSkipped": 4378,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3092,
+      "durationMs": 3054,
       "error": ""
     },
     {
@@ -5943,12 +5953,12 @@
           "description": "Suspicious network communication detected: Hardcoded IP Address (1 occurrence)"
         }
       ],
-      "filesScanned": 2303,
-      "filesSkipped": 3488,
+      "filesScanned": 2307,
+      "filesSkipped": 3484,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3079,
+      "durationMs": 2965,
       "error": ""
     },
     {
@@ -5977,7 +5987,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2316,
+      "durationMs": 2276,
       "error": ""
     },
     {
@@ -6006,7 +6016,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1281,
+      "durationMs": 1299,
       "error": ""
     },
     {
@@ -6098,12 +6108,12 @@
           "description": "Suspicious file access detected: Destructive File Deletion"
         }
       ],
-      "filesScanned": 553,
-      "filesSkipped": 60433,
+      "filesScanned": 767,
+      "filesSkipped": 60219,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3094,
+      "durationMs": 3271,
       "error": ""
     },
     {
@@ -6127,12 +6137,12 @@
       "rulesTriggered": [],
       "falsePositiveNotes": "",
       "findings": [],
-      "filesScanned": 1317,
-      "filesSkipped": 14297,
+      "filesScanned": 1347,
+      "filesSkipped": 14267,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4812,
+      "durationMs": 4389,
       "error": ""
     },
     {
@@ -6175,7 +6185,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -6261,7 +6271,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -6400,7 +6410,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -6582,7 +6592,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -6754,7 +6764,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -7012,7 +7022,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -7141,7 +7151,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -7184,7 +7194,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
