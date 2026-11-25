@@ -1,13 +1,13 @@
 {
   "metadata": {
     "benchmarkVersion": "0.1.0",
-    "runAt": "2026-11-25T11:13:26.142Z",
+    "runAt": "2026-11-25T19:23:05.158Z",
     "corpusPath": "/Users/tomas.tilnak/Documents/repos/flagrix-cli/benchmark/corpus.lock.json",
-    "cliVersion": "0.8.2",
-    "engineVersion": "0.9.0",
+    "cliVersion": "0.9.0",
+    "engineVersion": "0.10.0",
     "engineCommitSha": null,
     "engineDirty": false,
-    "rulesVersion": "2026.11.23.001",
+    "rulesVersion": "2026.11.25.001",
     "requestedReadMode": "tarball"
   },
   "metrics": {
@@ -88,7 +88,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 34,
+      "durationMs": 21,
       "error": ""
     },
     {
@@ -131,7 +131,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 6,
+      "durationMs": 5,
       "error": ""
     },
     {
@@ -409,7 +409,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -452,7 +452,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -514,7 +514,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 2,
+      "durationMs": 3,
       "error": ""
     },
     {
@@ -588,7 +588,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -769,7 +769,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -833,7 +833,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 2,
       "error": ""
     },
     {
@@ -1057,7 +1057,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1153,7 +1153,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1364,7 +1364,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1405,7 +1405,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1446,7 +1446,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -1574,7 +1574,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1661,7 +1661,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -1806,7 +1806,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1733,
+      "durationMs": 1812,
       "error": ""
     },
     {
@@ -1835,7 +1835,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2387,
+      "durationMs": 2460,
       "error": ""
     },
     {
@@ -1864,7 +1864,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 952,
+      "durationMs": 1175,
       "error": ""
     },
     {
@@ -1900,12 +1900,12 @@
           "description": "Data exfiltration patterns detected: Form Data Transmission"
         }
       ],
-      "filesScanned": 270,
-      "filesSkipped": 184,
+      "filesScanned": 271,
+      "filesSkipped": 183,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2327,
+      "durationMs": 2337,
       "error": ""
     },
     {
@@ -1948,7 +1948,7 @@
           "type": "MALWARE_SIGNATURE",
           "rule": "OBF_NEW_FUNCTION",
           "file": "vendor/firebug-lite/src/firebug-lite-debug.js",
-          "line": 15309,
+          "line": null,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         },
         {
@@ -2002,7 +2002,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1406,
+      "durationMs": 1456,
       "error": ""
     },
     {
@@ -2031,7 +2031,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 267,
+      "durationMs": 276,
       "error": ""
     },
     {
@@ -2072,7 +2072,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1180,
+      "durationMs": 1430,
       "error": ""
     },
     {
@@ -2101,7 +2101,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 375,
+      "durationMs": 410,
       "error": ""
     },
     {
@@ -2142,7 +2142,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4547,
+      "durationMs": 4694,
       "error": ""
     },
     {
@@ -2175,15 +2175,6 @@
           "rule": "OBF_NEW_FUNCTION",
           "file": "scripts/inline-enums.js",
           "line": 40,
-          "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
-        },
-        {
-          "severity": "medium",
-          "confidence": "low",
-          "type": "MALWARE_SIGNATURE",
-          "rule": "OBF_NEW_FUNCTION",
-          "file": "packages/compiler-core/src/options.ts",
-          "line": 312,
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         },
         {
@@ -2228,7 +2219,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2707,
+      "durationMs": 3061,
       "error": ""
     },
     {
@@ -2257,7 +2248,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2720,
+      "durationMs": 3114,
       "error": ""
     },
     {
@@ -2307,7 +2298,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2665,
+      "durationMs": 3027,
       "error": ""
     },
     {
@@ -3170,12 +3161,12 @@
           "description": "Minified/obfuscated code detected in source repository"
         }
       ],
-      "filesScanned": 2462,
-      "filesSkipped": 27366,
+      "filesScanned": 2464,
+      "filesSkipped": 27364,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 11114,
+      "durationMs": 11975,
       "error": ""
     },
     {
@@ -3211,12 +3202,12 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 1831,
-      "filesSkipped": 297,
+      "filesScanned": 1833,
+      "filesSkipped": 295,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2652,
+      "durationMs": 3003,
       "error": ""
     },
     {
@@ -3333,7 +3324,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6407,
+      "durationMs": 6900,
       "error": ""
     },
     {
@@ -3477,7 +3468,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4467,
+      "durationMs": 5086,
       "error": ""
     },
     {
@@ -3550,12 +3541,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 3950,
-      "filesSkipped": 3230,
+      "filesScanned": 3951,
+      "filesSkipped": 3229,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4249,
+      "durationMs": 4717,
       "error": ""
     },
     {
@@ -3601,12 +3592,12 @@
           "description": "privileged: true, pid: host or CAP_SYS_ADMIN / CAP_SYS_PTRACE give a service the host's devices and process table. Some dev setups need it (dind, hardware access), so treat it as context for the rest of the scan.\n"
         }
       ],
-      "filesScanned": 1190,
-      "filesSkipped": 1859,
+      "filesScanned": 1192,
+      "filesSkipped": 1857,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2651,
+      "durationMs": 3462,
       "error": ""
     },
     {
@@ -3675,7 +3666,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2617,
+      "durationMs": 2941,
       "error": ""
     },
     {
@@ -3892,7 +3883,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 5880,
+      "durationMs": 7570,
       "error": ""
     },
     {
@@ -3921,7 +3912,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 821,
+      "durationMs": 1125,
       "error": ""
     },
     {
@@ -3950,7 +3941,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2377,
+      "durationMs": 2837,
       "error": ""
     },
     {
@@ -3979,7 +3970,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2588,
+      "durationMs": 2765,
       "error": ""
     },
     {
@@ -4020,7 +4011,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 762,
+      "durationMs": 823,
       "error": ""
     },
     {
@@ -4049,7 +4040,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2558,
+      "durationMs": 2942,
       "error": ""
     },
     {
@@ -4090,7 +4081,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2352,
+      "durationMs": 2502,
       "error": ""
     },
     {
@@ -4119,7 +4110,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1075,
+      "durationMs": 1137,
       "error": ""
     },
     {
@@ -4424,7 +4415,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2564,
+      "durationMs": 2700,
       "error": ""
     },
     {
@@ -4453,7 +4444,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2978,
+      "durationMs": 3131,
       "error": ""
     },
     {
@@ -4482,7 +4473,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2709,
+      "durationMs": 3051,
       "error": ""
     },
     {
@@ -4511,7 +4502,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 436,
+      "durationMs": 457,
       "error": ""
     },
     {
@@ -4575,12 +4566,12 @@
           "description": "eval() executes arbitrary dynamic code. While there are legitimate uses, eval() is the #1 technique for executing hidden malicious payloads.\n"
         }
       ],
-      "filesScanned": 3211,
-      "filesSkipped": 1460,
+      "filesScanned": 3212,
+      "filesSkipped": 1459,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3047,
+      "durationMs": 3216,
       "error": ""
     },
     {
@@ -4609,7 +4600,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2540,
+      "durationMs": 2689,
       "error": ""
     },
     {
@@ -4663,12 +4654,12 @@
           "description": "new Function() creates and executes dynamic code similar to eval(). Used to hide malicious logic that bypasses some static analysis tools.\n"
         }
       ],
-      "filesScanned": 6089,
-      "filesSkipped": 3236,
+      "filesScanned": 6090,
+      "filesSkipped": 3235,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2789,
+      "durationMs": 2908,
       "error": ""
     },
     {
@@ -4709,7 +4700,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3893,
+      "durationMs": 3967,
       "error": ""
     },
     {
@@ -4765,12 +4756,12 @@
           "description": "Install hook (preinstall: node setup.js) runs local setup only: no download-and-execute, no writes outside the project, no credential or environment access, no obfuscation in pnpm11/pnpm/artifacts/exe/setup.js, pnpm11/pnpm/artifacts/exe/platform-pkg-name.js."
         }
       ],
-      "filesScanned": 2710,
-      "filesSkipped": 2359,
+      "filesScanned": 2714,
+      "filesSkipped": 2355,
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3362,
+      "durationMs": 3537,
       "error": ""
     },
     {
@@ -4942,7 +4933,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4133,
+      "durationMs": 4435,
       "error": ""
     },
     {
@@ -5088,7 +5079,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4614,
+      "durationMs": 4805,
       "error": ""
     },
     {
@@ -5158,7 +5149,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1728,
+      "durationMs": 1848,
       "error": ""
     },
     {
@@ -5238,7 +5229,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2746,
+      "durationMs": 2703,
       "error": ""
     },
     {
@@ -5417,7 +5408,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6264,
+      "durationMs": 6691,
       "error": ""
     },
     {
@@ -5586,7 +5577,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3749,
+      "durationMs": 4325,
       "error": ""
     },
     {
@@ -5656,7 +5647,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2764,
+      "durationMs": 3157,
       "error": ""
     },
     {
@@ -5838,7 +5829,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 6281,
+      "durationMs": 6437,
       "error": ""
     },
     {
@@ -5879,7 +5870,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3054,
+      "durationMs": 3277,
       "error": ""
     },
     {
@@ -5958,7 +5949,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2965,
+      "durationMs": 3100,
       "error": ""
     },
     {
@@ -5987,7 +5978,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 2276,
+      "durationMs": 2444,
       "error": ""
     },
     {
@@ -6016,7 +6007,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 1299,
+      "durationMs": 1363,
       "error": ""
     },
     {
@@ -6113,7 +6104,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 3271,
+      "durationMs": 3340,
       "error": ""
     },
     {
@@ -6142,7 +6133,7 @@
       "treeTruncated": false,
       "readMode": "tarball",
       "readFallbackReason": "",
-      "durationMs": 4389,
+      "durationMs": 6357,
       "error": ""
     },
     {
@@ -6271,7 +6262,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -6367,7 +6358,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -6893,7 +6884,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 1,
+      "durationMs": 0,
       "error": ""
     },
     {
@@ -6936,7 +6927,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -6979,7 +6970,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -7151,7 +7142,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     },
     {
@@ -7237,7 +7228,7 @@
       "treeTruncated": false,
       "readMode": "per-file",
       "readFallbackReason": "",
-      "durationMs": 0,
+      "durationMs": 1,
       "error": ""
     }
   ]
