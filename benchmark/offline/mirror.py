@@ -3,7 +3,8 @@
 
 For each repo: shallow, blobless fetch of the pinned commit (trees only), then
 one batched fetch of just the blobs any scanner variant could select (superset
-of old + new scanner-core file selection). Writes git/<repo>/tree.json in the
+of old + new scanner-core file selection: every priority file, config,
+scannable source file and font, uncapped). Writes git/<repo>/tree.json in the
 GitHub "git/trees?recursive=1" shape with sizes for the fetched blobs.
 """
 import hashlib, json, os, re, subprocess, sys
@@ -46,8 +47,9 @@ FONTS = (".woff", ".woff2", ".ttf", ".otf", ".eot")
 
 
 # Bump when the rule for *which* blobs are fetched changes in a way the lists
-# below do not capture, so every mirror re-fetches.
-SELECTION_POLICY = "all-scannable-v2"
+# below do not capture, so every mirror re-fetches. v3: every font, not the
+# first 10.
+SELECTION_POLICY = "all-scannable-v3"
 
 
 def selection_fingerprint():
@@ -173,7 +175,12 @@ def mirror(repo, sha):
         entries.append({"path": path, "type": typ, "sha": oid})
     blobs = [e for e in entries if e["type"] == "blob"]
     first = [e for e in blobs if any(e["path"].endswith(p) for p in PRIORITY) or any(c.search(e["path"]) for c in CONFIG)]
-    fonts = [e for e in blobs if e["path"].lower().endswith(FONTS)][:10]
+    # Every font, uncapped. scanner-core's snapshot path (flagrix-scanner-core
+    # PR #15) magic-checks every font as the archive streams, where the
+    # per-file path stopped at 10. A font the mirror lacks is missing from the
+    # synthesized tarball, falls through to a per-file read that 404s offline,
+    # and shows up as `fetch-failed` (eslint has 33 fonts, next.js 50).
+    fonts = [e for e in blobs if e["path"].lower().endswith(FONTS)]
     # Every scannable blob, with no cap and no ordering. The mirror holds a
     # superset of anything the scanner could select, so it has no selection
     # logic of its own to drift out of step. The previous "first 320 in tree

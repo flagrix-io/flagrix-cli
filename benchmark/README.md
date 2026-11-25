@@ -145,6 +145,14 @@ scanner sorted by `sourcePriority` and took the top 200, and after 0.7.0 began
 reading build scripts first the two diverged badly — `noisy-node` scanned 225
 files through the API and 34 from the mirror. A superset has nothing to drift.
 
+Fonts and configs are uncapped too. The per-file path magic-checks at most 10
+fonts, but scanner-core's snapshot path (flagrix-io/flagrix-scanner-core#15)
+checks every font as the archive streams and gives configs a 4MB byte budget
+instead of a count. A font the mirror lacks is missing from the synthesized
+tarball, falls through to a per-file read that 404s offline, and becomes
+`fetch-failed` — eslint has 33 fonts, rust 14, next.js 50 — so the mirror
+fetches all of them.
+
 `tree.json` records a fingerprint of every rule that decides which blobs are
 fetched (`SELECTION_POLICY`, `PRIORITY`, `SCANNABLE`, `CONFIG`, `FONTS`), and a
 mismatch re-fetches. Without it the cache short-circuited on `tree.json` merely
