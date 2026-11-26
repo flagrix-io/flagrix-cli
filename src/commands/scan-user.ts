@@ -28,9 +28,9 @@ export async function runScanUser(login: string, options: ScanUserOptions): Prom
     })
 
     if (wantJson(options.json)) {
-      console.log(JSON.stringify(result, null, 2))
+      console.log(JSON.stringify({ ...result, rulesVersion: loaded.signatures.version }, null, 2))
     } else {
-      console.log(renderUserResult(result))
+      console.log(renderUserResult(result, loaded.signatures.version))
     }
     return exitCodeFor(result.riskLevel)
   } catch (error) {

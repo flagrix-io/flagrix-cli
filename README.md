@@ -136,6 +136,9 @@ In `--json` output, read `verdict` and `coverage` rather than `riskLevel`:
   `verdict` or the exit code instead.
 - `coverage.readMode` is which reader ran, and `coverage.readFallbackReason`
   is present only when a requested snapshot read did not happen.
+- `rulesVersion` is the version of the detection rules the scan ran with
+  (for example `"2026.11.25.001"`); the human output ends with the same
+  version. Two scans of one commit under different rules can disagree.
 
 The MCP tool's JSON block carries the same fields.
 
@@ -167,6 +170,9 @@ Fully local. No telemetry, no accounts, no Flagrix backend — the only network
 calls go to the GitHub/npm APIs and the public
 [detection-rules](https://github.com/flagrix-io/flagrix-detection-rules)
 repository (signature refresh, cached 6 h, with a bundled offline snapshot).
+A scan never runs with rules older than the snapshot bundled in the installed
+release: a cached or downloaded copy with an older `version` is replaced by
+the snapshot, and stderr says so.
 
 Dependencies are also checked against the OSV malicious-package feed
 (`osv-malicious.json` from the same repository: every npm/PyPI package the

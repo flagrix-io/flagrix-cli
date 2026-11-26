@@ -31,8 +31,10 @@ import {
 
 const MOCK_SHA = "0123456789abcdef0123456789abcdef01234567"
 
+// Newer than the bundled snapshot, so the scans below run with these rules
+// rather than falling back to it (see tests/signatures.test.ts).
 const SIGNATURES = {
-  version: "test.001",
+  version: "9999.01.01.001",
   malicious_packages: [],
   yara_rules: [],
   known_bad_hashes: []
@@ -139,6 +141,17 @@ describe("flagrix scan — exit codes and JSON", () => {
     const code = await runScan("acme/meh", { json: true })
     expect(code).toBe(EXIT.MEDIUM)
     expect(JSON.parse(logs.join("\n")).riskLevel).toBe("medium")
+  })
+
+  it("names the rules version in the JSON and the readable output", async () => {
+    global.fetch = mockApi({ "src/index.js": "export const ok = 1\n" }) as unknown as typeof fetch
+    await runScan("acme/clean", { json: true })
+    expect(JSON.parse(logs.join("\n")).rulesVersion).toBe(SIGNATURES.version)
+
+    logs = []
+    global.fetch = mockApi({ "src/index.js": "export const ok = 1\n" }) as unknown as typeof fetch
+    await runScan("acme/clean", { json: false })
+    expect(logs.join("\n")).toContain(`Detection rules v${SIGNATURES.version}.`)
   })
 
   it("nonexistent repo → exit 1 with actionable error", async () => {
@@ -495,7 +508,9 @@ describe("JSON verdict and coverage", () => {
     })
     expect(raw.safeToClone).toBe(true) // the engine alone would pass it
 
-    const block = JSON.parse(repoScanResponse(raw).content[1]!.text)
+    const response = repoScanResponse(raw, null, SIGNATURES.version)
+    expect(response.content[0]!.text).toContain(`Detection rules v${SIGNATURES.version}.`)
+    const block = JSON.parse(response.content[1]!.text)
     expect(block.verdict).toBe("incomplete")
     expect(block.safeToClone).toBe(false)
     expect(block.coverage).toMatchObject({ complete: false, unreliableClear: true, reason: "rate-limit" })
@@ -507,6 +522,7 @@ describe("JSON verdict and coverage", () => {
     expect(block.verdict).toBe(cli.verdict)
     expect(block.safeToClone).toBe(cli.safeToClone)
     expect(block.coverage).toEqual(cli.coverage)
+    expect(block.rulesVersion).toBe(cli.rulesVersion)
   })
 })
 

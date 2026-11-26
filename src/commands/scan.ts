@@ -49,9 +49,9 @@ export async function runScan(target: string, options: ScanOptions): Promise<num
     const result = await scanGitHubRepo(repo, scanOptions)
 
     if (wantJson(options.json)) {
-      console.log(JSON.stringify(scanReport(result), null, 2))
+      console.log(JSON.stringify(scanReport(result, loaded.signatures.version), null, 2))
     } else {
-      console.log(renderRepoResult(result))
+      console.log(renderRepoResult(result, loaded.signatures.version))
     }
     return exitCodeForScan(result)
   } catch (error) {

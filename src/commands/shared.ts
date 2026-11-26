@@ -13,7 +13,7 @@ export const EXIT = { LOW: 0, ERROR: 1, MEDIUM: 2, HIGH: 3, INCOMPLETE: 4 } as c
 // does not reach into source, and the built CLI would otherwise report the
 // previous release. Lives here rather than in cli.ts because `flagrix mcp`
 // advertises the same number to its client, and cli.ts runs a scan on import.
-export const VERSION = "0.9.0"
+export const VERSION = "0.9.1"
 
 /**
  * Whether a scan reads the whole commit in one request (scanner-core's

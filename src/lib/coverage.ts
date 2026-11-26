@@ -63,9 +63,11 @@ export type Verdict = RiskLevel | "incomplete"
 /**
  * A repository result as `--json` and the MCP tool emit it: the engine's
  * result plus the CLI's own coverage verdict, so the JSON says what the exit
- * code and the human output say.
+ * code and the human output say, and the version of the detection rules the
+ * scan ran with — two scans of one commit under different rules can disagree,
+ * and without it the results are indistinguishable.
  */
-export type ScanReport = GitHubScanResult & { verdict: Verdict; coverage: Coverage }
+export type ScanReport = GitHubScanResult & { verdict: Verdict; coverage: Coverage; rulesVersion?: string }
 
 /**
  * Every engine field is kept so existing consumers don't break, with one
@@ -75,11 +77,12 @@ export type ScanReport = GitHubScanResult & { verdict: Verdict; coverage: Covera
  * `riskLevel` stays as the engine's reading of the files it did see; gates
  * should branch on `verdict` (or the exit code), not on `riskLevel`.
  */
-export function scanReport(result: GitHubScanResult): ScanReport {
+export function scanReport(result: GitHubScanResult, rulesVersion?: string): ScanReport {
   const coverage = coverageOf(result)
   return {
     verdict: coverage.unreliableClear ? "incomplete" : result.riskLevel,
     coverage,
+    ...(rulesVersion ? { rulesVersion } : {}),
     ...result,
     safeToClone: result.safeToClone && !coverage.unreliableClear
   }

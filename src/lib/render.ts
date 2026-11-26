@@ -45,7 +45,12 @@ export function securityScore(riskScore: number): number {
   return 100 - Math.round(riskScore * 100)
 }
 
-export function renderRepoResult(result: GitHubScanResult): string {
+/** The footer line naming the rules a scan ran with — empty when unknown. */
+function rulesLine(rulesVersion?: string): string[] {
+  return rulesVersion ? [dim(`  Detection rules v${rulesVersion}.`)] : []
+}
+
+export function renderRepoResult(result: GitHubScanResult, rulesVersion?: string): string {
   const v = VERDICTS[result.riskLevel]
   const installTime = verdictIsInstallTime(result)
   const verdict = installTime && result.riskLevel !== "low" ? INSTALL_VERDICTS[result.riskLevel] : v.verdict
@@ -111,12 +116,13 @@ export function renderRepoResult(result: GitHubScanResult): string {
     lines.push("")
     lines.push(dim(`  Verdict applies to commit ${result.commitSha} — re-scan after new pushes.`))
   }
+  lines.push(...rulesLine(rulesVersion))
   lines.push(dim(`  ${result.disclaimer}`))
   lines.push("")
   return lines.join("\n")
 }
 
-export function renderUserResult(result: GitHubUserScanResult): string {
+export function renderUserResult(result: GitHubUserScanResult, rulesVersion?: string): string {
   const v = VERDICTS[result.riskLevel]
   const lines: string[] = []
 
@@ -138,6 +144,7 @@ export function renderUserResult(result: GitHubUserScanResult): string {
   }
   lines.push("")
   lines.push(`  ${result.recommendation}`)
+  lines.push(...rulesLine(rulesVersion))
   lines.push("")
   return lines.join("\n")
 }
